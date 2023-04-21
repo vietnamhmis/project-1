@@ -1,0 +1,541 @@
+{% extends "layouts/base_no.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+
+
+
+<!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+
+                <button type="button" class="btn btn-lg btn-primary" disabled>BƯỚC 3:</button>
+                <button type="button" class="btn btn-info btn-lg" >ĐÁNH GIÁ NĂNG LỰC NHÂN VIÊN:</button>
+
+
+                </h2>
+                <ul class="breadcrumb">
+                    <!-- link bang dieu khiển -->
+                    <li class="breadcrumb-item"><a href="{% url 'list_nangluc' %}">Danh mục năng lực</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'danhgianangluc_view_nv' %}">Tự Đánh giá </a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'danhgianangluc_view' %}">Quản lý Đánh giá năng lực</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'kequa_nangluc_list' %}">Kết quả Đánh giá </a></li>
+
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="{% url 'add_danhgia_nangluc' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thêm đợt đánh giá Năng lực</a>
+                 <div class="view-icons">
+                    <a href="{% url 'Danhgia_nangluc_list2' %}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="{% url 'Danhgia_nangluc_list' %}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+
+    <!-- Search Filter----------------------------- -->
+
+     <form method='POST' action=''>{% csrf_token %}
+        <div class="row">
+           <div class="col-6 col-md-2"><input type="text" class="form-control" placeholder="Đợt đánh giá năng lực ex: 11-2022" id={{form.Landanhgia_nagluc}} </div>
+
+          <div class="col-6 col-md-2"><select class="form-control" placeholder="Chức danh xây thiết lập Khung năng lực" {{form.Nhanvien_dg_nangluc}} </select> </div>
+
+          </div><div class="form-check"> <input class="form-check-input" type="checkbox" id="{{form.Xuất_Word}}"<label class="form-check-label">TB Kết quả ĐGNL</label></div>
+
+          <div class="col-6 col-md-2"><input class="form-check-input" type="checkbox" id={{form.Xuất_Excel}} <label class="form-check-label">Xuất Excel</label></div>
+          <div class="col-6 col-md-2">  <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Tìm kiếm' >
+
+        </div>
+    </form>
+
+
+    <!-- /Search Filter ------------------------------------------------------>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive-sm">
+                  <div class="table-responsive-sm">
+                {% if danhgia_nangluc_list1 %}
+                <table class="table table-striped custom-table datatable">
+                    <thead>
+                        <tr class="table-success">
+                            <th scope="col" style="width: 5%">id</th>
+                            <th scope="col" style="width: 25%">Tên năng lực</th>
+                            <th scope="col" style="width: 25%">Người được đánh giá năng lực</th>
+                            <th scope="col" style="width: 10%">Mức quan trọng </th>
+                            <th scope="col" style="width: 10%">Tự Đgiá </th>
+                            <th scope="col" style="width: 10%">Cấp trên giá </th>
+                            <th scope="col" style="width: 10%">Kết quả Đ.Giá </th>
+                            <th scope="col" style="width: 10%">Điểm KQ Tiêu chuẩn </th>
+                            <th scope="col" style="width: 10%">Điểm KQ  Đ.Giá </th>
+                            <th class="text-right no-sort" style="width: 10%">Tùy chỉnh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sto in danhgia_nangluc_list1 %}
+                        <tr>
+                             <td>
+                                <a href=""> {{forloop.counter}} <a/>
+                             </td>
+                           <td>
+                                <h2 class="table-avatar">
+                                    <a href="{% url 'nangluc_chitiet' sto.TenNangluc_congviec.nangluc_cv_id %}">
+                                        {{sto.TenNangluc_congviec|truncatewords:12}}<span></span></a>
+                                </h2>
+                            </td>
+
+                             <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.Nhanvien_dg_nangluc}}<span></span></a>
+                                </h2>
+                            </td>
+
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.TenNangluc_congviec.Muc_quantrong_nluc}}<span></span></a>
+                                </h2>
+                            </td>
+
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.tu_danhgia_dapung}}<span></span></a>
+                                </h2>
+                            </td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.Quanly_danhgia}}<span></span></a>
+                                </h2>
+                            </td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.Ketqua_danhgia}}<span></span></a>
+                                </h2>
+                            </td>
+                                   <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.get_Diem_tieuchuan}}<span></span></a>
+                                </h2>
+                            </td>
+                                   <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.get_Diem_dat}}<span></span></a>
+                                </h2>
+                            </td>
+
+                        <td class="text-right">
+                               <a href="{% url 'Danhgia_nangluc_update_cannhan' sto.id  %}" class=" btn-info"><i class="fa fa-pencil" style="font-size:16px;color:yellow"></i> </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                     <tfoot>
+                       <tr class="table-success" >
+                           <td colspan="2" ></td>
+                           <td class="text-left" >Tổng cộng</td>
+                           <td class="text-left" >{{total_mucqt}}</td>
+                           <td class="text-left" >{{total_tu_dg}}</td>
+                           <td class="text-left" >{{total_ql}}</td>
+                      <td colspan="text-left">{{total_chung}}</td>
+                           <td class="text-left" >{{total_diemchuan}}</td>
+                           <td class="text-left" >{{total_diemcdat}}</td>
+                           <td class="text-left" >{{ketqua_nangluc}}</td>
+                        </tr>
+                      </tfoot>
+                </table>
+                {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+                {% endif %}
+            </div>
+            </div>
+        </div> <!-- /md-12-------->
+    </div><!-- /rows------->
+</div>
+<!-- /Page Content -->
+<BR> <br
+<div class="row"
+<!------------------------Biểu đồ ------->
+<div class="row">
+						<div class="col-md-12">
+							<div class="row">
+                                <!------------------------Biểu đồ char1 ------->
+								<div class="col-md-6 text-center">
+									<div class="card">
+										<div class="card-body">
+											<h3 class="card-title">Biểu đồ năng lực</h3>
+                                            <div class="col-md-12">
+                                                <div class="col-md-10">
+                                                   <canvas id="myChart1" width="200" height="300"></canvas>
+                                                       <script>
+                                                                var ctx = document.getElementById('myChart1').getContext('2d');
+                                                                ctx.canvas.width = 80;
+																ctx.canvas.height = 80;
+
+                                                                var myChart1 = new Chart(ctx, {
+                                                                    type: 'radar',
+                                                                    data: {
+                                                              labels: [{% for product in productss %}  '{{ product.TenNangluc_congviec|truncatewords:3 }}',  {% endfor %}],
+                                                                        datasets: [{
+                                                                    label: 'Mức NL tiêu chuẩn',
+                                                                    data: [{% for product in productss %}  '{{ product.TenNangluc_congviec.Muc_thanhthao_nluc }}',  {% endfor %}],
+
+                                                                    fill: true,
+                                                                    backgroundColor: 'rgba(255, 99, 132, 0.1)',
+
+                                                                    borderColor: 'rgb(255, 99, 100)',
+                                                                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                                                                    pointBackgroundColor: 'rgba(251, 99, 32, 0.6)',
+                                                                    pointBackgroundColor: 'rgba(250, 99, 32, 0.7)',
+                                                                    pointBackgroundColor: 'rgba(258, 99, 32, 0.8)',
+
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                                                                  }, {
+                                                                    label: 'Tự đánh giá',
+                                                                    data: [{% for product in productss %}  '{{ product.tu_danhgia_dapung }}',  {% endfor %}],
+                                                                    fill: true,
+                                                                    backgroundColor: [
+                                                                      'rgba(255, 0, 255, 0.2)',
+                                                                      'rgba(155, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.2)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+
+                                                                    ],
+
+                                                                    borderColor: 'rgb(54, 162, 235)',
+                                                                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                                                                    pointBackgroundColor: 'rgba(251, 99, 132, 0.1)',
+                                                                    pointBackgroundColor: 'rgba(250, 99, 132, 0.7)',
+                                                                    pointBackgroundColor: 'rgba(258, 99, 132, 0.8)',
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                                                                  }, {
+                                                                    label: 'Quản lý ĐG',
+                                                                    data: [{% for product in productss %}  '{{ product.Quanly_danhgia }}',  {% endfor %}],
+                                                                    fill: true,
+                                                                    backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                                                                    borderColor: 'rgb( 0, 245, 255)',
+                                                                    pointBackgroundColor: [
+
+                                                                      'rgb( 0, 245, 255)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.2)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+
+                                                                    ],
+
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                                                                  }]
+
+                                                                    },
+                                                                    options: {
+                                                                        scales: {
+                                                                            y: {
+                                                                                beginAtZero: true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                });
+                                                                </script>
+
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               <!------------------------Biểu đồ char2------->
+                                <div class="col-md-6 text-center">
+                                <div class="card">
+										<div class="card-body">
+											<h3 class="card-title">Biểu đồ năng lực</h3>
+                                            <div class="col-md-12">
+                                                <div class="col-md-10">
+                                                   <canvas id="myChart2" width="200" height="300"></canvas>
+                                                               <script>
+                                                                var ctx = document.getElementById('myChart2').getContext('2d');
+                                                                ctx.canvas.width = 100;
+																ctx.canvas.height = 100;
+                                                                var myChart2 = new Chart(ctx, {
+                                                                    type: 'bar',
+                                                                    data: {
+                                                              labels: [{% for product in productss %}  '{{ product.TenNangluc_congviec|truncatewords:3 }}',  {% endfor %}],
+                                                                        datasets: [{
+                                                                    label: 'Mức NL tiêu chuẩn',
+                                                                    data: [{% for product in productss %}  '{{ product.TenNangluc_congviec.Muc_thanhthao_nluc }}',  {% endfor %}],
+
+                                                                    fill: true,
+                                                                   backgroundColor: [
+                                                                      'rgba(155, 99, 132, 0.8)',
+                                                                      'rgba(155, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.2)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.2)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+
+                                                                    ],
+
+                                                                    borderColor: [
+
+                                                                      'rgb(0, 255, 127)',
+                                                                      'rgb(75, 192, 192)',
+                                                                      'rgb(54, 162, 235)',
+                                                                      'rgb(153, 102, 255)',
+                                                                      'rgb(201, 203, 207)'
+                                                                    ],
+                                                                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                                                                    pointBackgroundColor: 'rgba(251, 99, 32, 0.6)',
+                                                                    pointBackgroundColor: 'rgba(250, 99, 32, 0.7)',
+                                                                    pointBackgroundColor: 'rgba(258, 99, 32, 0.8)',
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                                                                  }, {
+                                                                    label: 'Tự đánh giá',
+                                                                    data: [{% for product in productss %}  '{{ product.tu_danhgia_dapung }}',  {% endfor %}],
+                                                                    fill: true,
+                                                                    backgroundColor: [
+                                                                      'rgba(155, 99, 132, 0.2)',
+                                                                      'rgba(155, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.2)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+
+                                                                    ],
+
+                                                                    borderColor: 'rgb(0, 162, 235)',
+                                                                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                                                                    pointBackgroundColor: 'rgba(251, 99, 132, 0.1)',
+                                                                    pointBackgroundColor: 'rgba(250, 99, 132, 0.7)',
+                                                                    pointBackgroundColor: 'rgba(258, 99, 132, 0.8)',
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                                                                  }, {
+                                                                    label: 'Quản lý ĐG',
+                                                                    data: [{% for product in productss %}  '{{ product.Quanly_danhgia }}',  {% endfor %}],
+                                                                    fill: true,
+                                                                    backgroundColor: [
+
+
+                                                                      'rgb(255, 106, 106, 04)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.2)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+
+                                                                    ],
+
+                                                                    borderColor: 'rgb(0, 245, 255)',
+                                                                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                                                                    pointBackgroundColor: 'rgba(251, 99, 132, 0.1)',
+                                                                    pointBackgroundColor: 'rgba(250, 99, 132, 0.7)',
+                                                                    pointBackgroundColor: 'rgba(258, 99, 132, 0.8)',
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                                                                  }]
+
+                                                                    },
+                                                                    options: {
+                                                                        scales: {
+                                                                            y: {
+                                                                                beginAtZero: true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                });
+                                                                </script>
+
+                                                        </div>
+                                                                                            </div>
+                                        </div>
+                                        </div>
+                                </div>
+							</div>
+						</div>
+					</div>
+<!------------------------Biểu đồ kết thúc------->
+</div>
+
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

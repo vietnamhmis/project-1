@@ -1,0 +1,66 @@
+{% extends 'courses/base_1.html' %}
+{% block title %} Đăng nhập {% endblock %}
+{% load static %}
+{% block content %}
+
+    <body class="account-page">
+		<!-- Main Wrapper -->
+        <div class="main-wrapper">
+			<div class="account-content">
+				<!-- <a href="job-list.html" class="btn btn-primary apply-btn">Apply Job</a> -->
+				<div class="container">
+					<!-- Account Logo -->
+					<div class="account-logo">
+						<a href="index.html"><img src="/static/assets/img/logo.png" alt="Vicem 1"></a>
+					</div>
+					<!-- /Account Logo -->
+					<div class="account-box">
+						<div class="account-wrapper">
+							<h2 class="account-title">ĐĂNG NHẬP </h2>
+							<p class="account-subtitle">Chào mừng đến với hệ thống</p>
+
+						<!-- Account Form ----------------------------------------->
+							<form action="{% url 'login:loginUser' %}" method="post">
+        					{% csrf_token %}
+								<div class="form-group">
+									<label>Tài khoản</label>
+									<input placeholder="Tên đăng nhập" class="form-control" type="text" id={{flg.username}}
+
+								</div>
+
+								<div class="form-group">
+									<div class="row">
+										<div class="col">
+											<label>Mật khẩu</label>
+										</div>
+										<div class="col-auto">
+											<a class="text-muted" href="forgot-password.html">
+												Quên mật khẩu
+											</a>
+										</div>
+									</div>
+									<input  placeholder="Nhập mật khẩu đăng nhập"  class="form-control" type="password" id={{flg.password}}
+								</div>
+								<div class="form-group text-center">
+									<button class="btn btn-primary account-btn" type="submit">ĐĂNG NHẬP</button>
+								</div>
+							</div>
+								<div class="account-footer">
+									<p> Đăng nhập với tài khoản: <strong>{{ user.username }}</strong> </p>
+									<p> Email: {{ user.email }} </p>
+									<p> Đăng nhập lần cuối: {{ user.last_login }}</p>
+									<p> Đăng ký lúc: {{ user.joined_date}} </p>
+
+									<h8 class="account-subtitle"><p><a href="{% url 'login:register' %}">Hãy đăng ký tại đây </a></p></h8>
+
+								</div>
+							</form>
+							<!-- /Account Form --------------------------->
+
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+	</body>
+{% endblock %}

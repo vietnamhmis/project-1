@@ -1,0 +1,1337 @@
+{% extends "layouts/base_no.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<!-- Page Content Filter dữ liệu-->
+                <div class="content container-fluid">
+<!-- Page Header --><!--Filter dữ liệu-->
+
+					<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+								  <form method="GET" action=".">
+									<div class="form-row">
+										<div class="form-row">
+											<div class="form-group col-12">
+												<div class="input-group">
+													<input class="form-control py-2 border-right-0 border" type="search" name="ho_lot_thuong_dung_contains" placeholder="Tìm Họ tên..." />
+													<span class="input-group-append">
+														<div class="input-group-text bg-transparent">
+															<i class="fa fa-search"></i>
+														</div>
+													</span>
+												</div>
+											</div>
+										</div>
+										<div class="form-row">
+											<div class="form-group col-10">
+												<div class="input-group">
+													<input class="form-control py-2 border-right-0 border" type="search" name="id_nhanvien" placeholder="Tìm ID CBCNV..." />
+													<span class="input-group-append">
+														<div class="input-group-text bg-transparent">
+															<i class="fa fa-search"></i>
+														</div>
+													</span>
+												</div>
+											</div>
+										</div>
+
+
+										<div class="form-row">
+											<div class="form-group col-12">
+												<div class="input-group">
+													<input class="form-control py-2 border-right-0 border" type="search" name="dantoc_tocngiao" placeholder="Tìm Dân tộc/Tôn giáo..." />
+													<span class="input-group-append">
+														<div class="input-group-text bg-transparent">
+															<i class="fa fa-search"></i>
+														</div>
+													</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-row">
+											<div class="form-group col-12">
+												<div class="input-group">
+													<input class="form-control py-2 border-right-0 border" type="search" name="ho_lot_thuong_dung_or_chucvu" placeholder="Tìm Họ tên/Chức vụ..." />
+													<span class="input-group-append">
+														<div class="input-group-text bg-transparent">
+															<i class="fa fa-search"></i>
+														</div>
+													</span>
+												</div>
+											</div>
+										</div>
+										</div>
+
+										 <div class="form-row">
+
+										  <div class="form-group col-md-2 col-lg-2">
+											<label for="publishDateMin">Ngày vào đơn vị từ</label>
+											<input type="date" class="form-control" id="publishDateMin" name="date_min">
+										  </div>
+
+										  <div class="form-group col-md-2 col-lg-2">
+											<label for="publishDateMax">Đến ngày</label>
+											<input type="date" class="form-control" id="publishDateMax" name="date_max">
+										  </div>
+											 <!-- Page Content Filter dữ liệu-->
+
+										  <div class="form-group col-md-2">
+											<label for="category">Đơn vị</label>
+											<select id="category" class="form-control" name="category">
+											  <option selected>Chọn ...</option>
+											  {% for cat in categories %}
+											  <option value="{{ cat }}">{{ cat }}</option>
+											  {% endfor %}
+											</select>
+										  </div>
+											 <!-- Page Content Filter dữ liệu-->
+
+										<div class="form-group col-md-2 col-lg-2">
+											<input class="form-check-input" type="checkbox" id="da_nghiviec" name="da_nghiviec">
+											<label class="form-check-label" for="da_nghiviec">
+											 Đã thôi việc
+											</label>
+										</div>
+
+										<button type="submit" class="btn btn-info float: right" style="height:50px;">Lọc dữ liệu</button>
+										</div>
+
+									  </form>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- /Page Header -->
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+							<div class="card dash-widget">
+								<div class="card-body">
+									<span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
+									<div class="dash-widget-info">
+										<h3>{{Tong_NV}}</h3>
+										<span>Tổng Nhân viên</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+							<div class="card dash-widget">
+								<div class="card-body">
+									<span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
+									<div class="dash-widget-info">
+										<h3>{{Nam}}</h3>
+										<span> Nam</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+							<div class="card dash-widget">
+								<div class="card-body">
+									<span class="dash-widget-icon"><i class="fa fa-diamond"></i></span>
+									<div class="dash-widget-info">
+								<h3>{{Nu}}</h3>
+										<span>Lao động nữ</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+							<div class="card dash-widget">
+								<div class="card-body">
+									<span class="dash-widget-icon"><i class="fa fa-user"></i></span>
+									<div class="dash-widget-info">
+										<h3>{{NV_qly}}</h3>
+										<span>Lao động quản lý</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+<!------------------------Biểu đồ Trình độ và Nhân sự theo đơn vị------->
+<div class="row">
+	<div class="col-md-12">
+		<div class="row">
+			<!------------------------Biểu đồ char1 ------->
+			<div class="col-md-6 text-center">
+				<div class="card">
+					<div class="card-body">
+						<h1 class="card-title">BIỂU ĐỒ NHÂN SỰ THEO ĐƠN VỊ</h1>
+						<div class="col-md-12">
+							<div class="col-md-12">
+								<canvas id="myChart1" width="600" height="800"></canvas>
+								<script>
+								var ctx = document.getElementById('myChart1').getContext('2d');
+								ctx.canvas.width = 50;
+								ctx.canvas.height = 50;
+								var myChart1 = new Chart(ctx, {
+								type: 'bar',
+								data: {
+								labels: [{% for product in queryset %}  '{{ product.don_vi.Ten_DV|truncatewords:2 }}', {% endfor %}],
+								datasets: [{
+								label: 'Số lao động',
+								data: [{% for product in queryset %}  '{{ product.don_vi.so_nhanvien }}',  {% endfor %}],
+								fill: true,
+								backgroundColor: [
+																	  'rgba(255, 99, 132, 0.8)',
+																	  'rgba(255, 159, 64, 0.8)',
+																	  'rgba(255, 205, 86, 0.8)',
+																	  'rgba(75, 192, 192, 0.8)',
+																	  'rgba(54, 162, 235, 0.8)',
+																	  'rgba(153, 102, 255, 0.8)',
+																	  'rgba(201, 203, 207, 0.8)',
+																		'rgba(255, 99, 132, 0.8)',
+																	  'rgba(255, 159, 64, 0.8)',
+																	  'rgba(255, 205, 86, 0.8)',
+																	  'rgba(75, 192, 192, 0.8)',
+																	  'rgba(54, 162, 235, 0.8)',
+																	  'rgba(153, 102, 255, 0.8)',
+																	  'rgba(201, 203, 207, 0.8)',
+																		'rgba(255, 99, 132, 0.8)',
+																	  'rgba(255, 159, 64, 0.8)',
+																	  'rgba(255, 205, 86, 0.8)',
+																	  'rgba(75, 192, 192, 0.8)',
+																	  'rgba(54, 162, 235, 0.8)',
+																	  'rgba(153, 102, 255, 0.8)',
+																	  'rgba(201, 203, 207, 0.8)',
+																	],
+																	borderColor: [
+																	  'rgb(255, 99, 132)',
+																	  'rgb(255, 159, 64)',
+																	  'rgb(255, 205, 86)',
+																	  'rgb(75, 192, 192)',
+																	  'rgb(54, 162, 235)',
+																	  'rgb(153, 102, 255)',
+																	  'rgb(201, 203, 207)',
+																	],
+
+
+                                                                    pointBackgroundColor: 'rgba(258, 99, 32, 0.8)',
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                                                                  },
+                                                                 ]
+
+                                                                    },
+                                                                    options: {
+                                                                        scales: {
+                                                                            y: {
+                                                                                beginAtZero: true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                });
+                                                                </script>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+            <!------------------------Biểu đồ char2------->
+        	<div class="col-md-6 text-center">
+									<div class="card">
+										<div class="card-body">
+											<h1 class="card-title">BIỂU ĐỒ TRÌNH ĐỘ</h1>
+                                           <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                   <canvas id="myChart2" width="600" height="800"></canvas>
+                                                               <script>
+                                                                var ctx = document.getElementById('myChart2').getContext('2d');
+                                                                ctx.canvas.width = 50;
+																ctx.canvas.height = 50;
+                                                                var myChart2 = new Chart(ctx, {
+                                                                    type: 'line',
+                                                                    data: {
+                                                              labels: ['Tiến sĩ', 'Thạc sĩ', 'Đại học', 'Cao đẳng','Trung cấp', 'Sơ cẤP', 'Trình độ khác'],
+                                                                        datasets: [{
+                                                                    label: 'Trình độ Chuyên môn',
+                                                                    data: [{{TDTS}}, {{TDTHS}}, {{TDDH}}, {{TDCD}}, {{TDTC}}, {{TDSC}}, {{TDkhac}}],
+
+                                                                    fill: true,
+                                                                   backgroundColor: [
+                                                                      'rgba(113, 242, 237, 0.8)',
+
+
+                                                                    ],
+
+                                                                    borderColor: [
+                                                                      'rgb(255, 99, 132)',
+                                                                      'rgb(255, 159, 64)',
+                                                                      'rgb(255, 205, 86)',
+                                                                      'rgb(75, 192, 192)',
+                                                                      'rgb(54, 162, 235)',
+                                                                      'rgb(153, 102, 255)',
+                                                                      'rgb(201, 203, 207)'
+                                                                    ],
+                                                                    pointBackgroundColor: [
+                                                                      'rgba(145, 159, 64, )',
+                                                                      'rgba(155, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',],
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#FFD700',
+                                                                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                                                                  }, {
+                                                                    label: 'Trình độ Lý luận chính trị',
+                                                                    data:  [{{0}}, {{0}}, {{0}}, {{CTCC}}, {{CTTC}}, {{CTSC}}, {{CTkhac}}],
+
+
+
+                                                                    fill: true,
+                                                                    backgroundColor: [
+                                                                      'rgba(244, 39, 86, 0.4)',
+                                                                      'rgba(155, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+
+                                                                    ],
+
+                                                                  }]
+
+                                                                    },
+                                                                    options: {
+                                                                        scales: {
+                                                                            y: {
+                                                                                beginAtZero: true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                });
+                                                                </script>
+												</div>
+										   </div>
+										</div>
+									</div>
+								</div>
+		</div>
+	</div>
+</div>
+<!------------------------Biểu đồ nhóm trình độ-nhan sự kết thúc ------->
+
+<!----Nhóm danh sách nhân viên-Đơn vị--->
+					<div class="row">
+						<!----Nhóm danh sách nhan viên 1--->
+						<div class="col-md-6 d-flex">
+							<div class="card card-table flex-fill">
+								<div class="card-header">
+									<h3 class="card-title mb-0">DANH SÁCH NHÂN VIÊN</h3>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table custom-table mb-0">
+											<thead>
+												<tr>
+													<th>Tên</th>
+													<th>Chức danh/Vị trí </th>
+													<th>Trạng thái</th>
+													<th class="text-right">Tùy chỉnh</th>
+												</tr>
+											</thead>
+											<tbody>
+											 {% for sto in queryset_1 %}
+												<tr>
+											       <td>
+														<h2 class="table-avatar">
+															<a href="{% url 'nhanvien_profile_up' sto.id %}" class="avatar"> <img src="{{sto.avatar.url}}" alt=""></a>
+															<a href="{% url 'nhanvien_profile_view' sto.id %}"> {{sto.ho_lot_thuong_dung}}{{sto.ten_thuong_dung}}<span>{{sto.don_vi.Ten_DV}}</span></a>
+														</h2>
+													</td>
+													<td>{{sto.vitri_CV.Ten_Nhom_CV}}</td>
+													<td>
+														<div class="dropdown action-label">
+															<a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+																<i class="fa fa-dot-circle-o text-success"></i> Đang hoạt động
+															</a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Đang hoạt động</a>
+																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Ngưng hoạt động</a>
+															</div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+											</tbody>
+											{% endfor %}
+										</table>
+									</div>
+								</div>
+								<div class="card-footer">
+									<a href="/BaocaoFilter_DSVN/">Xem tất cả Nhân viên</a>
+								</div>
+							</div>
+						</div>
+						<!----Nhóm danh sách đơn vị 2---->
+						<div class="col-md-6 d-flex">
+							<div class="card card-table flex-fill">
+								<div class="card-header">
+									<h3 class="card-title mb-0">ĐƠN VỊ TRỰC THUỘC</h3>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table custom-table mb-0">
+											<thead>
+												<tr>
+													<th>Tên đơn vị </th>
+													<th>Tiến độ</th>
+													<th class="text-right">Tùy chỉnh</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												<tr>
+													<td>
+														<h2><a href="">Quản lý văn phòng</a></h2>
+														<small class="block text-ellipsis">
+															<span>1</span> <span class="text-muted">nhiệm vụ chưa xử lý, </span>
+															<span>9</span> <span class="text-muted">nhiệm vụ hoàn thành</span>
+														</small>
+													</td>
+
+													<td>
+														<div class="progress progress-xs progress-striped">
+															<div class="progress-bar" role="progressbar" data-toggle="tooltip" title="65%" style="width: 65%"></div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td>
+														<h2><a href="dasboad/project-view.html">Quản lý dự án</a></h2>
+														<small class="block text-ellipsis">
+															<span>2</span> <span class="text-muted">nhiệm vụ chưa xử lý, </span>
+															<span>5</span> <span class="text-muted">nhiệm vụ hoàn thành</span>
+														</small>
+													</td>
+													<td>
+														<div class="progress progress-xs progress-striped">
+															<div class="progress-bar" role="progressbar" data-toggle="tooltip" title="15%" style="width: 15%"></div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2><a href="project-view.html">Phát triển công nghệ</a></h2>
+														<small class="block text-ellipsis">
+															<span>3</span> <span class="text-muted">nhiệm vụ chưa xử lý, </span>
+															<span>3</span> <span class="text-muted">nhiệm vụ hoàn thành</span>
+														</small>
+													</td>
+													<td>
+														<div class="progress progress-xs progress-striped">
+															<div class="progress-bar" role="progressbar" data-toggle="tooltip" title="49%" style="width: 49%"></div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2><a href="project-view.html">Xây dựng nhà xưởng</a></h2>
+														<small class="block text-ellipsis">
+															<span>12</span> <span class="text-muted">nhiệm vụ đang xử lý, </span>
+															<span>4</span> <span class="text-muted">nhiệm vụ hoàn thành</span>
+														</small>
+													</td>
+													<td>
+														<div class="progress progress-xs progress-striped">
+															<div class="progress-bar" role="progressbar" data-toggle="tooltip" title="88%" style="width: 88%"></div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2><a href="project-view.html">Chuyển đổi số</a></h2>
+														<small class="block text-ellipsis">
+															<span>7</span> <span class="text-muted">nhiệm vụ đang xử lý, </span>
+															<span>14</span> <span class="text-muted">nhiệm vụ hoàn thành</span>
+														</small>
+													</td>
+													<td>
+														<div class="progress progress-xs progress-striped">
+															<div class="progress-bar" role="progressbar" data-toggle="tooltip" title="100%" style="width: 100%"></div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="card-footer">
+									<a href="projects.html">Xem tất cả đơn vị</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+<!------------------------Biểu đồ nhóm, Thành tóch công tác------>
+<div class="row">
+	<div class="col-md-12">
+		<div class="row">
+			<!------------------------Biểu đồ char1 ------->
+			<div class="col-md-6 text-center">
+				<div class="card">
+					<div class="card-body">
+						<h1 class="card-title">BIỂU ĐỒ PHÂN LOẠI LAO ĐỘNG</h1>
+						<div class="col-md-12">
+							<div class="col-md-12">
+								<canvas id="myChart3" width="600" height="800"></canvas>
+								<script>
+								var ctx = document.getElementById('myChart3').getContext('2d');
+								ctx.canvas.width = 50;
+								ctx.canvas.height = 50;
+								var myChart3 = new Chart(ctx, {
+								type: 'bar',
+								data: {
+								labels: ['Công nhân', 'Nhân viên', 'Lãnh đạo TCty','Trưởng, Phó đơn vị', ],
+								datasets: [{
+							    label: 'Lao động',
+                                data: [{{Nhom_1}}, {{Nhom_2}}, {{Nhom_3}}, {{Nhom_4}}],
+
+								fill: true,
+								backgroundColor: [
+																	  'rgba(255, 99, 132, 0.8)',
+																	  'rgba(255, 159, 64, 0.8)',
+																	  'rgba(255, 205, 86, 0.8)',
+																	  'rgba(75, 192, 192, 0.8)',
+																	  'rgba(54, 162, 235, 0.8)',
+																	  'rgba(153, 102, 255, 0.8)',
+																	  'rgba(201, 203, 207, 0.8)',
+
+																	  'rgba(201, 203, 207, 0.8)',
+																	],
+																	borderColor: [
+																	  'rgb(255, 99, 132)',
+																	  'rgb(255, 159, 64)',
+																	  'rgb(255, 205, 86)',
+																	  'rgb(75, 192, 192)',
+
+																	  'rgb(201, 203, 207)',
+																	],
+
+
+                                                                    pointBackgroundColor: 'rgba(258, 99, 32, 0.8)',
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                                                                  },
+                                                                 ]
+
+                                                                    },
+                                                                    options: {
+                                                                        scales: {
+                                                                            y: {
+                                                                                beginAtZero: true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                });
+                                                                </script>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+            <!------------------------Biểu đồ char2------->
+        	<div class="col-md-6 text-center">
+									<div class="card">
+										<div class="card-body">
+											<h1 class="card-title">BIỂU ĐỒ THÀNH TÍCH CÔNG TÁC</h1>
+                                           <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                   <canvas id="myChart4" width="600" height="800"></canvas>
+                                                               <script>
+                                                                var ctx = document.getElementById('myChart4').getContext('2d');
+                                                     			ctx.canvas.width = 50;
+																ctx.canvas.height = 50;
+                                                                var myChart4 = new Chart(ctx, {
+                                                                    type: 'pie',
+                                                                    data: {
+                                                              labels: ['Bằng khen UBNDTP', 'CSTĐ Thành phố', 'CSTĐCS', 'Lao động Tiên tiến', 'Lao động biểu dương',],
+                                                                        datasets: [{
+                                                                    label: 'Trình độ',
+                                                                    data: [{{TDTS}}, {{TDTHS}}, {{TDDH}}, {{TDCD}}, {{TDTC}}, {{TDSC}}, {{TDkhac}}],
+
+                                                                    fill: true,
+                                                                   backgroundColor: [
+                                                                      'rgba(155, 99, 132, 0.2)',
+                                                                      'rgba(155, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+
+                                                                    ],
+
+                                                                    borderColor: [
+                                                                      'rgb(255, 99, 132)',
+                                                                      'rgb(255, 159, 64)',
+                                                                      'rgb(255, 205, 86)',
+                                                                      'rgb(75, 192, 192)',
+                                                                      'rgb(54, 162, 235)',
+                                                                      'rgb(153, 102, 255)',
+                                                                      'rgb(201, 203, 207)'
+                                                                    ],
+                                                                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                                                                    pointBackgroundColor: 'rgba(251, 99, 32, 0.6)',
+                                                                    pointBackgroundColor: 'rgba(250, 99, 32, 0.7)',
+                                                                    pointBackgroundColor: 'rgba(258, 99, 32, 0.8)',
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                                                                  }, {
+                                                                    label: 'Tự đánh giá',
+                                                                    data: [{% for product in productss %}  '{{ product.tu_danhgia_dapung }}',  {% endfor %}],
+                                                                    fill: true,
+                                                                    backgroundColor: [
+                                                                      'rgba(155, 99, 132, 0.2)',
+                                                                      'rgba(155, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+
+                                                                    ],
+
+                                                                  }]
+
+                                                                    },
+                                                                    options: {
+                                                                        scales: {
+                                                                            y: {
+                                                                                beginAtZero: true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                });
+                                                                </script>
+												</div>
+										   </div>
+										</div>
+									</div>
+								</div>
+		</div>
+	</div>
+</div>
+<!------------------------Biểu đồ kết thúc------->
+
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card-group m-b-30">
+								<div class="card">
+									<div class="card-body">
+										<div class="d-flex justify-content-between mb-3">
+											<div>
+												<span class="d-block">Nhân viên mới</span>
+											</div>
+											<div>
+												<span class="text-success">{{Ti_le_NV_moi}}</span>
+											</div>
+										</div>
+										<h3 class="mb-3">{{NV_moi}}</h3>
+										<div class="progress mb-2" style="height: 5px;">
+											<div class="progress-bar bg-primary" role="progressbar" style="width: {{Ti_le_NV_moi|truncatewords:5}}%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+										<p class="mb-0">Toàn bộ nhân viên {{Tong_NV}}</p>
+									</div>
+								</div>
+
+								<div class="card">
+									<div class="card-body">
+										<div class="d-flex justify-content-between mb-3">
+											<div>
+												<span class="d-block">Lãi</span>
+											</div>
+											<div>
+												<span class="text-success">+12.5%</span>
+											</div>
+										</div>
+										<h3 class="mb-3">$1,42,300</h3>
+										<div class="progress mb-2" style="height: 5px;">
+											<div class="progress-bar bg-primary" role="progressbar" style="width: 70%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+										<p class="mb-0">Tháng trước <span class="text-muted">$1,15,852</span></p>
+									</div>
+								</div>
+
+								<div class="card">
+									<div class="card-body">
+										<div class="d-flex justify-content-between mb-3">
+											<div>
+												<span class="d-block">Phụ phí</span>
+											</div>
+											<div>
+												<span class="text-danger">-2.8%</span>
+											</div>
+										</div>
+										<h3 class="mb-3">$8,500</h3>
+										<div class="progress mb-2" style="height: 5px;">
+											<div class="progress-bar bg-primary" role="progressbar" style="width: 70%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+										<p class="mb-0">Tháng trước <span class="text-muted">$7,500</span></p>
+									</div>
+								</div>
+
+								<div class="card">
+									<div class="card-body">
+										<div class="d-flex justify-content-between mb-3">
+											<div>
+												<span class="d-block">Lợi nhuận</span>
+											</div>
+											<div>
+												<span class="text-danger">-75%</span>
+											</div>
+										</div>
+										<h3 class="mb-3">$1,12,000</h3>
+										<div class="progress mb-2" style="height: 5px;">
+											<div class="progress-bar bg-primary" role="progressbar" style="width: 70%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+										<p class="mb-0">Tháng trước <span class="text-muted">$1,42,000</span></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Statistics Widget -->
+					<div class="row">
+						<div class="col-md-12 col-lg-12 col-xl-4 d-flex">
+							<div class="card flex-fill dash-statistics">
+								<div class="card-body">
+									<h5 class="card-title">Thống kê</h5>
+									<div class="stats-list">
+										<div class="stats-info">
+											<p>Nghỉ trong ngày <strong>4 <small>/ 65</small></strong></p>
+											<div class="progress">
+												<div class="progress-bar bg-primary" role="progressbar" style="width: 31%" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
+											</div>
+										</div>
+										<div class="stats-info">
+											<p>Hóa đơn đang giải quyết <strong>15 <small>/ 92</small></strong></p>
+											<div class="progress">
+												<div class="progress-bar bg-warning" role="progressbar" style="width: 31%" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
+											</div>
+										</div>
+										<div class="stats-info">
+											<p>Dự án hoàn thành <strong>85 <small>/ 112</small></strong></p>
+											<div class="progress">
+												<div class="progress-bar bg-success" role="progressbar" style="width: 62%" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
+											</div>
+										</div>
+										<div class="stats-info">
+											<p>Tồn đọng <strong>190 <small>/ 212</small></strong></p>
+											<div class="progress">
+												<div class="progress-bar bg-danger" role="progressbar" style="width: 62%" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
+											</div>
+										</div>
+										<div class="stats-info">
+											<p>Đã xử lý <strong>22 <small>/ 212</small></strong></p>
+											<div class="progress">
+												<div class="progress-bar bg-info" role="progressbar" style="width: 22%" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-12 col-lg-6 col-xl-4 d-flex">
+							<div class="card flex-fill">
+								<div class="card-body">
+									<h4 class="card-title">Thống kê Nhiệm vụ</h4>
+									<div class="statistics">
+										<div class="row">
+											<div class="col-md-6 col-6 text-center">
+												<div class="stats-box mb-4">
+													<p>Tổng</p>
+													<h3>385</h3>
+												</div>
+											</div>
+											<div class="col-md-6 col-6 text-center">
+												<div class="stats-box mb-4">
+													<p>Quá hạn</p>
+													<h3>19</h3>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="progress mb-4">
+										<div class="progress-bar bg-purple" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
+										<div class="progress-bar bg-warning" role="progressbar" style="width: 22%" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100">22%</div>
+										<div class="progress-bar bg-success" role="progressbar" style="width: 24%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100">24%</div>
+										<div class="progress-bar bg-danger" role="progressbar" style="width: 26%" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100">21%</div>
+										<div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100">10%</div>
+									</div>
+									<div>
+										<p><i class="fa fa-dot-circle-o text-purple mr-2"></i>Nhiệm vụ đã hoàn thành <span class="float-right">166</span></p>
+										<p><i class="fa fa-dot-circle-o text-warning mr-2"></i>Nhiệm vụ chưa hoàn thành <span class="float-right">115</span></p>
+										<p><i class="fa fa-dot-circle-o text-success mr-2"></i>Nhiệm vụ đang trong thời gian chờ <span class="float-right">31</span></p>
+										<p><i class="fa fa-dot-circle-o text-danger mr-2"></i>Nhiệm vụ đang xử lý <span class="float-right">47</span></p>
+										<p class="mb-0"><i class="fa fa-dot-circle-o text-info mr-2"></i>Nhiệm vụ đang xem xét <span class="float-right">5</span></p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-12 col-lg-6 col-xl-4 d-flex">
+							<div class="card flex-fill">
+								<div class="card-body">
+									<h4 class="card-title">Hiện đang vắng mặt <span class="badge bg-inverse-danger ml-2">5</span>
+								Đi muộn, về sớm <span class="badge bg-inverse-danger ml-2">7</span></h4>
+									<div class="leave-info-box">
+										<div class="media align-items-center">
+											<a href="profile.html" class="avatar"><img alt="" src="/static/assets/img/user.jpg"></a>
+											<div class="media-body">
+												<div class="text-sm my-0">Nguyễn Văn Minh</div>
+											</div>
+										</div>
+										<div class="row align-items-center mt-3">
+											<div class="col-6">
+												<h6 class="mb-0">{{today}}</h6>
+												<span class="text-sm text-muted">Ngày nghỉ</span>
+											</div>
+											<div class="col-6 text-right">
+												<span class="badge bg-inverse-danger">Chưa giải quyết</span>
+											</div>
+										</div>
+									</div>
+									<div class="leave-info-box">
+										<div class="media align-items-center">
+											<a href="profile.html" class="avatar"><img alt="" src="/static/assets/img/user.jpg"></a>
+											<div class="media-body">
+												<div class="text-sm my-0">Nguyễn Văn Tâm</div>
+											</div>
+										</div>
+										<div class="row align-items-center mt-3">
+											<div class="col-6">
+												<h6 class="mb-0">01/06/2021</h6>
+												<span class="text-sm text-muted">Ngày nghỉ</span>
+											</div>
+											<div class="col-6 text-right">
+												<span class="badge bg-inverse-success">Đã phê duyệt</span>
+											</div>
+										</div>
+									</div>
+									<div class="load-more text-center">
+										<a class="text-dark" href="javascript:void(0);">Xem thêm</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Statistics Widget -->
+
+					<div class="row">
+						<div class="col-md-6 d-flex">
+							<div class="card card-table flex-fill">
+								<div class="card-header">
+									<h3 class="card-title mb-0">Hóa đơn</h3>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-nowrap custom-table mb-0">
+											<thead>
+												<tr>
+													<th>Số hóa đơn</th>
+													<th>Khác hàng</th>
+													<th>Ngày đáo hạn</th>
+													<th>Toàn bộ</th>
+													<th>Trạng thái</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td><a href="invoice-view.html">#INV-0001</a></td>
+													<td>
+														<h2><a href="#">HoaSen Group</a></h2>
+													</td>
+													<td>01/06/2021</td>
+													<td>$380</td>
+													<td>
+														<span class="badge bg-inverse-warning">Đã thanh toán một phần</span>
+													</td>
+												</tr>
+												<tr>
+													<td><a href="invoice-view.html">#INV-0002</a></td>
+													<td>
+														<h2><a href="#">TGDD</a></h2>
+													</td>
+													<td>01/06/2021</td>
+													<td>$500</td>
+													<td>
+														<span class="badge bg-inverse-success">Đã thanh toán</span>
+													</td>
+												</tr>
+												<tr>
+													<td><a href="invoice-view.html">#INV-0003</a></td>
+													<td>
+														<h2><a href="#">FPT Software</a></h2>
+													</td>
+													<td>01/06/2021</td>
+													<td>$60</td>
+													<td>
+														<span class="badge bg-inverse-danger">Chưa thanh toán</span>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="card-footer">
+									<a href="/dashboard/invoices">Xem tất cả hóa đơn</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 d-flex">
+							<div class="card card-table flex-fill">
+								<div class="card-header">
+									<h3 class="card-title mb-0">Thanh toán</h3>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table custom-table table-nowrap mb-0">
+											<thead>
+												<tr>
+													<th>Số hóa đơn</th>
+													<th>Khách hàng</th>
+													<th>Loại thanh toán</th>
+													<th>Ngày thanh toán</th>
+													<th>Tổng thanh toán</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td><a href="invoice-view.html">#INV-0001</a></td>
+													<td>
+														<h2><a href="#">HoaSen Group</a></h2>
+													</td>
+													<td>VCB</td>
+													<td>01/06/2021</td>
+													<td>$380</td>
+												</tr>
+												<tr>
+													<td><a href="invoice-view.html">#INV-0002</a></td>
+													<td>
+														<h2><a href="#">TGDD</a></h2>
+													</td>
+													<td>ACB</td>
+													<td>01/06/2021</td>
+													<td>$500</td>
+												</tr>
+												<tr>
+													<td><a href="invoice-view.html">#INV-0003</a></td>
+													<td>
+														<h2><a href="#">FPT Software</a></h2>
+													</td>
+													<td>BIDV</td>
+													<td>01/06/2021</td>
+													<td>$60</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="card-footer">
+									<a href="/dashboard/payments">Xem tất cả hóa đơn</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+<!----Nhóm danh sách 1-2--->
+					<div class="row">
+						<!----Nhóm danh sách 1--->
+						<div class="col-md-6 d-flex">
+							<div class="card card-table flex-fill">
+								<div class="card-header">
+									<h3 class="card-title mb-0">Khách hàng</h3>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table custom-table mb-0">
+											<thead>
+												<tr>
+													<th>Tên</th>
+													<th>Email</th>
+													<th>Trạng thái</th>
+													<th class="text-right">Tùy chỉnh</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="#" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-19.jpg"></a>
+															<a href="client-profile.html">Nguyễn Văn A <span>Giám đốc</span></a>
+														</h2>
+													</td>
+													<td>example@example.com</td>
+													<td>
+														<div class="dropdown action-label">
+															<a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+																<i class="fa fa-dot-circle-o text-success"></i> Đang hoạt động
+															</a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Đang hoạt động</a>
+																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Ngưng hoạt động</a>
+															</div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="#" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-15.jpg"></a>
+															<a href="client-profile.html">Hoàng Đinh E <span>Manager</span></a>
+														</h2>
+													</td>
+													<td>example@example.com</td>
+													<td>
+														<div class="dropdown action-label">
+															<a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+																<i class="fa fa-dot-circle-o text-danger"></i> Ngưng hoạt động
+															</a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Đang hoạt động</a>
+																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Ngưng hoạt động</a>
+															</div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="client-profile.html" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-07.jpg"></a>
+															<a href="client-profile.html">Nguyễn Thị B <span>Quản lý</span></a>
+														</h2>
+													</td>
+													<td>example@example.com</td>
+													<td>
+														<div class="dropdown action-label">
+															<a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+																<i class="fa fa-dot-circle-o text-danger"></i> Ngưng hoạt động
+															</a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Đang hoạt động</a>
+																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Ngưng hoạt động</a>
+															</div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="client-profile.html" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-06.jpg"></a>
+															<a href="client-profile.html"> Nguyễn Đình C <span>Giám đốc</span></a>
+														</h2>
+													</td>
+													<td>example@example.com</td>
+													<td>
+														<div class="dropdown action-label">
+															<a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+																<i class="fa fa-dot-circle-o text-success"></i> Đang hoạt động
+															</a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Đang hoạt động</a>
+																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Ngưng hoạt động</a>
+															</div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="client-profile.html" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-14.jpg"></a>
+															<a href="client-profile.html"> Trịnh Thanh D <span>Phó giám đốc</span></a>
+														</h2>
+													</td>
+													<td>example@example.com</td>
+													<td>
+														<div class="dropdown action-label">
+															<a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+																<i class="fa fa-dot-circle-o text-danger"></i> Không hoạt động
+															</a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Đang hoạt động</a>
+																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Không hoạt động</a>
+															</div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="card-footer">
+									<a href="/dashboard/clients">Xem tất cả khách hàng</a>
+								</div>
+							</div>
+						</div>
+						<!----Nhóm danh sách 2---->
+						<div class="col-md-6 d-flex">
+							<div class="card card-table flex-fill">
+								<div class="card-header">
+									<h3 class="card-title mb-0">Dự án gần đây</h3>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table custom-table mb-0">
+											<thead>
+												<tr>
+													<th>Tên dự án </th>
+													<th>Tiến độ</th>
+													<th class="text-right">Tùy chỉnh</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														<h2><a href="project-view.html">Quản lý văn phòng</a></h2>
+														<small class="block text-ellipsis">
+															<span>1</span> <span class="text-muted">nhiệm vụ chưa xử lý, </span>
+															<span>9</span> <span class="text-muted">nhiệm vụ hoàn thành</span>
+														</small>
+													</td>
+													<td>
+														<div class="progress progress-xs progress-striped">
+															<div class="progress-bar" role="progressbar" data-toggle="tooltip" title="65%" style="width: 65%"></div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2><a href="project-view.html">Quản lý dự án</a></h2>
+														<small class="block text-ellipsis">
+															<span>2</span> <span class="text-muted">nhiệm vụ chưa xử lý, </span>
+															<span>5</span> <span class="text-muted">nhiệm vụ hoàn thành</span>
+														</small>
+													</td>
+													<td>
+														<div class="progress progress-xs progress-striped">
+															<div class="progress-bar" role="progressbar" data-toggle="tooltip" title="15%" style="width: 15%"></div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2><a href="project-view.html">Phát triển công nghệ</a></h2>
+														<small class="block text-ellipsis">
+															<span>3</span> <span class="text-muted">nhiệm vụ chưa xử lý, </span>
+															<span>3</span> <span class="text-muted">nhiệm vụ hoàn thành</span>
+														</small>
+													</td>
+													<td>
+														<div class="progress progress-xs progress-striped">
+															<div class="progress-bar" role="progressbar" data-toggle="tooltip" title="49%" style="width: 49%"></div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2><a href="project-view.html">Xây dựng nhà xưởng</a></h2>
+														<small class="block text-ellipsis">
+															<span>12</span> <span class="text-muted">nhiệm vụ đang xử lý, </span>
+															<span>4</span> <span class="text-muted">nhiệm vụ hoàn thành</span>
+														</small>
+													</td>
+													<td>
+														<div class="progress progress-xs progress-striped">
+															<div class="progress-bar" role="progressbar" data-toggle="tooltip" title="88%" style="width: 88%"></div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2><a href="project-view.html">Chuyển đổi số</a></h2>
+														<small class="block text-ellipsis">
+															<span>7</span> <span class="text-muted">nhiệm vụ đang xử lý, </span>
+															<span>14</span> <span class="text-muted">nhiệm vụ hoàn thành</span>
+														</small>
+													</td>
+													<td>
+														<div class="progress progress-xs progress-striped">
+															<div class="progress-bar" role="progressbar" data-toggle="tooltip" title="100%" style="width: 100%"></div>
+														</div>
+													</td>
+													<td class="text-right">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="card-footer">
+									<a href="projects.html">Xem tất cả dự án</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

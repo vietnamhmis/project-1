@@ -1,0 +1,129 @@
+{% extends "layouts/base.html" %} {% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE --> {% block stylesheets %}{% endblock stylesheets %} {% block content %} {% load static %} <style>
+  .button {
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+  .button1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+  }
+
+  .button1:hover {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .button2 {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+  }
+
+  .button2:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+</style>
+<div class="content container-fluid">
+  <!-- Page Header -->
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h1 class="page-title-red">HỢP ĐỒNG LAO ĐỘNG</h1>
+        <br>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'hopdong_view' %}">TẤT CẢ</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'dieu_dong_view' %}">ĐIỀU ĐỘNG</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'dieu_dong_view' %}">BỔ NHIỆM</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'nangluong_view' %}">NÂNG LƯƠNG</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'dieu_dong_view' %}">KHEN THƯỞNG</a>
+          </li>
+        </ul>
+        <br>
+      </div>
+      <div class="col-auto float-right ml-auto">
+        <a href="{% url 'add_hopdong' %}" class="btn add-btn">
+          <i class="fa fa-plus"></i> Thiết lập đợt ký Hợp đồng Lao động </a>
+        <div class="view-icons">
+          <a href="" class="grid-view btn btn-link active">
+            <i class="fa fa-th"></i>
+          </a>
+          <a href="" class="list-view btn btn-link">
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page Header -->
+  <!--Filter dữ liệu-->
+
+  <!-- /Page Header -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive-sm"> {% if queryset_1 %} <table class="table table-striped custom-table datatable">
+          <thead>
+            <tr class="table-success">
+             <th scope="col" style="width: 5%">id</th>
+                        <th scope="col" style="width: 25%">Tên nhân viên viên</th>
+                        <th scope="col" style="width: 15%">Vị trí</th>
+                        <th scope="col" style="width: 10%">Bộ phận </th>
+                        <th scope="col" style="width: 10%">Lương BHXH cũ </th>
+                        <th scope="col" style="width: 10%">Lương  cũ </th>
+                        <th scope="col" style="width: 10%">Lương BHXH</th>
+                        <th scope="col" style="width: 10%">Lương  </th>
+                        <th scope="col" style="width: 10%">Chệnh lệch lương </th>
+                        <th scope="col" style="width: 10%">BHXH </th>
+            </tr>
+          </thead>
+         <tbody>
+             {% for student in students %}
+
+             <tr>
+               <td>{{ student.id }}</td>
+                        <td>{{student.Nhanvien.ho_lot_thuong_dung}} </td>
+                        <td >{{ student.Nhanvien.vitri_CV.Ten_Nhom_CV }}</td>
+                        <td >{{ student.Nhanvien.bo_phan.ten_bp }}</td>
+                        <td>{{ student.Luong_BHXH_cu }}</td>
+                        <td>{{ student.Luong_cu }}</td>
+                        <td>{{ student.Luong_BHXH_moi }}</td>
+                        <td>{{ student.Luong_moi }}</td>
+                        <td>{{ student.CL_Luong_BHXH_PA_1 }}</td>
+                        <td>{{ student.CL_Luong_moi_PA_1 }}</td>
+               </tr>
+
+
+             {% endfor %}
+         </tbody>
+
+        </table>
+          {% else %}
+          <h4 class="text-center alert alert-warning">No record </h4> {% endif %} </div>
+    </div>
+    <!-- /md-12-------->
+  </div>
+  <!-- /rows------->
+</div>
+<!-- /Page Content --> {% endblock content %}
+<!-- Specific Page JS goes HERE  --> {% block javascripts %}{% endblock javascripts %}

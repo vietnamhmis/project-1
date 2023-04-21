@@ -1,0 +1,132 @@
+{% extends "layouts/base_no.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+<div class="content container-fluid" xmlns="http://www.w3.org/1999/html">
+
+
+<!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+
+                <button type="button" class="btn btn-lg btn-primary" disabled>BƯỚC 4:</button>
+                <button type="button" class="btn btn-info btn-lg" >KẾT QUẢ ĐÁNH GIÁ NĂNG LỰC NHÂN VIÊN:</button>
+
+                <ul class="breadcrumb">
+                    <!-- link bang dieu khiển -->
+                    <li class="breadcrumb-item"><a href="{% url 'list_nangluc' %}">Danh mục năng lực</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'Danhgia_nangluc_list' %}">Đánh giá năng lực</a></li>
+
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="{% url 'add_danhgia_nangluc' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thêm đợt đánh giá Năng lực</a>
+                 <div class="view-icons">
+                    <a href="{% url 'Danhgia_nangluc_list2' %}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="{% url 'Danhgia_nangluc_list' %}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+
+    <!-- Search Filter----------------------------- -->
+    <form method='POST' action=''>{% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <input class="form-control" placeholder="Tên chức danh" {{form.Ten_Nhom_CV}} </input>
+            </div>
+              <!--
+              <div class="form-group col-md-3">
+                <select class="form-control" placeholder="Đơn vị" {{form.don_vi}} </select>
+            </div>
+
+            <div class="form-group col-md-3">
+                <select class="form-control" placeholder="Thuộc Bộ phận" {{form.bo_phan}} </select>
+            </div>   --->
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="{{form.Xuất_Excel}}" <label class="form-check-label">
+                Xuất Excel
+                </label>
+            </div>
+            <div class="col-md-2 text-right">
+                <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Tìm kiếm' />
+            </div>
+        </div>
+    </form>
+    <!-- /Search Filter ------------------------------------------------------>
+{{sumnl}}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive-sm">
+                  <div class="table-responsive-sm">
+                {% if nhanvien %}
+                <table class="table table-striped custom-table datatable">
+                    <thead>
+                        <tr class="table-success">
+                            <th scope="col" style="width: 5%">id</th>
+                            <th scope="col" style="width: 25%">Nhân viên năng lực</th>
+                            <th scope="col" style="width: 25%">Điểm chuẩn</th>
+                            <th scope="col" style="width: 25%">Điểm đạt</th>
+
+                            <th scope="col" style="width: 10%">Kết quả đánh giá </th>
+
+                            <th class="text-right no-sort" style="width: 10%">Tùy chỉnh</th>
+                        </tr>
+                    </thead>
+
+                    {{qldg}}
+                    {{qldg}}
+                    <tbody>
+                        {% for sto in nhanvien %}
+                        <tr>
+                             <td>
+                                <a href=""> {{forloop.counter}} <a/>
+                             </td>
+                           <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.ho_lot_thuong_dung}}<span></span></a>
+                                </h2>
+                                  <h2 class="table-avatar">
+                                    <a href="">{{sto.tdg}}<span></span></a>
+                                </h2>
+                            </td>
+                                     <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto__danhgia_nluc__tu_danhgia_dapung}}<span></span></a>
+                                </h2>
+                            </td>
+
+                              <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.qldg}}<span></span></a>
+                                </h2>
+                            </td>
+
+
+
+                        <td class="text-right">
+                               <a href="" class="btn btn-info"><i class="fa fa-pencil" style="font-size:12px;color:yellow"></i> Sửa </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+                {% endif %}
+            </div>
+            </div>
+        </div> <!-- /md-12-------->
+    </div><!-- /rows------->
+</div>
+<!-- /Page Content -->
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

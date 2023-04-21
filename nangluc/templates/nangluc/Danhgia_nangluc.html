@@ -1,0 +1,161 @@
+{% extends "layouts/base_no.html" %}
+{% block title %} Danh sách Danh giá năng lực {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Login/Regiser</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- CSS only -->
+
+    <style>
+    .image-thumbail{
+        height: 600px;
+
+        object-fit: cover;
+    }
+
+        .login--wrapper {
+            display: flex;
+            align-items: center;
+            height: 80vh;
+            justify-content: center;
+        }
+
+    </style>
+
+<!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h2 class="page-title"> ĐÁNH GIÁ NĂNG LỰC NHÂN VIÊN</h2>
+                <ul class="breadcrumb">
+                    <!-- link bang dieu khiển -->
+   					<li class="breadcrumb-item"><a href="{% url 'list_nangluc_2' %}">Danh mục năng lực</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'Khung_nangluc_list' %}">Khung năng lực</a></li>
+				</ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="{% url 'add_danhgia_nangluc' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thiết lập Đánh giá năng lực</a>
+                <div class="view-icons">
+                    <a href="{% url 'Danhgia_nangluc_list' %}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="{% url 'Danhgia_nangluc_list' %}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+
+<body class="md-12">
+    <div class="container">
+               {% if request.user.is_authenticated %}
+                <p>Hello {{request.user}}</p>
+                {% endif %}
+<div class="row">
+    <div class="col-md-4">
+          <div class="card">
+          <div class="card-header">
+            <h3 style="color:red"> DANH SÁCH NHÂN VIÊN</h3>
+          </div>
+          <ul class="list-group list-group-flush">
+                  {% for tenlop in Nhanvien_duoc_dg_nangluc %}
+                  <li class="list-group-item">
+                        <a href="{% url 'Danhgia_nangluc_list' %}?Nhanvien_dg_nangluc={{tenlop.ho_lot_thuong_dung}}">
+                         {{tenlop.ho_lot_thuong_dung}}, <span>{{tenlop.vitri_CV}}</span>
+                          </a>
+                     </li>
+                 {% endfor %}
+
+              <li class="list-group-item">
+                      <a href="{% url 'Danhgia_nangluc_list' %}">Tất cả</a>
+                  </li>
+            <a href="{% url 'add_danhgia_nangluc' %}" class="btn btn-success btn-block badge-pill">Thiết lập Đánh giá năng lực </a>
+          </ul>
+        </div>
+    </div>
+
+    <div class="col-md-8
+        <div class="row">
+
+
+    <div class="row">
+        <div class="col-md-12">
+              <div class="card-header">
+               <h3 style="color:BUE"> CHI TIẾT ĐÁNH GIÁ NĂNG LỰC </h3>
+              </div>
+
+            {{form}}
+
+            <div class="table-responsive-sm">
+                {% if danhgia_nangluc_list %}
+                <table class="table table-striped custom-table datatable">
+                    <thead>
+                        <tr class="table-success">
+                            <th scope="col" style="width: 5%">id</th>
+                            <th scope="col" style="width: 45%">Tên năng lực</th>
+                            <th scope="col" style="width: 10%">Tự Đgiá </th>
+                            <th scope="col" style="width: 10%"> QL Đ. giá </th>
+                            <th scope="col" style="width: 10%">Kết quả Đ.Giá </th>
+
+                            <th class="text-right no-sort" style="width: 10%">Tùy chỉnh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sto in danhgia_nangluc_list %}
+                        <tr>
+                             <td>
+                                <a href=""> {{forloop.counter}} <a/>
+                             </td>
+                           <td>
+                                <h2 class="table-avatar">
+                                    <a href="{% url 'nangluc_chitiet2' sto.TenNangluc_congviec.nangluc_cv_id %}">{{sto.TenNangluc_congviec}}<span></span></a>
+                                </h2>
+                            </td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.tu_danhgia_dapung}}<span></span></a>
+                                </h2>
+                            </td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.Quanly_danhgia}}<span></span></a>
+                                </h2>
+                            </td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.Ketqua_danhgia}}<span></span></a>
+                                </h2>
+                            </td>
+
+                          <td class="text-right">
+                               <a href="{% url 'Danhgia_nangluc_update' sto.id %}" class="btn btn-info"><i class="fa fa-pencil" style="font-size:12px;"></i> </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+                {% endif %}
+            </div>
+        </div> <!-- /md-12-------->
+    </div><!-- /rows------->
+
+        </div>
+    </div>
+    </div>
+
+    </div>
+</body>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+

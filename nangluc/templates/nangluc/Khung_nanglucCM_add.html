@@ -1,0 +1,89 @@
+{% extends "layouts/base_no.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+
+<style>
+m-12{
+    background: red;
+}
+
+.form-group m-4 input{
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    box-sizing: border-box;
+    border: ;
+    outline: none;
+    background: red;
+}
+    .label {
+      color: white;
+      padding: 8px;
+      font-family: Arial;
+    }
+    .success {background-color: #04AA6D;} /* Green */
+    .info {background-color: #2196F3;} /* Blue */
+    .warning {background-color: #ff9800;} /* Orange */
+    .danger {background-color: #f44336;} /* Red */
+    .other {background-color: #f44335; color: yellow;} /* Gray */
+</style>
+
+<body class="m-12">
+    <div class="container ">
+        <div class="col-md-12">
+            <a href="{% url 'Congviec_nangluc_list_2' %}" class="btn btn-dark my-3"> Quay về..  trang chủ</a>
+            <div class="card">
+                <form method="POST" action="" enctype="multipart/form-data">
+                     {% csrf_token %}
+                  <div class="form-group col-md-6 mb-3">
+                    <br>
+                      <label> Chọn vị trí/chức danh:</label>
+                    <select name="chucdanh_CV" class="form-control">
+                        <option value="none"> Chọn vị trí/chức danh... </option>
+                        {% for chucdanh_CV in chucdanh_CV_s %}
+                        <option value="{{chucdanh_CV.id}}">{{chucdanh_CV.Ten_vitri_full}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                       <div class="form-group col-md-6 mb-3">
+
+                  <label> Chọn Khung năng lực</label>
+
+                    <select name="nangluc_cv" class="form-control">
+                        <option value="none"> Chọn tên khung năng lực... </option>
+                        {% for nangluc_cv in nangluc_cv2 %}
+                        <option value="{{nangluc_cv.id}}">{{nangluc_cv.name}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                   <div class="form-group m-4">
+                    <label>Đợt tạo khung năng lực</label>
+                    <input name="name" type="text" placeholder="Đợt tạo khung năng lực" class ="form-control">
+                  </div>
+                  <div class="form-group m-4">
+                    <label>Mức quan trọng năng lực</label>
+                    <input type="number" name="Muc_quantrong_nluc" placeholder="Mức quan trọng khung năng lực" min="1" max="3" class ="form-control">
+                  </div>
+                  <div class="form-group m-4">
+                    <label>Thành thạo năng lực</label>
+                    <input type="number" name="Muc_thanhthao_nluc" placeholder="Mức thành thạo khung năng lực" min="1" max="5" class ="form-control">
+                  </div>
+                    <div class="form-group m-4">
+                    <label>Điểm tiêu chuẩn</label>
+                    <input type="number" name="Diem_tieuchuan" placeholder="Điểm tiêu chuẩn" min="1" max="20" class ="form-control">
+                  </div>
+                    <button type="submit" class="btn btn-primary m-4">Lưu</button>
+               </form>
+      </div>
+        </div>
+    </div>
+</body>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

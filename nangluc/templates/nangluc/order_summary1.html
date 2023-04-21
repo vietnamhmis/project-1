@@ -1,0 +1,88 @@
+{% extends "banhang/base_banhang.html" %}
+
+{% block content %}
+  <main>
+    <div class="container">
+    <div class="table w-auto">
+    '<h3 style="color: blue"> <b>BẢNG NĂNGLỰC CÁ NHÂN </b></h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">TT</th>
+            <th scope="col">Danh mục KPI</th>
+            <th scope="col">Tỉ trọng</th>
+            <th scope="col"></th>
+            <th scope="col">Đ.vị tính</th>
+            <th scope="col">Tần xuất</th>
+            <th scope="col">Chỉ tiêu</th>
+            <th scope="col">Kết quả</th>
+            <th scope="col">Mức H.thành</th>
+            <th scope="col">Điểm trọng số</th>
+            <th scope="col">Tùy chỉnh</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order_item in object.tong_nl.all %}
+        <!---object (lấy đơn hàng Order, )= Order.objects.get(user=self.request.user, ordered=False)- items-->
+        <!---object.items ==> --->
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ order_item.item.title }}</td>
+            <td>
+                <a href=""><i class="fas fa-minus mr-9"></i></a>
+                {{ order_item.quantity }}%
+                <a href="{% url 'bsc:add_to_kpi' order_item.item.slug %}"><i class="fas fa-plus ml-2"></i></a>
+            </td>
+            <td>
+            <td>{{ order_item.item.Don_vi_tinh }}</td>
+            <td>{{ order_item.item.Tan_xuat_d_gia }}</td>
+            <td>{{ order_item.Chi_tieu }}</td>
+            <td>{{ order_item.Ket_qua }}</td>
+            <td>{{ order_item.get_tile_hoan_thanh_kpi }}</td>
+             <td>{{ order_item.get_diem_trongso_kpi }}
+             <span class="badge badge-secondary">Điểm CV {{ order_item.get_diem_congviec_kpi }}</span></td>
+            <td>
+                <a style='color: red' href="{% url 'bsc:update_kpi' order_item.id %}" >
+                <i class="fas fa-trash " style="font-size:14px;color:red"></i>
+                </a>
+                <a style='color: red;' href="{% url 'bsc:remove-from-kpi' order_item.item.slug %}">
+                <i class="fas fa-trash float-right"></i>
+                 </a>
+            </td>
+
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan='5'>Your cart is empty</td>
+        </tr>
+        <tr>
+            <td colspan="9">
+            <a class='btn btn-primary float-right' href="{% url 'bsc:home' %}">Continue KPI</a>
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan ="2">
+            <a style='color: red;' ><b>Tổng cộng</b> </a>
+            </td>
+              <td colspan ="7">
+            <a style='color: red;' ><b>{{ object.get_total_titrong }} %</b> </a>
+            </td>
+            <td >
+            <a style='color:blue;' ><b> {{ object.get_total }}điểm</b> </a>
+            </td>
+        <tr>
+            <td colspan ="8">
+            <a class='btn btn-warning float-right ml-2' href='/checkout/'>ĐÁNH GIÁ KPI</a>
+            <a class='btn btn-primary float-right' href='/bsc/'>THÊM KpI</a>
+            </td>
+        </tr>
+        </tbody>'
+    </table>'
+    </div>
+    </div>
+  </main>
+{% endblock content %}
+
+

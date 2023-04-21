@@ -1,0 +1,68 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+
+<style>
+.form-group m-4 input{
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    background: #f0f0f0;
+
+}
+.label {
+  color: white;
+  padding: 8px;
+  font-family: Arial;
+}
+.success {background-color: #04AA6D;} /* Green */
+.info {background-color: #2196F3;} /* Blue */
+.warning {background-color: #ff9800;} /* Orange */
+.danger {background-color: #f44336;} /* Red */
+.other {background-color: #f44335; color: yellow;} /* Gray */
+</style>
+
+<body class="m-12">
+    <div class="container ">
+        <div class="col-md-12">
+            <a href="{% url 'nangluong_view' %}" class="btn btn-dark my-3"> Quay về  trang chủ</a>
+            <div class="card">
+                <form method="POST" action="" >
+                     {% csrf_token %}
+                  <div class="form-group col-md-4 mb-3">
+                    <br>
+
+                  </div>
+                   <div class="form-group m-2">
+                    <label>Đợt Nâng lương <br><i> Lưu ý chỉ áp dụng trong trường hợp Nâng lương đợt nhiều người</i> </label>
+                    <input name="name" type="text" placeholder="Đợt ký hợp đồng" class ="form-control">
+                  </div>
+                  <div class="form-group m-4">
+                    <label>Tiêu chuẩn 1: Thành tích công tác trong năm giữ bậc<br><i> </i> </label>
+                    <input name="name1" type="text" placeholder="Lựa chọn Thành tích công tác trong năm giữ bậc" class ="form-control">
+                  </div>
+                  <div class="form-group m-2">
+                    <label>Tiêu chuẩn 2: Thời gian làm việc<br><i> Đối với chức danh nhóm ĐH 3 năm, khác 2 năm </i> </label>
+                    <input name="name2" type="text" placeholder="Lựa chọn thời gian giữ bậc" class ="form-control">
+                  </div>
+                  <div class="form-group m-2">
+                    <label>Tiêu chuẩn 3: Thời gian làm việc<br><i> Chấp hành Nội quy/Quy chế không vi phạm </i> </label>
+                    <input name="name3" type="text" placeholder="Chấp hành Nội quy/Quy chế không vi phạm" class ="form-control">
+                  </div>
+
+                <button type="submit" class="btn btn-primary m-4">Lưu</button>
+               </form>
+      </div>
+        </div>
+    </div>
+</body>
+
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

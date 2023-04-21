@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans %}Xác nhận e-mail gửi đến {{email}}.{% endblocktrans %}

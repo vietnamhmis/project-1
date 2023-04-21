@@ -1,0 +1,123 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+<div class="content container-fluid">
+	  <!-- Page Header -->
+
+	  <!-- Page Header -->
+	  <div class="page-header">
+		  <div class="row align-items-center">
+			  <div class="col">
+				  <h3 class="page-title">ĐỊNH BIÊN LÀM VIỆC THEO HÀNH CHÍNH</h3>
+				  <ul class="breadcrumb">
+					  <!-- link bang dieu khiển -->
+					  <li class="breadcrumb-item"><a href="{% url 'dinhbien_th' %}">Tổng hợp Định biên</a></li>
+					  <li class="breadcrumb-item active"><a href="{% url 'dinhbien_ca_list' %}"> Định biên ca, kíp</a></li>
+				  </ul>
+			  </div>
+			  <div class="col-auto float-right ml-auto">
+				  <a href="{% url 'add_dinhbiehc'%}" class="btn add-btn"><i class="fa fa-plus"></i> Thêm định biên</a>
+				  <div class="view-icons">
+					  <a href="" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+					  <a href="" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+	  <!-- /Page Header -->
+	  <form method='POST' action=''>{% csrf_token %}
+		  <div class="form-row text-right">
+			<div class="form-check">
+				  <input class="form-check-input" type="checkbox" id="{{form.Xuất_Excel}}"
+				  <label class="form-check-label">
+					  Xuất Excel
+				  </label>
+			  </div>
+			  <div class= "col-md-2 text-right">
+				  <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Xuất excel'/>
+			  </div>
+		  </div>
+
+	  </form>
+
+	<div class="row">
+		<div class="col-md-12">
+            <div class="table-responsive-sm">
+
+            {% if queryset %}
+
+                <table class="table table-striped custom-table datatable">
+                     <thead>
+                        <tr class="table-success">
+                             <th scope="col" style="width: 5%">id</th>
+
+							 <th scope="col" style="width: 45%">Nội dung công việc</th>
+							 <th scope="col" style="width:7%">ĐV. tính</th>
+							 <th scope="col" style="width: 7%">T.xuất</th>
+
+
+							 <th scope="col" style="width: 7%">Kh.lương năm</th>
+							 <th scope="col" style="width: 7%">số phút/lần</th>
+							<th scope="col" style="width: 7%"> Phút/năm</th>
+							<th class="text-center" style="width: 15%">Sửa/Xóa</th>
+	                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for sto in queryset %}
+
+                            <tr >
+                                <th class="" scope="row">{{sto.id}}</th>
+
+
+								  <td>{{ sto.Noi_dung_cviec }}</td>
+
+								  <td>{{sto.donvi_tinh}}</td>
+								  <td>{{sto.tan_xuat_lviec}}</td>
+								  <td>{{sto.khoiluong_nam}}</td>
+								  <td>{{sto.sophut_th_1lan}}</td>
+								  <td class="text-right">{{sto.Tong_phut_1nam}}</td>
+                                <td class="text-center">
+                                    <a href="{% url 'update_dinhbienhc' sto.id %}" class="btn btn-info"><i class="fa fa-pencil" style="font-size:14px;color:yellow"></i> </a>
+                                    <form action="{% url 'del_dinhbienhc' sto.id %}" method="post" class="d-inline">
+                                    <input type="submit"  class="btn btn-success" class="fa fa fa-trash" style="font-size:14px;color:white" value="XÓA">
+                                        {% csrf_token %}
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+
+					<tfoot>
+					  <tr class="table-success">
+						  <th class="text-center" cscope="col"></th>
+						   <th class="text-center" cscope="col">Số lao động
+						  <th class="text-center" cscope="col">{{laodong}}</th>
+						  <th class="text-center" cscope="col"></th>
+						  <th class="text-center" cscope="col"></th>
+
+						  <th class="text-center" cscope="col">Phút/năm:</th>
+						  <th class="text-right"scope="col">{{sum_phutnam}}</th>
+						  <th class="text-right"scope="col"></th>
+
+						  <th class="text-center" cscope="col"></th>
+
+                      </tr>
+                      </tfoot>
+
+                </table>
+                {% else %}
+                      <h4 class="text-center alert alert-warning">No record </h4>
+            {% endif %}
+            </div>
+        </div>   <!-- /md-12-------->
+    </div><!-- /rows------->
+</div>
+<!-- /Page Content -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

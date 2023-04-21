@@ -1,0 +1,156 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Hồ sơ nhân viên {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+ <form action="" method="POST">{% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="profile-img-wrap edit-img">
+                                <img class="inline-block" src="/static/assets/img/profiles/avatar-02.jpg" alt="user">
+                                <div class="fileupload btn">
+                                    <span class="btn-text">Sửa</span>
+                                    <input class="upload" type="file">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Họ và tên</label>
+                                        <input type="text" class="form-control" id="{{form_nv_update.ho_lot_thuong_dung}}">
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Tên</label>
+                                        <input type="text" class="form-control" id="{{form_nv_update.ten_thuong_dung}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Ngày sinh</label>
+                                        <div class="cal-icon">
+                                            <input class="form-control datetimepicker" type="text" id="{{form_nhanvien.ngay_sinh}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Số CCCD</label>
+                                        <div class="text">
+                                            <input class="form-control datetimepicker" type="text" id="{{form_nv_update.so_CCCD}}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Ngày cấp CMND/CCCD</label>
+                                        <div class="cal-icon">
+                                            <input class="form-control datetimepicker" type="text" id="{{form_nv_update.ngay_cap_CCCD}}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Giới tính</label>
+                                        <select class="select form-control">
+                                            <option id ={{form_nv_update.vitri_CV}}></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Địa chỉ/ Số nhà</label>
+                                <input type="text" class="form-control" value="4487 Snowbird Lane">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Quận / Huyện</label>
+                                <input type="text" class="form-control" value="New York">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Tỉnh /  Thành phố   việt</label>
+                                <input type="text" class="form-control" id="{{form_nv_update.ma_tinh_noi_sinh}}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Mã vùng</label>
+                                <input type="text" class="form-control" value="10523">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <input type="text" class="form-control" value="631-889-3206">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Phòng ban <span class="text-danger">*</span></label>
+                                <select class="select">
+                                    <option>Giám đốc</option>
+									<option>Nhân sự</option>
+									<option>Kế toán</option>
+									<option>IT</option>
+									<option>Kinh Doanh</option>
+									<option>Marketing</option>																
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Vai trò <span class="text-danger">*</span></label>
+                                <select class="select">
+                                    <option>Giám đốc</option>
+									<option>Phó giám đốc</option>
+									<option>Thư ký</option>
+									<option selected>Quản lý</option>
+									<option>Trưởng phòng</option>
+									<option>Nhân viên</option>									
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Báo cáo cho <span class="text-danger">*</span></label>
+                                <select class="select">
+                                    <option>-</option>
+                                    <option>Wilmer Deluna</option>
+                                    <option>Lesley Grauer</option>
+                                    <option>Jeffery Lalor</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                     <input type="submit" class="btn btn-success btn-xs" value="LƯU">
+
+  </form>
+
+</div>
+<!-- /Experience Modal -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

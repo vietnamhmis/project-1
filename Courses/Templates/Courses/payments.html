@@ -1,0 +1,79 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+				
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="page-title">Thanh toán</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index">bảng điều khiển</a></li>
+                    <li class="breadcrumb-item active">Thanh toán</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">	
+                <table class="table table-striped custom-table datatable mb-0">
+                    <thead>
+                        <tr>
+                            <th>Số hóa đơn</th>
+                            <th>Khách hàng</th>
+                            <th>Loại thanh toán</th>
+                            <th>Ngày thanh toán</th>
+                            <th>Tổng thanh toán</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="invoice-view">#HD-0001</a></td>
+                            <td>
+                                <h2><a href="#">Global Technologies</a></h2>
+                            </td>
+                            <td>Chuyển khoản</td>
+                            <td>11/09/2021</td>
+                            <td>$500</td>
+                        </tr>
+                        <tr>
+                            <td><a href="invoice-view">#HD-0002</a></td>
+                            <td>
+                                <h2><a href="#">Delta Infotech</a></h2>
+                            </td>
+                            <td>Chuyển khoản</td>
+                            <td>11/09/2021</td>
+                            <td>$500</td>
+                        </tr>
+                        <tr>
+                            <td><a href="invoice-view">#HD-0003</a></td>
+                            <td>
+                                <h2><a href="#">Cream Inc</a></h2>
+                            </td>
+                            <td>Tiền mặt</td>
+                            <td>11/09/2021</td>
+                            <td>$500</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

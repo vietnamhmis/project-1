@@ -1,0 +1,50 @@
+{% extends 'courses/base.html' %}
+{% block title %} Sửa dữ liệu{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-12 offset-1 ">
+        <div class="container">
+            <div class="card mt-1 mr-0 ml-0">
+                <div class="card-body">
+
+                    <h4 class="alert alert-info"> BẢNG THIẾT LẬP ĐỊNH GIÁ CÔNG VIỆC</h4>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <h3 class="alert alert-info">Chức vụ: {{form.chuc_vu}}</h3>
+                        <h5 >Đơn vị: {{form.don_vi}}, {{form.bo_phan}}</h5> <br>
+
+                        I.MỨC ĐỘ TÁC ĐỘNG CỦA CÔNG VIỆC:
+                        <h6 class="alert alert-info"> 1.1 Đến kết quả hoạt động kinh doanh: {{form.muc_ah_cty_11}}</h6> <br>
+                        <h6> 1.2 Đến công việc của người khác{{form.muc_ah_nv_12}} </h6> <br>
+
+                        II.YÊU CẦU VỀ NĂNG LỰC ĐỂ THỰC HIỆN CÔNG VIỆC
+
+                        <h6 class="alert alert-info"> 2.1 Đến kết quả hoạt động kinh doanh: {{form.ycau_trinhdocm_21}}</h6> <br>
+
+                        <h6> 2.2 Về kinh nghiệm:{{form.ycau_k_nghiem_22}} </h6> <br>
+                        <h6> 2.3 Về trình độ Ngoại ngữ{{form.ycau_Ngoaingu_23}}</h6> <br>
+                        <h6> 2.4 Về trình độ CNTT{{form.ycau_CNTT_24}}</h6> <br>
+
+                        III.ĐẶC TÍNH CỦA CÔNG VIỆC
+                        <h6 class="alert alert-info"> 3.1 Tính kế hoạch:{{form.ycau_kehoach_31}}</h6> <br>
+                        <h6>Tính ổn định và sáng tạo:{{form.ycau_sangtao_32}}</h6> <br>
+                        <h6>Tính độc lập{{form.ycau_doclap_33}}</h6> <br>
+                        <h6>Cường độ lao động: <br>{{form.ycau_cuongdo_34}}</h6> <br>
+                        <h6>Mức độ phối hợp và kỹ năng giao tiếp:{{form.ycau_giaotiep_35}}</h6> <br>
+
+                        IV. ĐIỀU KIỆN LÀM VIỆC
+                        <h6 class="alert alert-info">Môi trường làm việc:{{form.mt_laodong_41}}</h6> <br>
+                        <h6 class=“alert alert-info”>Mức độ rủi ro nghề nghiệp{{form.muc_rui_ro_42}}</h6> <br>
+
+                        <input type="submit" class="btn btn-success" value="Update">
+                        <a href="{% url 'dinhgia_list' %}" class="btn btn-info"> Back to Home </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

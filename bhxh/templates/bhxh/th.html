@@ -1,0 +1,123 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách BHXHTN {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">BHXH, BHYT</h3>
+                <ul class="breadcrumb">
+                    <!-- link bang dieu khiển -->
+                   <li class="breadcrumb-item"><a href="/dashboard">DANH SÁCH:D05-TS</a></li>
+                    <li class="breadcrumb-item"><a href="/dashboard">THANHTOÁN:C66a-HD</a></li>
+                    <li class="breadcrumb-item"><a href="/dashboard">ĐỐI CHIẾU:C17-T</a></li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="" class="btn add-btn"><i class="fa fa-plus"></i> Thêm người tham gia BHXH</a>
+                <div class="view-icons">
+                    <a href="" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+
+    <!-- Search Filter----------------------------- -->
+    <form method='POST' action=''>{% csrf_token %}
+        <div class="form-row">
+
+            <div class="form-group col-md-3">
+                <input type="text" class="form-control" placeholder="Họ tên" id={{form.HOTEN}}
+            </div>
+
+            <div class="form-group col-md-2">
+                <input type="text" class="form-control" placeholder="Số sổ BHXH" id={{form.SOBHXH}}
+            </div>
+
+
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id={{form.Xuất_Excel}} <label class="form-check-label">Xuất Excel </label>
+            </div>
+
+            <div class="col-md-2 text-right">
+                <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Tìm kiếm' />
+            </div>
+        </div>
+    </form>
+
+    <!-- /Search Filter ------------------------------------------------------>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+
+                {% if queryset %}
+                <table class="table table-striped custom-table datatable">
+                    <thead>
+                        <tr class="table-success">
+                            <th scope="col">TT</th>
+                            <th scope="col">Họ tên</th>
+                            <th scope="col">Mã BHXH</th>
+                            <th scope="col">Ngày sinh</th>
+                            <th scope="col">Nơi Đăng ký KCB</th>
+                            <th scope="col">Số Biên lai</th>
+                            <th scope="col">NgàyTham gia</th>
+                            <th scope="col">Tiền lương</th>
+                            <th scope="col">NN hỗ trợ</th>
+                            <th scope="col">Thời hạn sử dụng KCB</th>
+                            <th class="text-right no-sort">Tùy chỉnh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sto in queryset %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>
+                                <h4 class="table-avatar">
+                                   <a href="{% url 'bhxh_tokhai' sto.id %}"> {{sto.HOTEN}}</span></a>
+                                </h4>
+                            </td>
+                             <td>{{sto.SOBHXH}}</td>
+                              <td>{{sto.NGAYSINH|date:"d-m-Y"}}</td>
+                              <td>{{sto.MA_BV}}</td>
+                              <td>{{sto.SOBL}}</td>
+                             <td>{{sto.TUNGAY|date:"d-m-Y"}}</td>
+                              <td>{{sto.ML_dong}}</td>
+                              <td>{{sto.TYLE_NSNN}}</td>
+                              <td>Từ tháng {{sto.TUTHANG}} </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="{% url 'update_bhxh' sto.id %}"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="{% url 'delete_BHXH' sto.id %}"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                </table>
+                {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+                {% endif %}
+            </div>
+            <!-------------Finish class="table-responsive"------->
+
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

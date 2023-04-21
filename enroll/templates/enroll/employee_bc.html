@@ -1,0 +1,82 @@
+{% extends "layouts/base.html" %}
+{% block title %} Tất cả nhân viên {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+<div class="content container-fluid">
+
+
+	<!-- Page Header -->
+	<div class="page-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h3 class="page-title">Nhân viên</h3>
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item"><a href="/dashboard">Bảng điều khiển</a></li>
+					<!---liên kết về  bảng điều khiển --->
+					<li class="breadcrumb-item active">Nhân viên</li>
+				</ul>
+			</div>
+			<!---<a href="{% url 'add_nhanvien' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thêm nhân viên</a>
+			Liên kết về  bảng list nhân viên/nhanvien và thêm nhân viên thông qua: data-toggle="modal" data-target="#add_employee"> --->
+			<div class="col-auto float-right ml-auto">
+				<a href="{% url 'add_nhanvien_dt' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thêm nhân viên</a>
+
+				<div class="view-icons"> <!--- link profifie theo icon và theo list -->
+					<a href="" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+
+					<a href="" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Page Header -->
+
+
+	<!-- Search Filter -->
+	<form method='POST' action=''>{% csrf_token %}
+		<div class="form-row">
+
+
+		</div>
+	</form><br> <br>
+<!-- Search Filter -->
+
+
+<!-- Hiển thị dang lưới -->
+<div class="col-md-12 mb-12"><!--Start of second col--4>-->
+	<div class="display_table"> <!--Hiển thỉ dang kiểu --5-->
+		<div class="row staff-grid-row">
+
+			{% for sto in querysetbs %}
+			<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+				<div class="profile-widget">
+					<div class="profile-img">
+
+						<a href="" class="avatar"><img src="{{sto.avatar.url}}" alt=""></a>
+
+					</div>
+					<div class="dropdown profile-action">
+						<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+						<div class="dropdown-menu dropdown-menu-right">
+							<a class="dropdown-item" href="" ><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+							<a class="dropdown-item" href=""><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+						</div>
+					</div>
+					<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="{% url 'nhanvien_profile_3' sto.id %}">{{sto.ho_lot_thuong_dung}}{{sto.ten_thuong_dung}}</a></h4>
+				</div>
+			</div>
+			{% endfor %}
+
+		</div>
+	</div>
+</div>
+<!-- Hiển thị dang lưới -->
+
+
+<!-- Page Content -->
+</div>
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

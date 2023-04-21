@@ -1,0 +1,120 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+
+<!-- Page Content -->
+  <div class="content container-fluid">
+	  <!-- Page Header -->
+	  <div class="page-header">
+		  <div class="row align-items-center">
+			  <div class="col">
+				  <h4 class="page-title">THIẾT LẬP KPI ĐƠN VỊ:</h4>
+			  </div>
+			  <div class="col-auto float-right ml-auto">
+				  <a href="" class="btn add-btn"><i class="fa fa-plus"></i> GIAO KPI</a>
+			  </div>
+		  </div>
+	  </div>
+	  <!-- /Page Header -->
+
+
+	  <!-- Search Filter----------------------------- -->
+	  <form action="" method="POST"> {% csrf_token %}
+        <div class="rows">
+             <div class="col-md-12">
+                  <div class="rows">
+                    <div class="input-group">
+                        <div class="col-md-1">
+                            <input type="text" class="form-control" placeholder = "Mã KPO" required name="{{ form.Ma_KPo }}"
+                        </div>
+                        <div class="col-md-11">
+                            <input type="text" placeholder = "Tên KPO" aria-label="{{ form.Ten_KPo }}
+                        </div>
+                    </div>
+                 </div>
+                 <div class="rows">
+                    <div class="input-group">
+                        <div class="col-md-10">
+                           <input type="text" placeholder = "Nhập KPI"  aria-label="{{ form.Ten_KPI }}</textarea>
+                        </div>
+
+                        <div class="col-md-2">
+                            <input type="" class="form-control" placeholder = "Cấp KPI: 1,2" required name={{form.Cap_KPI}}
+                        </div>
+                    </div>
+                 </div>
+                <div class="card-body">
+                    <p>
+                        ĐV tính:{{ form.Don_vi_tinh }}
+                        Chỉ tiêu:{{ form.Chitieu_KPI }}
+                        Tỉ trọng: {{ form.Ti_trong }}
+                        Nhóm viễn cảnh {{ form.Vien_canh_cluoc }}
+                        Tần xuất: {{ form.Tan_xuat_d_gia }}
+                        Đơn vị Q.lý: {{ form.Dv_quanly_KPI }}
+                     </p>
+
+                     <input type="submit" class="btn btn-primary" value="Thêm dữ liệu">
+
+                </div>
+            </div>
+
+        </div>
+    </form>
+	  <!-- /Search Filter ------------------------------------------------------>
+
+	  <div class="row">
+		  <div class="col-md-12">
+			  <div class="table-responsive">
+
+     {% if loc_ki %}
+            <table class="table table-striped custom-table datatable">
+                 <thead>
+                    <tr class="table-success">
+                        <th scope="col" style="width: 5%">id</th>
+                        <th scope="col" style="width: 1%">Mã</th>
+
+                        <th scope="col" style="width: 30%">Tên KPI</th>
+                        <th scope="col" style="width: 5%">ĐVT</th>
+                        <th scope="col" style="width: 5%" >Chỉ tiêu</th>
+                        <th scope="col" style="width: 5%" >TT</th>
+                        <th scope="col" style="width: 8%">SỬA/XÓA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for std in loc_ki %}
+                        <tr>
+                            <th>{{std.id}}</th>
+                            <td>{{std.Ma_KPo}}</td>
+
+                            <td >{{std.Ten_KPI|truncatewords:30}}</td>
+                            <td>{{std.Don_vi_tinh}}</td>
+                            <td style="blue">{{std.Chitieu_KPI|floatformat:"-2" }}</td>
+                            <td>{{std.Ti_trong}}</td>
+                            <td class="" >
+                                <a href="{% url 'updatedv' std.id %}" class="btn btn-info"><i class="fa fa-pencil" style="font-size:18px;color:yellow"></i> Sửa </a>
+                                <form action="{% url 'delete_dv' std.id %}" method="post" class="d-inline">
+                                <input type="submit"  class="btn btn-success" class="fa fa fa-trash" style="font-size:14px;color:white" value="XÓA">
+                                    {% csrf_token %}
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+      {% else %}
+                  <h4 class="text-center alert alert-warning">No record </h4>
+     {% endif %}
+              </div>
+		  </div>
+	  </div>
+  </div>
+<!-- /Page Content -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

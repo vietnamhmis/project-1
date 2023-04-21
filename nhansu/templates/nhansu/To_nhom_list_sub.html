@@ -1,0 +1,113 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách nhân viên {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+
+<!-- Page Content -->
+  <div class="content container-fluid">
+	  <!-- Page Header -->
+	  <div class="page-header">
+		  <div class="row align-items-center">
+			  <div class="col">
+				  <h3 class="page-title">Tổ Nhóm</h3>
+				  <ul class="breadcrumb">
+					  <!-- link bang dieu khiển -->
+					  <li class="breadcrumb-item"><a href="/dashboard">Bảng điểu khiển</a></li>
+					  <li class="breadcrumb-item active">Tổ Nhóm</li>
+				  </ul>
+			  </div>
+			  <div class="col-auto float-right ml-auto">
+				  <a href="{% url 'add_to'%}" class="btn add-btn"><i class="fa fa-plus"></i> Thêm Tổ nhóm</a>
+				  <div class="view-icons">
+					  <a href="" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+					  <a href="" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+	  <!-- /Page Header -->
+
+
+	  <!-- Search Filter----------------------------- -->
+	  <form method='POST' action=''>{% csrf_token %}
+		  <div class="form-row">
+			  <div class="form-group col-md-2">
+				  <input type="text" class="form-control" placeholder = "Tên Tổ" id={{form.ten_to}}
+			  </div>
+			  <div class="form-group col-md-3">
+				  <select  class="form-control" placeholder = "Thuộc Bộ phận"{{form.bo_phan}}
+				  </select>
+			  </div>
+			  <div class="form-check">
+				  <input class="form-check-input" type="checkbox" id="{{form.Xuất_Excel}}"
+				  <label class="form-check-label">
+					  Xuất Excel
+				  </label>
+			  </div>
+			  <div class= "col-md-2 text-right">
+				  <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Tìm kiếm'/>
+			  </div>
+		  </div>
+	  </form>
+	  <!-- /Search Filter ------------------------------------------------------>
+
+
+	  <div class="row">
+		  <div class="col-md-12">
+			  <div class="table-responsive">
+				  {% if queryset %}
+				  <table class="table table-striped custom-table datatable">
+					  <thead>
+					  <tr class="table-success">
+						  <th scope="col">id</th>
+						  <th scope="col">Tên Tổ</th>
+						  <th scope="col">Mã Tổ</th>
+						  <th scope="col">Bộ phận</th>
+						  <th class="text-LEFT no-sort">Sửa/Xóa</th>
+					  </tr>
+					  </thead>
+					  <tbody>
+					  {% for sto in queryset %}
+					  <tr>
+						  <td>{{sto.id}}</td>
+
+						  <td>
+							  <h5 class="table-avatar">
+								  <a href="{% url 'tonhom_nhanvien' sto.id %}" class="avatar"> <img src="/static/assets/img/profiles/avatar-02.jpg" alt=""></a>
+								  <a href=""> {{sto.ten_to}}<span>{{sto.bo_phan}}</span></a>
+							  </h5>
+						  </td>
+
+						  <td>{{sto.ma_to}}</td>
+						  <td>{{sto.bo_phan}}</td>
+						  <td >
+							   <a href="{% url 'update_tonhom' sto.id %}" class="btn btn-info"><i class="fa fa-pencil" style="font-size:18px;color:white"></i> Sửa </a>
+							   <a href="{% url 'del_to' sto.id %}" class="btn btn-success badge-pill"><i class="fa fa fa-trash" style="font-size:18px;color:yellow"></i> Xóa </a>
+
+
+
+							  <!---
+							   <form action="{% url 'del_to' sto.id %}" method="post" class="d-inline">
+								   <input type="submit"  class="btn btn-success badge-pill" value="XÓA">
+								   {% csrf_token %}
+							   </form> -->
+						  </td>
+
+					  </tr>
+                        {% endfor %}
+				  </table>
+				  {% else %}
+				  <h4 class="text-center alert alert-warning">No record </h4>
+				  {% endif %}
+			  </div>
+		  </div>
+	  </div>
+  </div>
+<!-- /Page Content -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,11 @@
+container-fluid{
+    border-top: solid 170px #090909;
+
+}
+
+header.container{
+border-bottom: solid 1px #c0c0c0;
+padding: 17px 0;
+font-family: timenews;
+font-size: 22 px;
+}

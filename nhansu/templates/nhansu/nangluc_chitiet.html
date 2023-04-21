@@ -1,0 +1,133 @@
+
+{% extends "layouts/base_no.html" %}
+%} {% block title %} Danh sách nhân viên {% endblock %}
+<!-- Specific CSS goes HERE --> {% block stylesheets %}{% endblock stylesheets %} {% block content %} <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+<!---- Toàn trang--->
+    <style>
+    body {
+      background-color: redblue;
+    }
+    a {
+      color: yellow;
+
+    }
+
+    h1 {
+      color: red;
+      text-align: center;
+      background-color: redblue;
+    }
+
+    h2 {
+      color: red;
+      text-align: center;
+      background-color: redblue;
+
+    }
+
+    p {
+      font-family: Calibri (Body);
+      font-size: 34px;
+    }
+</style>
+<!-- Page Content -->
+<div class="col-md-12">
+  <div class="row">
+    <div class="container-fluid">
+      <div class="container mt-2">
+
+        <div class="card text-blue  mb-3" style="max-width: 4800rem;">
+          <nav class="navbar navbar-dark bg-red  justify-content-start sticky-top text-right, style=" background-color: #e3f2fd;" id="my-menu">
+            <a class="navbar-brand" href="">NĂNG LỰC {{item.name}}</a>
+            <a class="nav nav-pills text-right" href="#muc_1">Mức 1</a>
+            <a class="nav-link" href="#muc_2">Mức 2</a>
+
+            <a class="nav nav-pills text-right" href="#muc_3">Mức 3</a>
+            <a class="nav-link" href="#muc_4">Mức 4</a>
+            <a class="nav nav-pills text-right" href="#muc_5">Mức 5  </a>
+          <a class="nav-link" href="{% url 'list_nangluc' %}"> TRỞ VỀ</a>
+
+
+          </nav>
+          <div class="mt-9" data-spy="scroll" data-target="#my-menu" data-offset="6">
+            <div id="muc_1">
+              <h1 class="animate__animated animate__bounce"></h1>
+              <u>
+                <h2 class="alert alert-secondary">MỨC 1: </h2>
+              </u>
+              <i>
+                <h2> Năng lực kém: (Hiểu biết sơ bộ, làm được một phần việc, luôn có sự giám sát, hỗ trợ)</h2><br>
+                </h>
+              </i>
+              <h3>
+
+                  <p>
+                 {{item.NL_muc_1}}
+               </p>
+              </h3>
+            </div>
+             <div id="muc_2">
+            <u>
+                   <h2 class=" alert alert-success"> MỨC 2: </h2>
+            </u>
+            <i>
+              <h2> Năng lực cơ bản: (Hiểu biết cơ bản, làm thành thạo một phần việc, cần sự giám sát, hỗ trợ)</h2><br>
+            </i>
+            <h3>
+              <p> {{item.NL_muc_2}}</p><br><br><br>
+            </h3>
+          </div>
+          <div id="muc_3">
+            <u>
+                   <h2 class="alert alert-info">MỨC 3:</h2>
+            </u>
+            <i>
+              <h2 class=""> Năng lực làm việc khá: (Hiểu biết tốt, duy trì được công việc, thể hiện thường xuyên và đạt yêu cầu) </h2><br>
+            </i>
+            <h3>
+                 <p> {{item.NL_muc_3}}</p><br><br><br>
+            </h3>
+          </div>
+
+
+
+          <div id="muc_4">
+            <u>
+              <h2 class="alert alert-primary">MỨC 4:</h2>
+            </u>
+            <i>
+              <h2 class=""> Năng lực làm việc tốt: (Hiểu biết sâu, thành thạo việc, thường xuyên hoàn thành tốt nhiệm vụ được giao)</h2><br>
+            </i>
+            <h3>
+                 <p> {{item.NL_muc_4}}</p><br><br><br>
+            </h3>
+          </div>
+
+
+          <div id="muc_5">
+            <u>
+              <h2 class="alert alert-primary">MỨC 5:</h2>
+            </u>
+            <i>
+              <h2 class=""> Năng lực làm việc xuất sắc: (Hiểu biết tinh thông, công việc vượt trội, thể hiện được sự sáng tạo, chủ động; hoặc dẫn dắt trong công việc)</h2><br>
+            </i>
+            <h3>
+                 <p> {{item.NL_muc_5}}</p><br><br><br>
+            </h3>
+          </div>
+
+
+
+
+          <a href="{% url 'list_nangluc' %}" class="btn btn-info"> Trở về </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- /Page Content -->
+</div>
+<!---- End Toàn trang---> {% endblock content %} undefined
+<!-- Specific Page JS goes HERE  --> {% block javascripts %}{% endblock javascripts %}

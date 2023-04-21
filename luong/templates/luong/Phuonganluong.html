@@ -1,0 +1,174 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+{% load static %}
+<style>
+    tr{cursor: pointer; transition: all .001s ease-in-out}
+    .selected{background-color: green; font-weight: bold; font-size: 25px; color: red;}
+</style>
+<!-- Page Content -->
+<div class="content container-fluid" xmlns="http://www.w3.org/1999/html">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 style="color:red" class="page-title">BẢNG KẾT QUẢ CHUYỂN XẾP LƯƠNG MỚI</h3>
+                <ul class="breadcrumb">
+                    <!-- link bang dieu khiển
+                    <li class="breadcrumb-item"><a href="">BẢNG LƯƠNG</a></li>-->
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="" class="btn add-btn"><i class="fa fa-plus"></i> XEM BẢNG LƯƠNG</a>
+                <div class="view-icons">
+                    <a href="" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <!-- Search Filter----------------------------- -->
+    <form method='POST' action=''>{% csrf_token %}
+        <div class="form-row">
+            	<div class="form-row col-6">
+                    <div class="form-group ">
+                        <strong><label for="">Lọc Họ, tên</label></strong>
+                        <div class="input-group">
+                            <input class="form-control py-2 border-right-0 border" type="search" name="ho_lot_thuong_dung_or_chucvu" placeholder="Tìm Họ tên/Chức vụ/ID..." />
+						</div>
+					</div>
+				</div>
+
+            <div class="form-group col-md-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id={{form.Xuất_Excel}} <label class="form-check-label">
+                        Xuất Excel
+                        </label>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Tìm kiếm' />
+                    </div>
+            </div>
+    </form>
+
+    <!-- /Search Filter ------------------------------------------------------>
+
+    <div class="row">
+        <div class="col-lg-12">
+       <div class="table-responsive-sm">
+                {% if queryset %}
+                <table id="table" class="table table-striped custom-table datatable">
+                    <thead align="center" >
+                        <tr  border ="1" class="table-success" >
+                            <th rowspan="2" scope="col" style="width: 5%">id</th>
+                            <th rowspan="2" scope="col" style="width: 25%">Tên nhân viên viên</th>
+                            <th rowspan="2" scope="col" style="width: 25%">Bộ phận </th>
+                            <th rowspan="2" scope="col" style="width: 10% "> Ngạch Điểm </th>
+
+                            <th colspan="2" scope="col" style="width: 20% "> BHXH </th>
+                            <th colspan="2" scope="col" style="width: 20%">Lương</th>
+                            <th colspan="2" scope="col" style="width: 15%">Chệnh lệch  </th>
+
+                        </tr>
+                        <tr class="table-success">
+
+                            <th scope="col" style="width: 10%">BHXH cũ </th>
+                            <th scope="col" style="width: 15%">BHXH mới </th>
+                            <th scope="col" style="width: 10%">Lương cũ </th>
+                            <th scope="col" style="width: 10%">Lương mới </th>
+                            <th scope="col" style="width: 15%">BHXH</th>
+                            <th scope="col" style="width: 15%">Lương </th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody >
+                        {% for sto in queryset %}
+                        <tr>
+                            <th class="" scope="row">{{forloop.counter}}</th>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="" class="avatar"> <img src="{{sto.Nhanvien.avatar.url}}" alt=""></a>
+                                    <a href=""> {{sto.Nhanvien.ho_lot_thuong_dung}}{{sto.Nhanvien.ten_thuong_dung}}
+                                        <span>{{sto.Nhanvien.vitri_CV|truncatewords:4}}</span></a>
+                                </h2>
+                            </td>
+                            <td><small>{{sto.Nhanvien.bo_phan.ten_bp|truncatewords:3}}</small></td>
+                            <td align="center">{{sto.Nhom_luong.Nhom_luong.nhom}}<br>
+                                <small style="color:red">{{sto.Nhom_luong.Nhom_luong.diem}} </small></td>
+
+
+                            <td align="right">{{sto.Luong_BHXH_cu}}</td>
+                            <td style="color:blue" align="right">{{sto.Luong_BHXH_moi}}</td>
+                            <td align="right">{{sto.Luong_cu}} </td>
+                            <td style="color:blue" align="right">{{sto.Luong_moi}} </td>
+                            <td style="float-right">{{sto.CL_Luong_BHXH_PA_1}} </td>
+                            <td style="color:blue" align="right">{{sto.CL_Luong_moi_PA_1}} </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot style="color:red"> >
+                          <tr class="table-warning" >
+                               <td colspan="2" ></td>
+                               <td class="text-left" >Tổng: </td>
+                               <td></td>
+                               <td class="text-left" >{{total_Luong_BHXH_cu}}</td>
+                               <td class="text-left" >{{total_Luong_BHXH_moi}}</td>
+                               <td colspan="text-left">{{total_Luong_cu}}</td>
+                               <td class="text-left" >{{total_Luong_moi}}</td>
+                               <td colspan="text-left">{{total_CL_Luong_BHXH_PA_1}}</td>
+                               <td class="text-left" >{{total_CL_Luong_moi_PA_1}}</td>
+                            </tr>
+
+
+                    </tfoot>
+                </table>
+                {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+                {% endif %}
+            </div>
+        </div> <!-- /md-12-------->
+    </div><!-- /rows------->
+</div>
+<!-- /Page Content -->
+
+<script>
+//https://www.youtube.com/watch?v=nEAi0Z9MnDg&t=812s tínhtoán dòng
+            function selectedRow(){
+                var index,
+                    table = document.getElementById("table");
+                for(var i = 1; i < table.rows.length; i++)
+                {
+                    table.rows[i].onclick = function()
+                    {
+                         // remove the background from the previous selected row
+                        if(typeof index !== "undefined"){
+                           table.rows[index].classList.toggle("selected");
+                        }
+                        console.log(typeof index);
+                        // get the selected row index
+                        index = this.rowIndex;
+                        // add class selected to the row
+                        this.classList.toggle("selected");
+                        console.log(typeof index);
+                     };
+                }
+
+            }
+            selectedRow();
+            // Kết thucx1
+</script>
+
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

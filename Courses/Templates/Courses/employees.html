@@ -1,0 +1,896 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Tất cả nhân viên {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page Content -->
+                <div class="content container-fluid">
+
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row align-items-center">
+							<div class="col">
+								<h3 class="page-title">Nhân viên</h3>
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a href="/dashboard">Bảng điều khiển</a></li>
+									<li class="breadcrumb-item active">Nhân viên</li>
+								</ul>
+							</div>
+							<div class="col-auto float-right ml-auto">
+								<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Thêm nhân viên</a>
+								<div class="view-icons">
+									<a href="/dashboard/employees" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+									<a href="/dashboard/employees-list" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+
+					<!-- Search Filter -->
+					<div class="row filter-row">
+						<div class="col-sm-6 col-md-3">
+							<div class="form-group form-focus">
+								<input type="text" class="form-control floating">
+								<label class="focus-label">Mã nhân viên</label>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-3">
+							<div class="form-group form-focus">
+								<input type="text" class="form-control floating">
+								<label class="focus-label">Tên nhân viên</label>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-3">
+							<div class="form-group form-focus select-focus">
+								<select class="select floating">
+									<option>Giám đốc</option>
+									<option>Phó giám đốc</option>
+									<option>Quản lý</option>
+									<option>Trưởng phòng</option>
+									<option>Nhân viên</option>
+								</select>
+								<label class="focus-label">Vai trò</label>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-3">
+							<a href="#" class="btn btn-success btn-block"> Tìm kiếm </a>
+						</div>
+                    </div>
+					<!-- Search Filter -->
+
+					<div class="row staff-grid-row">
+						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+							<div class="profile-widget">
+								<div class="profile-img">
+									<a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-02.jpg" alt=""></a>
+								</div>
+								<div class="dropdown profile-action">
+									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+									<div class="dropdown-menu dropdown-menu-right">
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+									</div>
+								</div>
+								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="/dashboard/profile">Nguyễn Văn A</a></h4>
+								<div class="small text-muted">CEO</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+							<div class="profile-widget">
+								<div class="profile-img">
+									<a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-09.jpg" alt=""></a>
+								</div>
+								<div class="dropdown profile-action">
+									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+									<div class="dropdown-menu dropdown-menu-right">
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+									</div>
+								</div>
+								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="/dashboard/profile">Nguyễn Văn B</a></h4>
+								<div class="small text-muted">Phó giám đốc</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+							<div class="profile-widget">
+								<div class="profile-img">
+									<a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-10.jpg" alt=""></a>
+								</div>
+								<div class="dropdown profile-action">
+									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+									<div class="dropdown-menu dropdown-menu-right">
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+									</div>
+								</div>
+								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="/dashboard/profile">Nguyễn Văn C</a></h4>
+								<div class="small text-muted">Quản lý</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+							<div class="profile-widget">
+								<div class="profile-img">
+									<a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-05.jpg" alt=""></a>
+								</div>
+								<div class="dropdown profile-action">
+									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+									<div class="dropdown-menu dropdown-menu-right">
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+									</div>
+								</div>
+								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="/dashboard/profile">Trịnh Đình D</a></h4>
+								<div class="small text-muted">Quản lý</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+							<div class="profile-widget">
+								<div class="profile-img">
+									<a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-11.jpg" alt=""></a>
+								</div>
+								<div class="dropdown profile-action">
+									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+									<div class="dropdown-menu dropdown-menu-right">
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+									</div>
+								</div>
+								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="/dashboard/profile">Trịnh Đình E</a></h4>
+								<div class="small text-muted">Trưởng phòng</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+							<div class="profile-widget">
+								<div class="profile-img">
+									<a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-12.jpg" alt=""></a>
+								</div>
+								<div class="dropdown profile-action">
+									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+									<div class="dropdown-menu dropdown-menu-right">
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+									</div>
+								</div>
+								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="/dashboard/profile">Trịnh Đình F</a></h4>
+								<div class="small text-muted">Nhân viên</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+							<div class="profile-widget">
+								<div class="profile-img">
+									<a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-13.jpg" alt=""></a>
+								</div>
+								<div class="dropdown profile-action">
+									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+									<div class="dropdown-menu dropdown-menu-right">
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+									</div>
+								</div>
+								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="/dashboard/profile">Hoàng Thành G</a></h4>
+								<div class="small text-muted">Nhân viên</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+							<div class="profile-widget">
+								<div class="profile-img">
+									<a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-01.jpg" alt=""></a>
+								</div>
+								<div class="dropdown profile-action">
+									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+									<div class="dropdown-menu dropdown-menu-right">
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+									</div>
+								</div>
+								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="/dashboard/profile">Hoàng Thành H</a></h4>
+								<div class="small text-muted">Trưởng phòng</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+							<div class="profile-widget">
+								<div class="profile-img">
+									<a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-16.jpg" alt=""></a>
+								</div>
+								<div class="dropdown profile-action">
+									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+									<div class="dropdown-menu dropdown-menu-right">
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+									</div>
+								</div>
+								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="/dashboard/profile">Hoàng Thành I</a></h4>
+								<div class="small text-muted">Trưởng phòng</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+							<div class="profile-widget">
+								<div class="profile-img">
+									<a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-04.jpg" alt=""></a>
+								</div>
+								<div class="dropdown profile-action">
+									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+									<div class="dropdown-menu dropdown-menu-right">
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+									</div>
+								</div>
+								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="/dashboard/profile">Minh Nhật</a></h4>
+								<div class="small text-muted">Nhân viên</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+							<div class="profile-widget">
+								<div class="profile-img">
+									<a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-03.jpg" alt=""></a>
+								</div>
+								<div class="dropdown profile-action">
+									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+									<div class="dropdown-menu dropdown-menu-right">
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+									</div>
+								</div>
+								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="/dashboard/profile">Minh Trang</a></h4>
+								<div class="small text-muted">Nhân viên</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+							<div class="profile-widget">
+								<div class="profile-img">
+									<a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-08.jpg" alt=""></a>
+								</div>
+								<div class="dropdown profile-action">
+									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+									<div class="dropdown-menu dropdown-menu-right">
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+									</div>
+								</div>
+								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="/dashboard/profile">Minh Hằng</a></h4>
+								<div class="small text-muted">Nhân viên</div>
+							</div>
+						</div>
+					</div>
+                </div>
+				<!-- /Page Content -->
+
+				<!-- Add Employee Modal -->
+				<div id="add_employee" class="modal custom-modal fade" role="dialog">
+					<div class="modal-dialog modal-dialog-centered modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">Thêm Nhân viên</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Họ và tên <span class="text-danger">*</span></label>
+												<input class="form-control" type="text">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Biệt danh</label>
+												<input class="form-control" type="text">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Tài khoản <span class="text-danger">*</span></label>
+												<input class="form-control" type="text">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Email <span class="text-danger">*</span></label>
+												<input class="form-control" type="email">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Mật khẩu</label>
+												<input class="form-control" type="password">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Xác nhận mật khẩu</label>
+												<input class="form-control" type="password">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Mã số nhân viên <span class="text-danger">*</span></label>
+												<input type="text" class="form-control">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Ngày tham gia<span class="text-danger">*</span></label>
+												<div class="cal-icon"><input class="form-control datetimepicker" type="text"></div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Số điện thoại </label>
+												<input class="form-control" type="text">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Công ty</label>
+												<select class="select">
+													<option selected>--Vui lòng chọn công ty--</option>
+													<option>Vicem 1</option>
+													<option>Vicem 2</option>
+													<option>Khác</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Phòng ban <span class="text-danger">*</span></label>
+												<select class="select">
+													<option selected>--Vui lòng chọn phòng ban--</option>
+													<option>Giám đốc</option>
+													<option>Nhân sự</option>
+													<option>Kế toán</option>
+													<option>IT</option>
+													<option>Kinh Doanh</option>
+													<option>Marketing</option>
+													<option>Khác</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Vai trò <span class="text-danger">*</span></label>
+												<select class="select">
+													<option selected>--Vui lòng chọn chức danh--</option>
+													<option>Giám đốc</option>
+													<option>Phó giám đốc</option>
+													<option>Thư ký</option>
+													<option>Quản lý</option>
+													<option>Trưởng phòng</option>
+													<option>Nhân viên</option>
+													<option>Khác</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="table-responsive m-t-15">
+										<table class="table table-striped custom-table">
+											<thead>
+												<tr>
+													<th>Quyền truy cập</th>
+													<th class="text-center">Xem</th>
+													<th class="text-center">Chỉnh sửa</th>
+													<th class="text-center">Tạo mới</th>
+													<th class="text-center">Xóa</th>
+													<th class="text-center">Import</th>
+													<th class="text-center">Export</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Ngày lễ</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+												<tr>
+													<td>Ngày nghỉ</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+												<tr>
+													<td>Khách hàng</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+												<tr>
+													<td>Dự án</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+												<tr>
+													<td>Nhiệm vụ</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+												<tr>
+													<td>Chats</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+												<tr>
+													<td>Tài sản</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+												<tr>
+													<td>Lịch trình làm việc</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="submit-section">
+										<button class="btn btn-primary submit-btn">Áp dụng</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /Add Employee Modal -->
+
+				<!-- Edit Employee Modal -->
+				<div id="edit_employee" class="modal custom-modal fade" role="dialog">
+					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">Chỉnh sửa nhân viên</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Họ và tên <span class="text-danger">*</span></label>
+												<input class="form-control" value="Nguyễn Văn A" type="text">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Biệt danh</label>
+												<input class="form-control" value="Thomas" type="text">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Tài khoản <span class="text-danger">*</span></label>
+												<input class="form-control" value="example" type="text">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Email <span class="text-danger">*</span></label>
+												<input class="form-control" value="example@example.com" type="email">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Mật khẩu</label>
+												<input class="form-control" value="example" type="password">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Xác thực mật khẩu</label>
+												<input class="form-control" value="example" type="password">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Mã nhân viên <span class="text-danger">*</span></label>
+												<input type="text" value="VC-0001" readonly class="form-control floating">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Ngày tham gia <span class="text-danger">*</span></label>
+												<div class="cal-icon"><input class="form-control datetimepicker" type="text"></div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Số điện thoại </label>
+												<input class="form-control" value="0909009990" type="text">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="col-form-label">Công ty</label>
+												<select class="select">													
+													<option>Vicem 1</option>
+													<option selected>Vicem 2</option>
+													<option>Khác</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Phòng ban <span class="text-danger">*</span></label>
+												<select class="select">													
+													<option>Giám đốc</option>
+													<option>Nhân sự</option>
+													<option>Kế toán</option>
+													<option>IT</option>
+													<option>Kinh Doanh</option>
+													<option>Marketing</option>
+													<option selected>Khác</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Vai trò <span class="text-danger">*</span></label>
+												<select class="select">													
+													<option>Giám đốc</option>
+													<option>Phó giám đốc</option>
+													<option>Thư ký</option>
+													<option selected>Quản lý</option>
+													<option>Trưởng phòng</option>
+													<option>Nhân viên</option>
+													<option>Khác</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="table-responsive m-t-15">
+										<table class="table table-striped custom-table">
+											<thead>
+												<tr>
+													<th>Quyền truy cập</th>
+													<th class="text-center">Xem</th>
+													<th class="text-center">Chỉnh sửa</th>
+													<th class="text-center">Tạo mới</th>
+													<th class="text-center">Xóa</th>
+													<th class="text-center">Import</th>
+													<th class="text-center">Export</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Ngày lễ</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+												<tr>
+													<td>Ngày nghỉ</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+												<tr>
+													<td>Khách hàng</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+												<tr>
+													<td>Dự án</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+												<tr>
+													<td>Nhiệm vụ</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+												<tr>
+													<td>Chats</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+												<tr>
+													<td>Tài sản</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+												<tr>
+													<td>Lịch trình làm việc</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input checked="" type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+													<td class="text-center">
+														<input type="checkbox">
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="submit-section">
+										<button class="btn btn-primary submit-btn">Lưu lại</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /Edit Employee Modal -->
+
+				<!-- Delete Employee Modal -->
+				<div class="modal custom-modal fade" id="delete_employee" role="dialog">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-body">
+								<div class="form-header">
+									<h3>Xóa nhân viên</h3>
+									<p>Bạn có chắc chắn muốn xóa</p>
+								</div>
+								<div class="modal-btn delete-action">
+									<div class="row">
+										<div class="col-6">
+											<a href="javascript:void(0);" class="btn btn-primary continue-btn">Xác nhận</a>
+										</div>
+										<div class="col-6">
+											<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Hủy bỏ</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /Delete Employee Modal -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

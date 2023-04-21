@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta name="viewport" content="with =device-width, initial-scale=1.0">
+    <title>HMis Web</title>
+    <link rel="stylesheet" href= {% static "/courses/hmis.css" %}>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<section class="sub-header">
+    <nav>
+        <a href="layouts/hmis.html"> <img class="image-thumbail" alt="" src="/static/assets/img/anh_his/hrm3.png"></a>
+        <div class="nav-links" id="navLinks">
+            <i class="fa fa-times"  onclick="hideMenu()"></i>
+             <ul>
+                 <li> <a href="{% url 'Courses:chayweb_index' %}">HOME</a> </li>
+                <li> <a href="{% url 'Courses:chayweb_about' %} ">ABOUT</a> </li>
+                <li> <a href="{% url 'Courses:chayweb_course' %} ">COURSE</a> </li>
+                <li> <a href="{% url 'Courses:chayweb_blog' %} ">BLOG</a> </li>
+                <li> <a href="{% url 'Courses:chayweb_Contac' %}">CONTACT</a> </li>
+            </ul>
+        </div>
+       <!---  <i class="fa fa-bars"</i> --->
+       <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav>
+  <h1> ABOUT US</h1>
+</section>
+       <!---  about us--->
+<section class="about-us">
+    <div class="row">
+            <div class="about-col">
+                <h1> Viện Khoa học quản lý Nguồn nhân lực là Tổ chức tư vấn nhân sự hàng đầu Việt Nam</h1>
+                <p>HMIS cam kết sẽ nỗ lực hết mình nhằm mang lại
+                    các giá trị tài nguyên con người, đáp ứng tối đa nhu cầu của Quý Doanh nghiệp
+                </p>
+                <a href="" class="hero-btn red-btb">EXPLOLER-NOW</a>
+            </div>
+            <div class="about-col">
+                <img src="/static/assets/img/anh_his/about.jpg">
+            </div>
+        </div>
+</section>
+       <!---  List chuyên gia --->
+
+<!---------------------------------Tư liẹu----->
+<section class="testimonials">
+ <h1>  DANH SÁCH ĐỘI NGŨ CHUYÊN GIA CỦA VIỆN</h1>
+
+<!------------------Nhóm 1------------>
+     <div class="row">
+        <div class="testimonials-col">
+            <img src="/static/assets/img/anh_his/ThanhBeee.jfif">
+            <div>
+                <p>Viện Trưởng </p>
+                <h3>TTND.TS.BS. Lê Thị Hòa Bình</h3>
+            </div>
+        </div>
+
+         <div class="testimonials-col">
+            <img src="/static/assets/img/anh_his/cuongximang.jfif">
+             <div>
+                 <p>Hoạch định chiến lược;Nghệ thuật lãnh đạo và thuật sử dụng quyền lực
+                        Quản trị thương hiệu và Tiếp thị dành cho lãnh đạo;Nhân sự dành cho lãnh đạo
+                    Kỹ năng giao tiếp bán hàng và chăm sóc khách hàng; Quản trị chiến lược
+                </p>
+                   <h3>TS Nguyễn Văn  Sĩ- Phó Viện trưởng</h3>
+             </div>
+        </div>
+     </div>
+
+ <!------------------Nhóm 2------------>
+     <div class="row">
+        <div class="testimonials-col">
+            <img src="/static/assets/img/anh_his/ThanhBeee.jfif">
+            <div>
+                <p>- Chủ tịch Hội đồng Khoa học </p>
+                <h3>PGS.TS. Trần Văn Thiện,nguyên Viện trưởng Viện NCPT NNL/ĐH Kinh tế TP. HCM</h3>
+            </div>
+        </div>
+
+         <div class="testimonials-col">
+            <img src="/static/assets/img/anh_his/cuongximang.jfif">
+             <div>
+                 <p>Hoạch định chiến lược;Nghệ thuật lãnh đạo và thuật sử dụng quyền lực
+                        Quản trị thương hiệu và Tiếp thị dành cho lãnh đạo;Nhân sự dành cho lãnh đạo
+                    Kỹ năng giao tiếp bán hàng và chăm sóc khách hàng; Quản trị chiến lược
+                </p>
+                   <h3>PGS. TS. Lê Thị Kim Nhung 	- Giám đốc Trung tâm Đào tạo và Hợp tác Quốc tế </h3>
+             </div>
+        </div>
+     </div>
+
+</section>
+
+
+<!------------------Footer------------>
+<section class="footer">
+    <h4>Abou Us</h4>
+    <p>  HMIS sẵn sàng trao đổi, phân tích nhu cầu <br>
+        và thiết kế các chương trình tư vấn và đào tạo chuyên biệt phù hợp
+        theo đơn đặt hàng của Quý Doanh nghiệp</p>
+    <div class="icons">
+        <i class="fa fa-facebook"></i>
+        <i class="fa fa-twitter"></i>
+        <i class="fa fa-instagram"></i>
+        <i class="fa fa-linkedin"></i>
+    </div>
+<p>Made with   <i class="fa fa-heart-o"></i> Viện Khoa học Quản lý Nguồn nhân lực (HMIS) </p>
+</section>
+
+
+
+<script>
+    var navLinks = document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right = "0";
+    }
+    function hideMenu(){
+        navLinks.style.right = "-200px";
+    }
+</script>
+
+</body>
+</html>

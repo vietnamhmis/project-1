@@ -1,0 +1,1818 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Hồ sơ nhân viên {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+				
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="page-title">Hồ sơ nhân viên</h3>
+
+                    <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/dashboard/">Bảng điều khiển</a></li>
+                    <li class="breadcrumb-item active">Hồ sơ nhân viên</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <div class="card mb-0">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="profile-view">
+                        <div class="profile-img-wrap">
+                            <div class="profile-img">
+                                <a href="" class="avatar"><img alt="" src="{{form_nhanvien.avatar.url}}" ></a>
+                            </div>
+                        </div>
+                        <div class="profile-basic">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="profile-info-left">
+                                        <h4 class="user-name m-t-0 mb-0" class="text-danger"> {{form_nhanvien.ho_lot_thuong_dung|upper }} {{form_nhanvien.ten_thuong_dung|upper }}</h4>
+
+                                        <h6 class="text-muted">{{form_nhanvien.vitri_CV}}</h6>
+                                        <small class="text-muted">Đơn vị: Nhà máy </small>
+                                        <div class="staff-id">Mã nhân viên : {{form_nhanvien.ma_nhan_vien}}</div>
+                                        <div class="small doj text-muted">Ngày vào đơn vị : 01/08/2021</div>
+                                        <div class="staff-msg"><a class="btn btn-custom" href="/dashboard/chat.html">Gửi tin nhắn</a></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <ul class="personal-info">
+                                        <li>
+                                            <div class="title">SĐT:</div>
+                                            <div class="text"><a href="">{{form_nhanvien.tel_dd}}</a></div>
+                                        </li>
+                                            <li>
+                                            <div class="title">Email:</div>
+                                            <div class="text"><a href="">{{form_nhanvien.email}}</a></div>
+                                        </li>
+                                        <li>
+                                            <div class="title">Chức danh kiêm:</div>
+                                            <div class="text"><a href="">{{form_nhanvien.C_danh_kiem_nhiem}}</a></div>
+                                        </li>
+
+                                        <li>
+                                            <div class="title">Ngày vào Ngành:</div>
+                                            <div class="text">{{form_nhanvien.ngay_vao_nganh|date:"D,d-m-Y"}}.</div>
+                                        </li>
+
+                                        <li>
+                                            <div class="title">Địa chỉ cơ quan:</div>
+                                            <div class="text">{{form_nhanvien.don_vi.diachi}}</div>
+                                        </li>
+
+                                        <li>
+                                            <div class="title">Giới tính:</div>
+                                            <div class="text">{{form_nhanvien.Gioi_tinh}}</div>
+                                        </li>
+
+                                        <li>
+                                            <div class="title">Người quản lý/Hdẫn:</div>
+                                            <div class="text">
+                                               <div class="avatar-box">
+                                                  <div class="avatar avatar-xs">
+                                                     <img src="/static/assets/img/profiles/avatar-16.jpg" alt="">
+                                                  </div>
+                                               </div>
+                                               <a href="/dashboard/profile.html">
+                                                    {{form_nhanvien.Nguoi_qly}}
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="pro-edit"><a data-target="#profile_info" data-toggle="modal" class="edit-icon" href="#"><i class="fa fa-pencil"></i></a></div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card tab-box">
+        <div class="row user-tabs">
+            <div class="col-lg-12 col-md-12 col-sm-12 line-tabs">
+                <ul class="nav nav-tabs nav-tabs-bottom">
+                    <li class="nav-item"><a href="#emp_profile" data-toggle="tab" class="nav-link active">Hồ sơ Nhân viên:<small class="text-danger"> (Dành cho CB Nhân sự)</small></a></li>
+                    <li class="nav-item"><a href="#emp_projects" data-toggle="tab" class="nav-link">Dự án</a></li>
+                    <li class="nav-item"><a href="#bank_statutory" data-toggle="tab" class="nav-link">Ngân hàng và điều lệ <small class="text-danger">(Dành cho quản trị viên)</small></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="tab-content">
+    
+        <!-- Profile Info Tab -->
+        <div id="emp_profile" class="pro-overview tab-pane fade show active">
+            <div class="row">
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                          <h3 class="card-title">Thông tin cá nhân <a href="#" class="edit-icon" data-toggle="modal" data-target="#personal_info_modal"><i class="fa fa-pencil"></i></a></h3>
+                            <ul class="personal-info">
+                               <li>
+                                    <div class="title">Ngày sinh</div>
+                                    <div class="text">{{form_nhanvien.ngay_sinh|date:"d-m-Y"}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Nơi sinh</div>
+                                    <div class="text">{{form_nhanvien.ma_tinh_noi_sinh}}</div>
+                                </li>
+
+                                <li>
+                                    <div class="title">CMND / CCCD / Passport</div>
+                                    <div class="text">{{form_nhanvien.so_CCCD}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Ngày hết hạn</div>
+                                    <div class="text">{{form_nhanvien.ngay_cap_CCCD|date:"d-m-Y"}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Nơi cấp</div>
+                                    <div class="text">Bộ Công an</div>
+                                </li>
+
+                                <li>
+                                    <div class="title">Quốc tịch</div>
+                                    <div class="text">{{form_nhanvien.quoctich}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Dân tộc</div>
+                                    <div class="text">{{form_nhanvien.dan_toc}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Tôn giáo</div>
+                                    <div class="text">{{form_nhanvien.ton_giao}}</div>
+                                </li>
+                                 <li>
+                                    <div class="title">Thành phần xuất thân</div>
+                                    <div class="text">{{form_nhanvien.thanhphan_gd.THANH_PHAN}}</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+<!-- End Profile Info Tab -->
+
+
+<!----Star----Thông tin liên lạc ---->
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+
+
+                            <h3 class="card-title">Thông tin cư trú   <a href="#" class="edit-icon" data-toggle="modal" data-target="#personal_info_modal_location"><i class="fa fa-pencil"></i></a></h3>
+                            <h4 class="section-title">Địa chỉ chổ ở hiện nay:</h4>
+                            <ul class="personal-info">
+                                <li>
+                                    <div class="title">Địa chỉ: (số nhà, đường, khu phố)</div>
+                                    <br>
+                                    <div class="text">{{form_nhanvien.dc_hiennay|capfirst}}</div>
+                                </li>
+
+                            </ul>
+
+                            <hr>
+
+                            <h4 class="section-title">Địa chỉ hộ khẩu/Thường trú</h4>
+                            <ul class="personal-info">
+                                <li>
+                                    <div class="title">Địa chỉ: (số nhà, đường, khu phố)</div>
+                                    <div class="text">{{form_nhanvien.dc_thuong_tru}}e</div>
+                                </li>
+                                <li>
+                                    <div class="title">Phường, xã</div>
+                                    <div class="text">{{ form_nhanvien.phuong_xa.Ten_xa|capfirst}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Quận, huyện </div>
+                                    <div class="text">{{form_nhanvien.quan_huyen.Ten_quan|capfirst}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Tỉnh/thành phố </div>
+                                    <div class="text">{{form_nhanvien.tinh_thanh.TEN_TINH|capfirst}}</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+<!----Star----Thông tin trìh độ, hôn nhân---->
+
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">Tình trạng hôn nhân, gia đình <a href="#" class="edit-icon" data-toggle="modal" data-target="#family_info_modal"><i class="fa fa-pencil"></i></a></h3>
+                            <h5 class="section-title"></h5>
+                            <ul class="personal-info">
+
+                                 <li>
+                                    <div class="title">Tình trạng hôn nhân</div>
+                                    <div class="text">{{form_nhanvien.Tinhtrang_gd}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Nguyên quán</div>
+                                    <div class="text">{{form_nhanvien.Nguyen_quan}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Người phụ thuộc</div>
+                                    <div class="text">{{form_nhanvien.So_nguoi_phuthuoc}}</div>
+                                </li>
+                                <li>
+                            </ul>
+
+                            <hr>
+                            <h3 class="section-title">Trình độ đào tạo</h3>
+                            <ul class="personal-info">
+                                    <li>
+                                    <div class="title">Trình độ học vấn:</div>
+                                    <div class="text">{{form_nhanvien.trinhdovh.TEN_TRINH_DO}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Trình độ Chuyên môn</div>
+                                    <div class="text">{{form_nhanvien.trinhdo.TEN_TRINH_DO}}</div>
+                                </li>
+
+                                <li>
+                                    <div class="title">Trình độ chính trị</div>
+                                    <div class="text">{{form_nhanvien.trinh_do_ctri.TEN_TRINH_DO}} </div>
+                                </li>
+                                <li>
+                                    <div class="title">Trình độ QLNN</div>
+                                    <div class="text">{{form_nhanvien.trinh_do_ql.TEN_TRINH_DO}} </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                 <!----End----Thông tin trinh độ---->
+
+                <!----Star----Thông tin Ngân hàng, thuế---->
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">Thông tin Thuế/BHXH/Ngân hàng <a href="#" class="edit-icon" data-toggle="modal" data-target="#emergency_contact_modal"><i class="fa fa-pencil"></i></a></h3>
+
+                            <ul class="personal-info">
+                                <li>
+                                    <div class="title">Mã số thuế</div>
+                                    <div class="text">{{form_nhanvien.Masothue_cn}}</div>
+                                <li>
+                                    <div class="title">Số sổ Lao động</div>
+                                    <div class="text">{{form_nhanvien.so_so_ld}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Số sổ BHXH</div>
+                                    <div class="text">{{form_nhanvien.so_so_bhxh}}</div>
+                                </li>
+
+                            </ul>
+                            <hr>
+                             <h3 class="section-title">Thông tin BHYT, Tài khoản Ngân hàng</h3>
+
+                            <ul class="personal-info">
+                                 <li>
+                                    <div class="title">Số thẻ BHYT</div>
+                                    <div class="text">{{form_nhanvien.ma_phieu_kcb}}</div>
+                                </li>
+                                 <li>
+                                    <div class="title">Tên ngân hàng</div>
+                                    <div class="text">{{form_nhanvien.Ten_nganhang}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Số tài khoản </div>
+                                    <div class="text">{{form_nhanvien.Taikhoan_nh}}</div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                 <!----End----Thông tin Ngân hàng, thuế---->
+                 <!----Star----Thông tin Y tế---->
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">Thông tin Y tế  Sức khỏe<a href="#" class="edit-icon" data-toggle="modal" data-target="#emergency_contact_modal"><i class="fa fa-pencil"></i></a></h3>
+
+                            <ul class="personal-info">
+                                <li>
+                                    <div class="title">Chiều cao (cm)</div>
+                                    <div class="text">{{form_nhanvien.Chieu_cao}}</div>
+                                <li>
+                                    <div class="title">Cân nặng (kg)</div>
+                                    <div class="text">{{form_nhanvien.Can_nang}}</div>
+                                </li>
+                                 <li>
+                                    <div class="title">Đặc điểm nhận dạng </div>
+                                    <div class="text">{{form_nhanvien.dd_nhan_dang}}</div>
+                                </li>
+                            </ul>
+                            <hr>
+
+                            <ul class="personal-info">
+                                 <li>
+                                    <div class="title">Xếp loại sức khỏe năm nay(Loại I,II,..)</div>
+                                    <div class="text">.....</div>
+                                </li>
+                                <li>
+                                    <div class="title">Xếp loại sức khỏe năm trước (Loại I,II,..)</div>
+                                    <div class="text">.....</div>
+                                </li>
+                                <li>
+                                    <div class="title">Bệnh mãn tính(nếu có) </div>
+                                    <div class="text">{{form_nhanvien.Danh_hieu_ph_tang}}</div>
+                                </li>
+
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+                 <!----End----Thông tin Y tế---->
+ <!----Star----Thông tin Thông tin Đảng, Đoà---->
+                  <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">Đảng Cộng sản VN<a href="#" class="edit-icon" data-toggle="modal" data-target="#emergency_contact_modal"><i class="fa fa-pencil"></i></a></h3>
+
+                            <ul class="personal-info">
+                                <li>
+                                    <div class="title">Ngày vào Đảng</div>
+                                    <div class="text">{{form_nhanvien.Ngay_vao_dang|date:"d-m-Y"}}</div>
+                                <li>
+                                <li>
+                                    <div class="title">Ngày vào Đảng chính thức</div>
+                                    <div class="text">{{form_nhanvien.Ngay_ct|date:"d-m-Y"}}</div>
+                                <li>
+                                    <div class="title">Chức vụ trong Đảng</div>
+                                    <div class="text">{{form_nhanvien.Chuc_vu_dang}}</div>
+                                </li>
+                            </ul>
+                            <br>
+                            <hr>
+                            <h3 class="section-title">Đoàn TNCS, Công đoàn </h3>
+                            <ul class="personal-info">
+                                 <li>
+                                    <div class="title">Ngày vào Đoàn TNCS</div>
+                                    <div class="text">{{form_nhanvien.Ngay_vao_doan|date:"d-m-Y"}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Nơi vào Đoàn </div>
+                                    <div class="text">{{form_nhanvien.Noi_vao_doan}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Chức vụ Đoàn TNCSHCM </div>
+                                    <div class="text">{{form_nhanvien.Chuc_vu_doan}}</div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                 <!----End----Thông tin Đảng, Đoàn---->
+
+            </div>
+            <div class="row">
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title"> Thông tin sở trường</h3>
+                            <ul class="personal-info">
+                                <li>
+                                    <div class="title">Điểm mạnh</div>
+                                    <div class="text">{{form_nhanvien.Diem_manh}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Điểm yếu</div>
+                                    <div class="text">{{form_nhanvien.Diem_yeu}}</div>
+                                </li>
+
+
+                                <li>
+                                    <div class="title">Mục tiêu cá nhân</div>
+                                    <div class="text">{{form_nhanvien.Muctieu_cn}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Sở trường</div>
+                                    <div class="text">{{form_nhanvien.So_truong}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Quan hệ nước ngoài</div>
+                                    <div class="text">{{form_nhanvien.Q_he_nuoc_ngoai}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">Thân nhân nước ngoài</div>
+                                    <div class="text">{{form_nhanvien.Thannhan_nn}}</div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">Thông tin gia đình <a href="#" class="edit-icon" data-toggle="modal" data-target="#family_info_modal"><i class="fa fa-pencil"></i></a></h3>
+                            <div class="table-responsive">
+                                <table class="table table-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Tên</th>
+                                            <th>Mối quan hệ</th>
+                                            <th>Ngày sinh</th>
+                                            <th>Nguyên quán</th>
+                                            <th>SĐT</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Trang</td>
+                                            <td>Em gái</td>
+                                            <td>16/05/2010</td>
+                                            <td>9876543210</td>
+                                            <td class="text-right">
+                                                <div class="dropdown dropdown-action">
+                                                    <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                                        <a href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">Trình độ học vấn <a href="#" class="edit-icon" data-toggle="modal" data-target="#education_info"><i class="fa fa-pencil"></i></a></h3>
+                            <div class="experience-box">
+                                <ul class="experience-list">
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name">Đại học khoa học tự nhiên</a>
+                                                <div>Cử nhân - Quản trị kinh doanh</div>
+                                                <span class="time">2000 - 2003</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name">Đại học luật TP.HCM</a>
+                                                <div>Thạc sĩ - Tài chính ngân hàng</div>
+                                                <span class="time">2005 - 2007</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">Kinh nghiệm làm việc <a href="#" class="edit-icon" data-toggle="modal" data-target="#experience_info"><i class="fa fa-pencil"></i></a></h3>
+                            <div class="experience-box">
+                                <ul class="experience-list">
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name">Trưởng phòng kinh doanh - Vin Group</a>
+                                                <span class="time">01/2013 - Hiện tại (8 năm 2 tháng)</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name">Trưởng phòng kế hoạch</a>
+                                                <span class="time">02/2013 - Hiện tại (8 năm 5 tháng)</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name">Quản lý nhân sự</a>
+                                                <span class="time">05/2013 - Hiện tại (8 năm 3 tháng)</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Profile Info Tab -->
+        
+        <!-- Projects Tab -->
+        <div class="tab-pane fade" id="emp_projects">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dropdown profile-action">
+                                <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a data-target="#edit_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                    <a data-target="#delete_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                </div>
+                            </div>
+                            <h4 class="project-title"><a href="/dashboard/project-view.html">Quản lý văn phòng</a></h4>
+                            <small class="block text-ellipsis m-b-15">
+                                <span class="text-xs">1</span> <span class="text-muted">open tasks, </span>
+                                <span class="text-xs">9</span> <span class="text-muted">tasks completed</span>
+                            </small>
+                            <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and
+                                typesetting industry. When an unknown printer took a galley of type and
+                                scrambled it...
+                            </p>
+                            <div class="pro-deadline m-b-15">
+                                <div class="sub-title">
+                                    Deadline:
+                                </div>
+                                <div class="text-muted">
+                                    17 Apr 2019
+                                </div>
+                            </div>
+                            <div class="project-members m-b-15">
+                                <div>Project Leader :</div>
+                                <ul class="team-members">
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="/static/assets/img/profiles/avatar-16.jpg"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="project-members m-b-15">
+                                <div>Team :</div>
+                                <ul class="team-members">
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="/static/assets/img/profiles/avatar-02.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="/static/assets/img/profiles/avatar-09.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="/static/assets/img/profiles/avatar-10.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="/static/assets/img/profiles/avatar-05.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="all-users">+15</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <p class="m-b-5">Progress <span class="text-success float-right">40%</span></p>
+                            <div class="progress progress-xs mb-0">
+                                <div style="width: 40%" title="" data-toggle="tooltip" role="progressbar" class="progress-bar bg-success" data-original-title="40%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dropdown profile-action">
+                                <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a data-target="#edit_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                    <a data-target="#delete_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                </div>
+                            </div>
+                            <h4 class="project-title"><a href="project-view.html">Quản lý dự án</a></h4>
+                            <small class="block text-ellipsis m-b-15">
+                                <span class="text-xs">2</span> <span class="text-muted">Tác vụ đang xử lý, </span>
+                                <span class="text-xs">5</span> <span class="text-muted">Tác vụ hoàn thành</span>
+                            </small>
+                            <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and
+                                typesetting industry. When an unknown printer took a galley of type and
+                                scrambled it...
+                            </p>
+                            <div class="pro-deadline m-b-15">
+                                <div class="sub-title">
+                                    Ngày kết thúc:
+                                </div>
+                                <div class="text-muted">
+                                    17/10/2022
+                                </div>
+                            </div>
+                            <div class="project-members m-b-15">
+                                <div>Quản lý dự án :</div>
+                                <ul class="team-members">
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="/static/assets/img/profiles/avatar-16.jpg"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="project-members m-b-15">
+                                <div>Team :</div>
+                                <ul class="team-members">
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="/static/assets/img/profiles/avatar-02.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="/static/assets/img/profiles/avatar-09.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="/static/assets/img/profiles/avatar-10.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="/static/assets/img/profiles/avatar-05.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="all-users">+15</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <p class="m-b-5">Tiến độ <span class="text-success float-right">40%</span></p>
+                            <div class="progress progress-xs mb-0">
+                                <div style="width: 40%" title="" data-toggle="tooltip" role="progressbar" class="progress-bar bg-success" data-original-title="40%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dropdown profile-action">
+                                <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a data-target="#edit_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                    <a data-target="#delete_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                </div>
+                            </div>
+                            <h4 class="project-title"><a href="project-view.html">Chuyển đổi số</a></h4>
+                            <small class="block text-ellipsis m-b-15">
+                                <span class="text-xs">3</span> <span class="text-muted">Tác vụ đang xử lý, </span>
+                                <span class="text-xs">3</span> <span class="text-muted">Tác vụ hoàn thành</span>
+                            </small>
+                            <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and
+                                typesetting industry. When an unknown printer took a galley of type and
+                                scrambled it...
+                            </p>
+                            <div class="pro-deadline m-b-15">
+                                <div class="sub-title">
+                                    Ngày kết thúc:
+                                </div>
+                                <div class="text-muted">
+                                    17/10/2022
+                                </div>
+                            </div>
+                            <div class="project-members m-b-15">
+                                <div>Quản lý dự án :</div>
+                                <ul class="team-members">
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="/static/assets/img/profiles/avatar-16.jpg"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="project-members m-b-15">
+                                <div>Team :</div>
+                                <ul class="team-members">
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="/static/assets/img/profiles/avatar-02.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="/static/assets/img/profiles/avatar-09.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="/static/assets/img/profiles/avatar-10.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="/static/assets/img/profiles/avatar-05.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="all-users">+15</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <p class="m-b-5">Tiến độ <span class="text-success float-right">40%</span></p>
+                            <div class="progress progress-xs mb-0">
+                                <div style="width: 40%" title="" data-toggle="tooltip" role="progressbar" class="progress-bar bg-success" data-original-title="40%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dropdown profile-action">
+                                <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a data-target="#edit_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                    <a data-target="#delete_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                </div>
+                            </div>
+                            <h4 class="project-title"><a href="project-view.html">Xây dựng nhà xưởng</a></h4>
+                            <small class="block text-ellipsis m-b-15">
+                                <span class="text-xs">12</span> <span class="text-muted">Tác vụ đang xử lý, </span>
+                                <span class="text-xs">4</span> <span class="text-muted">Tác vụ hoàn thành</span>
+                            </small>
+                            <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and
+                                typesetting industry. When an unknown printer took a galley of type and
+                                scrambled it...
+                            </p>
+                            <div class="pro-deadline m-b-15">
+                                <div class="sub-title">
+                                    Ngày kết thúc:
+                                </div>
+                                <div class="text-muted">
+                                    17/10/2022
+                                </div>
+                            </div>
+                            <div class="project-members m-b-15">
+                                <div>Quản lý dự án :</div>
+                                <ul class="team-members">
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="/static/assets/img/profiles/avatar-16.jpg"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="project-members m-b-15">
+                                <div>Team :</div>
+                                <ul class="team-members">
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="/static/assets/img/profiles/avatar-02.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="/static/assets/img/profiles/avatar-09.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="/static/assets/img/profiles/avatar-10.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="/static/assets/img/profiles/avatar-05.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="all-users">+15</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <p class="m-b-5">Tiến độ <span class="text-success float-right">40%</span></p>
+                            <div class="progress progress-xs mb-0">
+                                <div style="width: 40%" title="" data-toggle="tooltip" role="progressbar" class="progress-bar bg-success" data-original-title="40%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Projects Tab -->
+        
+        <!-- Bank Statutory Tab -->
+        <div class="tab-pane fade" id="bank_statutory">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title"> Thông tin lương cơ bản</h3>
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Lương cơ bản <span class="text-danger">*</span></label>
+                                    <select class="select">
+                                        <option>Lựa chọn lương cơ bản</option>
+                                        <option>Theo giờ</option>
+                                        <option>Theo ngày</option>
+                                        <option>Theo tuần</option>
+                                        <option>Theo tháng</option>
+                                    </select>
+                               </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Tổng lương <small class="text-muted">/ Tháng</small></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Type your salary amount" value="0.00">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Thanh toán</label>
+                                    <select class="select">
+                                        <option>Lựa chọn loại thanh toán</option>
+                                        <option>Chuyển khoản</option>
+                                        <option>Bitcoin</option>
+                                        <option>Tiền mặt</option>
+                                    </select>
+                               </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <!--
+                        <h3 class="card-title"> PF Information</h3>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">PF contribution</label>
+                                    <select class="select">
+                                        <option>Select PF contribution</option>
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">PF No. <span class="text-danger">*</span></label>
+                                    <select class="select">
+                                        <option>Select PF contribution</option>
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Employee PF rate</label>
+                                    <select class="select">
+                                        <option>Select PF contribution</option>
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Additional rate <span class="text-danger">*</span></label>
+                                    <select class="select">
+                                        <option>Select additional rate</option>
+                                        <option>0%</option>
+                                        <option>1%</option>
+                                        <option>2%</option>
+                                        <option>3%</option>
+                                        <option>4%</option>
+                                        <option>5%</option>
+                                        <option>6%</option>
+                                        <option>7%</option>
+                                        <option>8%</option>
+                                        <option>9%</option>
+                                        <option>10%</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Total rate</label>
+                                    <input type="text" class="form-control" placeholder="N/A" value="11%">
+                                </div>
+                            </div>
+                       </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Employee PF rate</label>
+                                    <select class="select">
+                                        <option>Select PF contribution</option>
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Additional rate <span class="text-danger">*</span></label>
+                                    <select class="select">
+                                        <option>Select additional rate</option>
+                                        <option>0%</option>
+                                        <option>1%</option>
+                                        <option>2%</option>
+                                        <option>3%</option>
+                                        <option>4%</option>
+                                        <option>5%</option>
+                                        <option>6%</option>
+                                        <option>7%</option>
+                                        <option>8%</option>
+                                        <option>9%</option>
+                                        <option>10%</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Total rate</label>
+                                    <input type="text" class="form-control" placeholder="N/A" value="11%">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr>
+                        <h3 class="card-title"> ESI Information</h3>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">ESI contribution</label>
+                                    <select class="select">
+                                        <option>Select ESI contribution</option>
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">ESI No. <span class="text-danger">*</span></label>
+                                    <select class="select">
+                                        <option>Select ESI contribution</option>
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Employee ESI rate</label>
+                                    <select class="select">
+                                        <option>Select ESI contribution</option>
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Additional rate <span class="text-danger">*</span></label>
+                                    <select class="select">
+                                        <option>Select additional rate</option>
+                                        <option>0%</option>
+                                        <option>1%</option>
+                                        <option>2%</option>
+                                        <option>3%</option>
+                                        <option>4%</option>
+                                        <option>5%</option>
+                                        <option>6%</option>
+                                        <option>7%</option>
+                                        <option>8%</option>
+                                        <option>9%</option>
+                                        <option>10%</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Total rate</label>
+                                    <input type="text" class="form-control" placeholder="N/A" value="11%">
+                                </div>
+                            </div>
+                       </div>
+                        -->
+                        <div class="submit-section">
+                            <button class="btn btn-primary submit-btn" type="submit">Lưu lại</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /Bank Statutory Tab -->
+        
+    </div>
+</div>
+<!-- /Page Content -->
+
+<!-- Profile Modal -->
+<div id="profile_info" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông tin hồ sơ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="profile-img-wrap edit-img">
+                                <img class="inline-block" src="/static/assets/img/profiles/avatar-02.jpg" alt="user">
+                                <div class="fileupload btn">
+                                    <span class="btn-text">Sửa</span>
+                                    <input class="upload" type="file">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Họ và tên</label>
+                                        <input type="text" class="form-control" id="{{form_nv_update.ho_lot_thuong_dung}}">
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tên</label>
+                                        <input type="text" class="form-control" id="{{form_nv_update.ten_thuong_dung}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Ngày sinh</label>
+                                        <div class="cal-icon">
+                                            <input class="form-control datetimepicker" type="text" id="{{form_nhanvien.ngay_sinh|date:"d-m-Y"}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Số CCCD</label>
+                                        <div class="text">
+                                            <input class="form-control datetimepicker" type="text" id="{{form_nv_update.so_CCCD}}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Ngày cấp CMND/CCCD</label>
+                                        <div class="cal-icon">
+                                            <input class="form-control datetimepicker" type="text" id="{{form_nv_update.ngay_cap_CCCD|date:"Dd-m-Y"}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Giới tính</label>
+                                        <select class="select form-control">
+                                            <option id ={{form_nv_update.vitri_CV}}></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Địa chỉ/ Số nhà</label>
+                                <input type="text" class="form-control" value="4487 Snowbird Lane">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Quận / Huyện</label>
+                                <input type="text" class="form-control" value="New York">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Tỉnh /  Thành phố   việt</label>
+                                <input type="text" class="form-control" id="{{form_nv_update.ma_tinh_noi_sinh}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Mã vùng</label>
+                                <input type="text" class="form-control" value="10523">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <input type="text" class="form-control" value="631-889-3206">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Phòng ban <span class="text-danger">*</span></label>
+                                <select class="select">
+                                    <option>Giám đốc</option>
+									<option>Nhân sự</option>
+									<option>Kế toán</option>
+									<option>IT</option>
+									<option>Kinh Doanh</option>
+									<option>Marketing</option>																
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Vai trò <span class="text-danger">*</span></label>
+                                <select class="select">
+                                    <option>Giám đốc</option>
+									<option>Phó giám đốc</option>
+									<option>Thư ký</option>
+									<option selected>Quản lý</option>
+									<option>Trưởng phòng</option>
+									<option>Nhân viên</option>									
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Báo cáo cho <span class="text-danger">*</span></label>
+                                <select class="select">
+                                    <option>-</option>
+                                    <option>Wilmer Deluna</option>
+                                    <option>Lesley Grauer</option>
+                                    <option>Jeffery Lalor</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Profile Modal -->
+
+<!-- Personal Info Modal --(1)----->
+  <div id="personal_info_modal" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông tin cá nhân </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ngày sinh</label>
+                                <div class="cal-icon">
+                                    <input class="form-control datetimepicker" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nơi sinh <span class="text-danger">*</span></label>
+                                <select class="select form-control">
+                                    <option>-</option>
+                                    <option>------</option>
+                                    <option>-----</option>
+                                </select>
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>CMND / CCCD / Passport</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ngày hết hạn</label>
+                                <div class="cal-icon">
+                                    <input class="form-control datetimepicker" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nơi cấp</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Quốc tịch <span class="text-danger">*</span></label>
+                                <input class="form-control floating" type="text">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Dân tộc</label>
+
+                                    <input class="form-control" type="text">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Tôn giáo</label>
+
+                                    <input class="form-control" type="text">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Thành phần xuất thân <span class="text-danger">*</span></label>
+                                <select class="select form-control">
+                                    <option>-</option>
+                                    <option>Độc thân</option>
+                                    <option>Đã kết hôn</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Personal Info Modal -----(1)----->
+
+<!-- Personal Info Modal --(2)----->
+  <div id="personal_info_modal_location" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông tin cư trú </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ngày sinh</label>
+                                <div class="cal-icon">
+                                    <input class="form-control datetimepicker" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nơi sinh <span class="text-danger">*</span></label>
+                                <select class="select form-control">
+                                    <option>-</option>
+                                    <option>------</option>
+                                    <option>-----</option>
+                                </select>
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>CMND / CCCD / Passport</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ngày hết hạn</label>
+                                <div class="cal-icon">
+                                    <input class="form-control datetimepicker" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nơi cấp</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Quốc tịch <span class="text-danger">*</span></label>
+                                <input class="form-control floating" type="text">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Dân tộc</label>
+
+                                    <input class="form-control" type="text">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Tôn giáo</label>
+
+                                    <input class="form-control" type="text">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Thành phần xuất thân <span class="text-danger">*</span></label>
+                                <select class="select form-control">
+                                    <option>-</option>
+                                    <option>Độc thân</option>
+                                    <option>Đã kết hôn</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Personal Info Modal -----(2)----->
+
+<!-- Family Info Modal -->
+<div id="family_info_modal" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> Thông tin Gia đình</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-scroll">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Thành viên <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Họ tên <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Mối quan hệ <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Ngày sinh <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>SĐT <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Trình độ học vấn <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Họ và tên <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Mối quan hệ <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Ngày sinh <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>SĐT <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="add-more">
+                                    <a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Thêm</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Family Info Modal -->
+
+
+<!-- Emergency Contact Modal -->
+<div id="emergency_contact_modal" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông tin liên lạc</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Ưu tiên</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Họ và tên <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Mối quan hệ <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>SĐT <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Thêm SĐT</label>
+                                        <input class="form-control" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Bổ sung</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Họ và tên <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Mối quan hệ <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>SĐT <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Thêm SĐT</label>
+                                        <input class="form-control" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Emergency Contact Modal -->
+
+<!-- Education Modal -->
+<div id="education_info" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> Trình độ học vấn</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-scroll">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Thông tin học vấn <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus focused">
+                                            <input type="text" value="ĐH Khoa học tự nhiên" class="form-control floating">
+                                            <label class="focus-label">Nơi đào tạo</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus focused">
+                                            <input type="text" value="Quản trị kinh doanh" class="form-control floating">
+                                            <label class="focus-label">Chuyên ngành</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus focused">
+                                            <div class="cal-icon">
+                                                <input type="text" value="01/06/2002" class="form-control floating datetimepicker">
+                                            </div>
+                                            <label class="focus-label">Ngày bắt đầu</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus focused">
+                                            <div class="cal-icon">
+                                                <input type="text" value="31/05/2006" class="form-control floating datetimepicker">
+                                            </div>
+                                            <label class="focus-label">Ngày hoàn thành</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus focused">
+                                            <input type="text" value="Thạc sĩ" class="form-control floating">
+                                            <label class="focus-label">Bằng cấp</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus focused">
+                                            <input type="text" value="A+" class="form-control floating">
+                                            <label class="focus-label">Điểm số</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Thông tin học vấn <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus focused">
+                                            <input type="text" value="ĐH khoa học tự nhiên" class="form-control floating">
+                                            <label class="focus-label">Nơi đào tạo</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus focused">
+                                            <input type="text" value="Khoa học máy tính" class="form-control floating">
+                                            <label class="focus-label">Chuyên ngành</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus focused">
+                                            <div class="cal-icon">
+                                                <input type="text" value="01/06/2002" class="form-control floating datetimepicker">
+                                            </div>
+                                            <label class="focus-label">Ngày bắt đầu</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus focused">
+                                            <div class="cal-icon">
+                                                <input type="text" value="31/05/2006" class="form-control floating datetimepicker">
+                                            </div>
+                                            <label class="focus-label">Ngày hoàn thành</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus focused">
+                                            <input type="text" value="BE Computer Science" class="form-control floating">
+                                            <label class="focus-label">Bằng cấp</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus focused">
+                                            <input type="text" value="Grade A" class="form-control floating">
+                                            <label class="focus-label">Diểm số</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="add-more">
+                                    <a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Thêm</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Education Modal -->
+
+<!-- Experience Modal -->
+<div id="experience_info" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Kinh nghiệm làm việc</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-scroll">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Kinh nghiệm làm việc <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus">
+                                            <input type="text" class="form-control floating" value="Hoa Sen Group">
+                                            <label class="focus-label">Tên công ty</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus">
+                                            <input type="text" class="form-control floating" value="VN">
+                                            <label class="focus-label">Địa điểm làm việc</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus">
+                                            <input type="text" class="form-control floating" value="Trưởng phòng">
+                                            <label class="focus-label">Vai trò</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus">
+                                            <div class="cal-icon">
+                                                <input type="text" class="form-control floating datetimepicker" value="01/07/2007">
+                                            </div>
+                                            <label class="focus-label">Bắt đầu từ</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus">
+                                            <div class="cal-icon">
+                                                <input type="text" class="form-control floating datetimepicker" value="08/06/2018">
+                                            </div>
+                                            <label class="focus-label">Đến</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Kinh nghiệm làm việc <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus">
+                                            <input type="text" class="form-control floating" value="Vin Group">
+                                            <label class="focus-label">Tên công ty</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus">
+                                            <input type="text" class="form-control floating" value="VN">
+                                            <label class="focus-label">Địa điểm làm việc</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus">
+                                            <input type="text" class="form-control floating" value="Web Developer">
+                                            <label class="focus-label">Vai trò</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus">
+                                            <div class="cal-icon">
+                                                <input type="text" class="form-control floating datetimepicker" value="01/07/2007">
+                                            </div>
+                                            <label class="focus-label">Bắt đầu từ</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-focus">
+                                            <div class="cal-icon">
+                                                <input type="text" class="form-control floating datetimepicker" value="08/06/2018">
+                                            </div>
+                                            <label class="focus-label">Đến</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="add-more">
+                                    <a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Thêm</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Experience Modal -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+    $("#id_don_vi").change(function () {
+      var url = $("#personForm").attr("load_bophans");
+      var don_viId = $(this).val();
+          $.ajax({
+            url: url,
+            data: {
+              'don_vi': don_viId
+            },
+            success: function (data) {
+              $("#id_bo_phan").html(data);
+            }
+          });
+      });
+
+     $("#id_bo_phan").change(function () {
+      var url = $("#personForm").attr("load_bophans");
+      var bo_phanId = $(this).val();
+          $.ajax({
+            url: url,
+            data: {
+              'bo_phan': bo_phanId
+            },
+            success: function (data) {
+              $("#id_to_nhom").html(data);
+            }
+          });
+      });
+
+  </script>
+{% endblock javascripts %}

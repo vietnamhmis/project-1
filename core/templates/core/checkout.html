@@ -1,0 +1,112 @@
+{% extends "banhang/base_banhang.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <main >
+    <div class="container wow fadeIn">
+      <h2 class="my-5 h2 text-center">Checkout form/kiểm tra</h2>
+      <div class="row">
+        <div class="col-md-8 mb-4">
+          <div class="card">
+                <form>
+                      <h3>Shipping address</h3>
+                    {{ form|crispy}}
+                    <button class="btn btn-primary" type="submit">Checkout/kiểm tra</button>
+                </form>
+
+
+
+                            <!-- card content---->
+                <form method="POST" class="card-body">
+                        {% csrf_token %}
+                 <!-- address---->
+                   <div class="md-form mb-5">
+                      {% comment %} <input type="text" id="address"  class='form-control'  placeholder='1234 Main St'/> {% endcomment %}
+                        {{ form.street_address}}
+                        <label for="address" class="">Address</label>
+                   </div>
+
+                   <!-- address2---->
+                   <div class="md-form mb-5">
+                      {% comment %} <input type="text" id="address-2"  class='form-control'  placeholder='phòng/ban'/>{% endcomment %}
+                         {{ form.apartment_address}}
+                         <label for="address-2" class="">Address-2 (optional..)</label>
+                   </div>
+                  <!-- Grid row--->
+
+                <div class="row">
+                   <div class="col-lg-8 col-md-12 mb-4">
+                     {% comment %}
+                       <label for="country" >country</label>
+                       <select class=" custom-select d-block w-100" id="country" required>
+                           <option value="" >Chọn</option>
+                       </select>
+                        {% endcomment %}
+                       <option> ....</option>
+                       <div class="invalid-feelback"> </div>
+                        {{ form.country}}
+                       <div class="invalid-feedback">
+                           Hãy chọn quốc gia
+                       </div>
+
+                   </div>
+                        <div class="col-lg-4 col-md-6 mb-4">
+                       <label for="zip" >Zip</label>
+                        {% comment %}   <input type="text" class="form-control" id="zip", placeholder="" required> {% endcomment %}
+                            {{form.shipping_zip}}
+                        <div class="innvalid-feedback">
+                            Zip code required.
+                           </div>
+                   </div>
+               </div>
+
+                <div class="custom-control custom-checkbox">
+                    <input{% if form.same_shipping_address.value %}checked{% endif %} type ="checkbox" classe"custom-control-label">
+                    <label class="custom-control-label" for="same_address">Shipping address is the same: </label>
+                    <!---
+                    {% comment %}<input type="checkbox" class="custom-control-input" name="use_default_billing" id="">
+                    {{form.same_billing_address}}
+                    <label class="custom-control-label" for="same_billing_address">Use default billing address: </label>{%  endcomment %} --->
+                 </div>
+
+                 <div class="custom-control custom-checkbox">
+                    <input{% if form.same_infor.value %}checked{% endif %} type ="checkbox" classe"custom-control-label">
+                    <label class="custom-control-label" for="save_infor">Save information for the nexst: </label>
+                 </div>
+
+              <h3>Payment option</h3>
+              <div class="d-block my-3">
+                {% for value, name in form.fields.payment_option.choices %}
+                <div class="custom-control custom-radio">
+                  <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input" required>
+                  <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
+                </div>
+                {% endfor %}
+              </div>
+              <hr class="mb-4">
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+
+            </form>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </main>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+

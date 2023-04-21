@@ -1,0 +1,124 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+<div class="content container-fluid">
+	  <!-- Page Header -->
+	  <div class="page-header">
+		  <div class="row align-items-center">
+			  <div class="col">
+				  <h3 class="page-title">ĐỊNH BIÊN LAO ĐỘNG TỔNG HỢP </h3>
+				  <ul class="breadcrumb">
+					  <!-- link bang dieu khiển -->
+					  <li class="breadcrumb-item"><a href="/dashboard">Bảng điểu khiển</a></li>
+					  <li class="breadcrumb-item active"><a href="{% url 'dinhbien_ca_list' %}"> Định biên ca, kíp</a></li>
+					  <li class="breadcrumb-item active"><a href="{% url 'dinhbien_hc_list' %}"> Định biên hành chính</a></li>
+				  </ul>
+			  </div>
+			  <div class="col-auto float-right ml-auto">
+				  <a href="{% url 'add_dinhbienca'%}" class="btn add-btn"><i class="fa fa-plus"></i> Thêm định biên</a>
+				  <div class="view-icons">
+					  <a href="" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+					  <a href="" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+	  <!-- /Page Header -->
+
+
+	  <!-- Search Filter----------------------------- -->
+	  <form method='POST' action=''>{% csrf_token %}
+		  <div class="form-row">
+			  <div class="form-group col-md-2">
+				  <select  class="form-control" placeholder = "Thuộc Tên đơn vị"{{form.don_vi}}
+				  </select>
+			  </div>
+			  <div class="form-group col-md-3">
+				  <select  class="form-control" placeholder = "Thuộc Bộ phận"{{form.bo_phan}}
+				  </select>
+			  </div>
+			  <div class="form-group col-md-3">
+				  <select  class="form-control" placeholder = "Thuộc Bộ phận"{{form.to_nhom}}
+				  </select>
+			  </div>
+
+			<div class="form-check">
+				  <input class="form-check-input" type="checkbox" id="{{form.Xuất_Excel}}"
+				  <label class="form-check-label">
+					  Xuất Excel
+				  </label>
+			  </div>
+			  <div class= "col-md-2 text-right">
+				  <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Tìm kiếm'/>
+			  </div>
+		  </div>
+	  </form>
+	  <!-- /Search Filter ------------------------------------------------------>
+	  <!-- /add KPI------------------------------------------------------>
+	<div class="row">
+		<div class="col-md-12">
+            <div class="table-responsive-sm">
+            {% if queryset %}
+                <table class="table table-striped custom-table datatable">
+                     <thead>
+                        <tr class="table-success">
+							  <th scope="col" style="width: 5%">id</th>
+							  <th scope="col" style="width: 30%">Chức vụ/Đơn vị/Tổ</th>
+                             <th scope="col" style="width: 25%">Bộ phân/Đơn vị TT</th>
+							  <th scope="col" style="width: 5%">Đ.B hiện hưu</th>
+                              <th scope="col" style="width: 5%">LĐ.HChính</th>
+                              <th scope="col" style="width: 5%">LĐ.ca</th>
+                              <th scope="col" style="width: 5%">LĐ.HC.ĐB</th>
+                              <th scope="col" style="width: 5%">LĐ.CaĐB</th>
+                              <th scope="col" style="width: 5%">Tổng</th>
+                              <th scope="col" style="width: 5%">CL.ĐB mới</th>
+                              <th scope="col" style="width: 5%">Tổng phút/năm</th>
+						  </tr>
+                    </thead>
+                    <tbody>
+                        {% for sto in queryset %}
+                             <tr>
+								  <th class="" scope="row">{{sto.id}}</th>
+								  <td>
+										<h2 class="table-avatar">
+										<a href="{% url 'tonhom_dinhbien' sto.to_nhom.id %}"> {{sto.chuc_vu}}<span> {{sto.to_nhom}} </span></a>
+										</h2>
+								  </td>
+                                 <td>
+										<h2 class="table-avatar">
+										<a href="{% url 'bophan_dinhbien' sto.bo_phan.id %}"> {{sto.bo_phan}}</a> <br>
+										<a href="{% url 'donvi_dinhbien' sto.don_vi.id %}"> <span> {{sto.don_vi}}</span></a>
+										</h2>
+								  </td>
+
+								  <td>{{sto.dinhbien_hienco}}</td>
+								  <td>{{sto.laodong_hc_hienco}}</td>
+                                  <td>{{sto.laodong_ca_hienco}}</td>
+
+                                  <td><a href="{% url 'dinhbien_hc_chi_tiet' sto.chuc_vu.id %}"> {{sto.laodong_hc_dinhbien}} </a></td>
+								  <td><a href="{% url 'dinhbien_ca_chi_tiet' sto.chuc_vu.id %}"> {{sto.laodong_ca_dinhbien}} </a></td>
+								  <td>{{sto.tong_dinhbien}}</td>
+								  <td>{{sto.chenhlech_dbien}}</td>
+								  <td>{{sto.Tong_phut_1nam}}</td>
+
+
+							  </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                      <h4 class="text-center alert alert-warning">No record </h4>
+            {% endif %}
+            </div>
+        </div>   <!-- /md-12-------->
+    </div><!-- /rows------->
+</div>
+<!-- /Page Content -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

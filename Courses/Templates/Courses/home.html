@@ -1,0 +1,103 @@
+{% extends 'layouts/base.html' %}
+{% block title %} Các bài học Hmis{% endblock %}
+{% block content %}
+<style>
+  .pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.pagination a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+/*
+    .pagination a {
+    border: 1px solid blue;
+    font-size:120%;
+    font-family: courier;
+    color: white;
+    padding: 5px 5px;
+    background-color: green;
+   
+    }
+    .current{
+    border: 1px solid blue;
+    font-size:120%;
+    font-family: courier;
+    color: blue;
+    padding: 5px 5px;
+    }
+
+*/
+</style>
+
+
+<div class="container teal">
+    <div class="section">
+        <div class="content">
+            <div class="row padding-64 margin">
+                <div class="containers videos-list">
+                    <h4 class="mp-12 text-center"> Video Bài huấn luyện </h4>
+                    {% for item in object_list %}
+                    <br>
+                    <article>
+                    <div class="media mp-9 ml-50 ">
+                        <a href=""><img src="{{item.picture.url}}" class="mr-3" alt="" width=450"></a>
+                        <div class="media-body">
+                            <h6 class="mt-0"><a href="/">{{item.name}} </a></h6>
+                            <ul>
+                                <li>Educator: <a href="/">{{item.educator}}</a</li>
+                                <li>Bài học số: <a href="/">{{item.number_lessons}}</a</li>
+                            </ul>
+                            {{item.excerpt}}
+                        </div>
+                    </div>
+                    </article>
+                    <hr>
+                 </div>
+            <br>
+
+            {% endfor %}
+    <!--- CHƯƠNG TRÌNH PHÂN TRANG -->
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if object_list.has_previous %}
+                    <a href="?page=1">&laquo; First</a>
+                    <a href="?page={{ object_list.previous_page_number }}">Previous</a>
+                    {% endif %}
+                    <span class="current">
+                        Page {{ object_list.number }}
+                       <!--- of {{ object_list.paginator.num_pages }} --> !
+                    </span>
+                    {% if object_list.has_next %}
+                    <a href="?page={{ object_list.next_page_number }}">Next</a>
+                    <a href="?page={{ object_list.paginator.num_pages }}">Last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+    </div>
+{% endblock %}
+<!-- Example split danger button -->
+

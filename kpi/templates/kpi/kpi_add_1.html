@@ -1,0 +1,95 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+<div class="content container-fluid">
+	  <!-- Page Header -->
+	  <div class="page-header">
+		  <div class="row align-items-center">
+			  <div class="col">
+				  <h4 class="page-title">THIẾT LẬP KPI DANH MỤC CÁ NHÂN:</h4>
+			  </div>
+			  <div class="col-auto float-right ml-auto">
+
+				  <a href="" class="btn add-btn"><i class="fa fa-plus"></i> GIAO KPI</a>
+			  </div>
+		  </div>
+	  </div>
+	  <!-- /Page Header -->
+	  <!-- Add kpi----------------------------- -->
+	  <form action="" method="POST"> {% csrf_token %}
+        <div class="rows">
+             <div class="col-md-12">
+                 <div class="rows">
+                    <div class="input-group">
+                        <div class="col-md-10">
+                            <textarea class="form-control"  placeholder = "Nhập KPI, (đảm bảo nguyên tắc SMART)"  aria-label=" {{ form.Ten_KPI }}</textarea>
+                        </div>
+                    </div>
+                 </div>
+                          <p>Công việc liên quan {{ form.LoaiCV }}
+                               Đơn vị tính:    {{ form.Don_vi_tinh }}
+                               Tần xuất đánh giá: {{ form.Tan_xuat_d_gia }}
+                               Tỉ trọng: {{ form.Ti_trong }}
+                               Tổng KPI: {{total_CViec}} </p>
+
+                        <input type= "submit" class="btn btn-success btn-xs" value="Thêm KPI">
+                </div>
+            </div>
+        </div>
+    </form>
+	  <!-- /add KPI------------------------------------------------------>
+	<div class="row">
+		<div class="col-md-12">
+
+            <div class="table-responsive-sm">
+            {% if stu %}
+                <table class="table table-striped custom-table datatable">
+                     <thead>
+                        <tr class="table-success">
+                            <th scope="col" style="width: 3%" >TT</th>
+                            <th scope="col" style="width: 50%" >Tên KPI</th>
+                            <th scope="col" style="width: 15%" >Vị trí</th>
+                            <th scope="col" style="width: 3%" >ĐV.tính</th>
+                            <th scope="col" style="width: 3%" >Tần xuất</th>
+                            <th scope="col" style="width: 3%" >Tỉ trọng</th>
+                            <th scope="col" style="width: 10%" >Sửa/Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for st in stu %}
+                            <tr >
+                                <th class="" scope="row">{{ forloop.counter }}</th>
+                                <td width="10">{{st.Ten_KPI|truncatewords:20 }}</td>
+                                <td>{{st.LoaiCV}}</td>
+                                <td>{{st.Don_vi_tinh}}</td>
+                                <td>{{st.Tan_xuat_d_gia}}</td>
+                                <td class="">{{st.Ti_trong|floatformat:"-2"}}</td>
+
+                                <td >
+                                    <a href="{% url 'update_dmkpi' st.id %}" class=""><i class="fa fa-pencil" style="font-size:14px;color:red"></i>  </a>
+                                    <form action="{% url 'del_dmkpi' st.id %}" method="post" class="d-inline">
+                                    <input type="submit"  class="btn btn-info" class="fa fa fa-trash" style="font-size:12px;color:white" value="XÓA">
+                                        {% csrf_token %}
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                      <h4 class="text-center alert alert-warning">No record </h4>
+            {% endif %}
+            </div>
+        </div>   <!-- /md-12-------->
+
+    </div><!-- /rows------->
+</div>
+<!-- /Page Content -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

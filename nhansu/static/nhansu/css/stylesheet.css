@@ -1,0 +1,54 @@
+body {
+background-color: white;
+font-size: 12px;
+;
+}
+
+.display_table{
+	border-bottom-right-radius: 20px;
+	/*border-bottom-left-radius: 2000px;*/
+	padding-left: 10px;
+	padding-right: 1px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	box-shadow:5px 5px 5px 5px #2e6da4;
+}
+
+.rows
+{
+	font-size: 14px;
+	text-align: left;
+	width: 95%;
+	margin: auto;
+	}
+
+.table{
+	font-size: 16px;
+	text-align: color;
+	width: 95%;
+	margin: auto;
+	text-align: left;
+}
+
+/*Make alternating colors for the table rows*/
+.table tr:nth-child(odd){
+	background: #B8CAE4
+}
+
+.table tr:nth-child(even){
+	background: #dae5f4
+}
+
+th {
+  background-color: #337ab7;
+  color: white;
+}
+
+.my-custom-scrollbar {
+position: relative;
+height: 200px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}

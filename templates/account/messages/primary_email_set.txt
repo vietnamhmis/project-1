@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans %}Địa chỉ email chính set.{% endblocktrans %}

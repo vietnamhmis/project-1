@@ -1,0 +1,30 @@
+{% extends 'courses/base.html' %}
+{% block title %} Sửa dữ liệu{% endblock %}
+{% block content %}
+{% load static %}
+<div class="row">
+    <div class="col-sm-8 offset-2 ">
+        <div class="container">
+            <div class="card mt-1 mr-0 ml-0">
+                <div class="card-body">
+                    <h4 class="alert alert-info"> Cập nhật dữ liệu nhân viên</h4>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{fmnv.avatar}}
+                        {{fmnv.ma_nhan_vien}}
+                        {{fmnv.ho_lot_thuong_dung}}
+                        {{fmnv.ten_thuong_dung}}
+                        {{fmnv.email}}
+                        {{fmnv.C_danh_kiem_nhiem}}
+                        {{fmnv.Gioi_tinh}}
+                        {{fmnv.Nguoi_qly}}
+                        <input type="submit" class="btn btn-success" value="Update">
+                        <a href="{% url 'list_nhanvien' %}" class="btn btn-info"> Back to Home </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

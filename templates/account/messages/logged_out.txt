@@ -1,0 +1,3 @@
+{% load i18n %}
+{% blocktrans %}You have signed out.{% endblocktrans %}
+{% blocktrans %}Bạn đã thoát khỏi chương trình{% endblocktrans %}

@@ -1,0 +1,210 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+<div class="content container-fluid">
+    <!-- Page Header -->
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">BẢNG ĐỊNH GIÁ CÔNG VIỆC</h3>
+                <ul class="breadcrumb">
+                    <!-- link bang dieu khiển -->
+                    <li class="breadcrumb-item"><a href="">Tổng hợp Định giá</a></li>
+                    <li class="breadcrumb-item active"><a href=""> Định biên ca, kíp</a></li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="{% url 'add_motacv' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thiết lập mô tả & định giá công việc</a>
+                <div class="view-icons">
+                    <a href="" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header
+<form method='POST' action=''>{% csrf_token %} -->
+    <!-- Search Filter----------------------------- -->
+
+    <form method="post" id="person_Form" data-cities-url="{% url 'ajax_load_cities' %}" novalidate>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <select class="form-control" placeholder="Thuộc Tên đơn vị" {{form.don_vi}} </select>
+            </div>
+            <div class="form-group col-md-3">
+                <select class="form-control" placeholder="Thuộc Bộ phận" {{form.bo_phan}} </select>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="{{form.Xuất_Excel}}" <label class="form-check-label">
+                Xuất Excel
+                </label>
+            </div>
+            <div class="col-md-2 text-right">
+                <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Tìm kiếm' />
+            </div>
+        </div>
+    </form>
+    <!-- /Search Filter ------------------------------------------------------>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive-sm">
+                {% if queryset %}
+                <table class="table table-striped custom-table datatable">
+                    <thead>
+                        <tr class="table-success">
+                            <th scope="col" style="width: 5%">id</th>
+                            <th scope="col" style="width: 15%">Chức vụ/Đơn vị/Tổ</th>
+
+                            <th scope="col">1.1 </th>
+                            <th scope="col">1.2 </th>
+                            <th scope="col">2.1 </th>
+                            <th scope="col">2.2 </th>
+                            <th scope="col">2.3 </th>
+                            <th scope="col">2.4 </th>
+                            <th scope="col">3.1 </th>
+                            <th scope="col">3.2 </th>
+                            <th scope="col">3.3 </th>
+                            <th scope="col">3.4 </th>
+                            <th scope="col">3.5 </th>
+                            <th scope="col">4.1 </th>
+                            <th scope="col">4.2 </th>
+                            <th scope="col">Điểm </th>
+                            <th scope="col">N.L </th>
+                            <th class="text-right no-sort" style="width: 10%">Tùy chỉnh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sto in model %}
+                        <tr>
+                            <th class="" scope="row">{{sto.id}}</th>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="{% url 'view_dinhgia_mota' sto.id %}"> {{sto.chuc_vu}}<span>{{sto.don_vi}}, {{sto.to_nhom}}</span></a>
+                                </h2>
+                            </td>
+
+                             <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.muc_ah_cty_11.id}}<span>{{sto.muc_ah_cty_11.diem}}</span></a>
+                                </h2>
+                            </td>
+
+                           <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.muc_ah_nv_12.id}}<span>{{sto.muc_ah_nv_12.diem}}</span></a>
+                                </h2>
+                            </td>
+
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.ycau_trinhdocm_21.id}}<span>{{sto.ycau_trinhdocm_21.diem}}</span></a>
+                                </h2>
+                            </td>
+
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.ycau_k_nghiem_22.id}}<span>{{sto.ycau_k_nghiem_22.diem}}</span></a>
+                                </h2>
+                            </td>
+
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.ycau_Ngoaingu_23.id}}<span>{{sto.ycau_Ngoaingu_23.diem}}</span></a>
+                                </h2>
+                            </td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.ycau_CNTT_24.id}}<span>{{sto.ycau_CNTT_24.diem}}</span></a>
+                                </h2>
+                            </td>
+
+
+
+                           <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.ycau_kehoach_31.id}}<span>{{sto.ycau_kehoach_31.diem}}</span></a>
+                                </h2>
+                            </td>
+                                 <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.ycau_sangtao_32.id}}<span>{{sto.ycau_sangtao_32.diem}}</span></a>
+                                </h2>
+                            </td>
+
+                                 <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.ycau_doclap_33.id}}<span>{{sto.ycau_doclap_33.diem}}</span></a>
+                                </h2>
+                            </td>
+
+                           <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.ycau_cuongdo_34.id}}<span>{{sto.ycau_cuongdo_34.diem}}</span></a>
+                                </h2>
+                            </td>
+                                 <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.ycau_giaotiep_35.id}}<span>{{sto.ycau_giaotiep_35.diem}}</span></a>
+                                </h2>
+                            </td>
+
+                                 <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.mt_laodong_41.id}}<span>{{sto.mt_laodong_41.diem}}</span></a>
+                                </h2>
+                            </td>
+                           <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.muc_rui_ro_42.id}}<span>{{sto.muc_rui_ro_42.diem}}</span></a>
+                                </h2>
+                            </td>
+                            <td>{{sto.tong_diem}}</td>
+                            <td>{{sto.ycau_kynang_khac}}</td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="{% url 'update_dinhgia' sto.id %}"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="{% url 'del_dinhgia' sto.id %}"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+                {% endif %}
+            </div>
+        </div> <!-- /md-12-------->
+    </div><!-- /rows------->
+</div>
+<!-- /Page Content -->
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+    $("#id_don_vi").change(function() {
+        var url = $("#personForm").attr("data-cities-url");
+        var don_viId = $(this).val();
+        $.ajax({
+            url: url,
+            data: {
+                'don_vi': don_viId
+            },
+            success: function(data) {
+                $("#id_bo_phan").html(data);
+            }
+        });
+    });
+</script>
+
+{% endblock javascripts %}

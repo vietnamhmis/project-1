@@ -1,0 +1,79 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Photo</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body class="m-9">
+    <div class="container">
+        <div class="col-md-9">
+            <a href="{% url 'gallery' %}" class="btn btn-dark my-3"> Come backl</a>
+            <div class="card">
+                <form method="POST" action="" enctype="multipart/form-data">
+                     {% csrf_token %}
+                  <div class="form-group m-3">
+                    <label> Chương trình tư vấn</label>
+                    <input required name="description" type="text"  placeholder="Nhập mô tả nội dung chương trình tư vấn" class="form-control">
+                  </div>
+
+                  <div class="form-group m-3">
+                    <label> Ngày Tư vấn</label>
+                    <input required name="ngay_tu_van" type="date"  placeholder="Nhập ngày bắt đầu tư vấn" class="form-control">
+                  </div>
+
+                  <div class="form-group m-3">
+                    <label> Chọn chương trình tư vấn </label>
+                    <select name="tenlop" class="form-control">
+                        <option value="none"> Select a tenlop... </option>
+                        {% for tenlop in tenlops %}
+                        <option value="{{tenlop.id}}">{{tenlop.name}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+
+                    <div class="form-group m-3">
+                    <label>Educator</label>
+                    <input name="educator" type="text" placeholder="Tên Tư vấn viên chính" class ="form-control">
+                  </div>
+
+                    <div class="form-group m-3">
+                    <label>Tạo Chương trình Tư vấn</label>
+                    <input name="tenlop_new" type="text" placeholder="Tạo một tenlop mới" class ="form-control">
+                  </div>
+
+                  <div class="form-group m-3">
+                    <label>Excerpt</label>
+                    <input name="excerpt" type="text" placeholder="Giới thiệu/mô tả chương trình tư vấn" class ="form-control">
+                  </div>
+
+                  <div class="form-group m-3">
+                    <label>Số ngày tư vấn/Number_lessons</label>
+                    <input name="number_lessons" type="text" placeholder="Số ngày tư vấn" class ="form-control">
+                  </div>
+
+                   <div class="form-group m-3">
+                    <label> Upload ảnh/tài liệu</label>
+                    <input required name="images" type="file" multiple class="form-control-file">
+                  </div>
+
+                    <button type="submit" class="btn btn-primary m-3">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

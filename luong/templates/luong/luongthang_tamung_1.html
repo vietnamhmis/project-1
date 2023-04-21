@@ -1,0 +1,225 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+<div class="content container-fluid" xmlns="http://www.w3.org/1999/html">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">BẢNG LƯƠNG TẠM ỨNG</h3>
+                <ul class="breadcrumb">
+                    <!-- link bang dieu khiển -->
+                    <li class="breadcrumb-item"><a href="">BẢNG LƯƠNG</a></li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="{% url 'luong_tamung_add' %}" class="btn add-btn"><i class="fa fa-plus"></i> TẠO BẢNG TẠM ỨNG</a>
+                <div class="view-icons">
+                    <a href="" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <!-- Search Filter----------------------------- -->
+
+    <form method='POST' action=''>{% csrf_token %}
+          <div class="form-row">
+
+                <div class="form-group col-md-2">
+                <select class="form-control" placeholder="Chức vụ" {{form.bo_phan}} </select> </div>
+                <div class="form-group col-md-2">
+                <select class="form-control" placeholder="Chức vụ" {{form.Nam}} </select> </div>
+               <div class="form-group col-md-2">
+                <select class="form-control" placeholder="Chức vụ" {{form.Thang_tra_luong}} </select> </div>
+              <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id={{form.Xuất_Excel}} <label class="form-check-label">
+                        Xuất Excel
+                    </label>
+              </div>
+              <div class="col-md-1 text-right">
+                        <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Tìm kiếm' /></div>
+        </div>
+
+    </form>
+
+    <!-- /Search Filter ------------------------------------------------------>
+
+    <div class="row">
+        <div class="col-lg-12">
+       <div class="table-responsive-sm">
+                {% if queryset %}
+                <table class="table table-striped custom-table datatable">
+                      <thead>
+                        <tr class="table-success">
+                            <th scope="col" style="width: 5%">id</th>
+                            <th scope="col" style="width: 20%">Họ tên/Chức vụ</th>
+
+
+                            <th scope="col" style="width: 20%">Đơn vị </th>
+
+                            <th scope="col" style="width: 10%">Số Tài khoản</th>
+                            <th scope="col" style="width: 10%">Ngân hàng</th>
+                            <th scope="col" style="width: 10%">Số CCCD</th>
+                            <th scope="col" style="width: 15%">Mức tạm ứng</th>
+
+                            <th class="text-right no-sort" style="width: 10%">Tùy chỉnh</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        {% for sto in queryset %}
+                           <tr>
+                            <th class="" scope="row">{{sto.id}}</th>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="{% url 'nhanvien_profile_up' sto.id %}" class="avatar"> <img src="{{sto.hoten_nhanvien.avatar.url}}" alt=""></a>
+                                    <a href="{% url 'luongthang_nhanvien' sto.id %}"> {{sto.hoten_nhanvien.ho_lot_thuong_dung}}{{sto.hoten_nhanvien.ten_thuong_dung}}<span>{{sto.hoten_nhanvien.vitri_CV}}</span></a>
+                                </h2>
+                            </td>
+                            <td>{{sto.hoten_nhanvien.don_vi}}</td>
+                            <td>{{sto.hoten_nhanvien.Taikhoan_nh}}</td>
+                            <td>{{sto.hoten_nhanvien.Ten_nganhang}}</td>
+                             <td>{{sto.hoten_nhanvien.so_CCCD}}</td>
+                            <td>{{sto.Tam_ung}}</td>
+
+
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href=""><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href=""><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+                {% endif %}
+            </div>
+        </div> <!-- /md-12-------->
+    </div><!-- /rows------->
+</div>
+<!-- /Page Content -->
+
+
+
+<!-- Attendance Modal -->
+<div class="modal custom-modal fade" id="attendance_info" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông tin chấm công</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card punch-status">
+                            <div class="card-body">
+                                <h5 class="card-title">Bảng chấm công <small class="text-muted">11/08/2021</small></h5>
+                                <div class="punch-det">
+                                    <h6>Thời gian vào</h6>
+                                    <p>Thứ 2, 11 08 2021 10.00 AM</p>
+                                </div>
+                                <div class="punch-info">
+                                    <div class="punch-hours">
+                                        <span>3.45 hrs</span>
+                                    </div>
+                                </div>
+                                <div class="punch-det">
+                                    <h6>Thời gian ra</h6>
+                                    <p>Thứ 2, 11 08 2021 9.00 PM</p>
+                                </div>
+                                <div class="statistics">
+                                    <div class="row">
+                                        <div class="col-md-6 col-6 text-center">
+                                            <div class="stats-box">
+                                                <p>Nghỉ trưa</p>
+                                                <h6>1.21 Tiếng</h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6 text-center">
+                                            <div class="stats-box">
+                                                <p>Tăng ca</p>
+                                                <h6>3 tiếng</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card recent-activity">
+                            <div class="card-body">
+                                <h5 class="card-title">Hoạt động</h5>
+                                <ul class="res-activity-list">
+                                    <li>
+                                        <p class="mb-0">Thời gian vào</p>
+                                        <p class="res-activity-time">
+                                            <i class="fa fa-clock-o"></i>
+                                            10.00 AM.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="mb-0">Thời gian ra</p>
+                                        <p class="res-activity-time">
+                                            <i class="fa fa-clock-o"></i>
+                                            11.00 AM.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="mb-0">Thời gian vào</p>
+                                        <p class="res-activity-time">
+                                            <i class="fa fa-clock-o"></i>
+                                            11.15 AM.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="mb-0">Thời gian ra</p>
+                                        <p class="res-activity-time">
+                                            <i class="fa fa-clock-o"></i>
+                                            1.30 PM.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="mb-0">Thời gian vào</p>
+                                        <p class="res-activity-time">
+                                            <i class="fa fa-clock-o"></i>
+                                            2.00 PM.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="mb-0">Thời gian ra</p>
+                                        <p class="res-activity-time">
+                                            <i class="fa fa-clock-o"></i>
+                                            7.30 PM.
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Attendance Modal -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

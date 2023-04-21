@@ -1,0 +1,168 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+
+<!-- Page Content -->
+  <div class="content container-fluid">
+	  <!-- Page Header -->
+	  <div class="page-header">
+		  <div class="row align-items-center">
+			  <div class="col">
+				  <h3 class="page-title">Xưởng, Phòng thuộc ĐVTT</h3>
+				  <ul class="breadcrumb">
+					  <!-- link bang dieu khiển -->
+					  <li class="breadcrumb-item"><a href="/dashboard">Bảng điểu khiển</a></li>
+					  <li class="breadcrumb-item active">Đơn vị</li>
+				  </ul>
+			  </div>
+			  <div class="col-auto float-right ml-auto">
+				  <a href="{% url 'add_bophan' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thêm Bộ phân</a>
+				  <div class="view-icons">
+					  <a href="" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+					  <a href="" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+	  <!-- /Page Header -->
+
+
+	  <!-- Search Filter----------------------------- -->
+	  <form method='POST' action=''>{% csrf_token %}
+		  <div class="row">
+
+			  <div class="form-group col-md-12">
+				  <input type="text" class="form-control" placeholder = "Tên Bộ phân" id={{form.ten_bp}}
+			  </div>
+			  <div class="form-group col-md-12">
+				  <select  class="form-control" placeholder = "Thuộc Bộ phận"{{form.loai_nang_luc}}
+				  </select>
+			  </div>
+
+			  <div class="form-check">
+				  <input class="form-check-input" type="checkbox" id= {{form.Xuất_Excel}}
+				  <label class="form-check-label">
+					  Xuất Excel
+				  </label>
+			  </div>
+			  <div class= "col-md-2 text-right">
+				  <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Tìm kiếm'/>
+			  </div>
+		  </div>
+	  </form>
+	  <!-- /Search Filter ------------------------------------------------------>
+
+
+	  <div class="row">
+		  <div class="col-md-12">
+			  <div class="table-responsive">
+
+	 {% if queryset %}
+            <table class="table table-striped custom-table datatable">
+                <thead>
+                <tr class="table-success">
+                     <div class="col-md-2"><!--Start of second col-->
+                         <th scope="col">ID</th>
+                     </div>
+                    <th scope="col">Mã Bộ phận</th>
+
+                    <th scope="col">Đơn vị</th>
+                    <th scope="col">Nhiệm vụ</th>
+                    <th scope="col">Sửa/Xóa</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for bp in queryset %}
+                    <tr >
+						<td>{{bp.id}}</td>
+						<td>
+							  <h5 class="table-avatar">
+								  <a href="{% url 'bophan_nhanvien' bp.id %}" class="avatar"> <img src="/static/assets/img/profiles/avatar-02.jpg" alt=""></a>
+								  <a <a href="/sdmto/{{bp.id}}">{{bp.ten_bp}}</span></a>
+							  </h5>
+						</td>
+
+
+
+                        <td>{{bp.don_vi.Ten_DV}}</td>
+                        <td class="table-bg-primary">{{bp.nv_bp}}</td>
+
+						<td >
+							<a href="{% url 'update_bophan' bp.id %}" class="btn btn-info"><i class="fa fa-pencil" style="font-size:18px;color:white"></i> Sửa </a>
+							<a href="{% url 'del_bophan' bp.id %}" class="btn btn-success badge-pill"><i class="fa fa fa-trash" style="font-size:18px;color:yellow"></i> Xóa </a>
+
+						</td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+				<tfoot>
+					  <tr class="table-infor">
+						  <th class="text-center" cscope="col"></th>
+
+                          <th class="text-center" cscope="col">Tổ trực thuộc:{{to_nhom}}</th>
+                          <th scope="col">Vị trí công việc:{{vitri_chucvu}}</th>
+                          <th scope="col">Số lao động:{{nhanvien}}</th>
+
+                      </tr>
+                      </tfoot>
+            </table>
+            {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+            {% endif %}
+
+		<!---
+
+				  {% if queryset %}
+				  <table class="table table-striped custom-table datatable">
+					  <thead>
+					  <tr class="table-success">
+						  <th scope="col">ID</th>
+                          <th scope="col">lưa chọn</th>
+                          <th class="text-center" cscope="col">TÊN Đơn vị</th>
+                          <th class="text-center" scope="col">Địa chỉ</th>
+                          <th scope="col">Khối</th>
+                          <th scope="col">Nhiệm vụ</th>
+                          <th scope="col">Sửa/Xóa</th>
+
+                      </tr>
+                      </thead>
+
+
+                      <tbody>
+                       {% for donvi in queryset %}
+					   <tr >
+						   <th class="table-table-triped" scope="row">{{donvi.id}}</th>
+						   <td> <input type="checkbox" value="{{donvi.id}}" class="attendencecheckvalue"></td>
+						   <td><a href="{% url 'update_donvi' donvi.id %}">{{donvi.Ten_DV}}</a></td>
+						   <td>{{donvi.diachi}}</td>
+						   td>{{donvi.khoi_SXKD}}</td>
+						   <td class="table-Primary">{{donvi.nv_dv}}</td>
+						   <td >
+							   <a href="{% url 'update_donvi' donvi.id %}" class="btn btn-info"><i class="fa fa-plus"></i> Sửa </a>
+							   <form action="{% url 'del_donvi' donvi.id %}" method="post" class="d-inline"> <i class="fa fa-th"></i>
+								   <input type="submit"  class="bnt btn-success" value="XÓA">
+								   {% csrf_token %}
+							   </form>
+						   </td>
+					   </tr>
+					   {% endfor %}
+					  </tbody>
+				  </table>
+				  {% else %}
+				  <h4 class="text-center alert alert-warning">No record </h4>
+				  ---->
+				  {% endif %}
+			  </div>
+		  </div>
+	  </div>
+  </div>
+<!-- /Page Content -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

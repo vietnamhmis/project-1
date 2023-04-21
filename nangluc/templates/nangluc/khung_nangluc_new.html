@@ -1,0 +1,341 @@
+{% extends "layouts/base_nangluc_ajax.html" %}
+{% load static %}
+
+{% block content %}
+<html>
+<!----------=style Ofdấu dòng--->
+<style>
+    tr{cursor: pointer; transition: all .001s ease-in-out}
+    .selected{background-color: green; font-weight: bold; font-size: 30px; color: red;}
+</style>
+
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<!--.....................Lọc dữ liệu............................................................................................................-->
+    <form method='POST' action=''>{% csrf_token %}
+         <div class="container text-center">
+            <div class="row align-items-center">
+                   <div class="col-md-2">
+                       <input type="text" class="form-control" placeholder="Đợt đánh giá năng lực ex: 11-2022" id={{form.name}}
+                   </div>
+                   <div class="col-md-2">
+                      <select class="form-control" placeholder="Chức danh xây thiết lập Khung năng lực" {{form.chucdanh_CV}} </select>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id={{form.Xuất_Excel}} <label class="form-check-label">Xuất Excel</label>
+                  </div>
+
+                  <div class="col-6 col-md-1">
+                      <input class="btn btn-warning btn-block badge-pill" style="" type="submit" value='LỌC' >
+                  </div>
+            </div>
+
+         </div>
+    </form>
+
+
+
+<!-------------------------Kết thúc lọc dữ liệu-------------------------------------------------------------------------------------------------->
+</div>
+
+<div class="page-header">
+
+
+<div class="container">
+    <div class="row form-group" style="margin-top:30px;">
+        <div class="col-lg-2">
+            <button class="btn btn-block btn-success" id="insert_btn" data-toggle="modal" data-target="#insert_data">THÊM</button>
+        </div>
+        <div class="col order-last">
+            <button class="btn btn-block btn-info" id="update_btn">SỬA</button>
+            <button class="btn btn-block btn-success" id="save_all_btn" style="display:none;margin-top:0px">LƯU</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+              <div class="alert alert-success" id="upt_success" style="display:none">
+              </div>
+               <div class="alert alert-danger" id="upt_error" style="display:none">
+              </div>
+        </div>
+    </div>
+ </div>
+<!-- /Page Content -->
+
+<div class="row">
+        <div class="col-md-12">
+           <div class="table-responsive-sm">
+               {% if students %}
+                 <!--  <table id="table" class="" height= "100 px";>-->
+                  <table id="table" class="table table-striped custom-table datatable" height= "80 px">
+                    <thead>
+                    <tr class="table-success">
+                         <th scope="col" style="width: 5%">id</th>
+                         <th scope="col" style="width: 45%">Tên năng lực</th>
+                         <th scope="col" style="width: 15%">Mức Quan trọng </th>
+                         <th scope="col" style="width: 15%">Mức Thành thạo </th>
+                         <th scope="col" style="width: 10%">Điểm chuẩn </th>
+                         <th class="text-right no-sort" style="width: 10%">Tùy chỉnh</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.id }}</td>
+                        <td>
+                            <h3 class="table-avatar">
+                                <a href="">
+                               {{student.nangluc_cv|truncatewords:12}}</a>
+                               <small>,{{student.chucdanh_CV}}</small>
+
+                        </td>
+                        <td class="editable" data-type="Muc_quantrong_nluc">{{ student.Muc_quantrong_nluc }}</td>
+                        <td class="editable" data-type="Muc_thanhthao_nluc">{{ student.Muc_thanhthao_nluc }}</td>
+                        <td>{{ student.get_Diem_tieuchuan }}</td>
+                        <td class="td-block"><button class="btn-block btn-delete btn-info"  style="font-size:16px;color:yellow">Xóa</button></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                           <tr class="table-warning" >
+                               <td colspan="1" ></td>
+                               <td class="text-left" >Tổng mức quan trọng : {{total_mucqt}}
+                               ; Điểm chuẩn:{{total_diemchuan}}(Mức quan trọng x mức T.thạo chuẩn);
+                               </td>
+                               <td class="text-left" >{{total_ql}}</td>
+                               <td colspan="text-left">{{total_chung}}/{{total_diemcdat}}</td>
+                               <td>{{total_diemcdat}}</td>
+                              <!---       <td id="val">{{total_diemcdat}}</td>  -->
+                               <td class="text-left" >{{ketqua_nangluc}}</td>
+                            </tr>
+                      </tfoot>
+                </table>
+               {% else %}
+                  <h4 class="text-center alert alert-warning">Chưa có dữ liệu </h4>
+               {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+<!-- Modal -->
+<div id="insert_data" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Thêm dữ liệu</h4>
+           <button type="button" class="close" data-dismiss="modal">&times; </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+              <label>Tên năng lực : </label>
+              <input type="text" name="chucdanh_CV" id="ins_chucdanh_CV" class="form-control" placeholder="Tên năng lực">
+          </div>
+          <div class="form-group">
+              <label>QUẢN LÝ ĐÁNH GIÁ NĂNG LỰC: </label>
+              <input type="text" name="Muc_quantrong_nluc" id="ins_Muc_quantrong_nluc" class="form-control" placeholder="Mức năng lực Quản lý đánh giá">
+          </div>
+
+           <div class="form-group">
+                  <label>TỰ ĐÁNH GIÁ : </label>
+              <select name="Muc_thanhthao_nluc" class="form-control" id="ins_Muc_thanhthao_nluc">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+              </select>
+          </div>
+          <div class="form-group">
+             <div class="col-lg-4">
+                <input type="button" name="submit" class="btn btn-block btn-info btn-insert-data" value="THÊM DỮ LIỆU">
+            </div>
+         </div>
+          <div class="form-group">
+              <div class="alert alert-success" id="ins_success" style="display:none">
+              </div>
+               <div class="alert alert-danger" id="ins_error" style="display:none">
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+    // Thêm dữ liệu
+<script>
+    $(".btn-insert-data").click(function(){
+        var chucdanh_CV=$("#ins_chucdanh_CV").val();
+        var Muc_quantrong_nluc=$("#ins_Muc_quantrong_nluc").val();
+        var Muc_thanhthao_nluc=$("#ins_Muc_thanhthao_nluc").val();
+        if(chucdanh_CV==""){
+            $("#ins_error").text("Nhập tên")
+            $("#ins_error").show()
+            return;
+        }
+        else if(Muc_quantrong_nluc==""){
+            $("#ins_error").text("Please Enter chucdanh_CV")
+            $("#ins_error").show()
+            return;
+        }
+        else{
+                $(".btn-insert-data").attr("disabled","disabled");
+                $(".btn-insert-data").text("Inserting... Please Wait..");
+            $.ajax({
+                url:'{% url 'insert_khungnangluc' %}',
+                type:'POST',
+                data:{chucdanh_CV:chucdanh_CV,Muc_quantrong_nluc:Muc_quantrong_nluc,Muc_thanhthao_nluc:Muc_thanhthao_nluc}
+            })
+            .done(function(response){
+                if(response['error']==false){
+                    $("#ins_error").hide();
+                    $("#ins_success").text(response['errorMessage']);
+                    $("#ins_success").show();
+                    var html_data="<tr><td>"+response['id']+"</td><td class='editable' data-type='chucdanh_CV'>"+chucdanh_CV+"</td><td class='editable' data-type='Muc_quantrong_nluc'>"+Muc_quantrong_nluc+"</td><td class='editable' data-type='Muc_thanhthao_nluc'>"+Muc_thanhthao_nluc+"</td><td class='btn-td-block'><button class='btn btn-block btn-delete btn-info'>DELETE</button></td></tr>";
+                    $(".table tbody").append(html_data);
+                }
+                else{
+                    $("#ins_success").hide();
+                    $("#ins_error").text(response['errorMessage']);
+                    $("#ins_error").show();
+                }
+            })
+            .fail(function(){
+                 $("#ins_success").hide();
+                 $("#ins_error").text("Something Went Wrong!");
+                 $("#ins_error").show();
+            })
+            .always(function(){
+                $(".btn-insert-data").removeAttr("disabled");
+                $(".btn-insert-data").text("INSERT STUDENT");
+            })
+        }
+    })
+    // Cập nhật dữ liệu
+    $("#update_btn").click(function(){
+            $("#update_btn").hide();
+            $("#save_all_btn").show();
+
+       $(".editable").each(function(){
+           var value=$(this).text();
+           var types=$(this).data('type');
+           if(types!='chucdanh_CV'){
+                var html_data="<input type='text' name='"+types+"'  class='form-control input_"+types+" input_data' value='"+value+"'>";
+                $(this).html(html_data);
+           }
+           else{
+                var html_data="<select name='"+types+"'  class='form-control input_"+types+" input_data'>";
+                if(value=="3"){
+                    html_data+="<option selected>3</option><option>1</option><option>0</option><option>4</option><option>3</option>";
+                }
+                else{
+                    html_data+="<option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option selected>3</option>";
+                }
+                html_data+="</select>";
+                $(this).html(html_data);
+           }
+        });
+    });
+
+    $("#save_all_btn").click(function(){
+        $("#save_all_btn").attr("disabled","disabled");
+        $("#save_all_btn").text("Saving Data....");
+
+        var json_data=[];
+        $(".input_data").each(function(){
+                var value=$(this).val();
+                var parent_html=$(this).parent();
+                parent_html.html(value);
+                $(this).remove();
+         });
+        $("tbody tr").each(function(){
+             var id=$(this).children().eq(0).text()
+             var chucdanh_CV=$(this).children().eq(1).text()
+             var Muc_quantrong_nluc=$(this).children().eq(2).text()
+             var Muc_thanhthao_nluc=$(this).children().eq(3).text()
+
+             var single_data={"id":id,"chucdanh_CV":chucdanh_CV, "Muc_quantrong_nluc":Muc_quantrong_nluc,"Muc_thanhthao_nluc":Muc_thanhthao_nluc};
+             json_data.push(single_data);
+        });
+
+        var string_data=JSON.stringify(json_data)
+        $.ajax({
+                url:'{% url 'update_all_khungnangluc' %}',
+                type:'POST',
+                data:{data:string_data}
+            })
+            .done(function(response){
+                if(response['error']==false){
+                    $("#upt_error").hide();
+                    $("#upt_success").text(response['errorMessage']);
+                    $("#upt_success").show();
+
+                }
+                else{
+                    $("#upt_success").hide();
+                    $("#upt_error").text(response['errorMessage']);
+                    $("#upt_error").show();
+                }
+            })
+            .fail(function(){
+                 $("#upt_success").hide();
+                 $("#upt_error").text("Something Went Wrong!");
+                 $("#upt_error").show();
+            })
+            .always(function(){
+                 $("#save_all_btn").removeAttr("disabled");
+                 $("#save_all_btn").text("LƯU LẠI");
+                 $("#update_btn").show();
+                 $("#save_all_btn").hide();
+            })
+
+    });
+    // Xóa dữ liệu
+    $(document).on("click",".btn-delete",function(){
+            var this_html=$(this);
+            this_html.attr("disabled","disabled");
+            this_html.text("DELETING....");
+            var id=this_html.parent().parent().children().first().text();
+            //console.log(id);
+            $.ajax({
+                url:'{% url 'delete_data_khungnangluc' %}',
+                type:'POST',
+                data:{id:id}
+            })
+            .done(function(response){
+                if(response['error']==false){
+                    this_html.parent().parent().remove();
+                    $("#upt_error").hide();
+                    $("#upt_success").text(response['errorMessage']);
+                    $("#upt_success").show();
+
+                }
+                else{
+                    $("#upt_success").hide();
+                    $("#upt_error").text(response['errorMessage']);
+                    $("#upt_error").show();
+                }
+            })
+            .fail(function(){
+                 $("#upt_success").hide();
+                 $("#upt_error").text("Something Went Wrong!");
+                 $("#upt_error").show();
+            });
+    });
+
+</script>
+</body>
+</html>
+
+{% endblock content %}

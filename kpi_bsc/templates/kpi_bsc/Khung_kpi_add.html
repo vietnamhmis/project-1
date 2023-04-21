@@ -1,0 +1,58 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+
+<style>
+.form-group m-4 input{
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    background: #f0f0f0;
+
+}
+.label {
+  color: white;
+  padding: 8px;
+  font-family: Arial;
+}
+.success {background-color: #04AA6D;} /* Green */
+.info {background-color: #2196F3;} /* Blue */
+.warning {background-color: #ff9800;} /* Orange */
+.danger {background-color: #f44336;} /* Red */
+.other {background-color: #f44335; color: yellow;} /* Gray */
+</style>
+
+<body class="m-12">
+    <div class="container ">
+        <div class="col-md-12">
+            <a href="{% url 'Khung_kpi_list_2' %}" class="btn btn-dark my-3"> Quay về  trang chủ</a>
+            <div class="card">
+                <form method="POST" action="" enctype="multipart/form-data">
+                     {% csrf_token %}
+
+                   <div class="form-group m-4">
+                    <label>Đợt tạo khung năng lực</label>
+                    <input name="name" type="text" placeholder="Đợt tạo khung năng lực" class ="form-control">
+                  </div>
+
+                  <div class="form-group m-4">
+                    <label>Tỉ trọng</label>
+                    <input type="number" name="ti_trong" placeholder="Tỉ trọng" min="1" max="3" class ="form-control">
+                  </div>
+
+                <button type="submit" class="btn btn-primary m-4">Lưu</button>
+               </form>
+      </div>
+        </div>
+    </div>
+</body>
+
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

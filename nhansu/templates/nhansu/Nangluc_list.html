@@ -1,0 +1,123 @@
+{% extends "layouts/base_no.html" %}
+{% block title %} Danh sách nhân viên {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+
+     <style>
+
+
+    h1 {
+      color: red;
+      font: Arial Narrow
+      text-align:;
+    }
+
+
+</style>
+
+<!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+
+
+                 <button type="button" class="btn btn-lg btn-primary" disabled>BƯỚC 1:</button>
+                <button type="button" class="btn btn-info btn-lg" > DANH MỤC NĂNG LỰC NHÂN VIÊN</button>
+
+                <ul class="breadcrumb">
+                    <!-- link bang dieu khiển -->
+                    <li class="breadcrumb-item"><a href="{% url 'list_nangluc' %}">Danh mục năng lực</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'Khung_nangluc_list' %}">Khung Tiêu chuẩn năng lực</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'danhgianangluc_view_nv' %}">Tự Đánh giá </a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'danhgianangluc_view' %}">Quản lý Đánh giá năng lực</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'kequa_nangluc_list' %}">Kết quả Đánh giá </a></li>
+               </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="{% url 'add_nangluc' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thêm Năng lực</a>
+                <div class="view-icons">
+                    <a href="{% url 'list_nangluc_2' %}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="{% url 'list_nangluc' %}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <!-- Search Filter----------------------------- -->
+
+ <form method='POST' action=''>{% csrf_token %}
+
+        <div class="row">
+          <div class="col-4 col-md-2"><input type="text" class="form-control" placeholder="Tên năng lực" id={{form.name}} </div>
+          <div class="col-4 col-md-2"><select class="form-control" placeholder="Tổ chức sử dụng" {{form.tochuc_Sudung}} </select> </div>
+          <div class="col-4 col-md-2"><select class="form-control" placeholder="Loại năng lực" {{form.loai_nang_luc}} </select> </div>
+           <div class="col-4 col-md-2"><select class="form-control" placeholder="Họ Công việc" {{form.ho_congviec}} </select> </div>
+          <div class="col-4 col-md-2"><input class="form-check-input" type="checkbox" id={{form.Xuất_Excel}} <label class="form-check-label">Xuất Excel</label></div>
+          <div class="col-4 col-md-2">  <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Tìm kiếm' ></div>
+        </div>
+</form>
+
+    <!-- /Search Filter ------------------------------------------------------>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+               {% if queryset %}
+				  <table class="table table-striped custom-table datatable">
+					  <thead>
+					  <tr class="table-success">
+						  <th scope="col">id</th>
+						  <th scope="col">Tên Năng lực</th>
+                           <th scope="col">Sử dụng F/T</th>
+						  <th scope="col">Loại</th>
+                           <th scope="col">Họ Công việc/Tổ chức sử dụng</th>
+						  <th scope="col">Tùy chỉnh lực</th>
+					  </tr>
+
+					  </thead>
+					  <tbody>
+					  {% for sto in queryset %}
+					  <tr>
+						<td>{{forloop.counter}}</td>
+                          <td>
+                              <a href="{% url 'nangluc_chitiet' sto.id %}"> {{sto.name|truncatewords:10}}
+                          </td>
+                          <td>
+                             {{ sto.su_dung }}
+                          </td>
+                          <td>
+                             {{ sto.loai_nang_luc.name }}
+                              <span class="badge badge-pill badge-{{ sto.get_label_display }}"> {{ sto.slug }}</span>
+
+         				  </td>
+                          <td> {{ sto.tochuc_Sudung.name }} <br>
+                            <span>{{ sto.ho_congviec.name|truncatewords:6}} </span>
+                          </td>
+
+
+						  <td>
+							 <a href="{% url 'update_nangluc' sto.id %}" class="btn btn-info"><i class="fa fa-pencil" style="font-size:18px;color:yellow"></i> Sửa </a>
+							<a href="{% url 'del_nangluc' sto.id %}" class="btn btn-success badge-pill"><i class="fa fa fa-trash" style="font-size:18px;color:yellow"></i> Xóa </a>
+						  </td>
+					  </tr>
+                        {% endfor %}
+				  </table>
+				  {% else %}
+				  <h4 class="text-center alert alert-warning">No record </h4>
+				  {% endif %}
+            </div>
+            <!-------------Finish class="table-responsive"------->
+
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

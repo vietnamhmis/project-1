@@ -1,0 +1,228 @@
+{% extends "layouts/base_no.html" %}
+{% block title %} Danh sách Danh giá năng lực {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Login/Regiser</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- CSS only -->
+        <style>
+
+   h2 {
+      color: red;
+      font: Arial Narrow
+      text-align:;
+    }
+
+
+    </style>
+
+<!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+
+                <button type="button" class="btn btn-lg btn-primary" disabled>BƯỚC 3:</button>
+                <button type="button" class="btn btn-info btn-lg" >ĐÁNH GIÁ NĂNG KPI/BSC:</button>
+
+
+                <ul class="breadcrumb">
+                   <li class="breadcrumb-item"><a href="{% url 'kpi_list' %}">Danh mục KPI</a></li>
+	               <li class="breadcrumb-item"><a href="{% url 'Khung_kpi_list_2' %}">Khung KPI/BSC</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'Danhgia_kpi_list2' %}">Kết quả Đánh giá </a></li>
+				</ul>
+            </div>
+             <div class="col-auto float-right ml-auto">
+                <a href="{% url 'add_khung_kpi' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thiết lập Đánh giá KPI</a>
+                 <div class="view-icons">
+                    <a href="{% url 'Danhgia_kpi_list2' %}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="{% url 'danhgia_KPI_list' %}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+
+<body class="md-12">
+    
+<div class="row">
+    <div class="col-md-4">
+          <div class="card">
+          <div class="card-header">
+            <h3 style="color:red"> DANH SÁCH NHÂN VIÊN</h3>
+          </div>
+          <ul class="list-group list-group-flush">
+                  {% for tenlop in Nhanvien_duoc_dg_kpi %}
+                  <li class="list-group-item">
+                        <a href="{% url 'Danhgia_kpi_list2' %}?Nhanvien_dg_kpi={{tenlop.ho_lot_thuong_dung}}">
+                         {{tenlop.ho_lot_thuong_dung}}, <span>{{tenlop.vitri_CV|truncatewords:5}}</span>
+                          </a>
+                     </li>
+                 {% endfor %}
+
+               <li class="list-group-item">
+               <a href="{% url 'Danhgia_kpi_list2' %}">Tất cả</a>
+               </li>
+            <a href="{% url 'add_danhgia_kpi' %}" class="btn btn-success btn-block badge-pill">Thiết lập Đánh giá KPI tháng </a>
+          </ul>
+        </div>
+    </div>
+
+    <div class="col-md-8
+        <div class="row">
+
+    <div class="row">
+        <div class="col-md-12">
+              <div class="card-header">
+               <h3 style="color:BUE"> CHI TIẾT ĐÁNH GIÁ KPI/BSC:  </h3>
+              </div>
+
+<form method='POST' action=''>{% csrf_token %}
+        <div class="form-row">
+                 <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="{{form.Xuất_Excel}}"
+                     <label class="form-check-label">Chi tiết KPI </label>
+                </div>
+                      <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="{{form.Xuất_Word}}"
+                          <label class="form-check-label">TB Kết quả ĐGNL</label>
+                </div>
+            <div class="col-md-2 text-right">
+                <input class="btn btn-info btn-block badge-pill" style="" type="submit" value='Xuất FILE' />
+            </div>
+
+           <!---------- #--------------------------------->
+            <div class="col-md-4 text-right">
+                <a class="btn btn-warning float-right" href="{% url 'Danhgia_nangluc_list_intatca' %}">Xem Báo cáo Tổng hợp</a>
+            </div>
+
+             <!---------- #--------------------------------->
+
+        </div>
+    </form>
+            <div class="table-responsive-sm table-hover">
+                {% if danhgia_kpi_list2 %}
+                <table class="table table-striped custom-table datatable">
+                    <thead>
+                        <tr class="table-success">
+                            <th scope="col" style="width: 5%">id</th>
+                            <th scope="col" style="width: 20%">Tên KPO/KPI</th>
+                            <th scope="col" style="width: 10%">Người Đ.Giá</th>
+                            <th scope="col" style="width: 15%">Chỉ tiêu/Đ.vị tính </th>
+                            <th scope="col" style="width: 10%">Tự Đ.giá </th>
+                            <th scope="col" style="width: 10%"> Quản lý Đ. giá </th>
+                            <th scope="col" style="width: 10%">Kết quả chung </th>
+                            <th scope="col" style="width: 10%">Tỉ lệ H.thành</th>
+                            <th scope="col" style="width: 10%">Điểm CV</th>
+                            <th scope="col" style="width: 10%">Điểm T.số</th>
+                            <th class="text-right no-sort" style="width: 15%">Tùy chỉnh</th>
+                        </tr>
+
+                    <tbody>
+                        {% for sto in danhgia_kpi_list2 %}
+                        <tr>
+                             <td>
+                                <a href=""> {{forloop.counter}} <a/>
+                             </td>
+                             <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.Ten_kpi.kpi_cv.kpo|truncatewords:12}}</span></a>
+                                </h2>
+                                 <h2 class="table-avatar">
+                                    <span>{{sto.Ten_kpi|truncatewords:16}}</span>
+                            </td>
+                           <td>
+                                <h2 class="table-avatar">
+                                    <a href=""><span>{{sto.Nhanvien_dg_KPI}}</span></a>
+                           </h2>
+                            </td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.Ten_kpi.kpi_cv.chi_tieu}} <span>{{sto.Ten_kpi.kpi_cv.donvi_tinh.name}}</span></a>
+                                </h2>
+                            </td>
+
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.tu_danhgia_dapung}}<span></span></a>
+                                </h2>
+                            </td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.Quanly_danhgia}}<span></span></a>
+                                </h2>
+                            </td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.Ketqua_danhgia}}<span></span></a>
+                                </h2>
+                            </td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.Tile_hoanthanh}}<span></span></a>
+                                </h2>
+                            </td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.Diem_congviec}}<span></span></a>
+                                </h2>
+                            </td>
+                           <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.Diem_trongso}}<span></span></a>
+                                </h2>
+                            </td>
+                            <td class="text-right">
+
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="{% url 'Danhgia_KPI_update' sto.id %}"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="{% url 'del_Congviec_nangluc' sto.id %}"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                      <tfoot>
+                       <tr class="table-success" >
+                           <td colspan="3" ></td>
+                           <td class="text-left" >Tổng cộng</td>
+                           <td class="text-left" >{{total_tu_dg}}</td>
+                           <td class="text-left" >{{total_ql}}</td>
+                           <td class="text-left" >{{total_chung}}</td>
+                           <td class="text-left" >{{total_Ketqua_tile}}</td>
+                           <td class="text-left" > {{total_Diem_congviec}}</td>
+
+                          <td class="text-left" >{{tall_Diem_trongso}}</td>
+
+                        </tr>
+                      </tfoot>
+                </table>
+                {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+                {% endif %}
+            </div>
+        </div> <!-- /md-12-------->
+    </div><!-- /rows------->
+
+        </div>
+    </div>
+    </div>
+
+    </div>
+</body>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+

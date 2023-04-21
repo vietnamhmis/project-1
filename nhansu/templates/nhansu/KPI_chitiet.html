@@ -1,0 +1,53 @@
+
+{% extends "layouts/base_no.html" %}
+%} {% block title %} Danh sách nhân viên {% endblock %}
+<!-- Specific CSS goes HERE --> {% block stylesheets %}{% endblock stylesheets %} {% block content %} <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+<!---- Toàn trang--->
+    <style>
+    body {
+      background-color: redblue;
+    }
+    a {
+      color: yellow;
+
+    }
+
+    h1 {
+      color: red;
+      text-align: center;
+    }
+    p {
+      font-family: Calibri (Body);
+      font-size: 34px;
+    }
+</style>
+<!-- Page Content -->
+<div class="col-md-12">
+  <div class="row">
+    <div class="container-fluid">
+      <div class="container mt-2">
+
+        <div class="card text-blue  mb-3" style="max-width: 4800rem;">
+
+
+<h2 class=""> THÔNG TIN KPI </h2><br>
+          <h1 class=" alert alert-success"> KPO: {{item.kpo}}</h1>
+              <h2>{{item.name}}</h2>
+            <h3>
+              <p>Tần xuất: Đánh giá {{item.tan_xuat_d_gia}}</p><br><br><br>
+              <p>Tỉ trọng:{{item.ti_trong}}</p><br><br><br>
+              <p>Ngày tạo: {{item.ngaytao}}</p><br><br><br>
+            </h3>
+          </div>
+          <a href="{% url 'kpi_list' %}" class="btn btn-info"> Trở về </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- /Page Content -->
+</div>
+<!---- End Toàn trang---> {% endblock content %} undefined
+<!-- Specific Page JS goes HERE  --> {% block javascripts %}{% endblock javascripts %}

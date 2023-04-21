@@ -1,0 +1,626 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+				
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="page-title">Thiết lập ngày nghỉ</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index">Bảng điều khiển</a></li>
+                    <li class="breadcrumb-item active">Thiết lập ngày nghỉ</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+    
+    <div class="row">
+        <div class="col-md-12">
+        
+            <!-- Annual Leave -->
+            <div class="card leave-box" id="leave_annual">
+                <div class="card-body">
+                    <div class="h3 card-title with-switch">
+                        Thường niên 											
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch_annual" checked>
+                            <label class="onoffswitch-label" for="switch_annual">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="leave-item">
+                    
+                        <!-- Annual Days Leave -->
+                        <div class="leave-row">
+                            <div class="leave-left">
+                                <div class="input-box">
+                                    <div class="form-group">
+                                        <label>Số ngày</label>
+                                        <input type="text" class="form-control" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="leave-right">
+                                <button class="leave-edit-btn">Sửa</button>
+                            </div>
+                        </div>
+                        <!-- /Annual Days Leave -->
+                        
+                        <!-- Carry Forward -->
+                        <div class="leave-row">
+                            <div class="leave-left">
+                                <div class="input-box">
+                                    <label class="d-block">Chuyển tiếp ngày phép</label>
+                                    <div class="leave-inline-form">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="carry_no" value="option1" disabled>
+                                            <label class="form-check-label" for="carry_no">Không</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="carry_yes" value="option2" disabled>
+                                            <label class="form-check-label" for="carry_yes">Có</label>
+                                        </div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Tối đa</span>
+                                            </div>
+                                            <input type="text" class="form-control" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="leave-right">
+                                <button class="leave-edit-btn">
+                                    Sửa
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /Carry Forward -->
+                        
+                        <!-- Earned Leave -->
+                        <div class="leave-row">
+                            <div class="leave-left">
+                                <div class="input-box">
+                                    <label class="d-block">Nghỉ phép có lương</label>
+                                    <div class="leave-inline-form">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="earned_no" value="option1" disabled>
+                                            <label class="form-check-label" for="earned_no">Không</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="earned_yes" value="option2" disabled>
+                                            <label class="form-check-label" for="earned_yes">Có</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="leave-right">
+                                <button class="leave-edit-btn">
+                                    Sửa
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /Earned Leave -->
+                        
+                    </div>
+                    
+                    <!-- Custom Policy -->
+                    <div class="custom-policy">
+                        <div class="leave-header">
+                            <div class="title">Tùy chỉnh chính sách</div>
+                            <div class="leave-action">
+                                <button class="btn btn-sm btn-primary" type="button" data-toggle="modal" data-target="#add_custom_policy"><i class="fa fa-plus"></i> Thêm tùy chỉnh chính sách</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-nowrap leave-table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="l-name">Tên</th>
+                                        <th class="l-days">Số ngày</th>
+                                        <th class="l-assignee">ID</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>5 năm kinh nghiệm </td>
+                                        <td>5</td>
+                                        <td>
+                                            <a href="#" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-02.jpg"></a>
+                                            <a href="#">Example</a>
+                                        </td>
+                                        <td class="text-right">
+                                            <div class="dropdown dropdown-action">
+                                                <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#edit_custom_policy"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#delete_custom_policy"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /Custom Policy -->
+                    
+                </div>
+            </div>
+            <!-- /Annual Leave -->
+            
+            <!-- Sick Leave -->
+            <div class="card leave-box" id="leave_sick">
+                <div class="card-body">
+                    <div class="h3 card-title with-switch">
+                        Nghỉ ốm											
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch_sick" checked>
+                            <label class="onoffswitch-label" for="switch_sick">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="leave-item">
+                        <div class="leave-row">
+                            <div class="leave-left">
+                                <div class="input-box">
+                                    <div class="form-group">
+                                        <label>Số ngày</label>
+                                        <input type="text" class="form-control" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="leave-right">
+                                <button class="leave-edit-btn">
+                                    Sửa
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Sick Leave -->
+            
+            <!-- Hospitalisation Leave -->
+            <div class="card leave-box" id="leave_hospitalisation">
+                <div class="card-body">
+                    <div class="h3 card-title with-switch">
+                        Nhập viện											
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch_hospitalisation">
+                            <label class="onoffswitch-label" for="switch_hospitalisation">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="leave-item">
+                    
+                        <!-- Annual Days Leave -->
+                        <div class="leave-row">
+                            <div class="leave-left">
+                                <div class="input-box">
+                                    <div class="form-group">
+                                        <label>Số ngày</label>
+                                        <input type="text" class="form-control" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="leave-right">
+                                <button class="leave-edit-btn">
+                                    Sửa
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /Annual Days Leave -->
+                        
+                    </div>
+                    
+                    <!-- Custom Policy -->
+                    <div class="custom-policy">
+                        <div class="leave-header">
+                            <div class="title">Tùy chỉnh chính sách</div>
+                            <div class="leave-action">
+                                <button class="btn btn-sm btn-primary" type="button" data-toggle="modal" data-target="#add_custom_policy"><i class="fa fa-plus"></i> Thêm tùy chỉnh chính sách</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-nowrap leave-table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="l-name">Tên</th>
+                                        <th class="l-days">Số ngày</th>
+                                        <th class="l-assignee">IT</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>5 năm kinh nghiệm </td>
+                                        <td>5</td>
+                                        <td>
+                                            <a href="#" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-02.jpg"></a>
+                                            <a href="#">Example</a>
+                                        </td>
+                                        <td class="text-right">
+                                            <div class="dropdown dropdown-action">
+                                                <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                                    <a href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /Custom Policy -->
+                    
+                </div>
+            </div>
+            <!-- /Hospitalisation Leave -->
+            
+            <!-- Maternity Leave -->
+            <div class="card leave-box" id="leave_maternity">
+                <div class="card-body">
+                    <div class="h3 card-title with-switch">
+                        Thai sản  <span class="subtitle">(Chỉ dành cho chị em phụ nữ)</span>
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch_maternity" checked>
+                            <label class="onoffswitch-label" for="switch_maternity">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="leave-item">
+                        <div class="leave-row">
+                            <div class="leave-left">
+                                <div class="input-box">
+                                    <div class="form-group">
+                                        <label>Số ngày</label>
+                                        <input type="text" class="form-control" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="leave-right">
+                                <button class="leave-edit-btn">
+                                    Sửa
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Maternity Leave -->
+            
+            <!-- Paternity Leave -->
+            <div class="card leave-box" id="leave_paternity">
+                <div class="card-body">
+                    <div class="h3 card-title with-switch">
+                        Bảo hiểm cho người thân  <span class="subtitle">Cha mẹ hoặc vợ con</span>
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch_paternity">
+                            <label class="onoffswitch-label" for="switch_paternity">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="leave-item">
+                        <div class="leave-row">
+                            <div class="leave-left">
+                                <div class="input-box">
+                                    <div class="form-group">
+                                        <label>Số ngày</label>
+                                        <input type="text" class="form-control" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="leave-right">
+                                <button class="leave-edit-btn">
+                                    Sửa
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Paternity Leave -->
+            
+            <!-- Custom Create Leave -->
+            <div class="card leave-box mb-0" id="leave_custom01">
+                <div class="card-body">
+                    <div class="h3 card-title with-switch">
+                        Nghỉ không lương 											
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch_custom01" checked>
+                            <label class="onoffswitch-label" for="switch_custom01">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                        <button class="btn btn-danger leave-delete-btn" type="button">Xóa</button>
+                    </div>
+                    <div class="leave-item">
+                    
+                        <!-- Annual Days Leave -->
+                        <div class="leave-row">
+                            <div class="leave-left">
+                                <div class="input-box">
+                                    <div class="form-group">
+                                        <label>Số ngày</label>
+                                        <input type="text" class="form-control" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="leave-right">
+                                <button class="leave-edit-btn">Sửa</button>
+                            </div>
+                        </div>
+                        <!-- /Annual Days Leave -->
+                        
+                        <!-- Carry Forward -->
+                        <div class="leave-row">
+                            <div class="leave-left">
+                                <div class="input-box">
+                                    <label class="d-block">Chuyển tiếp ngày phép</label>
+                                    <div class="leave-inline-form">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="carryForward" id="carry_no_01" value="option1" disabled>
+                                            <label class="form-check-label" for="carry_no_01">Không</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="carryForward" id="carry_yes_01" value="option2" disabled>
+                                            <label class="form-check-label" for="carry_yes_01">Có</label>
+                                        </div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Tối đa</span>
+                                            </div>
+                                            <input type="text" class="form-control" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="leave-right">
+                                <button class="leave-edit-btn">
+                                    Sửa
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /Carry Forward -->
+                        
+                        <!-- Earned Leave -->
+                        <div class="leave-row">
+                            <div class="leave-left">
+                                <div class="input-box">
+                                    <label class="d-block">Nghỉ phép có lương</label>
+                                    <div class="leave-inline-form">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" disabled>
+                                            <label class="form-check-label" for="inlineRadio1">Không</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" disabled>
+                                            <label class="form-check-label" for="inlineRadio2">Có</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="leave-right">
+                                <button class="leave-edit-btn">
+                                    Sửa
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /Earned Leave -->
+                        
+                    </div>
+                    
+                    <!-- Custom Policy -->
+                    <div class="custom-policy">
+                        <div class="leave-header">
+                            <div class="title">Tùy chỉnh chính sách</div>
+                            <div class="leave-action">
+                                <button class="btn btn-sm btn-primary" type="button" data-toggle="modal" data-target="#add_custom_policy"><i class="fa fa-plus"></i> Thêm tùy chỉnh chính sách</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-nowrap leave-table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="l-name">Tên</th>
+                                        <th class="l-days">Số ngày</th>
+                                        <th class="l-assignee">ID</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>5 năm kinh nghiệm </td>
+                                        <td>5</td>
+                                        <td>
+                                            <a href="#" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-02.jpg"></a>
+                                            <a href="#">Example</a>
+                                        </td>
+                                        <td class="text-right">
+                                            <div class="dropdown dropdown-action">
+                                                <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#edit_custom_policy"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#delete_custom_policy"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /Custom Policy -->
+                    
+                </div>
+            </div>
+            <!-- /Custom Create Leave -->
+            
+        </div>
+    </div>
+        
+</div>
+<!-- /Page Content -->
+
+<!-- Thêm tùy chỉnh chính sách Modal -->
+<div id="add_custom_policy" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm chính sách tùy chỉnh</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>Tên chính sách <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Số ngày <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group leave-duallist">
+                        <label>Thêm nhân viên</label>
+                        <div class="row">
+                            <div class="col-lg-5 col-sm-5">
+                                <select name="customleave_from" id="customleave_select" class="form-control" size="5" multiple="multiple">
+                                    <option value="1">Example </option>
+                                    <option value="2">Example</option>
+                                    <option value="2">Example</option>
+                                    <option value="2">Example</option>
+                                    <option value="3">Example</option>
+                                </select>
+                            </div>
+                            <div class="multiselect-controls col-lg-2 col-sm-2">
+                                <button type="button" id="customleave_select_rightAll" class="btn btn-block btn-white"><i class="fa fa-forward"></i></button>
+                                <button type="button" id="customleave_select_rightSelected" class="btn btn-block btn-white"><i class="fa fa-chevron-right"></i></button>
+                                <button type="button" id="customleave_select_leftSelected" class="btn btn-block btn-white"><i class="fa fa-chevron-left"></i></button>
+                                <button type="button" id="customleave_select_leftAll" class="btn btn-block btn-white"><i class="fa fa-backward"></i></button>
+                            </div>
+                            <div class="col-lg-5 col-sm-5">
+                                <select name="customleave_to" id="customleave_select_to" class="form-control" size="8" multiple="multiple"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Thêm tùy chỉnh chính sách Modal -->
+
+<!-- Edit Custom Policy Modal -->
+<div id="edit_custom_policy" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sửa tùy chỉnh chính sách</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>Tên chính sách <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" value="LOP">
+                    </div>
+                    <div class="form-group">
+                        <label>Số ngày <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" value="4">
+                    </div>
+                    <div class="form-group leave-duallist">
+                        <label>Thêm nhân viên</label>
+                        <div class="row">
+                            <div class="col-lg-5 col-sm-5">
+                                <select name="edit_customleave_from" id="edit_customleave_select" class="form-control" size="5" multiple="multiple">
+                                    <option value="1">Example </option>
+                                    <option value="2">Example</option>
+                                    <option value="2">Example</option>
+                                    <option value="2">Example</option>
+                                    <option value="3">Example</option>
+                                </select>
+                            </div>
+                            <div class="multiselect-controls col-lg-2 col-sm-2">
+                                <button type="button" id="edit_customleave_select_rightAll" class="btn btn-block btn-white"><i class="fa fa-forward"></i></button>
+                                <button type="button" id="edit_customleave_select_rightSelected" class="btn btn-block btn-white"><i class="fa fa-chevron-right"></i></button>
+                                <button type="button" id="edit_customleave_select_leftSelected" class="btn btn-block btn-white"><i class="fa fa-chevron-left"></i></button>
+                                <button type="button" id="edit_customleave_select_leftAll" class="btn btn-block btn-white"><i class="fa fa-backward"></i></button>
+                            </div>
+                            <div class="col-lg-5 col-sm-5">
+                                <select name="customleave_to" id="edit_customleave_select_to" class="form-control" size="8" multiple="multiple"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Edit Custom Policy Modal -->
+
+<!-- Delete Custom Policy Modal -->
+<div class="modal custom-modal fade" id="delete_custom_policy" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-header">
+                    <h3>Xóa tùy chỉnh chính sách</h3>
+                    <p>Bạn có chắc chắn muốn xóa?</p>
+                </div>
+                <div class="modal-btn delete-action">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="javascript:void(0);" class="btn btn-primary continue-btn">Xóa</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Hủy bỏ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Delete Custom Policy Modal -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

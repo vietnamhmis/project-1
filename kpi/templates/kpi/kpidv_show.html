@@ -1,0 +1,62 @@
+
+{% extends 'courses/base.html' %}
+{% block title %} Thêm dữ liệu{% endblock %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'enroll/css/dmkpi.css' %}">
+<div>
+        <h4 class="text-center alert alert-info"> CHI TIẾT KPIs </h4>
+        {% if KPIcviec %}
+        <table class="table table-hover" >
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tên KPI</th>
+                <th scope="col">Vị trí</th>
+                <th scope="col">ĐV.tính</th>
+                <th scope="col">Tần xuất</th>
+                <th scope="col">Tỉ trọng</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tfoot>
+                <tr class="table-success">
+                    <th scope="col">ID</th>
+                    <th scope="col">Tên KPI</th>
+                    <th scope="col">Vị trí</th>
+                    <th scope="col">ĐV.tính</th>
+                    <th scope="col">Tần xuất</th>
+                    <th scope="col">Tỉ trọng</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </tfoot>
+
+            <tbody>
+                {% for st in KPIcviec %}
+                <tr>
+                    <th scope="row">{{st.id}}</th>
+                    <td>{{st.Ten_KPI|truncatewords:30}}...</td> # lấy 30 từ đầu
+                    <td>{{st.LoaiCV}}</td>
+                    <td>{{st.Don_vi_tinh}}</td>
+                    <td>{{st.Tan_xuat_d_gia}}</td>
+                    <td>{{st.Ti_trong}}</td>
+                    <td>
+                        <a href="{% url 'updatedata' st.id %}" class="btn btn btn-success">Edit</a>
+                        <form action="{% url 'deletedata' st.id %}" method="post" class="d-inline">
+                         <input type="submit"  class="btn btn-warning btn-sm" value="Delete">{% csrf_token %}
+                         </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+        {% else %}
+        <h4 class="text-center alert alert-warning">No record </h4>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}
+

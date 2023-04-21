@@ -1,0 +1,35 @@
+{% extends 'courses/base.html' %}
+{% block title %} Xóa Khung Năng lực này khỏi hệ thống {% endblock %}
+{% load static %}
+{% block content %}
+
+<body class="account-page">
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <div class="card">
+            <!-- <a href="job-list.html" class="btn btn-primary apply-btn">Apply Job</a> -->
+            <div class="container">
+                <!-- Account Logo -->
+                <div class="account-logo">
+                    <a href="index.html"><img src="" alt="Vicem 1"></a>
+                </div>
+                <!-- /Account Logo -->
+                <div class="account-box">
+                    <div class="account-wrapper">
+                        <!-- Account Form ----------------------------------------->
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            <h4 class="account-title">Bạn chắc chắn muốn xóa Khung Năng lực này khỏi hệ thống?</h4><br>
+                            <input class="btn btn-danger" style="width:150px;" type="submit" value="Yes" />
+                            <a href="{% url 'Congviec_nangluc_list_2' %}">
+                                <div class="btn btn-primary" style="width:200px;">Cancel</div>
+                            </a>
+                        </form>
+                        <!-- /Account Form --------------------------->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

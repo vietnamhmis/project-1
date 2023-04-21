@@ -1,0 +1,139 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load widget_tweaks %}
+
+<style>
+    h1 {
+      color: red;
+      font: Arial Narrow text-align:;
+    }
+    .form-row, .form-row form-group{
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    box-sizing: border-box;
+    border: 20;
+    outline: none;
+    background: #f0f0f0;
+}
+.form-row submit{
+    margin: 10px 0;
+}
+  </style>
+
+<div class="container p-1 mb-1 bg-transparent text-blue ">
+    <h2 class="alert alert-danger GREEN"> CẬP NHẬT ĐIỀU CHỈNH  KPI</h2>
+  </div>
+<div class="container p-1 mb-1 bg-gradient-light text-info ">
+          <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                   <div class="form-row">
+                      <div class="form-group col-md-10 mb-0">
+                        {{ form.name|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-2 mb-0">
+                        {{ form.ma_kpi|as_crispy_field }}
+                      </div>
+                   </div>
+                   <div class="form-row">
+                       <div class="form-group col-md-12 mb-0">
+                        {{ form.moTa_kpi|as_crispy_field }}
+                      </div>
+                   </div>
+
+                   <div class="form-row">
+                        <div class="form-group col-md-10 mb-0">
+                        {{ form.kpo|as_crispy_field }}
+                        </div>
+
+                      <div class="form-group col-md-2 mb-0">
+                        {{ form.loai_kpi|as_crispy_field }}
+                      </div>
+                   </div>
+
+                    <div class="form-row">
+                          <div class="form-group col-md-3 mb-0">
+                         {{ form.tan_xuat_d_gia|as_crispy_field }}
+                         </div>
+                          <div class="form-group col-md-3 mb-0">
+                            {{ form.chi_tieu|as_crispy_field }}
+                          </div>
+
+                          <div class="form-group col-md-3 mb-0">
+                            {{ form.donvi_tinh|as_crispy_field }}
+                          </div>
+                                <div class="form-group col-md-3 mb-0">
+                            {{ form.tochuc_Sudung|as_crispy_field }}
+                          </div>
+                    </div>
+
+                    <div class="form-row">
+                          <div class="form-group col-md-3 mb-0">
+                            {{ form.slug|as_crispy_field }}
+                          </div>
+                          <div class="form-group col-md-3 mb-0">
+                            {{ form.label|as_crispy_field }}
+                          </div>
+                          <div class="form-group col-md-3 mb-0">
+                            {{ form.ho_congviec|as_crispy_field }}
+                          </div>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Cập nhật">
+                    <a href="{% url 'kpi_list' %}" class="btn btn-info"> TRỞ VỀ </a>
+                     {% if messages %}
+                     {% for up_dulieu in messages %}
+
+                    <h2 style="color: red">{{up_dulieu}}</h2>
+
+                     {% endfor %}
+                     {% endif %}
+
+          </form>
+</div>
+<!-- /Page Content -->
+
+{% endblock content %}
+
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+
+
+<script>
+    $("#id_don_vi").change(function () {
+      var url = $("#Choise_DV_Form").attr("load_bophans");
+      var don_viId = $(this).val();
+          $.ajax({
+            url: url,
+            data: {
+              'don_vi': don_viId
+            },
+            success: function (data) {
+              $("#id_bo_phan").html(data);
+            }
+          });
+      });
+
+     $("#id_bo_phan").change(function () {
+      var url = $("#Choise_DV_Form").attr("load_bophans");
+      var bo_phanId = $(this).val();
+          $.ajax({
+            url: url,
+            data: {
+              'bo_phan': bo_phanId
+            },
+            success: function (data) {
+              $("#id_to_nhom").html(data);
+            }
+          });
+      });
+
+  </script>
+{% endblock javascripts %}

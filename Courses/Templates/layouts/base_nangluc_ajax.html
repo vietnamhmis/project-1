@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <title>
+        Dashboard - {% block title %}{% endblock %}
+    </title>
+    <head>
+<!-- Chart JS -->
+        <!-- Thư viện tính toán JS
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>-->
+
+	<script src="/static/assets/plugins/morris/morris.min.js"></script>
+	<script src="/static/assets/plugins/raphael/raphael.min.js"></script>
+	<script src="/static/assets/js/chart.js"></script>
+    <script src="/static/assets/js/Chart.min.js"></script>
+	<script src="/static/assets/js/line-chart.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Datatable JS -->
+	<script src="/static/assets/js/jquery.dataTables.min.js"></script>
+	<script src="/static/assets/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" href="/static/assets/css/dataTables.bootstrap4.min.css">
+
+
+   <!-- Favicon icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/static/assets/img/favicon.png">
+        <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+        <!-- fontawesome CSS -->
+    <link rel="stylesheet" href="/static/assets/css/font-awesome.min.css">
+        <!-- Lineawesome CSS -->
+    <link rel="stylesheet" href="/static/assets/css/line-awesome.min.css">
+    	<!-- Main CSS -->
+    <link rel="stylesheet" href="/static/assets/css/mainstyle.css">
+
+
+ <body>
+     <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <button type="button" class="btn btn-lg btn-primary" disabled>BƯỚC 4:</button>
+                <button type="button" class="btn btn-info btn-lg" >QUẢN LÝ ĐÁNH GIÁ NĂNG LỰC NHÂN VIÊN:</button>
+                </h2>
+               <ul class="breadcrumb">
+                    <!-- link bang dieu khiển -->
+                    <li class="breadcrumb-item"><a href="{% url 'list_nangluc' %}">Danh mục năng lực</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'Khung_nangluc_list' %}">Khung Tiêu chuẩn năng lực</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'danhgianangluc_view_nv' %}">Tự Đánh giá </a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'danhgianangluc_view' %}">Quản lý Đánh giá năng lực</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'kequa_nangluc_list' %}">Kết quả Đánh giá </a></li>
+               </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="{% url 'add_danhgia_nangluc' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thêm đợt đánh giá Năng lực</a>
+                 <div class="view-icons">
+                    <a href="{% url 'Danhgia_nangluc_list2' %}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="{% url 'Danhgia_nangluc_list' %}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% block content %}
+{% endblock %}
+
+</head>
+</html>

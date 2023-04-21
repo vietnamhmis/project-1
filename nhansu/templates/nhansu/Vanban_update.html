@@ -1,0 +1,111 @@
+{% extends "layouts/base.html" %}
+{% block title %} Sửa dữ liệu{% endblock %}
+
+<html lang="en">
+
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<style>
+    h1 {
+      color: red;
+      font: Arial Narrow text-align:;
+    }
+    .form-row, .form-row form-group{
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    box-sizing: border-box;
+    border: 20;
+    outline: none;
+    background: #f0f0f0;
+}
+.form-row submit{
+    margin: 10px 0;
+}
+
+
+
+  </style>
+
+
+<head>
+    <meta name="viewport" content="with =device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+<div class="row">
+    <div class="col-sm-8 offset-2 ">
+        <div class="container">
+            <div class="card mt-1 mr-0 ml-0">
+                <div class="card-body">
+                    <h2 class="alert alert-info"> ĐIỀU CHỈNH THÔNG TIN  </h2>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                   <div class="form-row">
+                      <div class="form-group col-md-8 mb-0">
+                        {{ form.name|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-2 mb-0">
+                        {{ form.ma_vanban|as_crispy_field }}
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-8 mb-0">
+                        {{ form.MoTa_vanban|as_crispy_field }}
+                      </div>
+
+
+                      <div class="form-group col-md-4 mb-0">
+                        {{ form.file_name|as_crispy_field }}
+
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form.tochuc_Sudung|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-4 mb-0">
+                        {{ form.image|as_crispy_field }}
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form.loai_vanban|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-2 mb-0">
+                        {{ form.label|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-2 mb-0">
+                        {{ form.slug|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-2 mb-0" type="radio">
+                        {{ form.su_dung|as_crispy_field }}
+                      </div>
+                    </div>
+
+                    <input type="submit" class="btn btn-success" value="Cập nhật">
+                    <a href="{% url 'Vanban' %}" class="btn btn-info"> TRỞ VỀ </a>
+                     {% if messages %}
+                     {% for up_dulieu in messages %}
+
+                    <h2 style="color: red">{{up_dulieu}}</h2>
+
+                     {% endfor %}
+                     {% endif %}
+
+
+                    </form>
+                </div>
+            </div>
+    </div>
+</div>
+
+{% endblock content %}

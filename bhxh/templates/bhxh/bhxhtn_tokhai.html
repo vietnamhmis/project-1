@@ -1,0 +1,332 @@
+{% extends "layouts/base.html" %}
+{% block title %} Dashboard {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+<div class="content container-fluid">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Bảng lương</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index">Bảng điều khiển</a></li>
+                    <li class="breadcrumb-item active">BHXH</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <div class="btn-group btn-group-sm">
+
+                    <input type="button" id="create_pdf" value="In Tờ khai TK1-TS">
+                    <button class="btn btn-white"><i class="fa fa-print fa-lg"></i> Xuất PDF Mẫu D05-TS </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- /Page Header -->
+       <!-- In chi tiet luong -->
+<form class="form" style="max-width: 180%; width: 1500px; max-height: none; height: none;">
+      <!-- In chi tiet luong -->
+
+
+    <div class="row">
+            <div class="col-md-12">
+            <span class="float-right">Mẫu TK1-TS  (Ban hành kèm theo Quyết định số: 505/QĐ-BHXH
+             ngày 27/03/2020 của BHXH Việt Nam)</span></h4> <p></p>
+            </div>
+
+
+        <div class="col-md-12">
+            <div class="card">
+                  <div class="card">
+                         <h4 class="p-3 mb-2 bg-info text-white"> <strong>TỜ KHAI THAM GIA, ĐIỀU CHỈNH THÔNG TIN  BẢO HIỂM XÃ HỘI, BẢO HIỂM Y TẾ </strong> </h4>
+
+                  </div>
+
+                    <div class="col-sm-12">
+                    <h4 class = "text-white bg-secondary"><strong>I.Áp dụng đối với người tham gia tra cứu không thấy mã số BHXH do cơ quan BHXH cấp:</strong></h4>
+                    </div>
+
+                    <div class="row">
+                         <!--- cột 1.1------!>
+                        <div class="col-sm-6">
+                            <div>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                             <td><strong>[01]. Họ và tên (viết chữ in hoa): </strong> <span class="float-right">{{f_bh.HOTEN}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>[03].Ngày sinh:</strong> <span class="float-right">{{f_bh.NGAYSINH}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>[05].Dân tộc<span class="float-right">{{f_bh.DANTOC}}</strong> </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>[7].Điện thoại</strong> <span class="float-right">{{f_bh.SDT}}</span></td>
+                                        </tr>
+
+                                            <tr>
+                                            <td><strong>[9].Nơi đăng ký khai sinh:</strong> <span class="float-right">{{f_bh.NOIKHAI}}</span></td>
+                                        </tr>
+                                        <tr>
+                                             <td><strong>9.3 Tỉnh:</strong> <span class="float-right">{{f_bh.tinh_thanh}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>[10]. Họ tên cha/mẹ/giám hộ :</strong> <span class="float-right">.</span></td>
+                                        </tr>
+
+                                        <tr>
+                                        <td><strong>[11]. Địa chỉ nhận kết quả: [11.1]. Số nhà, đường/phố, thôn/xóm::</strong> <span class="float-right">{{f_bh.DIACHI}}</span></td>
+                                        </tr>
+
+                                         <tr>
+                                             <td><strong>[12]. Kê khai Phụ lục Thành viên hộ gia đình đối với người tham gia tra cứu không thấy
+                                                 mã số BHXH và người tham gia BHYT theo hộ gia đình để giảm trừ
+                                                 mức đóng.</strong> <span class="float-right"></span></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                           <!--- cột 1.2------!>
+                        <div class="col-sm-6">
+                            <div>
+
+                                <table class="table table-bordered">
+                                                               <tbody>
+                                        <tr>
+                                              <td><strong>[02]. Giới tính::</strong> <span class="float-right">{{f_bh.GIOITINH}}</span></td>
+                                        </tr>
+                                        <tr>
+                                             <td><strong>[04]. Quốc tịch:</strong> <span class="float-right">{{f_bh.QUOCTICH}}</span></td>
+                                        </tr>
+                                        <tr>
+                                              <td><strong>[06]. Số CMND/CCCD/Hộ chiếu:</strong> <span class="float-right">{{f_bh.SOCCCD}}</span></td>
+                                        </tr>
+                                        <tr>
+                                              <td><strong>[08]. Email (nếu có):</strong> <span class="float-right">{{f_bh.email}}</span></td>
+                                        </tr>
+                                        <tr>
+                                             <td><strong>[09.1]. Xã:</strong> <span class="float-right">{{f_bh.phuong_xa}}</span></td>
+                                        </tr>
+                                        <tr>
+                                             <td><strong>[09.2]. Huyện:</strong> <span class="float-right">{{f_bh.quan_huyen}}</span></td>
+                                        </tr>
+                                        <tr>
+                                             <td>.</td>
+                                        </tr>
+                                        <tr>
+                                             <td><strong>[11.2]. Xã,Huyện, Tỉnh:</strong> <span class="float-right">{{f_bh.phuong_xa}},{{f_bh.quan_huyen}}</span></td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-sm-12">
+                    <h4 class="text-white bg-secondary "><strong>II.	Áp dụng đối với người tham gia đã có mã số BHXH đề nghị
+                        đăng ký, điều chỉnh thông tin ghi trên sổ BHXH, thẻ BHYT:</strong></h4>
+                    </div>
+
+                    <div class="row">
+                         <!--- cột 2.1------!>
+                        <div class="col-sm-6">
+                            <div>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                             <td><strong>[13]. Mã số BHXH: </strong> <span class="float-right">{{f_bh.SOBHXH}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>[14.1].Họ và tên:</strong> <span class="float-right">{{f_bh.HOTEN}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>[14.3]. Ngày, tháng, năm sinh: <span class="float-right">{{f_bh.NAMSINH}}{{f_bh.NGAYSINH}}</strong> </span></td>
+                                        </tr>
+
+                                            <tr>
+                                            <td><strong>[14.5]. Số CMND/CCCD/Hộ chiếu::</strong> <span class="float-right">{{f_bh.NOIKHAI}}</span></td>
+                                        </tr>
+                                        <tr>
+                                             <td><strong>[15]. Mức tiền đóng: h:</strong> <span class="float-right">{{f_bh.PA}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>[16]. Nơi đăng ký khám, chữa bệnh ban đầu:</strong> <span class="float-right">{{f_bh.MA_BV}}</span></td>
+                                        </tr>
+
+
+                                         <tr>
+                                             <td><strong>Hồ sơ kèm theo (nếu có):</strong> <span class="float-right">{{f_bh.GHICHU}}</span></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                           <!--- cột 2.2------!>
+                        <div class="col-sm-6">
+                            <div>
+
+                                <table class="table table-bordered">
+                                    <tbody>
+                                         <tr>
+                                             <td><strong>[14]. Điều chỉnh thông tin cá nhân: </strong> <span class="float-right">{{f_bh.HOTEN}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>[14.2]. Giới tính:</strong> <span class="float-right">{{f_bh.GIOITINH}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>[14.4]. Nơi đăng ký khai sinh:  <span class="float-right">{{f_bh.tinh_thanh}}</strong> </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Huyện, tỉnh:</strong> <span class="float-right">{{f_bh.quan_huyen}}</span></td>
+                                        </tr>
+                                            <tr>
+                                            <td><strong> [16].Phương thức đóng::</strong> <span class="float-right">{{f_bh.PA}}</span></td>
+                                        </tr>
+                                        <tr>
+                                             <td><strong>[18]. Nội dung thay đổi, yêu cầu khác::</strong> <span class="float-right"></span></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+
+     <td class="text-success" >
+        </div>
+            <div class="col-sm-10">
+                <h4> <span class="float-right">Ngày... tháng.. năm</span></h4> <p></p>
+            </div>
+        <div class="col-sm-10">
+            <h4> <span class="float-right">Họ tên người khai</span></h4>
+        </div>
+         </div>
+      </td>
+
+
+</div>
+
+
+<!-- /Page Content -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+
+<script>
+    (function () {
+        var
+         form = $('.form'),
+         cache_width = form.width(),
+         a4 = [595.28, 841.89]; // for a4 size paper width and height
+
+        $('#create_pdf').on('click', function () {
+            $('body').scrollTop(0);
+            createPDF();
+        });
+        //create pdf
+        function createPDF() {
+            getCanvas().then(function (canvas) {
+                var
+                 img = canvas.toDataURL("image/png"),
+                 doc = new jsPDF({
+                     unit: 'px',
+                     format: 'a4'
+                 });
+                doc.addImage(img, 'JPEG', 2, 2);
+                doc.save('DS don vi.pdf');
+                form.width(cache_width);
+            });
+        }
+
+        // create canvas object
+        function getCanvas() {
+            form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
+            return html2canvas(form, {
+                imageTimeout: 2000,
+                removeContainer: true
+            });
+        }
+
+    }());
+</script>
+<script>
+    /*
+ * jQuery helper plugin for examples and tests
+ */
+    (function ($) {
+        $.fn.html2canvas = function (options) {
+            var date = new Date(),
+            $message = null,
+            timeoutTimer = false,
+            timer = date.getTime();
+            html2canvas.logging = options && options.logging;
+            html2canvas.Preload(this[0], $.extend({
+                complete: function (images) {
+                    var queue = html2canvas.Parse(this[0], images, options),
+                    $canvas = $(html2canvas.Renderer(queue, options)),
+                    finishTime = new Date();
+
+                    $canvas.css({ position: 'absolute', left: 0, top: 0 }).appendTo(document.body);
+                    $canvas.siblings().toggle();
+
+                    $(window).click(function () {
+                        if (!$canvas.is(':visible')) {
+                            $canvas.toggle().siblings().toggle();
+                            throwMessage("Canvas Render visible");
+                        } else {
+                            $canvas.siblings().toggle();
+                            $canvas.toggle();
+                            throwMessage("Canvas Render hidden");
+                        }
+                    });
+                    throwMessage('Screenshot created in ' + ((finishTime.getTime() - timer) / 1000) + " seconds<br />", 4000);
+                }
+            }, options));
+
+            function throwMessage(msg, duration) {
+                window.clearTimeout(timeoutTimer);
+                timeoutTimer = window.setTimeout(function () {
+                    $message.fadeOut(function () {
+                        $message.remove();
+                    });
+                }, duration || 2000);
+                if ($message)
+                    $message.remove();
+                $message = $('<div ></div>').html(msg).css({
+                    margin: 0,
+                    padding: 10,
+                    background: "#000",
+                    opacity: 0.7,
+                    position: "fixed",
+                    top: 10,
+                    right: 10,
+                    fontFamily: 'Tahoma',
+                    color: '#fff',
+                    fontSize: 10,
+                    borderRadius: 12,
+                    width: 'auto',
+                    height: 'auto',
+                    textAlign: 'center',
+                    textDecoration: 'none'
+                }).hide().fadeIn().appendTo('body');
+            }
+        };
+    })(jQuery);
+
+</script>
+
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

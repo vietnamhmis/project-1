@@ -1,0 +1,665 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+					
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col">
+                <h3 class="page-title">Danh sách ca</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index">Bảng điều khiển</a></li>
+                    <li class="breadcrumb-item"><a href="#">Nhân sự</a></li>
+                    <li class="breadcrumb-item active">Danh sách lịch trình</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="#" class="btn add-btn m-r-5" data-toggle="modal" data-target="#add_shift">Thêm lịch trình</a>
+                <a href="#" class="btn add-btn m-r-5" data-toggle="modal" data-target="#add_schedule"> Chỉ định </a>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+    
+    <!-- Content Starts -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-striped custom-table datatable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tên lịch trình</th>
+                            <th>Bắt đầu (Tối thiểu)</th>
+                            <th>Bắt đầu</th>
+                            <th>Bắt đầu (Tối đa)</th>
+                            <th>Kết thúc (Tối thiểu)</th>
+                            <th>Kết thúc</th>
+                            <th>Kết thúc (Tối đa)</th>
+                            <th>Thời gian nghỉ</th>
+                            <th class="text-center">Tình trạng</th>
+                            <th class="text-right no-sort">Tùy chỉnh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>10 AM</td>
+                            <td>09:00:00 am</td>
+                            <td>10:00:00 am</td>
+                            <td>10:30:00 am</td>
+                            <td>06:00:00 pm</td>
+                            <td>06:30:00 pm</td>
+                            <td>07:00:00 pm</td>
+                            <td>30 phút</td>
+                            <td class="text-center">
+                                <div class="action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đang hoạt động
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_shift"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>10:30 PM</td>
+                            <td>10:00:00 am</td>
+                            <td>10:30:00 am	</td>
+                            <td>11:00:00 am</td>
+                            <td>06:30:00 pm</td>
+                            <td>07:00:00 pm</td>
+                            <td>07:30:00 pm	</td>
+                            <td>45 mins</td>
+                            <td class="text-center">
+                                <div class="action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đang hoạt động
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_shift"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Hàng ngày</td>
+                            <td>06:00:00 am</td>
+                            <td>06:30:00 am</td>
+                            <td>07:00:00 am</td>
+                            <td>03:00:00 pm</td>
+                            <td>03:30:00 pm</td>
+                            <td>04:00:00 pm</td>
+                            <td>60 mins</td>
+                            <td class="text-center">
+                                <div class="action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đang hoạt động
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_shift"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Mới</td>
+                            <td>06:11:00 am</td>
+                            <td>06:30:00 am</td>
+                            <td>08:12:00 am</td>
+                            <td>09:12:00 pm	</td>
+                            <td>09:30:00 pm</td>
+                            <td>09:45:00 pm</td>
+                            <td>45 mins</td>
+                            <td class="text-center">
+                                <div class="action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đang hoạt động
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_shift"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Thay đổi định kì</td>
+                            <td>08:30:00 am</td>
+                            <td>09:00:00 am</td>
+                            <td>09:30:00 am</td>
+                            <td>05:30:00 pm</td>
+                            <td>06:00:00 pm</td>
+                            <td>06:30:00 pm</td>
+                            <td>60 mins</td>
+                            <td class="text-center">
+                                <div class="action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đang hoạt động
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_shift"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /Content End -->
+    
+</div>
+<!-- /Page Content -->
+
+</div>
+<!-- /Page Wrapper -->
+
+<!-- Add Shift Modal -->
+<div id="add_shift" class="modal custom-modal fade" role="dialog">
+<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Thêm ca</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="col-form-label">Tên ca <span class="text-danger">*</span></label>
+                            <div class="input-group time timepicker">
+                                <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group" >
+                            <label>Thời gian bắt đầu (Tối thiểu) <span class="text-danger">*</span></label>
+                            <div class="input-group time timepicker">
+                                <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Thời gian bắt đầu <span class="text-danger">*</span></label>
+                            <div class="input-group time timepicker">
+                                <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                            </div>									
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Thời gian bắt đầu (Tối đa) <span class="text-danger">*</span></label>
+                            <div class="input-group time timepicker">
+                                <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                            </div>											
+                        </div>
+                    </div>		
+                    <div class="col-md-4">
+                        <div class="form-group" >
+                            <label>Thời gian kết thúc (Tối thiểu) <span class="text-danger">*</span></label>
+                            <div class="input-group time timepicker">
+                                <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Thời gian kết thúc <span class="text-danger">*</span></label>
+                            <div class="input-group time timepicker">
+                                <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                            </div>									
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Thời gian kết thúc (Tối đa) <span class="text-danger">*</span></label>
+                            <div class="input-group time timepicker">
+                                <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                            </div>											
+                        </div>
+                    </div>	
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Thời gian nghỉ </label>
+                            <input type="text" class="form-control">											
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Thay đổi định kỳ</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="col-form-label">Lặp lại hàng ngày</label>
+                            <select class="select">
+                                <option value="">1 </option>
+                                <option value="1">2</option>
+                                <option value="2">3</option>
+                                <option value="3">4</option>
+                                <option  selected value="4">5</option>
+                                <option value="3">6</option>
+                            </select>
+                            <label class="col-form-label">Tuần</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group wday-box">
+                            <label class="checkbox-inline"><input type="checkbox" value="monday" class="days recurring" checked=""><span class="checkmark">T2</span></label>
+
+                            <label class="checkbox-inline"><input type="checkbox" value="tuesday" class="days recurring" checked=""><span class="checkmark">T3</span></label>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" value="wednesday" class="days recurring" checked=""><span class="checkmark">T4</span></label>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" value="thursday" class="days recurring" checked=""><span class="checkmark">T5</span></label>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" value="friday" class="days recurring" checked=""><span class="checkmark">T6</span></label>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" value="saturday" class="days recurring"><span class="checkmark">T7</span></label>
+                        
+                            <label class="checkbox-inline"><input type="checkbox" value="sunday" class="days recurring"><span class="checkmark">CN</span></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="col-form-label">Kết thúc vào <span class="text-danger">*</span></label>
+                            <div class="cal-icon"><input class="form-control datetimepicker" type="text"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck2">
+                            <label class="custom-control-label" for="customCheck2">Vô thời hạn</label>
+                        </div>
+                    </div>								
+            
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Thêm thẻ </label>
+                            <input type="text" class="form-control">											
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Thêm chú thích </label>
+                            <textarea class="form-control"></textarea>											
+                        </div>
+                    </div>
+                </div>
+                <div class="submit-section">
+                    <button class="btn btn-primary submit-btn">Lưu lại</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<!-- /Add Shift Modal -->
+
+<!-- Edit Shift Modal -->
+<div id="edit_shift" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thay đổi lịch trình</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Tên lịch trình <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group" >
+                                <label>Thời gian bắt đầu (Tối thiểu) <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Thời gian bắt đầu <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>									
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Thời gian bắt đầu (Tối đa) <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>											
+                            </div>
+                        </div>		
+                        <div class="col-md-4">
+                            <div class="form-group" >
+                                <label>Thời gian kết thúc (Tối thiểu) <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Thời gian kết thúc <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>									
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Thời gian kết thúc (Tối đa) <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>											
+                            </div>
+                        </div>	
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Thời gian nghỉ </label>
+                                <input type="text" class="form-control">											
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck3">
+                                <label class="custom-control-label" for="customCheck3">Thay đổi định kỳ</label>
+                                </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Lặp lại hàng ngày</label>
+                                <select class="select">
+                                    <option value="">1 </option>
+                                    <option value="1">2</option>
+                                    <option value="2">3</option>
+                                    <option value="3">4</option>
+                                    <option  selected value="4">5</option>
+                                    <option value="3">6</option>
+                                </select>
+                                <label class="col-form-label">Tuần</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group wday-box">
+                                <label class="checkbox-inline"><input type="checkbox" value="monday" class="days recurring" checked=""><span class="checkmark">T2</span></label>
+
+                                <label class="checkbox-inline"><input type="checkbox" value="tuesday" class="days recurring" checked=""><span class="checkmark">T3</span></label>
+                            
+                                <label class="checkbox-inline"><input type="checkbox" value="wednesday" class="days recurring" checked=""><span class="checkmark">T4</span></label>
+                            
+                                <label class="checkbox-inline"><input type="checkbox" value="thursday" class="days recurring" checked=""><span class="checkmark">T5</span></label>
+                            
+                                <label class="checkbox-inline"><input type="checkbox" value="friday" class="days recurring" checked=""><span class="checkmark">T6</span></label>
+                            
+                                <label class="checkbox-inline"><input type="checkbox" value="saturday" class="days recurring"><span class="checkmark">T7</span></label>
+                            
+                                <label class="checkbox-inline"><input type="checkbox" value="sunday" class="days recurring"><span class="checkmark">CN</span></label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Kết thúc vào <span class="text-danger">*</span></label>
+                                <div class="cal-icon"><input class="form-control datetimepicker" type="text"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck4">
+                                <label class="custom-control-label" for="customCheck4">Vô thời hạn</label>
+                                </div>
+                        </div>								
+                
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Thêm thẻ </label>
+                                <input type="text" class="form-control">											
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Thêm chú thích </label>
+                                <textarea class="form-control"></textarea>											
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Edit Shift Modal -->
+
+<!-- Add Schedule Modal -->
+<div id="add_schedule" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm lịch trình</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Phòng ban <span class="text-danger">*</span></label>
+                                <select class="select">
+                                    <option value="">-</option>                                    
+                                    <option value="1">Nhân sự</option>
+                                    <option value="2">IT</option>
+                                    <option value="3">Kế toán</option>
+                                    <option value="4">Tài chính</option>
+                                    <option value="5">Ban quản lý</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Employee Name <span class="text-danger">*</span></label>
+                                <select class="select">
+                                    <option value="">- </option>
+                                    <option value="1">Example name </option>
+                                    <option value="2">Example name</option>
+                                    <option value="3">Example name </option>
+                                    <option value="4">Example name</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Ngày</label>
+                                <div class="cal-icon"><input class="form-control datetimepicker" type="text"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Ca lịch trình <span class="text-danger">*</span></label>
+                                <select class="select">
+                                    <option value="">-</option>
+                                    <option value="1">10:00 AM</option>
+                                    <option value="2">10:00 PM</option>
+                                    <option value="3">Ca hàng ngày </option>
+                                    <option value="4">Lịch trình khác</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian bắt đầu (Tối thiểu)  <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian bắt đầu  <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian bắt đầu (Tối đa)  <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian kết thúc (Tối thiểu)  <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian kết thúc   <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian kết thúc (Tối đa) <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian nghỉ  <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Chấp nhận cho thêm giờ </label>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
+                                    <label class="custom-control-label" for="customSwitch1"></label>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Công bố </label>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch2" checked="">
+                                    <label class="custom-control-label" for="customSwitch2"></label>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Add Schedule Modal -->
+    
+<!-- Delete Shift Modal -->
+<div class="modal custom-modal fade" id="delete_employee" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-header">
+                    <h3>Xóa lịch trình</h3>
+                    <p>Bạn có chắc chắn muốn xóa?</p>
+                </div>
+                <div class="modal-btn delete-action">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="javascript:void(0);" class="btn btn-primary continue-btn">Xóa</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Delete Employee Modal -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

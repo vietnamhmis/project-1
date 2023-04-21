@@ -1,0 +1,120 @@
+<!--{% extends 'courses/base.html' %} -->
+{% block title %} Thêm dữ liệu{% endblock %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'enroll/css/dmkpi.css' %}">
+<link href="{% static 'nhansu/css/stylesheet.css' %}" rel="stylesheet">
+
+<!---Cài đặt hiển thi table https://www.youtube.com/watch?v=yGBk9Nalyq8 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"/>
+<!---Kết  thúc Cài đặt hiển thi table -->
+
+     <form action="" method="POST">
+        {% csrf_token %}
+        <div class="col-md-12">
+            <div class="input-group">
+                <span class="input-group-text"> THÊM MỚI KPI:</span>
+                <textarea class="form-control" aria-label="{{ form.Ten_KPI }}</textarea>
+            </div>
+
+        <div class="col-md-12">
+               <div class="input-group">
+                     <span class="input-group-text"> Kỳ giao KPI:</span>
+                <textarea class="form-control" aria-label="{{ form.Ky_giao_KPI }}</textarea>
+                     <span class="input-group-text"> Người giao:</span>
+                            {{ form.Nguoigiao }}>
+
+                     <span class="input-group-text"> Người nhận:</span>
+                <textarea class="form-control" aria-label="{{ form.Nguoi_nhan }}</textarea>
+                    <span class="input-group-text"> Tỉ trọng:</span>
+                <textarea class="form-control" aria-label="{{ form.Ti_trong }}</textarea>
+                <input type="submit" class="btn btn-success" value="Thêm dữ liệu">
+            </div>
+            </div>
+        </div>
+        </div>
+    </form>
+<!------ --->
+  <div class="display_table"> <!--Hiển thỉ dang kiểu-->
+      <div class="col-md-12">
+        {% if stu %}
+        <table class="table table-hover tablekpicn_id" >
+            <thead>
+            <tr class="table-success">
+                <th scope="col">ID</th>
+                <th scope="col">Tên KPI</th>
+                <th scope="col">Kỳ giao</th>
+                <th scope="col">Người giao</th>
+                <th scope="col">Người nhận</th>
+                <th scope="col">ĐVT</th>
+                <th scope="col">Chỉ tiêu</th>
+                <th scope="col">Tỉ trọng</th>
+                <th scope="col">Sửa/Xóa</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for st in stu %}
+            <tr >
+                <th class="" scope="row">{{st.id}}</th>
+                <td class="">{{st.Ten_KPI}}</td>
+                <td class="">{{st.Ky_giao_KPI}}</td>
+                <td class="">{{st.Nguoigiao}}</td>
+                <td class="">{{st.Nguoi_nhan}}</td>
+                <td class="">{{st.Don_vi_tinh}}</td>
+                <td>{{st.Chitieu}}</td>
+
+                <td >{{st.Ti_trong}}</td>
+                <td class="">
+                    <a href="{% url 'update_kpicn' st.id %}" class="">SỬA</a>
+                    <form action="{% url 'delete_kpicn' st.id %}" method="post" class="d-inline">
+                    <input type="submit"  class="" value="XÓA">
+                        {% csrf_token %}
+                    </form>
+                </td>
+            </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <h4 class="text-center alert alert-warning">No record </h4>
+        {% endif %}
+
+      </div> <!------star display table--->
+    </div>
+
+<!---Cài đặt hiển thi table https://www.youtube.com/watch?v=yGBk9Nalyq8 -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+<!---Chương trình  nhóm cac Gruop trong table --->
+ <script>
+  $('.tablekpicn_id').DataTable({
+    columnDedfs: [
+        {visible:false, targets:3 }
+        ],
+    order:[[3, 'asc']],
+    dislayLength:5,
+
+    drawCallback: function(settings) {
+        var api = this.api();
+        var rows = api.row({page: 'current'}).nodes();
+        var last=null;
+
+    api.column(3,{page:'current'}).data().each(function(group,i) {
+        if (last !== group) {
+            $(rows).eq( i ).before(
+                '<tr class="bg-primary text-light"><td colspan="5">'+group+'</td></tr>'
+            );
+                last = group;
+            }
+     });
+    }
+  });
+</script>
+{% endblock content %}
+

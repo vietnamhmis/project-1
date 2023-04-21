@@ -1,0 +1,19 @@
+<option value="">---------</option>
+
+{% for quan_huyen in quan_huyens %}
+<option value="{{ quan_huyen.pk }}">{{ quan_huyen.Ten_quan }}</option>
+{% endfor %}
+
+{% for phuong_xa in phuong_xas %}
+<option value="{{ phuong_xa.pk }}">{{ phuong_xa.Ten_xa }}</option>
+{% endfor %}
+
+
+
+{% for bo_phan in bo_phans %}
+<option value="{{ bo_phan.pk }}">{{ bo_phan.ten_bp }}</option>
+{% endfor %}
+
+{% for to_nhom in to_nhoms %}
+<option value="{{ to_nhom.pk }}">{{ to_nhom.ten_to }}</option>
+{% endfor %}

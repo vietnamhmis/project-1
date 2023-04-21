@@ -1,0 +1,96 @@
+{% extends "layouts/base.html" %}
+
+//templates/product_list.html
+
+{% load static %}
+
+{% block javascript %}
+  <script src="{% static 'js/script.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+  <h1 class="page-header">Products</h1>
+  <p>
+    <button type="button" class="btn btn-primary js-create-product" data-url="{% url 'product_create' %}">
+      <span class="glyphicon glyphicon-plus"></span>
+      New Product
+    </button>
+  </p>
+  <table class="table" id="product-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Date Added</th>
+        <th>Category</th>
+        <th>Product Code</th>
+        <th>Quantiry</th>
+        <th>Price</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% include 'templates/includes/partial_product_list.html' %}
+    </tbody>
+  </table>
+  <div class="modal fade" id="modal-product">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+      </div>
+    </div>
+  </div>
+<script>
+  $(document).ready(function(){
+  var loadForm = function () {
+    var btn = $(this);
+    $.ajax({
+      url: btn.attr("data-url"),
+      type: 'get',
+      dataType: 'json',
+      beforeSend: function () {
+        $("#modal-product .modal-content").html("");
+        $("#modal-product").modal("show");
+      },
+      success: function (data) {
+        $("#modal-product .modal-content").html(data.html_form);
+      }
+    });
+  };
+
+  var saveForm = function () {
+    var form = $(this);
+    $.ajax({
+      url: form.attr("action"),
+      data: form.serialize(),
+      type: form.attr("method"),
+      dataType: 'json',
+      success: function (data) {
+        if (data.form_is_valid) {
+          $("#product-table tbody").html(data.html_product_list);
+          $("#modal-product").modal("hide");
+        }
+        else {
+          $("#modal-product .modal-content").html(data.html_form);
+        }
+      }
+    });
+    return false;
+  };
+
+
+  /* Binding */
+  $(".js-create-product").click(loadForm);
+  $("#modal-product").on("submit", ".js-product-create-form", saveForm);
+
+  // Update product
+  $("#product-table").on("click", ".js-update-product", loadForm);
+  $("#modal-product").on("submit", ".js-product-update-form", saveForm);
+
+  // Delete product
+  $("#product-table").on("click", ".js-delete-product", loadForm);
+  $("#modal-product").on("submit", ".js-product-delete-form", saveForm);
+
+});
+</script>
+{% endblock %}

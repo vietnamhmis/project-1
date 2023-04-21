@@ -1,0 +1,699 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+				
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="page-title">Hồ sơ khách hàng</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index">Bảng điều khiển</a></li>
+                    <li class="breadcrumb-item active">Hồ sơ</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+    
+    <div class="card mb-0">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="profile-view">
+                        <div class="profile-img-wrap">
+                            <div class="profile-img">
+                                <a href="">
+                                    <img src="/static/assets/img/profiles/avatar-19.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="profile-basic">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="profile-info-left">
+                                        <h3 class="user-name m-t-0">BIDV</h3>
+                                        <h5 class="company-role m-t-0 mb-0">Barry Cuda</h5>
+                                        <small class="text-muted">CEO</small>
+                                        <div class="staff-id">Mã khách hàng : KH-0001</div>
+                                        <div class="staff-msg"><a href="chat.html" class="btn btn-custom">Gửi tin nhắn</a></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <ul class="personal-info">
+                                        <li>
+                                            <span class="title">Số điện thoại:</span>
+                                            <span class="text"><a href="">9876543210</a></span>
+                                        </li>
+                                        <li>
+                                            <span class="title">Email:</span>
+                                            <span class="text"><a href="">barrycuda@example.com</a></span>
+                                        </li>
+                                        <li>
+                                            <span class="title">Sinh nhật:</span>
+                                            <span class="text">02/08</span>
+                                        </li>
+                                        <li>
+                                            <span class="title">Địa chỉ:</span>
+                                            <span class="text">57 CMTT, TP.HCM</span>
+                                        </li>
+                                        <li>
+                                            <span class="title">Giới tính:</span>
+                                            <span class="text">Nam</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card tab-box">
+        <div class="row user-tabs">
+            <div class="col-lg-12 col-md-12 col-sm-12 line-tabs">
+                <ul class="nav nav-tabs nav-tabs-bottom">
+                    <li class="nav-item col-sm-3"><a class="nav-link active" data-toggle="tab" href="#myprojects">Dự án</a></li>
+                    <li class="nav-item col-sm-3"><a class="nav-link" data-toggle="tab" href="#tasks">Nhiệm vụ</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12"> 
+            <div class="tab-content profile-tab-content">
+                
+                <!-- Projects Tab -->
+                <div id="myprojects" class="tab-pane fade show active">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="dropdown profile-action">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_project"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                        </div>
+                                    </div>
+                                    <h4 class="project-title"><a href="project-view.html">Di dời văn phòng</a></h4>
+                                    <small class="block text-ellipsis m-b-15">
+                                        <span class="text-xs">1</span> <span class="text-muted"> đang xử lý, </span>
+                                        <span class="text-xs">9</span> <span class="text-muted"> hoàn thành</span>
+                                    </small>
+                                    <p class="text-muted">Áp lực bán ra khiến nhiều mã ngân hàng mất ngưỡng hỗ trợ ngắn hạn, 
+                                        là nhóm cổ phiếu tác động chính làm thị trường mất điểm phiên cuối tuần.                                       
+                                        
+                                    </p>
+                                    <div class="pro-deadline m-b-15">
+                                        <div class="sub-title">
+                                            Hạn chót:
+                                        </div>
+                                        <div class="text-muted">
+                                            09/08/2021
+                                        </div>
+                                    </div>
+                                    <div class="project-members m-b-15">
+                                        <div>Quản lý dự án :</div>
+                                        <ul class="team-members">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="/static/assets/img/profiles/avatar-16.jpg"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="project-members m-b-15">
+                                        <div>Đội xử lý :</div>
+                                        <ul class="team-members">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="/static/assets/img/profiles/avatar-02.jpg"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="/static/assets/img/profiles/avatar-09.jpg"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="/static/assets/img/profiles/avatar-10.jpg"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="/static/assets/img/profiles/avatar-05.jpg"></a>
+                                            </li>
+                                            <li class="dropdown avatar-dropdown">
+                                                <a href="#" class="all-users dropdown-toggle" data-toggle="dropdown" aria-expanded="false">+15</a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <div class="avatar-group">
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-02.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-09.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-10.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-05.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-11.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-12.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-13.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-01.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-16.jpg">
+                                                        </a>
+                                                    </div>
+                                                    <div class="avatar-pagination">
+                                                        <ul class="pagination">
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="#" aria-label="Previous">
+                                                                    <span aria-hidden="true">«</span>
+                                                                    <span class="sr-only">Trang trước</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="#" aria-label="Next">
+                                                                    <span aria-hidden="true">»</span>
+                                                                <span class="sr-only">Kế tiếp</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li> 
+                                        </ul>
+                                    </div>
+                                    <p class="m-b-5">Tiến độ <span class="text-success float-right">40%</span></p>
+                                    <div class="progress progress-xs mb-0">
+                                        <div class="progress-bar bg-success" role="progressbar" data-toggle="tooltip" title="40%" style="width: 40%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="dropdown profile-action">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_project"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                        </div>
+                                    </div>
+                                    <h4 class="project-title"><a href="project-view.html">Xây dựng nhà xưởng</a></h4>
+                                    <small class="block text-ellipsis m-b-15">
+                                        <span class="text-xs">2</span> <span class="text-muted"> đang xử lý, </span>
+                                        <span class="text-xs">5</span> <span class="text-muted"> hoàn thành</span>
+                                    </small>
+                                    <p class="text-muted">Cổ phiếu ngân hàng kéo lùi VN-Index
+                                        Áp lực bán ra khiến nhiều mã ngân hàng mất ngưỡng hỗ trợ ngắn hạn, 
+                                        là nhóm cổ phiếu tác động chính làm thị trường mất điểm phiên cuối tuần.
+                                    </p>
+                                    <div class="pro-deadline m-b-15">
+                                        <div class="sub-title">
+                                            Hạn chót:
+                                        </div>
+                                        <div class="text-muted">
+                                            09/09/2021
+                                        </div>
+                                    </div>
+                                    <div class="project-members m-b-15">
+                                        <div>Quản lý dự án :</div>
+                                        <ul class="team-members">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="/static/assets/img/profiles/avatar-16.jpg"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="project-members m-b-15">
+                                        <div>Đội xử lý :</div>
+                                        <ul class="team-members">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="/static/assets/img/profiles/avatar-02.jpg"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="/static/assets/img/profiles/avatar-09.jpg"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="/static/assets/img/profiles/avatar-10.jpg"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="/static/assets/img/profiles/avatar-05.jpg"></a>
+                                            </li>
+                                            <li class="dropdown avatar-dropdown">
+                                                <a href="#" class="all-users dropdown-toggle" data-toggle="dropdown" aria-expanded="false">+15</a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <div class="avatar-group">
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-02.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-09.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-10.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-05.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-11.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-12.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-13.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-01.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-16.jpg">
+                                                        </a>
+                                                    </div>
+                                                    <div class="avatar-pagination">
+                                                        <ul class="pagination">
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="#" aria-label="Previous">
+                                                                    <span aria-hidden="true">«</span>
+                                                                    <span class="sr-only">Trang trước</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="#" aria-label="Next">
+                                                                    <span aria-hidden="true">»</span>
+                                                                <span class="sr-only">Kế tiếp</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="m-b-5">Tiến độ <span class="text-success float-right">40%</span></p>
+                                    <div class="progress progress-xs mb-0">
+                                        <div class="progress-bar bg-success" role="progressbar" data-toggle="tooltip" title="40%" style="width: 40%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="dropdown profile-action">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_project"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                        </div>
+                                    </div>
+                                    <h4 class="project-title"><a href="project-view.html">Xây dựng hệ thống CNTT</a></h4>
+                                    <small class="block text-ellipsis m-b-15">
+                                        <span class="text-xs">3</span> <span class="text-muted"> đang xử lý, </span>
+                                        <span class="text-xs">3</span> <span class="text-muted"> hoàn thành</span>
+                                    </small>
+                                    <p class="text-muted">Nỗ lực chinh phục ngưỡng 1.350 bất thành trong phiên hôm qua, 
+                                        cùng với thanh khoản giảm, khiến nhiều nhà đầu tư mất dần kiên nhẫn.
+                                    </p>
+                                    <div class="pro-deadline m-b-15">
+                                        <div class="sub-title">
+                                            Hạn chót:
+                                        </div>
+                                        <div class="text-muted">
+                                            10/09/2021
+                                        </div>
+                                    </div>
+                                    <div class="project-members m-b-15">
+                                        <div>Quản lý dự án :</div>
+                                        <ul class="team-members">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="/static/assets/img/profiles/avatar-16.jpg"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="project-members m-b-15">
+                                        <div>Đội xử lý :</div>
+                                        <ul class="team-members">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="/static/assets/img/profiles/avatar-02.jpg"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="/static/assets/img/profiles/avatar-09.jpg"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="/static/assets/img/profiles/avatar-10.jpg"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="/static/assets/img/profiles/avatar-05.jpg"></a>
+                                            </li>
+                                            <li class="dropdown avatar-dropdown">
+                                                <a href="#" class="all-users dropdown-toggle" data-toggle="dropdown" aria-expanded="false">+15</a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <div class="avatar-group">
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-02.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-09.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-10.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-05.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-11.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-12.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-13.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-01.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-16.jpg">
+                                                        </a>
+                                                    </div>
+                                                    <div class="avatar-pagination">
+                                                        <ul class="pagination">
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="#" aria-label="Previous">
+                                                                    <span aria-hidden="true">«</span>
+                                                                    <span class="sr-only">Trang trước</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="#" aria-label="Next">
+                                                                    <span aria-hidden="true">»</span>
+                                                                <span class="sr-only">Kế tiếp</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="m-b-5">Tiến độ <span class="text-success float-right">40%</span></p>
+                                    <div class="progress progress-xs mb-0">
+                                        <div class="progress-bar bg-success" role="progressbar" data-toggle="tooltip" title="40%" style="width: 40%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="dropdown profile-action">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_project"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                        </div>
+                                    </div>
+                                    <h4 class="project-title"><a href="project-view.html">Xây dựng bệnh viện</a></h4>
+                                    <small class="block text-ellipsis m-b-15">
+                                        <span class="text-xs">12</span> <span class="text-muted">đang xử lý, </span>
+                                        <span class="text-xs">4</span> <span class="text-muted">hoàn thành</span>
+                                    </small>
+                                    <p class="text-muted">Lực bán, vì thế chiếm áp đảo từ đầu phiên hôm nay (1/10), 
+                                        khiến VN-Index lùi về dưới tham chiếu sau ATO.
+                                    </p>
+                                    <div class="pro-deadline m-b-15">
+                                        <div class="sub-title">
+                                            Hạn chót:
+                                        </div>
+                                        <div class="text-muted">
+                                            12/12/2021
+                                        </div>
+                                    </div>
+                                    <div class="project-members m-b-15">
+                                        <div>Quản lý dự án :</div>
+                                        <ul class="team-members">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="/static/assets/img/profiles/avatar-16.jpg"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="project-members m-b-15">
+                                        <div>Đội xử lý :</div>
+                                        <ul class="team-members">
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="/static/assets/img/profiles/avatar-02.jpg"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="/static/assets/img/profiles/avatar-09.jpg"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="/static/assets/img/profiles/avatar-10.jpg"></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="/static/assets/img/profiles/avatar-05.jpg"></a>
+                                            </li>
+                                            <li class="dropdown avatar-dropdown">
+                                                <a href="#" class="all-users dropdown-toggle" data-toggle="dropdown" aria-expanded="false">+15</a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <div class="avatar-group">
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-02.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-09.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-10.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-05.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-11.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-12.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-13.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-01.jpg">
+                                                        </a>
+                                                        <a class="avatar avatar-xs" href="#">
+                                                            <img alt="" src="/static/assets/img/profiles/avatar-16.jpg">
+                                                        </a>
+                                                    </div>
+                                                    <div class="avatar-pagination">
+                                                        <ul class="pagination">
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="#" aria-label="Previous">
+                                                                    <span aria-hidden="true">«</span>
+                                                                    <span class="sr-only">Trang trước</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="#" aria-label="Next">
+                                                                    <span aria-hidden="true">»</span>
+                                                                <span class="sr-only">Kế tiếp</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="m-b-5">Tiến độ <span class="text-success float-right">40%</span></p>
+                                    <div class="progress progress-xs mb-0">
+                                        <div class="progress-bar bg-success" role="progressbar" data-toggle="tooltip" title="40%" style="width: 40%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Projects Tab -->
+                
+                <!-- Task Tab -->
+                <div id="tasks" class="tab-pane fade">
+                    <div class="project-task">
+                        <ul class="nav nav-tabs nav-tabs-top nav-justified mb-0">
+                            <li class="nav-item"><a class="nav-link active" href="#all_tasks" data-toggle="tab" aria-expanded="true">Tất cả nhiệm vụ</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#pending_tasks" data-toggle="tab" aria-expanded="false">Đang xử lý</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#completed_tasks" data-toggle="tab" aria-expanded="false">Đã hoàn thành</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="all_tasks">
+                                <div class="task-wrapper">
+                                    <div class="task-list-container">
+                                        <div class="task-list-body">
+                                            <ul id="task-list">
+                                                <li class="task">
+                                                    <div class="task-container">
+                                                        <span class="task-action-btn task-check">
+                                                            <span class="action-circle large complete-btn" title="Đã hoàn thành">
+                                                                <i class="material-icons">check</i>
+                                                            </span>
+                                                        </span>
+                                                        <span class="task-label" contenteditable="true">Đặt lịch hẹn với bệnh nhân</span>
+                                                        <span class="task-action-btn task-btn-right">
+                                                            <span class="action-circle large" title="Thêm">
+                                                                <i class="material-icons">check</i>
+                                                            </span>
+                                                            <span class="action-circle large delete-btn" title="Xóa">
+                                                                <i class="material-icons">delete</i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li class="task">
+                                                    <div class="task-container">
+                                                        <span class="task-action-btn task-check">
+                                                            <span class="action-circle large complete-btn" title="Đã hoàn thành">
+                                                                <i class="material-icons">check</i>
+                                                            </span>
+                                                        </span>
+                                                        <span class="task-label" contenteditable="true">Thanh toán tiền vật tư</span>
+                                                        <span class="task-action-btn task-btn-right">
+                                                            <span class="action-circle large" title="Thêm">
+                                                                <i class="material-icons">person_add</i>
+                                                            </span>
+                                                            <span class="action-circle large delete-btn" title="Xóa">
+                                                                <i class="material-icons">delete</i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li class="completed task">
+                                                    <div class="task-container">
+                                                        <span class="task-action-btn task-check">
+                                                            <span class="action-circle large complete-btn" title="Đã hoàn thành">
+                                                                <i class="material-icons">check</i>
+                                                            </span>
+                                                        </span>
+                                                        <span class="task-label">Phòng cháy chữa cháy</span>
+                                                        <span class="task-action-btn task-btn-right">
+                                                            <span class="action-circle large" title="Thêm">
+                                                                <i class="material-icons">person_add</i>
+                                                            </span>
+                                                            <span class="action-circle large delete-btn" title="Xóa">
+                                                                <i class="material-icons">delete</i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li class="task">
+                                                    <div class="task-container">
+                                                        <span class="task-action-btn task-check">
+                                                            <span class="action-circle large complete-btn" title="Đã hoàn thành">
+                                                                <i class="material-icons">check</i>
+                                                            </span>
+                                                        </span>
+                                                        <span class="task-label" contenteditable="true">Lắp camera</span>
+                                                        <span class="task-action-btn task-btn-right">
+                                                            <span class="action-circle large" title="Thêm">
+                                                                <i class="material-icons">person_add</i>
+                                                            </span>
+                                                            <span class="action-circle large delete-btn" title="Xóa">
+                                                                <i class="material-icons">delete</i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li class="task">
+                                                    <div class="task-container">
+                                                        <span class="task-action-btn task-check">
+                                                            <span class="action-circle large complete-btn" title="Đã hoàn thành">
+                                                                <i class="material-icons">check</i>
+                                                            </span>
+                                                        </span>
+                                                        <span class="task-label" contenteditable="true">Xây dựng đội ngũ CNTT</span>
+                                                        <span class="task-action-btn task-btn-right">
+                                                            <span class="action-circle large" title="Thêm">
+                                                                <i class="material-icons">person_add</i>
+                                                            </span>
+                                                            <span class="action-circle large delete-btn" title="Xóa">
+                                                                <i class="material-icons">delete</i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li class="task">
+                                                    <div class="task-container">
+                                                        <span class="task-action-btn task-check">
+                                                            <span class="action-circle large complete-btn" title="Đã hoàn thành">
+                                                                <i class="material-icons">check</i>
+                                                            </span>
+                                                        </span>
+                                                        <span class="task-label" contenteditable="true">Giảm chi phí</span>
+                                                        <span class="task-action-btn task-btn-right">
+                                                            <span class="action-circle large" title="Thêm">
+                                                                <i class="material-icons">person_add</i>
+                                                            </span>
+                                                            <span class="action-circle large delete-btn" title="Xóa">
+                                                                <i class="material-icons">delete</i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="task-list-footer">
+                                            <div class="new-task-wrapper">
+                                                <textarea  id="new-task" placeholder="Thêm nhiệm vụ. . ."></textarea>
+                                                <span class="error-message hidden">Bạn cần nhập nhiệm vụ trước</span>
+                                                <span class="add-new-task-btn btn" id="add-task">Thêm</span>
+                                                <span class="btn" id="close-task-panel">Đóng</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="pending_tasks"></div>
+                            <div class="tab-pane" id="completed_tasks"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Task Tab -->
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

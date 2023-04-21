@@ -1,0 +1,395 @@
+{% extends "layouts/base_khung_ajax.html" %}
+{% load static %}
+
+{% block content %}
+
+<body>
+<!----------=style Ofdấu dòng--->
+<style>
+    tr{cursor: pointer; transition: all .001s ease-in-out}
+    .selected{background-color: rgb(255, 255, 128); font-weight: bold; font-size: 13x; color: red;}
+</style>
+<!------------------------Biểu đồ ---------------------------------------------------------------------------------------------------------------->
+
+<!-----------------------Biểu đồ kết thúc--------------------------------------------------------------------------------------------------------->
+<!--.....................Tiêu đề............................................................................................................-->
+ <div class="page-header mt-80">
+        <div class="row align-items-center">
+            <div class="col">
+
+                <button type="button" class="btn btn-lg btn-primary" disabled>BƯỚC 3:</button>
+                <button type="button" class="btn btn-info btn-lg" >TỰ ĐÁNH GIÁ KPI :</button>
+
+
+                <ul class="breadcrumb">
+                    <!-- link bang dieu khiển -->
+                    <li class="breadcrumb-item"><a href="{% url 'kpi_list' %}">Danh mục KPI</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'Khungkpi_View' %}">Thiết lập Khung KPI/BSC </a></li>
+					<li class="breadcrumb-item"><a href="{% url 'danhgia_kpi_view_nv' %}">Tự Đánh giá KPI</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'danhgia_kpi_view' %}">Quản lý Đánh giá KPI</a></li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="{% url 'add_khung_kpi' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thiết lập Khung KPI</a>
+                <div class="view-icons">
+                    <a href="{% url 'Khung_kpi_list_2' %}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="{% url 'Khung_kpi_list' %}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!----------Kết thúc  --->
+
+<!--.....................Lọc dữ liệu............................................................................................................-->
+    <form method='POST' action=''>{% csrf_token %}
+         <div class="container text-center">
+            <div class="row align-items-center">
+
+                  <div class="col-md-3">
+                       <input type="text" class="form-control" placeholder="Đợt đánh giá năng lực ex: 11-2022" id={{form.Landanhgia_KPI}}
+                   </div>
+                  <div class="col-md-3">
+                      <select class="form-control" placeholder="Chức danh xây thiết lập Khung năng lực" {{form.Nhanvien_dg_KPI}} </select>
+                  </div>
+                  <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="{{form.Xuất_Word}}"<label class="form-check-label">TB Kết quả ĐGNL</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id={{form.Xuất_Excel}} <label class="form-check-label">Xuất Excel</label>
+                  </div>
+
+                  <div class="col-6 col-md-3">
+                      <input class="btn btn-warning btn-block badge-pill" style="" type="submit" value='TÌM, LỌC' >
+                </div>
+
+            </div>
+         </div>
+    </form>
+<!-------------------------Kết thúc lọc dữ liệu-------------------------------------------------------------------------------------------------->
+</div>
+
+<div class="page-header">
+
+<div class="container">
+    <div class="row form-group" style="margin-top:30px;">
+        <div class="col-lg-2">
+            <button class="btn btn-block btn-success" id="insert_btn" data-toggle="modal" data-target="#insert_data">THÊM</button>
+        </div>
+        <div class="col order-last">
+            <button class="btn btn-block btn-info" id="update_btn">SỬA</button>
+            <button class="btn btn-block btn-success" id="save_all_btn" style="display:none;margin-top:0px">LƯU</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+              <div class="alert alert-success" id="upt_success" style="display:none">
+              </div>
+               <div class="alert alert-danger" id="upt_error" style="display:none">
+              </div>
+        </div>
+    </div>
+ </div>
+<!-- /Page Content -->
+
+<div class="row ">
+        <div class="col-md-11">
+           <div class="table-responsive-sm">
+               {% if students %}
+
+                 <table id="table" class="table table-striped custom-table datatable" height= "60 px">
+                    <thead>
+                    <tr class="table-success">
+                         <th scope="col" style="width: 5%">id</th>
+                         <th scope="col" style="width: 45%">Tên KPI</th>
+                         <th scope="col" style="width: 15%">Mức thành thạo yêu cầu  </th>
+                         <th scope="col" style="width: 15%">Tự Đgiá </th>
+                         <th scope="col" style="width: 10%">Điểm tự Đ.giá </th>
+                         <th class="text-right no-sort" style="width: 10%">Tùy chỉnh</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.id }}</td>
+                        <td class="table-avatar">
+                                <a href="">
+                               {{student.Ten_kpi|truncatewords:12}} <br>
+                               <small>{{student.Ten_kpi|truncatewords:25}}</small></a>
+
+
+                        </td>
+                        <td >{{ student.Ten_kpi.chi_tieu }}</td>
+
+                        <td class="editable" data-type="tu_danhgia_dapung">{{ student.tu_danhgia_dapung }}</td>
+
+                        <td >{{ student.get_Diem_tu_danhgia }}</td>
+
+
+                        <td class="td-block"><button class="btn-block btn-delete btn-info"  style="font-size:16px;color:yellow">Xóa</button></td>
+                    </tr>
+
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                               <tr class="table-warning" >
+                                   <td colspan="1" ></td>
+                                   <td class="text-left" >Tổng mức quan trọng : {{total_mucqt}}
+                                   ; Điểm chuẩn:{{total_diemchuan}}(Mức quan trọng x mức T.thạo chuẩn);
+                                   </td>
+                                   <td class="text-left" >{{total_ql}}</td>
+                                   <td class="text-left" >{{total_tu_dg}}</td>
+                                   <td colspan="text-left">{{total_diem_tudanhgia}}</td>
+                                   <td class="text-left" >Kết quả {{ketqua_nangluc}}</td>
+                                </tr>
+                      </tfoot>
+                </table>
+               {% else %}
+                  <h4 class="text-center alert alert-warning">Chưa có dữ liệu </h4>
+               {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+<!-- Modal -->
+<div id="insert_data" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Thêm dữ liệu</h4>
+           <button type="button" class="close" data-dismiss="modal">&times; </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+              <label>Tên năng lực : </label>
+              <input type="text" name="Ten_kpi" id="ins_Ten_kpi" class="form-control" placeholder="Ten_kpi">
+          </div>
+          <div class="form-group">
+              <label>QUẢN LÝ ĐÁNH GIÁ NĂNG LỰC: </label>
+              <input type="text" name="Quanly_danhgia" id="ins_Quanly_danhgia" class="form-control" placeholder="Quanly_danhgia">
+          </div>
+
+           <div class="form-group">
+                  <label>TỰ ĐÁNH GIÁ : </label>
+              <select name="tu_danhgia_dapung" class="form-control" id="ins_tu_danhgia_dapung">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+              </select>
+          </div>
+          <div class="form-group">
+             <div class="col-lg-4">
+                <input type="button" name="submit" class="btn btn-block btn-info btn-insert-data" value="THÊM DỮ LIỆU">
+            </div>
+         </div>
+          <div class="form-group">
+              <div class="alert alert-success" id="ins_success" style="display:none">
+              </div>
+               <div class="alert alert-danger" id="ins_error" style="display:none">
+              </div>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+//https://www.youtube.com/watch?v=nEAi0Z9MnDg&t=812s tínhtoán dòng
+            function selectedRow(){
+                var index,
+                    table = document.getElementById("table");
+                for(var i = 1; i < table.rows.length; i++)
+                {
+                    table.rows[i].onclick = function()
+                    {
+                         // remove the background from the previous selected row
+                        if(typeof index !== "undefined"){
+                           table.rows[index].classList.toggle("selected");
+                        }
+                        console.log(typeof index);
+                        // get the selected row index
+                        index = this.rowIndex;
+                        // add class selected to the row
+                        this.classList.toggle("selected");
+                        console.log(typeof index);
+                     };
+                }
+
+            }
+            selectedRow();
+            // Kết thucx1
+</script>
+<script>
+    $(".btn-insert-data").click(function(){
+        var Ten_kpi=$("#ins_Ten_kpi").val();
+        var Quanly_danhgia=$("#ins_Quanly_danhgia").val();
+        var tu_danhgia_dapung=$("#ins_tu_danhgia_dapung").val();
+        if(Ten_kpi==""){
+            $("#ins_error").text("Nhập tên")
+            $("#ins_error").show()
+            return;
+        }
+        else if(Quanly_danhgia==""){
+            $("#ins_error").text("Please Enter Ten_kpi")
+            $("#ins_error").show()
+            return;
+        }
+        else{
+                $(".btn-insert-data").attr("disabled","disabled");
+                $(".btn-insert-data").text("Inserting... Please Wait..");
+            $.ajax({
+                url:'{% url 'Insert_kpi_nv' %}',
+                type:'POST',
+                data:{Ten_kpi:Ten_kpi,Quanly_danhgia:Quanly_danhgia,tu_danhgia_dapung:tu_danhgia_dapung}
+            })
+            .done(function(response){
+                if(response['error']==false){
+                    $("#ins_error").hide();
+                    $("#ins_success").text(response['errorMessage']);
+                    $("#ins_success").show();
+                    var html_data="<tr><td>"+response['id']+"</td><td class='editable' data-type='Ten_kpi'>"+Ten_kpi+"</td><td class='editable' data-type='Quanly_danhgia'>"+Quanly_danhgia+"</td><td class='editable' data-type='tu_danhgia_dapung'>"+tu_danhgia_dapung+"</td><td>"+response['Diem_congviec']+"</td><td class='btn-td-block'><button class='btn btn-block btn-delete btn-info'>DELETE</button></td></tr>";
+                    $(".table tbody").append(html_data);
+                }
+                else{
+                    $("#ins_success").hide();
+                    $("#ins_error").text(response['errorMessage']);
+                    $("#ins_error").show();
+                }
+            })
+            .fail(function(){
+                 $("#ins_success").hide();
+                 $("#ins_error").text("Something Went Wrong!");
+                 $("#ins_error").show();
+            })
+            .always(function(){
+                $(".btn-insert-data").removeAttr("disabled");
+                $(".btn-insert-data").text("INSERT STUDENT");
+            })
+        }
+    })
+    $("#update_btn").click(function(){
+            $("#update_btn").hide();
+            $("#save_all_btn").show();
+
+       $(".editable").each(function(){
+           var value=$(this).text();
+           var types=$(this).data('type');
+
+           if(types!='Ten_kpi'){
+                var html_data="<input type='text' name='"+types+"'  class='form-control input_"+types+" input_data' value='"+value+"'>";
+                $(this).html(html_data);
+           }
+         else{
+                var html_data="<select name='"+types+"'  class='form-control input_"+types+" input_data'>";
+                if(value=="3"){
+                    html_data+="<option selected>3</option><option>1</option><option>3</option><option>4</option><option>5</option>";
+                }
+                else{
+                    html_data+="<option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></option><option>5</option><option selected>3</option>";
+                }
+                html_data+="</select>";
+                $(this).html(html_data);
+           }
+        });
+    });
+
+    $("#save_all_btn").click(function(){
+        $("#save_all_btn").attr("disabled","disabled");
+        $("#save_all_btn").text("Saving Data....");
+
+        var json_data=[];
+        $(".input_data").each(function(){
+                var value=$(this).val();
+                var parent_html=$(this).parent();
+                parent_html.html(value);
+                $(this).remove();
+         });
+        $("tbody tr").each(function(){
+             var id=$(this).children().eq(0).text()
+             var Ten_kpi=$(this).children().eq(1).text()
+             var Quanly_danhgia=$(this).children().eq(2).text()
+             var tu_danhgia_dapung=$(this).children().eq(3).text()
+
+             var single_data={"id":id,"Ten_kpi":Ten_kpi, "Quanly_danhgia":Quanly_danhgia,"tu_danhgia_dapung":tu_danhgia_dapung};
+             json_data.push(single_data);
+        });
+
+        var string_data=JSON.stringify(json_data)
+        $.ajax({
+                url:'{% url 'update_kpi_nhanvien' %}',
+                type:'POST',
+                data:{data:string_data}
+            })
+            .done(function(response){
+                if(response['error']==false){
+                    $("#upt_error").hide();
+                    $("#upt_success").text(response['errorMessage']);
+                    $("#upt_success").show();
+
+                }
+                else{
+                    $("#upt_success").hide();
+                    $("#upt_error").text(response['errorMessage']);
+                    $("#upt_error").show();
+                }
+            })
+            .fail(function(){
+                 $("#upt_success").hide();
+                 $("#upt_error").text("Something Went Wrong!");
+                 $("#upt_error").show();
+            })
+            .always(function(){
+                 $("#save_all_btn").removeAttr("disabled");
+                 $("#save_all_btn").text("LƯU LẠI");
+                 $("#update_btn").show();
+                 $("#save_all_btn").hide();
+            })
+
+    });
+
+    $(document).on("click",".btn-delete",function(){
+            var this_html=$(this);
+            this_html.attr("disabled","disabled");
+            this_html.text("DELETING....");
+            var id=this_html.parent().parent().children().first().text();
+            //console.log(id);
+            $.ajax({
+                url:'{% url 'delete_kpi_nhanvien' %}',
+                type:'POST',
+                data:{id:id}
+            })
+            .done(function(response){
+                if(response['error']==false){
+                    this_html.parent().parent().remove();
+                    $("#upt_error").hide();
+                    $("#upt_success").text(response['errorMessage']);
+                    $("#upt_success").show();
+
+                }
+                else{
+                    $("#upt_success").hide();
+                    $("#upt_error").text(response['errorMessage']);
+                    $("#upt_error").show();
+                }
+            })
+            .fail(function(){
+                 $("#upt_success").hide();
+                 $("#upt_error").text("Something Went Wrong!");
+                 $("#upt_error").show();
+            });
+    });
+</script>
+</body>
+</html>
+
+{% endblock content %}

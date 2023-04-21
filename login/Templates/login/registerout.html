@@ -1,0 +1,31 @@
+{% extends 'courses/base_1.html' %}
+{% block title %} Thoát chương trình {% endblock %}
+{% load static %}
+{% block content %}
+
+
+    <body class="account-page">
+		<!-- Main Wrapper -->
+        <div class="main-wrapper">
+			<div class="account-content">
+				<!-- <a href="job-list.html" class="btn btn-primary apply-btn">Apply Job</a> -->
+				<div class="container">
+					<!-- Account Logo -->
+					<div class="account-logo">
+						<a href="index.html"><img src="/static/assets/img/logo.png" alt="Vicem 1"></a>
+					</div>
+					<!-- /Account Logo -->
+					<div class="account-box">
+						<div class="account-wrapper">
+							<h2 class="account-title text-danger">BẠN ĐÃ HOÀN THÀNH ĐĂNG KÝ </h2>
+
+							<p class="account-subtitle">Cảm ơn bạn đến với hệ thống</p>
+							<h8 class="account-title"><p><a href="{% url 'login:loginUser' %}">Đăng nhập </a></p></h8>
+
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+	</body>
+{% endblock %}

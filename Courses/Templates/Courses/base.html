@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Nhân sự --------------{% endblock %} </title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link href="{% static 'nhansu/css/stylesheet.css' %}" rel="stylesheet">
+<!---Cài đặt hiển thi table https://www.youtube.com/watch?v=yGBk9Nalyq8 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"/>
+<!---Kết  thúc Cài đặt hiển thi table -->
+
+<!---Cài đặt hiển thi table https://www.youtube.com/watch?v=yGBk9Nalyq8 -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+	<!-- styles -->
+	<style>
+		.btn-space {
+			margin-right: 15px;
+		}
+		 nav {
+		    margin-bottom: 25px;
+		 }
+
+	</style>
+
+</head>
+<body>
+<div>
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">VICEM HÀ TIÊN 1</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-home"></i>
+                  Chiến lược
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Nhiệm vụ</a>
+                     <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Tầm nhìn</a>
+                     <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Bản đồ chiến lược</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>
+                  Nhân sự
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">Lý lịch</a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Quan hệ gia đình</a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Đào tạo</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-line-chart"></i>
+                  KPI
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">Hệ thống chức danh</a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">HT Mô tả công việc</a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">HT KPI cá nhân</a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">HT KPI Đơn vị</a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Giao KPI</a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Đánh giá KPI</a>
+
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users"></i>
+                  Hợp Đồng Lao Động
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">No name</a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">No Name</a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">No name</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users"></i>
+                  Lương
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">No Name</a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">No Name</a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">No Name</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-edit"></i>
+                  Đào tạo
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">No Name</a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">No Name</a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">No Name</a>
+                </div>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Nhập từ tìm kiếm" aria-label="Search">
+              <button class="btn btn-outline-success btn-space my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <form class="form-inline btn-space my-4 my-lg-0">
+
+                  <a href="{% url 'account_logout' %}"><button class="btn btn-success my-2 my-sm-0 " type="submit">Thoát
+           <!---  <a href="{% url 'account_logout' %} %}"><button class="btn btn-success my-2 my-sm-0 " type="submit">Thoát Hệ thống</button></a>   -->
+            </form>
+          </div>    </nav>
+    <div class="section">
+
+    </div>
+</div>
+
+
+
+
+
+
+<!--
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary"
+<div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+	<a class="navbar-brand" href="#">VICEM HÀ TIÊN 1</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	<div class="menu">
+	<ul>
+		<li class="active"><a href="#"><i class="fa fa-home"></i>Chiến lược</a>
+			<div class="sub-menu-1">
+				<ul>
+					<li><a href="#">Missions1</a></li>
+					<li><a href="#">Visions</a></li>
+					<li><a href="#">Bản đồ chiến lược</a></li>
+				</ul>
+			</div>
+		</li>
+		<li><a href="#"><i class="fa fa-user"></i>NHÂN SỰ</a>
+			<div class="sub-menu-1">
+				<ul>
+					<li><a href="#">Lý lịch</a></li>
+					<li><a href="#">Q.hệ gia đình</a></li>
+					<li><a href="#">Đào tạo</a></li>
+				</ul>
+			</div>
+	</li>
+	<li><a href="#"><i class="fa fa-clone"></i>KPI</a>
+	<div class="sub-menu-1">
+		<ul>
+			<li><a href="#">Web Desgning</a></li>
+			<li class="hover-me"><a href="#">BSC/KPI</a><i class="fa fa-angle-right"></i>
+				<div class="sub-menu-2">
+					<ul>
+						<li><a href="http://localhost:8000/admin/enroll/ten_cv/">Hệ thống chức danh</a></li>
+						<li><a href="http://127.0.0.1:8000/admin/mota_cv/ten_cv_mt/add/">HT Mô tả công việc</a></li>
+						<li><a href="http://127.0.0.1:8000/kpi">HT KPI cá nhân</a></li>
+						<li><a href="http://127.0.0.1:8000/kpidv">HT KPI Đơn vị</a></li>
+						<li><a href=""></a> Giao KPI</li>
+						<li><a href=""></a> Đánh giá KPI</li>
+					</ul>
+				</div>
+			</li>
+			<li class="hover-me"><a href="#">Mobile App</a><i class="fa fa-angle-right"></i>
+				<div class="sub-menu-2">
+					<ul>
+						<li><a href="#">Adoid</a></li>
+						<li><a href="#">iOs App</a></li>
+						<li><a href="#">Ionic App</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
+	</li>
+
+	<li><a href="#"><i class="fa fa-users"></i>HĐLĐ</a></li>
+	<li><a href="#"><i class="fa fa-users"></i>LƯƠNG</a></li>
+	<li><a href="#"><i class="fa fa-edit"></i>ĐÀO TẠO</a></li>
+	<li><a href="#"><i class="fa fa-angellist"></i>DANH MỤC</a>
+			<div class="sub-menu-1">
+			<ul>
+				<li class="hover-me"><a href="#">Lý lịch</a><i class="fa fa-angle-right"></i>
+					<div class="sub-menu-2">
+						<ul>
+							<li><a href="#">Th.phần gia đình</a></li>
+							<li><a href="#">Dân tộc</a></li>
+							<li><a href="#">Tôn giáo </a></li>
+							<li><a href="#">Mã tỉnh </a></li>
+							<li><a href="http://127.0.0.1:8000/admin/nhansu/quocgia/">Quốc gia </a></li>
+						</ul>
+					</div>
+				</li>
+
+				<li class="hover-me"><a href="#">Đơn vị</a><i class="fa fa-angle-right"></i>
+					<div class="sub-menu-2">
+						<ul>
+							<li><a href="http://127.0.0.1:8000/admin/nhansu/don_vi/">Nhà máy/TN/XN </a></li>
+							<li><a href="http://127.0.0.1:8000/admin/nhansu/bo_phan/">Phòng/TT/Xưởng</a></li>
+							<li><a href="http://127.0.0.1:8000/admin/nhansu/to_nhom/">Tổ, Đội </a></li>
+							<li><a href="http://127.0.0.1:8000/admin/enroll/ten_cv/">HT chức danh </a></li>
+							<li><a href="http://127.0.0.1:8000/admin/laodong/n_vien/">Nhân viên </a></li>
+						</ul>
+					</div>
+
+				</li>
+
+				<li class="hover-me"><a href="#">Trình độ</a><i class="fa fa-angle-right"></i>
+					<div class="sub-menu-2">
+						<ul>
+							<li><a href="http://127.0.0.1:8000/admin/nhansu/trinhdovh/">Trình độ văn hóa</a></li>
+							<li><a href="http://127.0.0.1:8000/admin/nhansu/trinhdo/">Chuyên môn NP</a></li>
+							<li><a href="#">Ngoại ngữ</a></li>
+							<li><a href="#">Tin học</a></li>
+							<li><a href="#">Lý luận Ch.trị</a></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</li>
+	<li><a href="#"><i class="fa fa-phone"></i>Contact</a></li>
+	</ul>
+	</div>
+</body>
+</html>
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Seach</button>
+        </form>
+       Thêm mục Đăng nhập
+        <ul class="navbar-nav ml-1">
+            <li class="nav-item ">
+                <a class="nav-link" href="/">LOGIN</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</nav>
+Example split danger button -->
+{% block content %} {% endblock %}
+</body>
+<footer>
+<div class="jumbotron text-center" style="margin-bottom:1">
+  <p>Footer</p>
+</div>
+</footer>
+</html>

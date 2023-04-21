@@ -1,0 +1,24 @@
+{% extends 'courses/base.html' %}
+{% block title %} Thêm Tổ{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-8 offset-2 ">
+        <div class="container">
+            <div class="card mt-1 mr-0 ml-0">
+                <div class="card-body">
+
+                    <h4 class="alert alert-info"> Thêm Tổ_nhóm</h4>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <input type="submit" class="btn btn-success" value="Thêm tổ">
+                        <a href="{% url 'list_to' %}" class="btn btn-info"> Back to Home </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

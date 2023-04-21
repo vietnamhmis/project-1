@@ -1,0 +1,141 @@
+{% extends "layouts/base_no.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+    <style>
+
+    h2 {
+      color: blue;
+      font: Arial Narrow
+      text-align:;
+    }
+    h3 {
+      color: red;
+      font: Arial Narrow
+      text-align:;
+    }
+
+    </style>
+<div class="content container-fluid" xmlns="http://www.w3.org/1999/html">
+
+
+
+<!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h2 class=""> IN TẤT CẢ KHUNG NĂNG LỰC</h2>
+                 <h3 class=""> Chọn hộp thoại Xuất và Xuất file </h3> <br> <br>
+                <ul class="breadcrumb">
+                    <!-- link bang dieu khiển -->
+                    <li class="breadcrumb-item"><a href="{% url 'list_nangluc' %}">Danh mục năng lực</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'danhgianangluc_view' %}">Đánh giá năng lực</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'kequa_nangluc_list' %}">Kết quả Đánh giá </a></li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="{% url 'add_khung_nangluc' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thiết lập Khung Năng lực</a>
+                <div class="view-icons">
+                    <a href="{% url 'Khung_nangluc_list' %}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="{% url 'Congviec_nangluc_list_2' %}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+
+    <!-- Search Filter----------------------------- -->
+    <form method='POST' action=''>{% csrf_token %}
+        <div class="row">
+           <div class="col-6 col-md-3"><input type="text" class="form-control" placeholder="Đợt đánh giá năng lực ex: 11-2022" id={{form.name}} </div>
+          <div class="col-6 col-md-3"><select class="form-control" placeholder="Chức danh xây thiết lập Khung năng lực" {{form.chucdanh_CV}} </select> </div>
+          <div class="col-6 col-md-3"><input class="form-check-input" type="checkbox" id={{form.Xuất_Excel}} <label class="form-check-label">Xuất Excel</label></div>
+          <div class="col-6 col-md-2">  <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Xuất file' >
+
+               <!----------
+          <div class="col-6 col-md-2">
+                <a class="btn btn-warning float-right" href="{% url 'Khung_nangluc_intatca' %}">Xuất Excel tất cả</a>
+            </div>
+
+  ----- #--------------------------------->
+
+        </div>
+    </form>
+    <!-- /Search Filter ---------------------------------------------
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive-sm">
+                {% if queryset %}
+                <table class="table table-striped custom-table datatable">
+                    <thead>
+                        <tr class="table-success">
+                            <th scope="col" style="width: 5%">id</th>
+                            <th scope="col" style="width: 15%">Chức danh</th>
+                            <th scope="col">Tên năng lực</th>
+                            <th scope="col">M.Quan trọng </th>
+                            <th scope="col">M thành thạo </th>
+                            <th scope="col">Điểm </th>
+                            <th class="text-right no-sort" style="width: 10%">Tùy chỉnh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sto in queryset %}
+                        <tr>
+                             <td>
+                                <a href="{% url 'update_dinhgia7' sto.id %}"> {{forloop.counter}} <a/>
+                             </td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="{% url 'view_motacv_chitiet7' sto.chucdanh_CV.id %}"> {{sto.chucdanh_CV|truncatewords:10}}<span>{{sto.chucdanh_CV.bo_phan}}, </span></a>
+                                      <a class="dropdown-item" href=""><i class="fa fa-file-word-o m-r-5"></i> </a>
+                                </h2>
+                            </td>
+
+                           <td>
+                                <h2 class="table-avatar">
+                                    <a href="{% url 'nangluc_chitiet' sto.nangluc_cv_id %}">{{sto.nangluc_cv|truncatewords:8}}<span></span></a>
+                                </h2>
+                            </td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.Muc_quantrong_nluc}}<span></span></a>
+                                </h2>
+                            </td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="">{{sto.Muc_thanhthao_nluc}}<span></span></a>
+                                </h2>
+                            </td>
+                            <td>{{sto.Diem_tieuchuan}}</td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="{% url 'update_dinhgia7' sto.id %}"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="{% url 'del_dinhgia' sto.id %}"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+                {% endif %}
+            </div>
+        </div>
+        -------->
+    </div><!-- /rows------->
+
+</div>
+<!-- /Page Content -->
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

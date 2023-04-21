@@ -1,0 +1,188 @@
+{% extends "layouts/base_no.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+<div class="content container-fluid" xmlns="http://www.w3.org/1999/html">
+
+
+<!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h2 class="btn btn-danger btn-lg"> ĐÁNH GIÁ NĂNG LỰC NHÂN VIÊN:</h2>
+                <ul class="breadcrumb">
+                    <!-- link bang dieu khiển -->
+                    <li class="breadcrumb-item"><a href="{% url 'list_nangluc' %}">Danh mục năng lực</a></li>
+
+					<li class="breadcrumb-item"><a href="{% url 'danhgia_nangluc_list2' %}">Đánh giá năng lực</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'kequa_nangluc_list' %}">Kết quả Đánh giá </a></li>
+
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="{% url 'add_danhgia_nangluc' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thêm đợt đánh giá Năng lực</a>
+                 <div class="view-icons">
+                    <a href="{% url 'Danhgia_nangluc_list2' %}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="{% url 'Danhgia_nangluc_list' %}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+
+    <!-- Search Filter----------------------------- -->
+    <form method='POST' action=''>{% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <input class="form-control" placeholder="Tên chức danh" {{form.Ten_Nhom_CV}} </input>
+            </div>
+              <!--
+              <div class="form-group col-md-3">
+                <select class="form-control" placeholder="Đơn vị" {{form.don_vi}} </select>
+            </div>
+
+            <div class="form-group col-md-3">
+                <select class="form-control" placeholder="Thuộc Bộ phận" {{form.bo_phan}} </select>
+            </div>   --->
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="{{form.Xuất_Excel}}" <label class="form-check-label">
+
+                Xuất Excel
+                </label>
+            </div>
+            <div class="col-md-2 text-right">
+                <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Tìm kiếm' />
+            </div>
+        </div>
+    </form>
+    <!-- /Search Filter ------------------------------------------------------>
+Tổng điểm: {{get_tongdiemchuan3}}
+
+    <div class="row">
+        <div class="col-md-12">
+            Tổng điểm: {{Diem_kq}}
+            <div class="table-responsive-sm">
+                <div class="table-responsive-sm">
+                    {% if danhgia_nangluc_list2 %}
+                    <table class="table table-striped custom-table datatable">
+                        <thead>
+                            <tr class="table-success">
+                                <th scope="col" style="width: 5%">id</th>
+                                <th scope="col" style="width: 45%">Tên năng lực</th>
+                                <th scope="col" style="width: 10%">Tự Đgiá </th>
+                                <th scope="col" style="width: 10%"> QL đánh giá </th>
+                                <th scope="col" style="width: 10%">Kết quả Đ.Giá </th>
+                                 <th scope="col" style="width: 10%">Điểm đạt </th>
+
+                                <th class="text-right no-sort" style="width: 10%">Tùy chỉnh</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for sto in danhgia_nangluc_list2 %}
+                            <tr>
+                                 <td>
+                                    <a href=""> {{forloop.counter}} <a/>
+                                 </td>
+                               <td>
+
+                                        <a href="{% url 'nangluc_chitiet' sto.TenNangluc_congviec.nangluc_cv_id %}">{{sto.TenNangluc_congviec}}<span></span></a>
+                                    </h2>
+                                </td>
+                                <td>
+                                    <h2 class="table-avatar">
+                                        <a href="">{{sto.tu_danhgia_dapung}}<span></span></a>
+                                    </h2>
+                                </td>
+                                <td>
+                                    <h2 class="table-avatar">
+                                        <a href="">{{sto.Quanly_danhgia}}<span></span></a>
+                                    </h2>
+                                </td>
+                                <td>
+                                    <h2 class="table-avatar">
+                                        <a href="">{{sto.Ketqua_danhgia}}<span></span></a>
+                                    </h2>
+                                </td>
+
+                                <td>
+                                    <h2 class="table-avatar">
+                                        <a href="">{{sto.get_diem_Kha_nang_dapung}}<span></span></a>
+                                    </h2>
+                                </td>
+
+                                <td class="text-right">
+                                   <a href="{% url '{% url 'Danhgia_nangluc_up' sto.id %} %}" class="btn btn-info"><i class="fa fa-pencil" style="font-size:12px;color:yellow"></i> Sửa </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <h4 class="text-center alert alert-warning">No record </h4>
+                    {% endif %}
+                </div>
+            </div>
+        </div> <!-- /md-12-------->
+
+
+
+    <div class="row"
+    <div class="col-md-12">
+    <div class="col-md-12">
+       <canvas id="myChart1" width="400" height="600"></canvas>
+        <script>
+                    var ctx = document.getElementById('myChart1').getContext('2d');
+                    var myChart1 = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                  labels: [{% for product in danhgia_nangluc_list2 %}  '{{ product.TenNangluc_congviec }}',  {% endfor %}],
+                            datasets: [{
+                        label: 'Quan trọng',
+                        data: [{% for product in danhgia_nangluc_list2 %}  '{{ product.TenNangluc_congviec.Muc_thanhthao_nluc }}',  {% endfor %}],
+
+                        fill: true,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        pointBackgroundColor: 'rgb(255, 99, 132)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(255, 99, 132)'
+                      }, {
+                        label: 'Tự đánh giá',
+                        data: [{% for product in danhgia_nangluc_list2 %}  '{{ product.tu_danhgia_dapung }}',  {% endfor %}],
+                        fill: true,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgb(54, 162, 235)',
+                        pointBackgroundColor: 'rgb(54, 162, 235)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(54, 162, 235)'
+                      }]
+
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+        </script>
+
+       </div>
+    </div>
+    </div>
+
+</div>
+
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

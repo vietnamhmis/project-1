@@ -1,0 +1,138 @@
+{% extends "layouts/base.html" %}
+{% block title %} Hồ sơ nhân viên {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load widget_tweaks %}
+
+<div class="row">
+
+        <div class="container">
+
+                <div class="card-body">
+                    <!--  <form action="" method="POST" enctype="multipart/form-data"> -->
+                    <form method="POST" enctype="multipart/form-data" id="Person__Form" load_diaphuong="{% url 'load_diaphuong' %}" novalidate>
+                        {% csrf_token %}
+
+                        <div class="card">
+                            <h4 class="alert alert-info"> Cập nhật thông tin Cá nhân</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Ngày sinh</label>
+                                        <div class="text">
+                                            <input class="form-control datetimepicker" type="text" id={{fmnv.ngay_sinh}} </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Nơi sinh: </label>
+                                            <select class="select form-control">
+                                                <option id={{fmnv.ma_tinh_noi_sinh}} </div>
+                                        </div> <br>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Số CCCD/CMND: </label>
+                                                <div class="text">
+                                                    <input class="form-control" type="text" id={{fmnv.so_CCCD}} </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Ngày cấp</label>
+                                                    <div class="text">
+                                                        <input class="form-control datetimepicker" type="text" id={{fmnv.ngay_cap_CCCD}} </div>
+                                                    </div>
+                                                </div> <br>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Quốc tịch:</label>
+                                                        <select class="select form-control">
+                                                            <option id={{fmnv.quoctich}} </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Tôn giáo:</label>
+                                                            <select class="select form-control">
+                                                                <option id={{fmnv.ton_giao}} </div>
+                                                        </div> <br>
+
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Dân tộc:</label>
+                                                                <select class="select form-control">
+                                                                    <option id={{fmnv.dan_toc}} </div>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>Tình trạng hôn nhân</label>
+                                                                    <select class="select form-control">
+                                                                        <option id={{fmnv.thanhphan_gd}} </div>
+                                                                </div> <br> <br>
+
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Tình trạng hôn nhân</label>
+                                                                        <select class="select form-control">
+                                                                            <option id={{fmnv.Tinhtrang_gd}} </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>Nguyên quán</label>
+                                                                            <select class="select form-control">
+                                                                                <option id={{fmnv.Nguyen_quan}} </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <input type="submit" class="btn btn-success" value="Cập nhật">
+                                                        <a href="{% url 'employees' %}" class="btn btn-info"> Trở về </a>
+                    </form>
+                </div>
+
+    </div>
+</div>
+
+{% endblock content %}
+{% block javascripts %}
+
+<script>
+    $("#id_ma_tinh_thuong_tru").change(function() {
+        var url = $("#Person__Form").attr("load_diaphuong");
+        var don_viId = $(this).val();
+        $.ajax({
+            url: url,
+            data: {
+                'ma_tinh_thuong_tru': ma_tinh_thuong_truId
+            },
+            success: function(data) {
+                $("#id_qh_thuong_tru").html(data);
+            }
+        });
+    });
+
+    $("#id_qh_thuong_tru").change(function() {
+        var url = $("#Person__Form").attr("load_diaphuong");
+        var bo_phanId = $(this).val();
+        $.ajax({
+            url: url,
+            data: {
+                'qh_thuong_tru': qh_thuong_truId
+            },
+            success: function(data) {
+                $("#id_px_thuong_tru").html(data);
+            }
+        });
+    });
+</script>
+{% endblock javascripts %}

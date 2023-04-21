@@ -1,0 +1,276 @@
+{% extends "layouts/base_no.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+<div class="content container-fluid">
+    <!-- Page Header -->
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+
+                <div class="container mt-2">
+                    <!-- link bang dieu khiển -->
+
+                    <button type="button" class="btn btn-danger btn-sm"><a href="{% url 'chamcong_thang' %}">CHẤM CÔNG </a></button>
+                    <button type="button" class="btn btn-success btn-sm"><a href="{% url 'luongthang_tamung' %}">TẠM ỨNG LƯƠNG THÁNG </a></button>
+                    <button type="button" class="btn btn-warning btn-sm"><a href="{% url 'luongthang_list' %}">BẢNG LƯƠNG THÁNG</a></button>
+                 </div> <br><br><br><br>
+                  <h2 class="page-title" style="color:blue" align="center" ><b>BẢNG LƯƠNG BHXH</b></h2>
+
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="{% url 'add_bangluong' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thiết lập Bảng lương</a>
+                <div class="view-icons">
+                    <a href="{% url 'bangluong_BHXH' %}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="{% url 'bangluong_list' %}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive-sm">
+                <h4 align="right" > Đơn vị tính: đ</h4>
+                <h4 align="right"> Mức lương tối thiểu: 4.680.000 đ</h4>
+                {% if l0 %}
+                 <table class="table table-striped custom-table datatable">
+                      <thead class="" align="center">
+                        <tr class="table-success" bgcolor="red">
+                                <th scope="col" style="width: 10%">Nhóm</th>
+                                <th scope="col" style="width: 5%">Nhóm lương</th>
+                                <th scope="col" style="width: 5%">Điểm</th>
+                                <th scope="col" style="width: 10%">Bậc 1</th>
+                                <th scope="col" style="width: 10%">Bậc 2</th>
+                                <th scope="col" style="width: 10%">Bậc 3</th>
+                                <th scope="col" style="width: 10%">Bậc 4</th>
+                                <th scope="col" style="width: 10%">Bậc 5</th>
+                        </tr>
+                       </thead>
+
+                       <tbody class="" align="right">
+                        <tr>
+                             <td><strong>Nhóm 1</strong> </td>
+                             {% for sto in l1 %}
+                                 <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                            {% endfor %}
+                         </tr>
+                             <td><strong>Nhóm 2</strong></td>
+                                {% for sto in l2 %}
+                                 <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                                {% endfor %}
+                        <tr>
+                               <td><strong>Nhóm 3</strong></td>
+                                {% for sto in l3 %}
+                                     <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                            {% endfor %}
+                            </tr>
+
+                            <tr>
+                                <td><strong>Nhóm 4</strong></td>
+
+                             {% for sto in l4 %}
+                                     <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                            {% endfor %}
+                            </tr>
+
+                             <tr>
+                                 <td><strong>Nhóm 5</strong></td>
+                            {% for sto in l5 %}
+                                     <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                            {% endfor %}
+                            </tr>
+
+                            <tr>
+                            <td><strong>Nhóm 6</strong></td>
+                                  {% for sto in l6 %}
+                                     <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                            {% endfor %}
+                            </tr>
+
+                            <tr>
+                              <td><strong>Nhóm 7</strong></td>
+                                {% for sto in l7 %}
+                                     <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                            {% endfor %}
+                            </tr>
+                            <tr>
+                              <td><strong>Nhóm 8</strong></td>
+                                {% for sto in l8 %}
+                                     <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                                {% endfor %}
+                            </tr>
+
+                            tr>
+                               <td><strong>Nhóm 9</strong></td>
+                                {% for sto in l9 %}
+                                     <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                                {% endfor %}
+                            </tr>
+
+                            <tr>
+                                <td><strong>Nhóm 10 </strong></td>
+                                    {% for sto in l10 %}
+                                     <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                                {% endfor %}
+                            </tr>
+
+                            <tr>
+                             <td><strong>Nhóm 11</strong></td>
+                                {% for sto in l11 %}
+                                     <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                                {% endfor %}
+                         </tr>
+                         <td><strong>Nhóm 12</strong></td>
+                                {% for sto in l12 %}
+                                 <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                            {% endfor %}
+                            <tr>
+                               <td><strong>Nhóm 13</strong></td>
+                              {% for sto in l13 %}
+                                     <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                            {% endfor %}
+                            </tr>
+
+                            <tr>
+                                <td><strong>Nhóm 14</strong></td>
+
+                             {% for sto in l14 %}
+                                     <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                            {% endfor %}
+                            </tr>
+
+                             <tr>
+                                 <td><strong>Nhóm 15</strong></td>
+                                     {% for sto in l15 %}
+                                     <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                            {% endfor %}
+                            </tr>
+
+                            <tr>
+                            <td><strong>Nhóm 16</strong></td>
+                                  {% for sto in l16 %}
+                                     <td> Hệ số <br> <small>Bội số<br>Mức lương:<br></td> </small></td>
+                                 <td> <a href="{% url '7yto_luong' sto.diem.Nhom_luong %}"> {{sto.Nhom_luong.diem}}  <a/> </td>
+                                 <td> <b>{{sto.Bac_1}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac1}} </td>
+                                 <td> <b>{{sto.Bac_2}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac2}}  </td>
+                                 <td> <b>{{sto.Bac_3}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac3}}  </td>
+                                 <td> <b>{{sto.Bac_4}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac4}}  </td>
+                                 <td> <b>{{sto.Bac_5}} </b> <br> <small>{{sto.Boiso}}</small> <br>{{sto.get_luong_bac5}}  </td>
+                            {% endfor %}
+                            </tr>
+
+
+
+                        </tbody>
+                </table>
+                {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+                {% endif %}
+            </div>
+        </div> <!-- /md-12-------->
+    </div><!-- /rows------->
+</div>
+<div>
+     {% include 'luong/Luong_chinhthuc_char.html' %}
+</div>
+<!-- /Page Content -->
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,139 @@
+{% extends 'layouts/base.html' %}
+{% block title %} Thêm dữ liệu{% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'enroll/css/dmkpi.css' %}">
+<!---Cài đặt hiển thi table https://www.youtube.com/watch?v=yGBk9Nalyq8 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"/>
+<!---Kết  thúc Cài đặt hiển thi table -->
+
+
+<!---Chương trình thêm KPI -->
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class= "col-sm-12">
+                <!--- <h6 class="text-center alert alert-info"> THIẾT LẬP KPIs </h6>
+               <h4 <p> Tên KPI thiết lập mới </h4> -->
+                <div class="input-group">
+                <span class="input-group-text"> THÊM MỚI KPI:</span>
+                <textarea class="form-control" aria-label=" {{ form.Ten_KPI }}</textarea>
+                <br>
+            </div>
+                <h2> <p>Công việc liên quan {{ form.LoaiCV }}
+                   Đơn vị tính:    {{ form.Don_vi_tinh }}
+                   Tần xuất đánh giá: {{ form.Tan_xuat_d_gia }}
+                   Tỉ trọng: {{ form.Ti_trong }}
+                   Tổng KPI: {{total_CViec}}
+              <input type="submit" class="btn btn-success btn-xs" value="Thêm KPI"></h7></p>
+            </div>
+        </form>
+<br>
+<!---Chương trình hiển thị table -->
+
+        <table  class="table table-hover tablekpi_id" style= "width="95%">
+            <thead>
+            <tr class="table-success">
+                <th scope="col" style="width: 3%" >ID</th>
+                <th scope="col" style="width: 50%" >Tên KPI</th>
+                <th scope="col" style="width: 15%" >Vị trí</th>
+                <th scope="col" style="width: 3%" >ĐV.tính</th>
+                <th scope="col" style="width: 3%" >Tần xuất</th>
+                <th scope="col" style="width: 3%" >Tỉ trọng</th>
+                <th scope="col" style="width: 10%" >Sửa/Xóa</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for st in stu %}
+            <tr >
+                <th class="" scope="row">{{st.id}}</th>
+                <td>{{st.Ten_KPI}}</td>
+                <td>{{st.LoaiCV}}</td>
+                <td>{{st.Don_vi_tinh}}</td>
+                <td>{{st.Tan_xuat_d_gia}}</td>
+                <td class="">{{st.Ti_trong}}</td>
+                <td >
+                    <a href="{% url 'update_dmkpi' st.id %}" class="btn btn-info"><i class="fa fa-pencil" style="font-size:18px;color:yellow"></i> Sửa </a>
+                    <form action="{% url 'del_dmkpi' st.id %}" method="post" class="d-inline">
+                    <input type="submit"  class="btn btn-success" class="fa fa fa-trash" style="font-size:14px;color:white" value="XÓA">
+                        {% csrf_token %}
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+     {se %}
+          <h4 class="text-center alert alert-warning">No record </h4>
+     {% endif %}
+<!---Kết thúc Chương trình hiển thị table -->
+
+<!---Chương trình lọc KPI
+<form method='POST' action=''>{% csrf_token %}
+    <span class="input-group-text">
+       Loại CV {{ form.LoaiCV }}
+       Tên  KPI {{ form.Ten_KPI }}
+    <input type="submit" value='Search'/> </h7></p></span>
+</form>
+
+
+<br>
+
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="get">
+                    <h8 class="text-center alert alert-info"> LỌC DỮ LIỆU</h8>
+                      {{myFiter.form}}
+                    <a href="{% url 'ex_excel' %}" class="btn btn-secondary"> Export excel</a>
+                    <button class="btn btn-success btn-xs" type="submit">Tìm kiếm</button>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+ -->
+<!---Cài đặt hiển thi table https://www.youtube.com/watch?v=yGBk9Nalyq8 -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+
+<script>
+$('.tablekpi_id').DataTable({
+    lengthMenu: [[5,10,25,50,-1],[5,10,25,50,"all"]],
+
+    });
+</script>
+{% endblock content %}
+
+<!--- Cài đặt hiển thi table loc cac table :
+--Kết  thúc Cài đặt hiển thi table
+
+$('.tablekpi_id').DataTable({
+    initComplete: function(){
+        this.api().columns().every( function() {
+        var column = this;
+        var select = $('<select><option value = ""></option></select>')
+            .appendTo( $(column.header()).empty())
+            .on( 'change', function(){
+                var val = $.fn.DataTable.util.escapeRegex(
+                    $(this).val()
+                );
+            column
+                .search( val ? '^'+val+'$' : '', true, false)
+                .draw();
+        });
+      column.data().unique().sort().each( function ( d,j){
+        select.append('<option value="'+d+'">'+d+'</option>')
+            });
+        });
+       }
+     });-->
+
+
+---->

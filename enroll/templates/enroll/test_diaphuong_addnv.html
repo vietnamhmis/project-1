@@ -1,0 +1,105 @@
+{% extends "layouts/base.html" %}
+{% block title %} LÝ LICH NHÂN VIÊN {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load widget_tweaks %}
+<div class="container p-3 mb-2 bg-transparent text-blue border border-danger">
+    <h2 class="alert alert-danger red"> THÊM NHÂN VIÊN</h2>
+</div>
+<div class="container p-3 my-3 bg-secondary text-white">
+    <!-- Page Content
+        <form action="" method="POST">-->
+    <form method="POST" id="DiaphuongForm" load_diaphuong="{% url 'load_diaphuong' %}" novalidate>
+        {% csrf_token %}
+
+        {% for field in form.visible_fields %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field | add_class:'form-control' }}
+            {% for error in field.errors %}
+            <span class="help-block">{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        <h4 class="account-title">Bạn kiểm tra và đồng ý ghi LY LICH vào hệ thống?</h4><br>
+        <input class="btn btn-danger" style="width:150px;" type="submit" value="Đồng ý" />
+        <a href="{% url 'load_diaphuong' %}">
+            <div class="btn btn-primary" style="width:200px;">Cancel</div>
+        </a>
+    </form>
+</div>
+<!-- /Page Content -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+
+{% block javascripts %}
+
+<script>
+    $("#id_tinh_thanh").change(function() {
+        var url = $("#DiaphuongForm").attr("load_diaphuong");
+        var tinh_thanhId = $(this).val();
+        $.ajax({
+            url: url,
+            data: {
+                'tinh_thanh': tinh_thanhId
+            },
+            success: function(data) {
+                $("#id_quan_huyen").html(data);
+            }
+        });
+    });
+
+    $("#id_quan_huyen").change(function() {
+        var url = $("#DiaphuongForm").attr("load_diaphuong");
+        var quan_huyenId = $(this).val();
+        $.ajax({
+            url: url,
+            data: {
+                'quan_huyen': quan_huyenId
+            },
+            success: function(data) {
+                $("#id_phuong_xa").html(data);
+            }
+        });
+    });
+
+<!-- Specific Page JS goes HERE  -->
+
+ $("#id_don_vi").change(function () {
+      var url = $("#DiaphuongForm").attr("load_diaphuong");
+      var don_viId = $(this).val();
+          $.ajax({
+            url: url,
+            data: {
+              'don_vi': don_viId
+            },
+            success: function (data) {
+              $("#id_bo_phan").html(data);
+            }
+          });
+      });
+
+     $("#id_bo_phan").change(function () {
+      var url = $("#DiaphuongForm").attr("load_diaphuong");
+      var bo_phanId = $(this).val();
+          $.ajax({
+            url: url,
+            data: {
+              'bo_phan': bo_phanId
+            },
+            success: function (data) {
+              $("#id_to_nhom").html(data);
+            }
+          });
+      });
+
+
+</script>
+{% endblock javascripts %}
+

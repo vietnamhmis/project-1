@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans %}YBạn không thể xóa địa chỉ e-mail chính({{email}}).{% endblocktrans %}

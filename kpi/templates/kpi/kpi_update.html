@@ -1,0 +1,57 @@
+{% extends 'layouts/base.html' %}
+{% block title %} Sửa dữ liệu{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style>
+    .current{
+    border: 6px solid blue;
+    font-size:500%;
+    font-size: 20px;
+    font-family: Arial;
+    color: blue;
+    background-color: white;
+    padding-left: 200px;
+	padding-right: 200px;
+	padding-top: 50px;
+	padding-bottom: 40px;
+	padding-row: 200px;
+	box-shadow:5px 5px 5px 5px #2e6da4;
+	text-align: left;
+.body {
+  background-color: lightblue;
+}
+
+.h4 {
+  color: blue;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+    }
+
+
+</style>
+<div class="current">
+    <div class="card mt-10 mr-1 ml-10">
+        <div class="card-body">
+            <h4 class="alert alert-info"> Cập nhật dữ liệu KPI:</h4>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form|crispy}}
+                <!--    <h5>   <p> Tên Công việc:    {{form|crispy}} </p>
+                    <p> Loại Công việc:   {{form.LoaiCV}} </p>
+                    <p> Đơn vị tính:       {{form.Don_vi_tinh}} </p>
+                    <p> tần xuất đánh giá: {{form.Tan_xuat_d_gia}} </p>
+                    <p> Tỉ trọng:          {{form.Ti_trong}} </p></h5> -->
+                <input type="submit" class="btn btn-success" value="Thêm">
+                <a href="{% url 'add_kpi' %}" class="btn btn-info"> Trở về </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,977 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+					
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col">
+                <h3 class="page-title">Lịch trình hàng ngày</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index">Bảng điều khiển</a></li>
+                    <li class="breadcrumb-item"><a href="/dashboard/employees">Nhân sự</a></li>
+                    <li class="breadcrumb-item active">Lịch trình</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="/dashboard/shift-list" class="btn add-btn m-r-5">Danh sách</a>
+                <a href="#" class="btn add-btn m-r-5" data-toggle="modal" data-target="#add_schedule"> Thêm lịch trình</a>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+    
+    <!-- Content Starts -->
+    <!-- Search Filter -->
+    <div class="row filter-row">
+        <div class="col-sm-6 col-md-3">  
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating">
+                <label class="focus-label">Nhân viên</label>
+            </div>
+        </div>
+        
+        <div class="col-sm-6 col-md-3"> 
+            <div class="form-group form-focus select-focus">
+                <select class="select floating"> 
+                    <option>Tất cả phòng ban</option>
+                    <option value="1">Nhân sự</option>
+                    <option value="2">IT</option>
+                    <option value="3">Kế toán</option>
+                    <option value="4">Tài chính</option>
+                    <option value="4">Kinh doanh</option>
+                </select>
+                <label class="focus-label">Phòng ban</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-2">  
+            <div class="form-group form-focus focused">
+                <div class="cal-icon">
+                    <input class="form-control floating datetimepicker" type="text">
+                </div>
+                <label class="focus-label">Từ</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-2">  
+            <div class="form-group form-focus focused">
+                <div class="cal-icon">
+                    <input class="form-control floating datetimepicker" type="text">
+                </div>
+                <label class="focus-label">Đến</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-2">  
+            <a href="#" class="btn btn-success btn-block"> Tìm kiếm </a>  
+        </div>     
+    </div>
+    <!-- Search Filter -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-striped custom-table datatable">
+                    <thead>
+                        <tr>
+                            <th>Ca lịch trình</th>
+                            <th>Thứ 6 21</th>
+                            <th>Thứ 7 22</th>
+                            <th>Chủ Nhật 23</th>
+                            <th>Thứ 2 24</th>
+                            <th>Thứ 3 25</th>
+                            <th>Thứ 4 26</th>
+                            <th>Thứ 5 27</th>
+                            <th>Thứ 5 28</th>
+                            <th>Thứ 7 29</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-02.jpg"></a>
+                                    <a href="/dashboard/profile">Example name <span>Nhân viên</span></a>
+                                </h2>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <h2>
+                                        <a href="#" data-toggle="modal" data-target="#edit_schedule" style="border:2px dashed #1eb53a">
+                                        <span class="username-info m-b-10">6:30 am - 9:30 pm ( 14 giờ 15 phút)</span>
+                                        <span class="userrole-info">Nhân viên</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <h2>
+                                        <a href="#" data-toggle="modal" data-target="#edit_schedule" style="border:2px dashed #1eb53a">
+                                        <span class="username-info m-b-10">6:30 am - 9:30 pm ( 14 giờ 15 phút)</span>
+                                        <span class="userrole-info">Nhân viên</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-09.jpg"></a>
+                                    <a href="/dashboard/profile">Example name <span>Nhân viên</span></a>
+                                </h2>
+                            </td>
+                            
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <h2>
+                                        <a href="#" data-toggle="modal" data-target="#edit_schedule" style="border:2px dashed #1eb53a">
+                                        <span class="username-info m-b-10">6:30 am - 9:30 pm ( 14 giờ 15 phút)</span>
+                                        <span class="userrole-info">Nhân viên</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                          
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <h2>
+                                        <a href="#" data-toggle="modal" data-target="#edit_schedule" style="border:2px dashed #1eb53a">
+                                        <span class="username-info m-b-10">6:30 am - 9:30 pm ( 14 giờ 15 phút)</span>
+                                        <span class="userrole-info">Nhân viên</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-10.jpg"></a>
+                                    <a href="/dashboard/profile">Example name <span>Trưởng phòng</span></a>
+                                </h2>
+                            </td>
+                            
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <h2>
+                                        <a href="#" data-toggle="modal" data-target="#edit_schedule" style="border:2px dashed #1eb53a">
+                                        <span class="username-info m-b-10">6:30 am - 9:30 pm ( 14 giờ 15 phút)</span>
+                                        <span class="userrole-info">Nhân viên</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <h2>
+                                        <a href="#" data-toggle="modal" data-target="#edit_schedule" style="border:2px dashed #1eb53a">
+                                        <span class="username-info m-b-10">6:30 am - 9:30 pm ( 14 giờ 15 phút)</span>
+                                        <span class="userrole-info">Nhân viên</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-05.jpg"></a>
+                                    <a href="/dashboard/profile">Example name <span>Trưởng phòng</span></a>
+                                </h2>
+                            </td>
+                            
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <h2>
+                                        <a href="#" data-toggle="modal" data-target="#edit_schedule" style="border:2px dashed #1eb53a">
+                                        <span class="username-info m-b-10">6:30 am - 9:30 pm ( 14 giờ 15 phút)</span>
+                                        <span class="userrole-info">Nhân viên</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <h2>
+                                        <a href="#" data-toggle="modal" data-target="#edit_schedule" style="border:2px dashed #1eb53a">
+                                        <span class="username-info m-b-10">6:30 am - 9:30 pm ( 14 giờ 15 phút)</span>
+                                        <span class="userrole-info">Nhân viên</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-11.jpg"></a>
+                                    <a href="/dashboard/profile">Example name <span>Quản lý</span></a>
+                                </h2>
+                            </td>
+                            
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <h2>
+                                        <a href="#" data-toggle="modal" data-target="#edit_schedule" style="border:2px dashed #1eb53a">
+                                        <span class="username-info m-b-10">6:30 am - 9:30 pm ( 14 giờ 15 phút)</span>
+                                        <span class="userrole-info">Nhân viên</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <h2>
+                                        <a href="#" data-toggle="modal" data-target="#edit_schedule" style="border:2px dashed #1eb53a">
+                                        <span class="username-info m-b-10">6:30 am - 9:30 pm ( 14 giờ 15 phút)</span>
+                                        <span class="userrole-info">Nhân viên</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-12.jpg"></a>
+                                    <a href="/dashboard/profile">Example name <span>Nhân viên</span></a>
+                                </h2>
+                            </td>
+                            
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <h2>
+                                        <a href="#" data-toggle="modal" data-target="#edit_schedule" style="border:2px dashed #1eb53a">
+                                        <span class="username-info m-b-10">6:30 am - 9:30 pm ( 14 giờ 15 phút)</span>
+                                        <span class="userrole-info">Nhân viên</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <h2>
+                                        <a href="#" data-toggle="modal" data-target="#edit_schedule" style="border:2px dashed #1eb53a">
+                                        <span class="username-info m-b-10">6:30 am - 9:30 pm ( 14 giờ 15 phút)</span>
+                                        <span class="userrole-info">Nhân viên</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-13.jpg"></a>
+                                    <a href="/dashboard/profile">Example name <span>Nhân viên</span></a>
+                                </h2>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <h2>
+                                        <a href="#" data-toggle="modal" data-target="#edit_schedule" style="border:2px dashed #1eb53a">
+                                        <span class="username-info m-b-10">6:30 am - 9:30 pm ( 14 giờ 15 phút)</span>
+                                        <span class="userrole-info">Nhân viên</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <h2>
+                                        <a href="#" data-toggle="modal" data-target="#edit_schedule" style="border:2px dashed #1eb53a">
+                                        <span class="username-info m-b-10">6:30 am - 9:30 pm ( 14 giờ 15 phút)</span>
+                                        <span class="userrole-info">Nhân viên</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="user-add-shedule-list">
+                                    <a href="#" data-toggle="modal" data-target="#add_schedule">
+                                    <span><i class="fa fa-plus"></i></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /Content End -->
+    
+</div>
+<!-- /Page Content -->
+
+</div>
+<!-- /Page Wrapper -->
+
+<!-- Add Schedule Modal -->
+<div id="add_schedule" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm lịch trình</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Phòng ban <span class="text-danger">*</span></label>
+                                <select class="select">
+                                    <option value="">-</option>
+                                    <option value="1">Nhân sự</option>
+                                    <option value="2">IT</option>
+                                    <option value="3">Kế toán</option>
+                                    <option value="4">Tài chính</option>
+                                    <option value="5">Ban quản lý</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Tên nhân viên <span class="text-danger">*</span></label>
+                                <select class="select">
+                                    <option value="">-</option>
+                                    <option value="1">Example name </option>
+                                    <option value="2">Example name</option>
+                                    <option value="3">Example name </option>
+                                    <option value="4">Example name</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Ngày</label>
+                                <div class="cal-icon"><input class="form-control datetimepicker" type="text"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Ca lịch trình <span class="text-danger">*</span></label>
+                                <select class="select">
+                                    <option value="">-</option>
+                                    <option value="1">10:00 AM</option>
+                                    <option value="2">10:00 PM</option>
+                                    <option value="3">Ca hàng ngày </option>
+                                    <option value="4">Lịch trình khác</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian bắt đầu (Tối thiểu)  <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian bắt đầu  <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian bắt đầu (Tối đa))  <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian kết thúc (Tối thiểu)  <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian kết thúc   <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian kết thúc (Tối đa) <span class="text-danger">*</span></label>
+                                <div class="input-group time timepicker">
+                                    <input class="form-control"><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian nghỉ  <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Chấp nhận cho thêm giờ </label>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
+                                    <label class="custom-control-label" for="customSwitch1"></label>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Công bố </label>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch2" checked="">
+                                    <label class="custom-control-label" for="customSwitch2"></label>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Add Schedule Modal -->
+
+<!-- Edit Schedule Modal -->
+<div id="edit_schedule" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thay đổi lịch trình</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Phòng ban <span class="text-danger">*</span></label>
+                                <select class="select">                                    
+                                    <option value="">-</option>
+                                    <option selected value="">Nhân sự</option>
+                                    <option value="1">IT</option>
+                                    <option value="2">Kế toán</option>
+                                    <option value="3">Tài chính</option>
+                                    <option value="4">Ban quản lý</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Tên nhân viên <span class="text-danger">*</span></label>
+                                <select class="select">
+                                    <option value="">- </option>
+                                    <option selected value="1">Example name </option>
+                                    <option value="2">Example name</option>
+                                    <option value="3">Example name </option>
+                                    <option value="4">Example name</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Ngày <span class="text-danger">*</span></label>
+                                <div class="cal-icon"><input class="form-control datetimepicker" type="text"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Ca lịch trình <span class="text-danger">*</span></label>
+                                <select class="select">
+                                    <option value="">-</option>
+                                    <option value="1">10:00 AM</option>
+                                    <option value="2">10:00 PM</option>
+                                    <option value="3">Ca hàng ngày </option>
+                                    <option value="4">Lịch trình khác</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian bắt đầu (Tối thiểu)  <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" value="06:11 am">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian bắt đầu  <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" value="06:30 am">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian bắt đầu (Tối đa) <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" value="08:12 am">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian kết thúc (Tối thiểu)  <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" value="09:12 pm">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian kết thúc   <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" value="09:30 pm">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian kết thúc (Tối đa) <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" value="09:45 pm">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Thời gian nghỉ  <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" value="45">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">Thay đổi định kì</label>
+                              </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Lặp lại mỗi ngày</label>
+                                <select class="select">
+                                    <option value="">1 </option>
+                                    <option value="1">2</option>
+                                    <option value="2">3</option>
+                                    <option value="3">4</option>
+                                    <option  selected value="4">5</option>
+                                    <option value="3">6</option>
+                                </select>
+                                <label class="col-form-label">Tuần</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group wday-box">
+                                
+                                    <label class="checkbox-inline"><input type="checkbox" name="week_days[]" value="monday" class="days recurring" checked="" onclick="return false;"><span class="checkmark">T2</span></label>
+
+                                    <label class="checkbox-inline"><input type="checkbox" name="week_days[]" value="tuesday" class="days recurring" checked="" onclick="return false;"><span class="checkmark">T3</span></label>
+                                
+                                    <label class="checkbox-inline"><input type="checkbox" name="week_days[]" value="wednesday" class="days recurring" checked="" onclick="return false;"><span class="checkmark">T4</span></label>
+                                
+                                    <label class="checkbox-inline"><input type="checkbox" name="week_days[]" value="thursday" class="days recurring" checked="" onclick="return false;"><span class="checkmark">T5</span></label>
+                                
+                                    <label class="checkbox-inline"><input type="checkbox" name="week_days[]" value="friday" class="days recurring" checked="" onclick="return false;"><span class="checkmark">T6</span></label>
+                                
+                                    <label class="checkbox-inline"><input type="checkbox" name="week_days[]" value="saturday" class="days recurring" onclick="return false;"><span class="checkmark">T7</span></label>
+                                
+                                    <label class="checkbox-inline"><input type="checkbox" name="week_days[]" value="sunday" class="days recurring" onclick="return false;"><span class="checkmark">CN</span></label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Kết thúc vào <span class="text-danger">*</span></label>
+                                <div class="cal-icon"><input class="form-control datetimepicker" type="text"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                <label class="custom-control-label" for="customCheck2">Vô thời hạn</label>
+                              </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Chấp nhận cho thêm giờ </label>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch3" checked="">
+                                    <label class="custom-control-label" for="customSwitch3"></label>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Công bố </label>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch4" checked="">
+                                    <label class="custom-control-label" for="customSwitch4"></label>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Edit Schedule Modal -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

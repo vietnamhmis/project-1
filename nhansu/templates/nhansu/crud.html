@@ -1,0 +1,222 @@
+{% extends 'nhansu/base_aj.html' %}
+{% load static %}
+<!---https://www.youtube.com/watch?v=uQtIqh9mEgM&t=80s
+  https://studygyaan.com/django/how-to-execute-crud-using-django-ajax-and-json
+  -->
+
+{% block title %}QUẢN LÝ ĐƠN VỊ TRỰC THUỘC{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Thêm đơn vị</h2>
+    <div class="row">
+      <div class="col-md-4 ">
+        <h3>THÊM ĐƠN VỊ</h3>
+        <form id="addUser" action="">
+          <div class="form-group">
+            <input class="form-control" type="text" name="ma_DV" placeholder="Nhập mã Đơn vị" required>
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="text" name="Ten_DV" placeholder="Tên Đơn vị" required>
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="number" name="so_nhanvien" min="10" max="100" placeholder="Số lao động" required>
+          </div>
+          <button class="btn btn-primary form-control" type="submit">THÊM</button>
+        </form>
+      </div>
+      <div class="col-md-8">
+        <h3>TÊN ĐƠN VỊ</h3>
+        <table id="userTable" class="table table-striped">
+          <tr>
+            <th>Mã Đơn vị</th>
+            <th>TÊN đƠn viỊ</th>
+            <th colspan="3">Số nhân viên</th>
+          </tr>
+          {% if users %}
+          {% for user in users %}
+          <tr id="user-{{user.id}}">
+              <td class="userName userData" name="ma_DV">{{user.ma_DV}}</td>
+              <td class="userTen_DV userData" name="Ten_DV">{{user.Ten_DV}}</td>
+              <td class="userSo_nhanvien userData" name="so_nhanvien">{{user.so_nhanvien}}</td>
+              <td align="center">
+                  <button class="btn btn-success form-control" onClick="editUser({{user.id}})" data-toggle="modal" data-target="#myModal")">Sửa</button>
+              </td>
+              <td align="center">
+                  <button class="btn btn-danger form-control" onClick="deleteUser({{user.id}})">Delete</button>
+              </td>
+          </tr>
+          {% endfor %}
+          {% else %}
+            No Users
+          {% endif %}
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 class="modal-title" id="myModalLabel">Update Đơn vị</h4>
+        </div>
+        <form id="updateUser" action="">
+            <div class="modal-body">
+                <input class="form-control" id="form-id" type="hidden" name="formId"/>
+                <label for="name">ma_DV</label>
+                <input class="form-control" id="form-ma_DV" type="text" name="formMa_DV"/>
+                <label for="address">Tên Đơn vị</label>
+                <input class="form-control" id="form-Ten_DV" type="text" name="formTen_DV"/>
+                <label for="age">Số CBCNV</label>
+                <input class="form-control" id="form-so_nhanvien" type="number" name="formSo_nhanvien" min=1 max=100/>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" >Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block javascript %}
+
+<script>
+// Create Đơn vị /Django Ajax Call
+$("form#addUser").submit(function() {
+    var ma_DVInput = $('input[name="ma_DV"]').val().trim();
+    var Ten_DVInput = $('input[name="Ten_DV"]').val().trim();
+    var so_nhanvienInput = $('input[name="so_nhanvien"]').val().trim();
+    if (ma_DVInput && Ten_DVInput && so_nhanvienInput) {
+        // Create Ajax Call
+        $.ajax({
+            url: '{% url "Create_donvi" %}',
+            data: {
+                'ma_DV': ma_DVInput,
+                'Ten_DV': Ten_DVInput,
+                'so_nhanvien': so_nhanvienInput
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.user) {
+                  appendToUsrTable(data.user);
+                }
+            }
+        });
+      } else {
+        alert("All fields must have a valid value.");
+    }
+    $('form#addUser').trigger("reset");
+    return false;
+});
+///////////////////////////--------------
+function appendToUsrTable(user) {
+  $("#userTable > tbody:last-child").append(`
+        <tr id="user-${user.id}">
+            '<td class="userMa_DV" name="ma_DV">${user.ma_DV}</td>
+            '<td class="userTen_DV" name="Ten_DV">${user.Ten_DV}</td>
+            '<td class="userSo_nhanvien" name="so_nhanvien">${user.so_nhanvien}</td>
+            '<td align="center">
+                <button class="btn btn-success form-control" onClick="editUser(${user.id})" data-toggle="modal" data-target="#myModal")">Sửa</button>
+            </td>
+            <td align="center">
+                <button class="btn btn-danger form-control" onClick="deleteUser(${user.id})">Delete</button>
+            </td>
+        </tr>
+    `);
+}
+
+
+//Cập nhật Lỗi/ update//////////////////////////////////////////
+
+// Create Django Ajax Call
+$("form#updateUser").submit(function() {
+    var idInput = $('input[name="formId"]').val().trim();
+    var ma_DVInput = $('input[name="forMa_DV"]').val().trim();
+    var Ten_DVInput = $('input[name="formTen_DV"]').val().trim();
+    var so_nhanvienInput = $('input[name="formSo_nhanvien"]').val().trim();
+    if (ma_DVInput && Ten_DVInput && so_nhanvienInput) {
+        // Create Ajax Call
+        $.ajax({
+            url: '{% url "Update_ax_Donvi" %}',
+            data: {
+                'id': idInput,
+                'ma_DV': ma_DVInput,
+                'Ten_DV': Ten_DVInput,
+                'so_nhanvien': so_nhanvienInput,
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.user) {
+                  updateToUserTabel(data.user);
+                }
+            }
+        });
+       } else {
+        alert("All fields must have a valid value.");
+    }
+    $('form#updateUser').trigger("reset");
+    $('#myModal').modal('hide');
+    return false;
+});
+
+// Update Django Ajax Call chỗ này lỗi
+function editUser(id) {
+  if (id) {
+    tr_id = "#user-" + id;
+    ma_DV = $(tr_id).find(".userMa_DV").text();
+    Ten_DV = $(tr_id).find(".userTen_DV").text();
+    so_nhanvien = $(tr_id).find(".userSo_nhanvien").text();
+
+    $('#form-id').val(id);
+
+    $('#form-ma_DV').val(ma_DV);
+    $('#form-Ten_DV').val(Ten_DV);
+    $('#form-so_nhanvien').val(so_nhanvien);
+  }
+}
+
+//
+
+//chỗ này lỗi đến đây
+
+function updateToUserTabel(user){
+    $("#userTable #user-" + user.id).children(".userData").each(function() {
+        var attr = $(this).attr("ma_DV");
+        if (attr == "ma_DV") {
+          $(this).text(user.ma_DV);
+        } else if (attr == "Ten_DV") {
+          $(this).text(user.Ten_DV);
+        } else {
+          $(this).text(user.so_nhanvien);
+        }
+      });
+}
+
+// Xóa dòng dữ liệu/Delete Django Ajax Call
+function deleteUser(id) {
+  var action = confirm("Bạn đã chắc chắn xóa dòng này?");
+  if (action != false) {
+    $.ajax({
+        url: '{% url "Delete_ax_donvi" %}',
+        data: {
+            'id': id,
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (data.deleted) {
+              $("#userTable #user-" + id).remove();
+            }
+        }
+    });
+  }
+}
+
+</script>
+{% endblock javascript %}

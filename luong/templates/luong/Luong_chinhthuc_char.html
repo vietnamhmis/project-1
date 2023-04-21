@@ -1,0 +1,106 @@
+<!------------------------Biểu đồ lương ------->
+			<div class="col-md-10 text-center">
+				<div class="card">
+					<div class="card-body">
+						<h2 style="color:red" > <b>BIỂU ĐỒ LƯƠNG </b></h2>
+						<div class="col-md-12">
+							<div class="col-md-8" align="center">
+								<canvas id="myChart3" width="200" height="300"></canvas>
+								<script>
+								var ctx = document.getElementById('myChart3').getContext('2d');
+								ctx.canvas.width = 30;
+								ctx.canvas.height = 30;
+								var myChart3 = new Chart(ctx, {
+								type: 'bar',
+								data: {
+
+								labels: [
+								   	{% for sto in l1 %} {{sto.Nhom_luong}} {% endfor %},
+									{% for sto in l2 %} {{sto.Nhom_luong}} {% endfor %},
+									{% for sto in l3 %} {{sto.Nhom_luong}} {% endfor %},
+									{% for sto in l4 %} {{sto.Nhom_luong}} {% endfor %},
+									{% for sto in l5 %} {{sto.Nhom_luong}} {% endfor %},
+									{% for sto in l6 %} {{sto.Nhom_luong}} {% endfor %},
+									{% for sto in l7 %} {{sto.Nhom_luong}} {% endfor %},
+									{% for sto in l8 %} {{sto.Nhom_luong}} {% endfor %},
+									{% for sto in l9 %} {{sto.Nhom_luong}} {% endfor %},
+									{% for sto in l10 %} {{sto.Nhom_luong}} {% endfor %},
+									{% for sto in l11 %} {{sto.Nhom_luong}} {% endfor %},
+									{% for sto in l12 %} {{sto.Nhom_luong}} {% endfor %},
+									{% for sto in l13 %} {{sto.Nhom_luong}} {% endfor %},
+									{% for sto in l14 %} {{sto.Nhom_luong}} {% endfor %},
+									{% for sto in l15 %} {{sto.Nhom_luong}} {% endfor %},
+									{% for sto in l16 %} {{sto.Nhom_luong}} {% endfor %},
+
+								],
+								datasets: [{
+							    label: 'VND',
+                                data:[
+									{% for sto in l1 %} {{sto.get_luong_bac}} {% endfor %},
+									{% for sto in l2 %} {{sto.get_luong_bac}} {% endfor %},
+									{% for sto in l3 %} {{sto.get_luong_bac}} {% endfor %},
+									{% for sto in l4 %} {{sto.get_luong_bac}} {% endfor %},
+									{% for sto in l5 %} {{sto.get_luong_bac}} {% endfor %},
+									{% for sto in l6 %} {{sto.get_luong_bac}} {% endfor %},
+									{% for sto in l7 %} {{sto.get_luong_bac}} {% endfor %},
+									{% for sto in l8 %} {{sto.get_luong_bac}} {% endfor %},
+									{% for sto in l9 %} {{sto.get_luong_bac}} {% endfor %},
+									{% for sto in l10 %} {{sto.get_luong_bac}} {% endfor %},
+									{% for sto in l11 %} {{sto.get_luong_bac}} {% endfor %},
+									{% for sto in l12 %} {{sto.get_luong_bac}} {% endfor %},
+									{% for sto in l13 %} {{sto.get_luong_bac}} {% endfor %},
+									{% for sto in l14 %} {{sto.get_luong_bac}} {% endfor %},
+									{% for sto in l15 %} {{sto.get_luong_bac}} {% endfor %},
+									{% for sto in l16 %} {{sto.get_luong_bac}} {% endfor %},
+
+
+
+								],
+
+								fill: true,
+								backgroundColor: [
+									'rgba(255, 99, 132, 0.8)',
+									'rgba(255, 159, 64, 0.8)',
+									'rgba(255, 205, 86, 0.8)',
+									'rgba(75, 192, 192, 0.8)',
+									'rgba(54, 162, 235, 0.8)',
+									'rgba(153, 102, 255, 0.8)',
+									'rgba(201, 203, 207, 0.8)',
+									'rgba(245, 203, 207, 0.8)',
+									'rgba(255, 99, 132, 0.6)',
+									'rgba(255, 159, 64, 0.2)',
+									'rgba(255, 205, 86, 0.7)',
+									'rgba(75, 192, 192, 0.5)',
+									'rgba(54, 162, 235, 0.6)',
+									'rgba(153, 102, 255, 0.8)',
+									'rgba(201, 203, 207, 0.6)',
+									],
+								borderColor: [
+									'rgb(255, 99, 132)',
+									'rgb(255, 159, 64)',
+									'rgb(255, 205, 86)',
+									'rgb(75, 192, 192)',
+									'rgb(201, 203, 207)',
+									],
+									pointBackgroundColor: 'rgba(258, 99, 32, 0.8)',
+									pointBorderColor: '#fff',
+									pointHoverBackgroundColor: '#fff',
+									pointHoverBorderColor: 'rgb(255, 99, 132)'
+									},
+									 ]
+									 },
+                                      options: {
+                                      scales: {
+                                        y: {
+                                        beginAtZero: true
+                                             }
+                                             }
+                                             }
+                                             });
+                         		</script>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>

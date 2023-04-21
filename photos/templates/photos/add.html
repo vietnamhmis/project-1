@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Photo</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body class="m-5">
+    <div class="container">
+        <div class="col-md-4">
+            <a href="{% url 'gallery' %}" class="btn btn-dark my-3"> Come backl</a>
+            <div class="card">
+                <form method="POST" action="" enctype="multipart/form-data">
+                     {% csrf_token %}
+                  <div class="form-group m-3">
+                    <label> Description</label>
+                    <input required name="description" type="text"  placeholder="Nhập mô tả" class="form-control">
+                  </div>
+
+                  <div class="form-group m-3">
+                    <label> Họ lót</label>
+                    <input required name="ho_lot_thuong_dung" type="text"  placeholder="Nhập họ" class="form-control">
+                  </div>
+
+                  <div class="form-group m-3">
+                    <label> Tên</label>
+                    <input required name="ten_thuong_dung" type="text"  placeholder="Nhập tên" class="form-control">
+                  </div>
+
+                  <div class="form-group m-3">
+                    <label> Mã NV</label>
+                    <input required name="ma_nhan_vien" type="text"  placeholder="Nhập mã nhân vên" class="form-control">
+                  </div>
+
+                  <div class="form-group m-3">
+                    <label> Ngày vào ngành</label>
+                    <input required name="ngay_vao_nganh" type="date"  placeholder="Nhập ngày" class="form-control">
+                  </div>
+
+
+                  <div class="form-group m-3">
+                    <label> Select a category </label>
+                    <select name="category" class="form-control">
+                        <option value="none"> Select a category... </option>
+                        {% for catagory in categories %}
+                        <option value="{{catagory.id}}">{{catagory.name}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+
+                    <div class="form-group m-3">
+                    <label>Create news category</label>
+                    <input name="category_new" type="text" placeholder="Tạo một catgory mới" class ="form-control">
+                  </div>
+
+                   <div class="form-group m-3">
+                    <label> Upload ảnh</label>
+                    <input required name="images" type="file" multiple class="form-control-file">
+                  </div>
+
+                    <button type="submit" class="btn btn-primary m-3">Submit</button>
+                </form>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</body>
+
+</html>

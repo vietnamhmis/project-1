@@ -1,0 +1,91 @@
+{% extends 'courses/base.html' %}
+{% block title %} Thêm dữ liệu{% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'enroll/css/dmkpi.css' %}">
+<!---Cài đặt hiển thi table https://www.youtube.com/watch?v=yGBk9Nalyq8 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"/>
+<!---Kết  thúc Cài đặt hiển thi table -->
+
+
+<!---Chương trình thêm KPI -->
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class= "col-sm-12">
+
+                <div class="input-group">
+                <span class="input-group-text"> THÊM MỚI DINH GIÁ:</span>
+
+1.	THÔNG TIN CHUNG VỀ CÔNG VIỆC
+                  <h4 class="alert alert-info">Vị trí/chức vụ: {{form.chuc_vu}}</h4> <br>
+                  <h5 class="alert alert-info">Đơn vị: {{form.don_vi}}</h5> <br>
+                  <h5 class="alert alert-info">Bộ phận: {{form.bo_phan}}</h5> <br>
+                  <h5 class="alert alert-info">Tổ/nhóm: {{form.to_nhom}}</h5> <br>
+                    Chức danh công việc cấp trên trực tiếp	Phó Tổng Giám đốc Tài chính
+                    Đơn vị cấp trên trực tiếp	Phó Tổng Giám đốc Tài chính
+                    Địa điểm làm việc	Ban quàn lý dự án
+
+2.	MỤC ĐÍCH CỦA CÔNG VIỆC
+
+3. CÁC MỐI QUAN HỆ LÀM VIỆC
+Cấp trên
+Cùng cấp
+Cấp dưới
+Cơ quan Nhà nước và xã hội
+Khách hàng, nhà cung cấp
+4. NHIỆM VỤ - KẾT QUẢ CÔNG VIỆC YÊU CẦU
+
+5. TRÁCH NHIỆM
+                        <h4 class="alert alert-info"> I.MỨC ĐỘ TÁC ĐỘNG CỦA CÔNG VIỆC</h4> <br>
+
+                        <h5 class="alert alert-info">1.1 Đến kết quả hoạt động kinh doanh: {{form.muc_ah_cty_11}}</h5> <br>
+                        <h5 class="alert alert-info">1.2 Đến công việc của người khác: <br>{{form.muc_ah_nv_12}}</h5> <br>
+
+                        <h4 class="alert alert-info">II.YÊU CẦU VỀ NĂNG LỰC ĐỂ THỰC HIỆN CÔNG VIỆC: <br></h4> <br>
+
+8.	YÊU CẦU NĂNG LỰC CỦA CÔNG VIỆC
+                        <h5 class="alert alert-info">Về trình độ chuyên môn: <br>{{form.ycau_trinhdocm_21}}</h5> <br>
+                        <h5 class="alert alert-info">Về kinh nghiệm: <br>{{form.ycau_k_nghiem_22}}</h5> <br>
+                        <h5 class="alert alert-info">Về trình độ Ngoại ngữ: <br>{{form.ycau_Ngoaingu_23}}</h5> <br>
+                        <h5 class="alert alert-info">Về trình độ CNTT: <br>{{form.ycau_CNTT_24}}</h5> <br>
+
+                        <h4 class="alert alert-info"><br>III.ĐẶC TÍNH CỦA CÔNG VIỆC: </h4> <br>
+                        <h5 class="alert alert-info">Tính kế hoạch: <br>{{form.ycau_kehoach_31}}</h5> <br>
+                        <h5 class="alert alert-info">Tính ổn định và sáng tạo: <br>{{form.ycau_sangtao_32}}</h5> <br>
+                        <h5 class="alert alert-info">Tính độc lập: <br> {{form.ycau_doclap_33}}</h5> <br>
+                        <h5 class="alert alert-info">Cường độ lao động: <br>{{form.ycau_cuongdo_34}}</h5> <br>
+                        <h5 class="alert alert-info">Mức độ phối hợp và kỹ năng giao tiếp:<br>{{form.ycau_giaotiep_35}}</h5><br>
+
+                        <h4 class="alert alert-info">IV. ĐIỀU KIỆN LÀM VIỆC: <br></h4><br>
+                        <h5 class="alert alert-info">Môi trường làm việc:<br>{{form.mt_laodong_41}}</h5> <br>
+                        <h5 class="alert alert-info">Mức độ rủi ro nghề nghiệp: <br>{{form.muc_rui_ro_42}}</h5> <br>
+5. TRÁCH NHIỆM
+TT	Trách nhiệm	Ghi chú
+1		Chịu trách nhiệm trước phó tổng giám đốc về các nhiệm vụ được giao;
+2		Tuân thủ các quy định của pháp luật trong việc thực hiện các công việc được phân công và chịu trách nhiệm về chuyên môn, nghiệp vụ của mình.
+6. mức độ ảnh hưởng của công việc
+TT	Mức độ ảnh hưởng	Ghi chú
+1		Ảnh hưởng đến toàn bộ hoạt động của Ban Giám Đốc và Ban QLDA
+7.	PHƯƠNG TIỆN VÀ ĐIỀU KIỆN LAO ĐỘNG
+-	Phương tiện lao động: Máy vi tính, máy in, các vật dụng văn phòng.
+-	Điều kiện lao động
+ Bình thường (Loại I,II&III)
+ Nặng nhọc/độc hại/nguy hiểm (Loại IV)
+ Đặc biệt nặng nhọc/độc hại/nguy hiểm (Loại V&VI)/ hoặc rủi ro nghề nghiệp/tính cạnh tranh cao
+8.	YÊU CẦU NĂNG LỰC CỦA CÔNG VIỆC
+
+              <input type="submit" class="btn btn-success btn-xs" value="THÊM ĐỊNH GIÁ"></h7></p>
+            </div>
+        </form>
+<br>
+
+<!---Cài đặt hiển thi table https://www.youtube.com/watch?v=yGBk9Nalyq8 -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+{% endblock content %}

@@ -1,0 +1,215 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+				
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Ngày nghỉ lễ 2021</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Bảng điều khiển</a></li>
+                    <li class="breadcrumb-item active">Ngày nghỉ lễ</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_holiday"><i class="fa fa-plus"></i> Thêm ngày lễ</a>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-striped custom-table mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Sự kiện </th>
+                            <th>Ngày lễ</th>
+                            <th>Ngày trong tuần</th>
+                            <th class="text-right">Tùy chỉnh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="holiday-completed">
+                            <td>1</td>
+                            <td>Tết dương lịch</td>
+                            <td>01-01-2021</td>
+                            <td>Thứ 7</td>
+                            <td></td>
+                        </tr>
+                        <tr class="holiday-completed">
+                            <td>2</td>
+                            <td>Giải phóng miền nam</td>
+                            <td>30-04-2021</td>
+                            <td>Thứ 6</td>
+                            <td></td>
+                        </tr>
+                        <tr class="holiday-completed">
+                            <td>3</td>
+                            <td>Quốc tế lao động</td>
+                            <td>01-05-2021</td>
+                            <td>Thứ 2</td>
+                            <td class="text-center">
+                            </td>
+                        </tr>
+                        <tr class="holiday-completed">
+                            <td>4</td>
+                            <td>Vua Hùng</td>
+                            <td>02-10-2021</td>
+                            <td>Thứ 3</td>
+                            <td class="text-center">
+                            </td>
+                        </tr>                        
+                        <tr class="holiday-upcoming">
+                            <td>6</td>
+                            <td>Quốc khánh</td>
+                            <td>01-09-2021</td>
+                            <td>Thứ 3</td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_holiday"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_holiday"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="holiday-upcoming">
+                            <td>7</td>
+                            <td>Giáng sinh</td>
+                            <td>15-12-2021</td>
+                            <td>Thứ 4</td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_holiday"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_holiday"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="holiday-upcoming">
+                            <td>8</td>
+                            <td>Tết dương lịch</td>
+                            <td>01-01-2022</td>
+                            <td>Thứ 2</td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_holiday"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_holiday"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->
+
+<!-- Add Holiday Modal -->
+<div class="modal custom-modal fade" id="add_holiday" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm ngày lễ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>Tên ngày lễ <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày nghỉ lễ <span class="text-danger">*</span></label>
+                        <div class="cal-icon"><input class="form-control datetimepicker" type="text"></div>
+                    </div>
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Add Holiday Modal -->
+
+<!-- Edit Holiday Modal -->
+<div class="modal custom-modal fade" id="edit_holiday" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Chỉnh sửa ngày lễ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>Tên ngày lễ <span class="text-danger">*</span></label>
+                        <input class="form-control" value="Năm mới" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày nghỉ lễ <span class="text-danger">*</span></label>
+                        <div class="cal-icon"><input class="form-control datetimepicker" value="01-01-2022" type="text"></div>
+                    </div>
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Edit Holiday Modal -->
+
+<!-- Delete Holiday Modal -->
+<div class="modal custom-modal fade" id="delete_holiday" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-header">
+                    <h3>Xóa nghày lễ</h3>
+                    <p>Bạn có thực sự muốn xóa?</p>
+                </div>
+                <div class="modal-btn delete-action">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="javascript:void(0);" class="btn btn-primary continue-btn">Xóa</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Hủy bỏ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Delete Holiday Modal -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

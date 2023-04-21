@@ -1,0 +1,124 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách nhân viên {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Nhân viên</h3>
+                <ul class="breadcrumb">
+                    <!-- link bang dieu khiển -->
+                    <li class="breadcrumb-item"><a href="/dashboard">Bảng điểu khiển</a></li>
+                    <li class="breadcrumb-item active">Nhân viên</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="{% url 'add_nhanvien' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thêm nhân viên</a>
+                <div class="view-icons">
+                    <a href="{% url 'employees' %}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="{% url 'list_nhanvien' %}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <!-- Search Filter----------------------------- -->
+    <form method='POST' action=''>{% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <input type="text" class="form-control" placeholder="Họ lót" id={{form.ho_lot_thuong_dung}} </div>
+                <div class="form-group col-md-1">
+                    <input type="text" class="form-control" placeholder="Họ tên" id={{form.ten_thuong_dung}} </div>
+                    <div class="form-group col-md-3">
+                        <select class="form-control" placeholder="Chức vụ" {{form.vitri_CV}} </select>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id={{form.Xuất_Excel}} <label class="form-check-label">
+                        Xuất Excel
+                        </label>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Tìm kiếm' />
+                    </div>
+                </div>
+    </form>
+    <!-- /Search Filter ------------------------------------------------------>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                {% if queryset %}
+                <table class="table table-striped custom-table datatable">
+                    <thead>
+                        <tr class="table-success">
+                            <th scope="col">id</th>
+                            <th scope="col">Họ tên/Mã</th>
+                            <th scope="col">Vị trí/xem MTCV</th>
+                            <th scope="col">In lý lịch</th>
+                            <th scope="col">Điện thoại CN</th>
+                            <th scope="col">Thành tích KPI</th>
+                            <th scope="col">Năng lực KSK </th>
+                            <th class="text-right no-sort">Tùy chỉnh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sto in queryset %}
+                        <tr>
+                            <td>{{sto.id}}</td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="{% url 'nhanvien_profile_up' sto.id %}" class="avatar"> <img src="{{sto.avatar.url}}" alt=""></a>
+                                    <a href="{% url 'nhanvien_profile_view' sto.id %}"> {{sto.ho_lot_thuong_dung}}{{sto.ten_thuong_dung}}<span>{{sto.ma_nhan_vien}}</span></a>
+                                </h2>
+                            </td>
+                            <td><a href="{% url 'view_motacv_chitiet7' sto.vitri_CV.id %}"> {{sto.vitri_CV|truncatewords:9}} </td>
+
+                            <td><a class="dropdown-item" href="{% url 'nhanvien_profile_up' sto.id %}"><i class="fa fa-address-card-o m-r-5"></i>Quá trình C/tác/Lý lịch </a> </td>
+                            <td class="fa fa-volume-control-phone"> :{{sto.tel_dd}}</td>
+                            <td><a class="dropdown-item" href="{% url 'danhgia_KPI_list'  %}"><i class="fa fa-sort-amount-asc m-r-5"></i> KPI </a> </td>
+                            <td><a class="dropdown-item" href="{% url 'danhgianangluc_view_nv'  %}"><i class="fa fa fa-cubes "></i> Năng lực</a> </td>py
+
+
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="{% url 'up_nhanvien' sto.id %}"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="{% url 'delete_nhanvien' sto.id %}"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                      <tfoot>
+					  <tr class="table-infor">
+						  <th class="text-center" cscope="col"></th>
+
+                          <th class="text-center" cscope="col">Điểm:{{diemdanhgia}}</th>
+                          <th scope="col">Vị trí công việc:{{vitri_chucvu}}</th>
+                          <th scope="col">Số lao động:{{nhanvien}}</th>
+
+                      </tr>
+                      </tfoot>
+                </table>
+                {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+                {% endif %}
+            </div>
+            <!-------------Finish class="table-responsive"------->
+
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

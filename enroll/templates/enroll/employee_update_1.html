@@ -1,0 +1,641 @@
+{% extends "layouts/base.html" %}
+{% block title %} Hồ sơ nhân viên {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load widget_tweaks %}
+
+
+<div class="row">
+    <div class="col-sm-12 offset-1 ">
+        <div class="container">
+            <div class="card mt-2 mr-0 ml-0">
+                <div class="card-body">
+          <!--  <form action="" method="POST" enctype="multipart/form-data"> -->
+                <form method="POST" enctype="multipart/form-data" id="Person__Form" load_diaphuong ="{% url 'load_diaphuong' %}" novalidate>
+
+
+                        {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="profile-img-wrap edit-img">
+                                <img class="inline-block" src= {{'fmnv.avatar.url'}} alt="user">
+                                <div class="fileupload btn">
+                                    <span class="btn-text">Sửa</span>
+                                    <input class="upload" type="file">
+                                </div>
+                            </div><br>
+
+
+
+                            <div class="card">
+                                <h4 class="alert alert-info"> Cập nhật thông tin chung</h4>
+                                <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Mã nhân viên</label>
+                                        <input type="text" class="form-control" id="{{fmnv.ma_nhan_vien}}
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Họ</label>
+                                        <input type="text" class="form-control" id="{{fmnv.ho_lot_thuong_dung}}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Tên</label>
+                                        <input type="text" class="form-control" id={{fmnv.ten_thuong_dung}}
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Điện thoại</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.tel_dd}}
+                                        </div>
+                                    </div>
+                                </div>
+                                  <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <div class="text">
+                                            <input class="form-control email" type="text" id={{fmnv.email}}
+                                        </div>
+                                    </div>
+                                  </div>
+
+                                        <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Chức vụ</label>
+                                        <select class="select form-control">
+                                            <option id ={{fmnv.vitri_CV}}
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Ngày vào đơn vị</label>
+                                        <div class="text">
+                                            <input class="form-control datetimepicker" type="text" id={{fmnv.ngay_vao_dv}}
+                                        </div>
+                                    </div>
+                                </div>
+                               <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Ngày vào Ngành</label>
+                                        <div class="text">
+                                            <input class="form-control datetimepicker" type="text" id={{fmnv.ngay_vao_nganh}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Cấp trên/người hướng dẫn</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.Nguoi_qly}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Giới tính</label>
+                                        <select class="select form-control">
+                                            <option id ={{fmnv.Gioi_tinh}}
+                                    </div>
+                                </div>
+                            </div>
+                                </div>
+<!------------------------------------------> <br>
+
+
+                    <div class="card">
+                                <h4 class="alert alert-info"> Cập nhật thông tin Cá nhân</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Ngày sinh</label>
+                                        <div class="text">
+                                            <input class="form-control datetimepicker" type="text" id={{fmnv.ngay_sinh}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Nơi sinh: </label>
+                                        <select class="select form-control">
+                                            <option id ={{fmnv.ma_tinh_noi_sinh}}
+                                    </div>
+                                </div> <br>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Số CCCD/CMND: </label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id ={{fmnv.so_CCCD}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Ngày cấp</label>
+                                        <div class="text">
+                                            <input class="form-control datetimepicker" type="text" id={{fmnv.ngay_cap_CCCD}}
+                                        </div>
+                                    </div>
+                                </div> <br>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Quốc tịch:</label>
+                                        <select class="select form-control">
+                                            <option id ={{fmnv.quoctich}}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tôn giáo:</label>
+                                        <select class="select form-control">
+                                            <option id ={{fmnv.ton_giao}}
+                                    </div>
+                                </div> <br>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Dân tộc:</label>
+                                        <select class="select form-control">
+                                            <option id ={{fmnv.dan_toc}}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tình trạng hôn nhân</label>
+                                        <select class="select form-control">
+                                            <option id ={{fmnv.thanhphan_gd}}
+                                    </div>
+                                </div> <br> <br>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tình trạng hôn nhân</label>
+                                        <select class="select form-control">
+                                            <option id ={{fmnv.Tinhtrang_gd}}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Nguyên quán</label>
+                                        <select class="select form-control">
+                                            <option id ={{fmnv.Nguyen_quan}}
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                                </div>
+                    </div>
+<!------------------------------------------> <br>
+
+
+                    <div class="card">
+                                <h4 class="alert alert-info"> Thông tin Thuế, BHXH, BHYT, Ngân hàng</h4>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Mã số thuế TNCN:</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.Masothue_cn}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Số người phụ thuộc( giảm trừ thuế TNCN):</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.So_nguoi_phuthuoc}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Số Sổ Lao động: </label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id ={{fmnv.so_so_ld}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Ngày cấp sổ lao động</label>
+                                        <div class="text">
+                                            <input class="form-control datetimepicker" type="text" id={{fmnv.ngay_cap_sld}}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Số Sổ BHXH/BHYT: </label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id ={{fmnv.so_so_bhxh}}
+                                        </div>
+                                    </div>
+                                </div><br>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tài khoản ngân hàng: </label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id ={{fmnv.Taikhoan_nh}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Tên Ngân hàng: </label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id ={{fmnv.Ten_nganhang}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+<!------------------------------------------> <br>
+
+
+                    <div class="card">
+                                <h4 class="alert alert-info"> Thông tin địa chỉ:</h4> <br>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label>Địa chỉ hiện nay:</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.dc_hiennay}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Phường/xã( giảm trừ thuế TNCN):</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.px_cu_tru}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Quận/huyện: </label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id ={{fmnv.qh_cu_tru}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Tỉnh/thành</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.tinh_cu_tru}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label>Địa chỉ Thường trú:</label> <br>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.dc_thuong_tru}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Phường/xã( giảm trừ thuế TNCN):</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.px_thuong_tru}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Quận/huyện: </label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id ={{fmnv.qh_thuong_tru}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Tỉnh/thành</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.ma_tinh_thuong_tru}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<!------------------------------------------> <br>
+
+
+                        <div class="card">
+                                <h4 class="alert alert-info"> Trình độ đào tạo (Phổ thông, chuyên môn, chính trị, quản lý</h4>
+                            <div class="row">
+                               <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Trình độ phổ thông: </label>
+                                        <select class="select form-control">
+                                            <option id ={{fmnv.trinhdovh}}
+                                    </div>
+                                </div> <br>
+
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Trình độ chuyên môn: </label>
+                                        <select class="select form-control">
+                                            <option id ={{fmnv.trinhdo}}
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Chuyên ngành chuyên môn: </label>
+                                        <select class="select form-control">
+                                            <option id =""{{fmnv.trinhdo}}
+                                    </div>
+                                </div>
+
+                                <br>
+
+                               <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Trình độ chính trị: </label>
+                                        <select class="select form-control">
+                                            <option id ={{fmnv.trinh_do_ctri}}
+                                    </div>
+                                </div> <br>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Trình độ quản lý Nhà nước </label>
+                                        <select class="select form-control">
+                                            <option id ={{fmnv.trinh_do_ql}}
+                                    </div>
+                                </div>
+                                 </div>
+                                </div><br>
+  <!------------------------------------------> <br>
+
+
+                    <div class="card">
+                                <h4 class="alert alert-info"> Thông tin Sức khỏe, Y tế:</h4> <br>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Chiều cao:</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.Chieu_cao}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Cân nặng:</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.Can_nang}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Đặc điểm nhận dạng: </label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id ={{fmnv.dd_nhan_dang}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Xếp loại sức khỏe 2 năm gần nhất/Có bệnh mãn tính (nếu có)</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.Danh_hieu_ph_tang}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+<!------------------------------------------> <br>
+
+
+                    <div class="card">
+                                <h4 class="alert alert-info">  Đảng, Đoàn TNCSHCM </h4>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Ngày vào Đảng</label>
+                                        <div class="text">
+                                            <input class="form-control datetimepicker" type="text" id={{fmnv.Ngay_vao_dang}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Ngày vào Đảng chính thức </label>
+                                        <div class="text">
+                                            <input class="form-control datetimepicker" type="text" id={{fmnv.Ngay_ct}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Chi bộ kết nạp:</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.Tai_chi_bo}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Chức vụ trong Đảng hiện nay:</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.Chuc_vu_dang}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Ngày vào Đoàn </label>
+                                        <div class="text">
+                                            <input class="form-control datetimepicker" type="text" id={{fmnv.Ngay_vao_doan}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Nơi kết nạp:</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.Noi_vao_doan}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Chức vụ trong Đoàn:</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.Chuc_vu_doan}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+<!------------------------------------------> <br>
+
+
+                    <div class="card">
+                                <h4 class="alert alert-info"> Sở trường, năng lực:</h4> <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Điểm mạnh:</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.Diem_manh}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Điểm yếu:</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.Diem_yeu}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Mục tiêu cá nhân: </label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id ={{fmnv.Muctieu_cn}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Sở trường</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.So_truong}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Quan hệ nước ngoài:</label> <br>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.Q_he_nuoc_ngoai}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Thành phần nước ngoài:</label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id={{fmnv.Thannhan_nn}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Nhận xét : </label>
+                                        <div class="text">
+                                            <input class="form-control" type="text" id ={{fmnv.Nhan_xet}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<!---------------------
+
+                    </div>
+
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+---------------------> <br>
+
+
+
+              <input type="submit" class="btn btn-success" value="Cập nhật">
+              <a href="{% url 'employees' %}" class="btn btn-info"> Trở về </a>
+            </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+{% block javascripts %}
+
+<script>
+    $("#id_ma_tinh_thuong_tru").change(function () {
+      var url = $("#Person__Form").attr("load_diaphuong");
+      var don_viId = $(this).val();
+          $.ajax({
+            url: url,
+            data: {
+              'ma_tinh_thuong_tru': ma_tinh_thuong_truId
+            },
+            success: function (data) {
+              $("#id_qh_thuong_tru").html(data);
+            }
+          });
+      });
+
+     $("#id_qh_thuong_tru").change(function () {
+      var url = $("#Person__Form").attr("load_diaphuong");
+      var bo_phanId = $(this).val();
+          $.ajax({
+            url: url,
+            data: {
+              'qh_thuong_tru': qh_thuong_truId
+            },
+            success: function (data) {
+              $("#id_px_thuong_tru").html(data);
+            }
+          });
+      });
+
+  </script>
+{% endblock javascripts %}

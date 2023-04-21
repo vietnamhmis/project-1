@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta name="viewport" content="with =device-width, initial-scale=1.0">
+    <title>HMis Web</title>
+    <link rel="stylesheet" href= {% static "/courses/hmis.css" %}>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<section class="sub-header">
+    <nav>
+        <a href="layouts/hmis.html"> <img class="image-thumbail" alt="" src="/static/assets/img/anh_his/hrm3.png"></a>
+        <div class="nav-links" id="navLinks">
+            <i class="fa fa-times"  onclick="hideMenu()"></i>
+            <ul>
+                <li> <a href="{% url 'Courses:chayweb_index' %}">HOME</a> </li>
+                <li> <a href="{% url 'Courses:chayweb_about' %} ">ABOUT</a> </li>
+                <li> <a href="{% url 'Courses:chayweb_course' %} ">COURSE</a> </li>
+                <li> <a href="{% url 'Courses:chayweb_blog' %} ">BLOG</a> </li>
+                <li> <a href="{% url 'Courses:chayweb_Contac' %}">CONTACT</a> </li>
+            </ul>
+        </div>
+       <!---  <i class="fa fa-bars"</i> --->
+       <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav>
+  <h1>Contact Us</h1>
+</section>
+
+<!------------------Contact Us------------>
+<section class="location">
+   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6088.326675252098!2d106.66167682685887!3d10.781417132809311!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ecff3b8e2c7%3A0x6296f510df48d599!2zVjcgQmEgVsOsLCBQaMaw4budbmcgMTUsIFF14bqtbiAxMCwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1669650634965!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>
+
+<section class="Contact-us">
+    <div class="row">
+        <div class="contact-col">
+            <div>
+                <i class="fa fa-home"></i>
+                <span>
+                    <h5>vnjfdnvkdnvkdk</h5>
+                    <p>nfnbdfslmfbmfdlms</p>
+                </span>
+            </div>
+
+             <div>
+                <i class="fa fa-phone"></i>
+                <span>
+                    <h5>0918143453</h5>
+                    <p>Monday to Sunday, 10 Pa-6hPM</p>
+                </span>
+            </div>
+
+            <div>
+                <i class="fa fa-envelope-o"></i>
+                <span>
+                    <h5>info@gmail.come</h5>
+                    <p>V7 Ba Vì, Phường 15, Quận 10, Thành phố Hồ Chí Minh, Việt Nam</p>
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="contact-col">
+            <form action="">
+                  <input type="text" placeholder="Nhập họ tên" required>
+                  <input type="email" placeholder="Nhập địa chỉ  Email" required>
+                 <input type="text" placeholder="Chủ đề bạn trao cần trao đổi" required>
+                 <textarea rows="5" placeholder="Nội dung trao đổi"></textarea>
+                 <button type="submit" class="hero-btn red-btn"> GỬI THÔNG TIN </button>
+            </form>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+<!------------------Footer------------>
+<section class="footer">
+    <h4>Abou Us</h4>
+    <p>  HMIS sẵn sàng trao đổi, phân tích nhu cầu <br>
+        và thiết kế các chương trình tư vấn và đào tạo chuyên biệt phù hợp
+        theo đơn đặt hàng của Quý Doanh nghiệp</p>
+    <div class="icons">
+        <i class="fa fa-facebook"></i>
+        <i class="fa fa-twitter"></i>
+        <i class="fa fa-instagram"></i>
+        <i class="fa fa-linkedin"></i>
+    </div>
+<p>Made with   <i class="fa fa-heart-o"></i> Viện Khoa học Quản lý Nguồn nhân lực (HMIS) </p>
+</section>
+
+
+
+<script>
+    var navLinks = document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right = "0";
+    }
+    function hideMenu(){
+        navLinks.style.right = "-200px";
+    }
+</script>
+
+</body>
+</html>

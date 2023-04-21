@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html' %}
+{% block title %} Sửa dữ liệu{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-8 offset-2 ">
+        <div class="container">
+            <div class="card mt-1 mr-0 ml-0">
+                <div class="card-body">
+                    <h4 class="alert alert-info"> ĐIỀU CHỈNH KPI ĐƠN VỊ:</h4>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{formdv.as_p}}
+                        <input type="submit" class="btn btn-success" value="Update">
+                        <a href="{% url 'kpi_dv_v' %}" class="btn btn-info"> Back to Home </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

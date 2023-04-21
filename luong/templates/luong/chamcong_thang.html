@@ -1,0 +1,262 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+<div class="content container-fluid" xmlns="http://www.w3.org/1999/html">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">BẢNG LƯƠNG THÁNG</h3>
+                <ul class="breadcrumb">
+                    <!-- link bang dieu khiển -->
+                    <li class="breadcrumb-item"><a href="">BẢNG LƯƠNG</a></li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="" class="btn add-btn"><i class="fa fa-plus"></i> XEM CHẤM CÔNG</a>
+                <div class="view-icons">
+                    <a href="" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <!-- Search Filter----------------------------- -->
+
+    <form method='POST' action=''>{% csrf_token %}
+          <div class="form-row">
+            <div class="form-group col-md-2">
+                <select class="form-control" placeholder="Chức vụ" {{form.don_vi}} </select> </div>
+                <div class="form-group col-md-2">
+                <select class="form-control" placeholder="Chức vụ" {{form.bo_phan}} </select> </div>
+                <div class="form-group col-md-2">
+                <select class="form-control" placeholder="Chức vụ" {{form.Nam}} </select> </div>
+               <div class="form-group col-md-2">
+                <select class="form-control" placeholder="Chức vụ" {{form.thang}} </select> </div>
+              <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id={{form.Xuất_Excel}} <label class="form-check-label">
+                        Xuất Excel
+                    </label>
+              </div>
+              <div class="col-md-1 text-right">
+                        <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Tìm kiếm' /></div>
+        </div>
+
+    </form>
+
+    <!-- /Search Filter ------------------------------------------------------>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                {% if queryset %}
+                <table class="table table-striped custom-table table-nowrap mb-0">
+                      <thead>
+                        <tr>
+                            <th>Họ tên</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                            <th>9</th>
+                            <th>10</th>
+                            <th>11</th>
+                            <th>12</th>
+                            <th>13</th>
+                            <th>14</th>
+                            <th>15</th>
+                            <th>16</th>
+                            <th>17</th>
+                            <th>18</th>
+                            <th>19</th>
+                            <th>20</th>
+                            <th>21</th>
+                            <th>22</th>
+                            <th>23</th>
+                            <th>24</th>
+                            <th>25</th>
+                            <th>26</th>
+                            <th>27</th>
+                            <th>28</th>
+                            <th>29</th>
+                            <th>30</th>
+                            <th>31</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                       {% for sto in queryset %}
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+								<a href="" class="avatar"> <img src="{{sto.Nhan_vien.avatar.url}}" alt=""></a>
+								<a href=""> {{sto.Nhan_vien.ho_lot_thuong_dung}} {{sto.Nhan_vien.ten_thuong_dung}}<span>{{sto.Nhan_vien.vitri_CV|truncatewords:8}}</span></a>
+								</h2>
+                            </td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_1}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_2}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_3}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_4}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_5}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_6}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_7}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_8}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_9}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_10}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_11}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_12}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_13}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_14}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_15}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_16}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_17}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_18}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_19}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_20}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_21}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_22}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_23}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_24}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_25}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_26}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_27}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_28}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_29}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_30}}</td>
+                            <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info">{{sto.Ngay_31}}</td>
+                        </tr>
+                        {% endfor %}
+
+
+                    </tbody>
+                </table>
+                {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+                {% endif %}
+            </div>
+        </div> <!-- /md-12-------->
+    </div><!-- /rows------->
+</div>
+<!-- /Page Content -->
+
+
+
+<!-- Attendance Modal -->
+<div class="modal custom-modal fade" id="attendance_info" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông tin chấm công</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card punch-status">
+                            <div class="card-body">
+                                <h5 class="card-title">Bảng chấm công <small class="text-muted">11/08/2021</small></h5>
+                                <div class="punch-det">
+                                    <h6>Thời gian vào</h6>
+                                    <p>Thứ 2, 11 08 2021 10.00 AM</p>
+                                </div>
+                                <div class="punch-info">
+                                    <div class="punch-hours">
+                                        <span>3.45 hrs</span>
+                                    </div>
+                                </div>
+                                <div class="punch-det">
+                                    <h6>Thời gian ra</h6>
+                                    <p>Thứ 2, 11 08 2021 9.00 PM</p>
+                                </div>
+                                <div class="statistics">
+                                    <div class="row">
+                                        <div class="col-md-6 col-6 text-center">
+                                            <div class="stats-box">
+                                                <p>Nghỉ trưa</p>
+                                                <h6>1.21 Tiếng</h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6 text-center">
+                                            <div class="stats-box">
+                                                <p>Tăng ca</p>
+                                                <h6>3 tiếng</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card recent-activity">
+                            <div class="card-body">
+                                <h5 class="card-title">Hoạt động</h5>
+                                <ul class="res-activity-list">
+                                    <li>
+                                        <p class="mb-0">Thời gian vào</p>
+                                        <p class="res-activity-time">
+                                            <i class="fa fa-clock-o"></i>
+                                            10.00 AM.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="mb-0">Thời gian ra</p>
+                                        <p class="res-activity-time">
+                                            <i class="fa fa-clock-o"></i>
+                                            11.00 AM.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="mb-0">Thời gian vào</p>
+                                        <p class="res-activity-time">
+                                            <i class="fa fa-clock-o"></i>
+                                            11.15 AM.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="mb-0">Thời gian ra</p>
+                                        <p class="res-activity-time">
+                                            <i class="fa fa-clock-o"></i>
+                                            1.30 PM.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="mb-0">Thời gian vào</p>
+                                        <p class="res-activity-time">
+                                            <i class="fa fa-clock-o"></i>
+                                            2.00 PM.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="mb-0">Thời gian ra</p>
+                                        <p class="res-activity-time">
+                                            <i class="fa fa-clock-o"></i>
+                                            7.30 PM.
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Attendance Modal -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

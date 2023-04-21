@@ -1,0 +1,86 @@
+{% extends 'courses/base.html' %}
+{% block title %} Đăng nhập {% endblock %}
+{% load static %}
+{% block content %}
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Login/Regiser</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <style>
+    .image-thumbail{
+        height: 200px;
+
+        object-fit: cover;
+    }
+
+        .login--wrapper {
+            display: flex;
+            align-items: center;
+            height: 80vh;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+
+<body class="md-9">
+    <div class="container">
+                        {% if request.user.is_authenticated %}
+                <p>Hello {{request.user}}</p>
+                {% endif %}
+<div class="row">
+
+    <div class="col-md-3">
+          <div class="card">
+          <div class="card-header">
+            Hình ảnh/categories
+          </div>
+          <ul class="list-group list-group-flush">
+                 <li class="list-group-item">
+                            <a href="{% url 'gallery' %}">All</a>
+                  </li>
+                  {% for category in categories %}
+                       <li class="list-group-item">
+                             <a href="{% url 'gallery' %}?category={{category.name}}">
+                                    {{category.name}}
+                             </a>
+                        </li>
+                 {% endfor %}
+            <a href="{% url 'add' %}" class="btn btn-success btn-block badge-pill">Add Photo</a>
+          </ul>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row">
+             {% for photo in photos %}
+                 <div class="col-md-4">
+                     <div class="card">
+                     <img class="image-thumbail" src="{{ photo.image.url }}" alt="Card image cap">
+                     <div class="card-body">
+                     <small>Category:{{ photo.category }}</small>
+                     </div>
+                         <a href="{% url 'photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
+                     </div>
+                </div>
+
+            {% endfor %}
+        </div>
+
+    </div>
+
+    </div>
+
+    </div>
+</body>
+
+{% endblock %}
+
+
+
+

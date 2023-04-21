@@ -1,0 +1,79 @@
+{% extends "banhang/base_banhang.html" %}
+
+{% block content %}
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <main>
+    <div class="container">
+    <div class="table w-auto">
+    <h3 style="color: blue"> <b>ĐƠN HÀNG CỦA BẠN </b></h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">TT</th>
+            <th scope="col">Danh mục hàng hóa</th>
+            <th scope="col">Giá bán</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Thành tiền</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order_item in object_ga.items.all %}
+        <!---object (lấy đơn hàng Order, )= Order.objects.get(user=self.request.user, ordered=False)- items-->
+        <!---object.items ==> --->
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ order_item.item.title }}</td>
+            <td>{{ order_item.item.price }}</td>
+            <!---tăng giảm số lượng hàng hóa--->
+            <td>
+                <a href="{% url 'core:remove-single-item-from-cart' order_item.item.slug %}"><i class="fas fa-minus mr-2"></i></a>
+                {{ order_item.quantity }}
+                <a href="{% url 'core:add_to_cart' order_item.item.slug %}"><i class='fas fa-plus-circle' style='font-size:24px;color:red'></i></a>
+            </td>
+            <td>
+            {% if order_item.item.discount_price %}
+                ${{ order_item.get_total_discount_item_price }}
+                <span class="badge badge-primary">Saving ${{ order_item.get_diem_congviec_kpi }}</span>
+            {% else %}
+                ${{ order_item.get_total_item_price }}
+            {% endif %}
+            <a style='color: red;' href="{% url 'core:remove-from-cart' order_item.item.slug %}">
+                <i class="fas fa-trash float-right"></i>
+            </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan='5'>Your cart is empty</td>
+        </tr>
+        <tr>
+            <td colspan="5">
+            <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+        <tr>
+            <td colspan="4">
+            <a style='color: red;' ><b>Tổng cộng</b> </a>
+            </td>
+
+            <td >
+            <a style='color: blue;' ><b>{{ object.get_total }} đồng</b> </a>
+                {{ object.get_total }}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5">
+            <a class='btn btn-warning float-right ml-2' href='/checkout/'>THANH TOÁN</a>
+            <a class='btn btn-primary float-right' href='/'>TIẾP TỤC CHỌN HÀNG</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    </div>
+  </main>
+{% endblock content %}
+
+

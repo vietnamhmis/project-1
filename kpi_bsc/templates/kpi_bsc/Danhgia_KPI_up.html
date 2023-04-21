@@ -1,0 +1,50 @@
+{% extends "layouts/base_no.html" %}
+{% block title %} Cập nhật KPI {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- Page Content -->
+<div class="container p-3 mb-2 bg-transparent text-blue border border-danger">
+    <h2 class="alert alert-danger red"> CẬP NHẬT ĐÁNH GIÁ KPI</h2>
+    <br><br>
+    <form action="" method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+         <div class="row">
+             Người được đánh giá :
+              <div class="col-8 col-md-4"><select class="form-control" placeholder="" {{form.Nhanvien_dg_KPI}} </select> </div>
+            Sửa mức tự đánh giá :
+              <div class="col-6 col-md-3"><input type="" class="form-control" placeholder="Mức Tự đánh giá" id={{form.tu_danhgia_dapung}} </div>
+         </div><br>
+
+         <div class="row">
+            Quản lý trực tiếp đánh giá:
+            <div class="col-4 col-md-4"><select class="form-control" placeholder="" {{form.Quanly_danhgia}} </select> </div>
+             Sửa mức  đánh giá :
+            <div class="col-6 col-md-3"><input type="" class="form-control" placeholder="Mức quản lý đánh giá" id={{form.Quanly_danhgia}} </div>
+         </div>
+
+        <br><br>
+        <!-- Page{{form|crispy}} Content -->
+
+        <input type="submit" class="btn btn-success" value="Cập nhật">
+        <a href="{% url 'Danhgia_kpi_list2' %}" class="btn btn-info"> TRỞ VỀ </a>
+
+         {% if messages %}
+         {% for up_dulieu in messages %}
+
+            <h2 style="color: red">{{up_dulieu}}</h2>
+
+         {% endfor %}
+         {% endif %}
+    </form>
+</div>
+<!-- /Page Content -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

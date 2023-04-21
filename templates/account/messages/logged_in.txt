@@ -1,0 +1,4 @@
+{% load account %}
+{% load i18n %}
+{% user_display user as name %}
+{% blocktrans %}Bạn đã hệ thống thành công với tên đăng nhập là {{name}}.{% endblocktrans %}

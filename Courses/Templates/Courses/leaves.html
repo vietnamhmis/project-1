@@ -1,0 +1,717 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+				
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Nghỉ phép</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index">Bảng điều khiển</a></li>
+                    <li class="breadcrumb-item active">Nghỉ phép</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_leave"><i class="fa fa-plus"></i> Thêm mới</a>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+    
+    <!-- Leave Statistics -->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="stats-info">
+                <h6>Tổng số ngày phép</h6>
+                <h4>12 / 60</h4>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-info">
+                <h6>Đã phê duyệt</h6>
+                <h4>8 <span>Hôm nay</span></h4>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-info">
+                <h6>Chưa phê duyệt</h6>
+                <h4>0 <span>Hôm nay</span></h4>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-info">
+                <h6>Chờ xử lý</h6>
+                <h4>12</h4>
+            </div>
+        </div>
+    </div>
+    <!-- /Leave Statistics -->
+    
+    <!-- Search Filter -->
+    <div class="row filter-row">
+       <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating">
+                <label class="focus-label">Tên nhân viên</label>
+            </div>
+       </div>
+       <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+            <div class="form-group form-focus select-focus">
+                <select class="select floating"> 
+                    <option> -- Chọn -- </option>
+                    <option>Nghỉ thường</option>
+                    <option>Nghỉ khám bệnh</option>
+                    <option>Nghỉ không lương</option>
+                </select>
+                <label class="focus-label">Loại nghỉ phép</label>
+            </div>
+       </div>
+       <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
+            <div class="form-group form-focus select-focus">
+                <select class="select floating"> 
+                    <option> -- Chọn -- </option>
+                    <option> Chờ xử lý </option>
+                    <option> Đã phê duyệt </option>
+                    <option> Không phê duyệt </option>
+                </select>
+                <label class="focus-label">Tình trạng</label>
+            </div>
+       </div>
+       <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+            <div class="form-group form-focus">
+                <div class="cal-icon">
+                    <input class="form-control floating datetimepicker" type="text">
+                </div>
+                <label class="focus-label">Từ ngày</label>
+            </div>
+        </div>
+       <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+            <div class="form-group form-focus">
+                <div class="cal-icon">
+                    <input class="form-control floating datetimepicker" type="text">
+                </div>
+                <label class="focus-label">Đến</label>
+            </div>
+        </div>
+       <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+            <a href="#" class="btn btn-success btn-block"> Tìm kiếm </a>  
+       </div>     
+    </div>
+    <!-- /Search Filter -->
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-striped custom-table mb-0 datatable">
+                    <thead>
+                        <tr>
+                            <th>Nhân viên</th>
+                            <th>Loại ngày nghỉ</th>
+                            <th>Từ</th>
+                            <th>Đến</th>
+                            <th>Tổng số ngày</th>
+                            <th>Lý do</th>
+                            <th class="text-center">Tình trạng</th>
+                            <th class="text-right">Tùy chỉnh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-09.jpg"></a>
+                                    <a href="#">Example name <span>HR</span></a>
+                                </h2>
+                            </td>
+                            <td>Nghỉ thường</td>
+                            <td>20-08-2021</td>
+                            <td>24-08-2021</td>
+                            <td>4 ngày</td>
+                            <td>Nghỉ dưỡng</td>
+                            <td class="text-center">
+                                <div class="dropdown action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-dot-circle-o text-purple"></i> Mới
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-purple"></i> Mới</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-info"></i> Chờ xử lý</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#approve_leave"><i class="fa fa-dot-circle-o text-success"></i> Đã duyệt</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Không duyệt</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_leave"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_approve"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-02.jpg"></a>
+                                    <a>	Example name  <span>HR</span></a>
+                                </h2>
+                            </td>
+                            <td>Nghỉ khám bệnh</td>
+                            <td>12-09-2021</td>
+                            <td>15-09-2021</td>
+                            <td>3 day</td>
+                            <td>BV DHYD</td>
+                            <td class="text-center">
+                                <div class="dropdown action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đã duyệt
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-purple"></i> Mới</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-info"></i> Chờ xử lý</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#approve_leave"><i class="fa fa-dot-circle-o text-success"></i> Đã duyệt</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Không duyệt</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_leave"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_approve"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-10.jpg"></a>
+                                    <a>Example name <span>HR</span></a>
+                                </h2>
+                            </td>
+                            <td>Nghỉ khám bệnh</td>
+                            <td>12-09-2021</td>
+                            <td>15-09-2021</td>
+                            <td>3 day</td>
+                            <td>BV DHYD</td>
+                            <td class="text-center">
+                                <div class="dropdown action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đã duyệt
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-purple"></i> Mới</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-info"></i> Chờ xử lý</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#approve_leave"><i class="fa fa-dot-circle-o text-success"></i> Đã duyệt</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Không duyệt</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_leave"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_approve"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-05.jpg"></a>
+                                    <a>Example name  <span>HR</span></a>
+                                </h2>
+                            </td>
+                            <td>Nghỉ khám bệnh</td>
+                            <td>12-09-2021</td>
+                            <td>15-09-2021</td>
+                            <td>3 day</td>
+                            <td>BV DHYD</td>
+                            <td class="text-center">
+                                <div class="dropdown action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đã duyệt
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-purple"></i> Mới</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-info"></i> Chờ xử lý</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#approve_leave"><i class="fa fa-dot-circle-o text-success"></i> Đã duyệt</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Không duyệt</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_leave"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_approve"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-24.jpg"></a>
+                                    <a>Example name <span>HR</span></a>
+                                </h2>
+                            </td>
+                            <td>Nghỉ khám bệnh</td>
+                            <td>12-09-2021</td>
+                            <td>15-09-2021</td>
+                            <td>3 day</td>
+                            <td>BV DHYD</td>
+                            <td class="text-center">
+                                <div class="dropdown action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đã duyệt
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-purple"></i> Mới</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-info"></i> Chờ xử lý</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#approve_leave"><i class="fa fa-dot-circle-o text-success"></i> Đã duyệt</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Không duyệt</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_leave"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_approve"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-08.jpg"></a>
+                                    <a>Example name <span>Kế toán</span></a>
+                                </h2>
+                            </td>
+                            <td>Nghỉ khám bệnh</td>
+                            <td>12-09-2021</td>
+                            <td>15-09-2021</td>
+                            <td>3 day</td>
+                            <td>BV DHYD</td>
+                            <td class="text-center">
+                                <div class="dropdown action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đã duyệt
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-purple"></i> Mới</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-info"></i> Chờ xử lý</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#approve_leave"><i class="fa fa-dot-circle-o text-success"></i> Đã duyệt</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Không duyệt</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_leave"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_approve"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-15.jpg"></a>
+                                    <a>Example name <span>HR</span></a>
+                                </h2>
+                            </td>
+                            <td>Nghỉ khám bệnh</td>
+                            <td>12-09-2021</td>
+                            <td>15-09-2021</td>
+                            <td>3 day</td>
+                            <td>BV DHYD</td>
+                            <td class="text-center">
+                                <div class="dropdown action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đã duyệt
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-purple"></i> Mới</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-info"></i> Chờ xử lý</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#approve_leave"><i class="fa fa-dot-circle-o text-success"></i> Đã duyệt</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Không duyệt</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_leave"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_approve"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-20.jpg"></a>
+                                    <a>Example name <span>IT</span></a>
+                                </h2>
+                            </td>
+                            <td>Nghỉ khám bệnh</td>
+                            <td>12-09-2021</td>
+                            <td>15-09-2021</td>
+                            <td>3 day</td>
+                            <td>BV DHYD</td>
+                            <td class="text-center">
+                                <div class="dropdown action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đã duyệt
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-purple"></i> Mới</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-info"></i> Chờ xử lý</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#approve_leave"><i class="fa fa-dot-circle-o text-success"></i> Đã duyệt</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Không duyệt</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_leave"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_approve"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-03.jpg"></a>
+                                    <a>Example name <span>Kế toán</span></a>
+                                </h2>
+                            </td>
+                            <td>Nghỉ khám bệnh</td>
+                            <td>12-09-2021</td>
+                            <td>15-09-2021</td>
+                            <td>3 day</td>
+                            <td>BV DHYD</td>
+                            <td class="text-center">
+                                <div class="dropdown action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đã duyệt
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-purple"></i> Mới</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-info"></i> Chờ xử lý</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#approve_leave"><i class="fa fa-dot-circle-o text-success"></i> Đã duyệt</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Không duyệt</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_leave"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_approve"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-20.jpg"></a>
+                                    <a>Example name <span>HR</span></a>
+                                </h2>
+                            </td>
+                            <td>Nghỉ khám bệnh</td>
+                            <td>12-09-2021</td>
+                            <td>15-09-2021</td>
+                            <td>3 day</td>
+                            <td>BV DHYD</td>
+                            <td class="text-center">
+                                <div class="dropdown action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đã duyệt
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-purple"></i> Mới</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-info"></i> Chờ xử lý</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#approve_leave"><i class="fa fa-dot-circle-o text-success"></i> Đã duyệt</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Không duyệt</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_leave"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_approve"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-02.jpg"></a>
+                                    <a>Example name <span>HR</span></a>
+                                </h2>
+                            </td>
+                            <td>Nghỉ khám bệnh</td>
+                            <td>12-09-2021</td>
+                            <td>15-09-2021</td>
+                            <td>3 day</td>
+                            <td>BV DHYD</td>
+                            <td class="text-center">
+                                <div class="dropdown action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đã duyệt
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-purple"></i> Mới</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-info"></i> Chờ xử lý</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#approve_leave"><i class="fa fa-dot-circle-o text-success"></i> Đã duyệt</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Không duyệt</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_leave"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_approve"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-25.jpg"></a>
+                                    <a>Example name <span>HR</span></a>
+                                </h2>
+                            </td>
+                            <td>Nghỉ khám bệnh</td>
+                            <td>12-09-2021</td>
+                            <td>15-09-2021</td>
+                            <td>3 day</td>
+                            <td>BV DHYD</td>
+                            <td class="text-center">
+                                <div class="dropdown action-label">
+                                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-dot-circle-o text-success"></i> Đã duyệt
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-purple"></i> Mới</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-info"></i> Chờ xử lý</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#approve_leave"><i class="fa fa-dot-circle-o text-success"></i> Đã duyệt</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Không duyệt</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_leave"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_approve"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->
+
+<!-- Add Leave Modal -->
+<div id="add_leave" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm ngày nghỉ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>Loại ngày nghỉ <span class="text-danger">*</span></label>
+                        <select class="select">
+                            <option>-- Chọn --</option>
+                            <option>Nghỉ thường</option>
+                            <option>Nghỉ khám bệnh</option>
+                            <option>Nghỉ không lương</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Từ ngày <span class="text-danger">*</span></label>
+                        <div class="cal-icon">
+                            <input class="form-control datetimepicker" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Đến ngày <span class="text-danger">*</span></label>
+                        <div class="cal-icon">
+                            <input class="form-control datetimepicker" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Số ngày nghỉ <span class="text-danger">*</span></label>
+                        <input class="form-control" readonly type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày nghỉ còn lại <span class="text-danger">*</span></label>
+                        <input class="form-control" readonly value="12" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Lý do nghỉ <span class="text-danger">*</span></label>
+                        <textarea rows="4" class="form-control"></textarea>
+                    </div>
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Add Leave Modal -->
+
+<!-- Edit Leave Modal -->
+<div id="edit_leave" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thay đổi ngày nghỉ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>Loại ngày nghỉ <span class="text-danger">*</span></label>
+                        <select class="select">
+                            <option>-- Chọn --</option>
+                            <option>Nghỉ thường</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Từ ngày <span class="text-danger">*</span></label>
+                        <div class="cal-icon">
+                            <input class="form-control datetimepicker" value="01-01-2019" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Đến ngày <span class="text-danger">*</span></label>
+                        <div class="cal-icon">
+                            <input class="form-control datetimepicker" value="01-01-2019" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Số ngày nghỉ <span class="text-danger">*</span></label>
+                        <input class="form-control" readonly type="text" value="2">
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày nghỉ còn lại <span class="text-danger">*</span></label>
+                        <input class="form-control" readonly value="12" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Lý do nghỉ <span class="text-danger">*</span></label>
+                        <textarea rows="4" class="form-control"></textarea>
+                    </div>
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Edit Leave Modal -->
+
+<!-- Approve Leave Modal -->
+<div class="modal custom-modal fade" id="approve_leave" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-header">
+                    <h3>Duyệt ngày nghỉ</h3>
+                    <p>Bạn có chắc chắn duyệt cho ngày nghỉ này?</p>
+                </div>
+                <div class="modal-btn delete-action">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="javascript:void(0);" class="btn btn-primary continue-btn">Đồng ý</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Không đồng ý</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Approve Leave Modal -->
+
+<!-- Delete Leave Modal -->
+<div class="modal custom-modal fade" id="delete_approve" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-header">
+                    <h3>Xóa ngày nghỉ</h3>
+                    <p>Bạn có chắc chắn muốn xóa?</p>
+                </div>
+                <div class="modal-btn delete-action">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="javascript:void(0);" class="btn btn-primary continue-btn">Đồng ý</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Hủy bỏ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Delete Leave Modal -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

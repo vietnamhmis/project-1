@@ -1,0 +1,136 @@
+{% extends 'courses/base.html' %}
+{% block title %} Thêm dữ liệu{% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+
+          rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+          crossorigin="anonymous">
+<link href="{% static 'nhansu/css/stylesheet.css' %}" rel="stylesheet">
+<!---Cài đặt hiển thi table https://www.youtube.com/watch?v=yGBk9Nalyq8 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"/>
+<!---Kết  thúc Cài đặt hiển thi table -->
+
+<div class="rows">
+ <div class="row"><!--Start of row-->
+      <div class="col-sm-2"><!--Start of first col-->
+              <form method='POST' action=''>{% csrf_token %}
+               {{form.ten_bp}}
+               {{form.don_vi}}
+               {{form.Xuất_Excel}}
+
+              <input class="btn btn-primary mybutton" type="submit" value='Tìm kiếm'/>
+              </form><br><br>
+              <br>
+
+      </div><!--End of first col-->
+
+      <div class="col-md-10"><!--Start of second col-->
+        <div class="display_table"> <!--Hiển thỉ dang kiểu-->
+           {% if queryset %}
+           <table class="table table-hover table-wrapper-scroll-y tablebp_id" style="width="100%">
+                <thead>
+                <tr class="table-success">
+                     <div class="col-md-2"><!--Start of second col-->
+                         <th scope="col">ID</th>
+                     </div>
+                    <th scope="col">Mã Bộ phận</th>
+                    <th scope="col">Tên Bộ phận</th>
+                    <th scope="col">Đơn vị</th>
+                    <th scope="col">Nhiệm vụ</th>
+                    <th scope="col">Sửa/Xóa</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for bp in queryset %}
+                    <tr >
+                        <th class="table-bg-primary" scope="row">{{st.id}}</th>
+                        <td>{{bp.ma_bp}}</td>
+                        <td>{{bp.ten_bp}}</td>
+                        <td>{{bp.don_vi.Ten_DV}}</td>
+                        <td class="table-bg-primary">{{bp.nv_bp}}</td>
+                                        <td >
+                                            <a href="{% url 'update_bophan' bp.id %}" class="btn btn-info">THÊM/up</a>
+
+                                            <form action="{% url 'del_bophan' bp.id %}" method="post" class="d-inline">
+                                            <input type="submit"  class="bnt btn-success" value="XÓA">
+                                                {% csrf_token %}
+                                            </form>
+                                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+            {% endif %}
+        </div>
+  </div>
+            </div> <!---kết thúc hiện thi dạng kiểu -->
+</div> <! kết thúc class row--->
+
+<!---Cài đặt hiển thi table https://www.youtube.com/watch?v=yGBk9Nalyq8 -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+<!--- Cài đặt hiển thi table loc cac table : ...---->
+  <script>
+    $('.tablebp_id').DataTable({
+    initComplete: function(){
+        this.api().columns().every( function() {
+        var column = this;
+        var select = $('<select><option value = ""></option></select>')
+            .appendTo($(column.footer()).empty())
+            .on( 'change', function(){
+                var val = $.fn.DataTable.util.escapeRegex(
+                    $(this).val()
+                );
+            column
+                .search( val ? '^'+val+'$' : '', true, false)
+                .draw();
+        });
+      column.data().unique().sort().each( function ( d,j){
+        select.append('<option value="'+d+'">'+d+'</option>')
+            });
+        });
+       }
+     });
+  </script>
+
+{% endblock content %}
+
+
+
+<!--- Chương trình  nhóm cac Gruop trong table
+  $('.tablebp_id').DataTable({
+    columnDedfs: [
+        {visible:false, targets:3 }
+        ],
+    order:[[3, 'asc']],
+    dislayLength:25,
+
+    drawCallback: function(settings) {
+        var api = this.api();
+        var rows = api.row({page: 'current'}).nodes();
+        var last=null;
+
+    api.column(3,{page:'current'}).data().each(function(group,i) {
+        if (last !== group) {
+            $(rows).eq( i ).before(
+                '<tr class="bg-primary text-light"><td colspan="5">'+group+'</td></tr>'
+            );
+                last = group;
+            }
+     });
+    }
+  });
+</script>
+
+
+Finish Chương trình  nhóm cac Gruop trong table--->

@@ -1,0 +1,371 @@
+{% extends "layouts/base.html" %}
+{% block title %} Dashboard {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+<div class="content container-fluid">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col-auto float-right ml-auto">
+                <div class="btn-group btn-group-sm">
+                    <button class="btn btn-white">PDF</button>
+                     <input type="button" id="create_pdf" value="Xuất PDF">
+                    <button class="btn btn-white"><i class="fa fa-print fa-lg"></i> In word</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-sm-6 m-b-20">
+<td><font color="660033">
+                        <div class="rounded float-left">
+                            <div class="profile-img">
+                                <a href="" class="avatar"><img alt="" src="{{form_hd_nhanvien.Ho_ten.avatar.url}}"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="form" style="max-width: 180%; width: 1500px; max-height: none; height: none;">
+
+                    <div class="row">
+                        <div class="col-lg-12 m-b-20">
+                            <ul class="list-unstyled">
+                                    <h5>
+                                        <li><span>{{form_hd_nhanvien.Ho_ten}}</li>
+                                        <li>{{form_hd_nhanvien.Ho_ten.don_vi}}, {{form_hd_nhanvien.Ho_ten.bo_phan}}</li>
+                                        <li>Mã NV: {{form_hd_nhanvien.Ho_ten.ma_nhan_vien}}, ĐT: {{form_hd_nhanvien.Ho_ten.tel_dd}}, Email: {{form_hd_nhanvien.Ho_ten.email}} </li>
+                                    </h5>
+
+                                    <h2 class="float-none"> <li class="list-group-item list-group-item-success">HỢP ĐỒNG LAO ĐỘNG {{form_hd_nhanvien.Ho_ten.Don_vi}} </h2></li>
+                                    <br>
+                                <h3>
+                                    <li>- Căn cứ Bộ luật Lao động được Quốc hội nước Cộng hòa Xã hội Chủ nghĩa Việt Nam khóa XIII, kỳ họp thứ 3 thông qua ngày 18/6/2012 và các văn bản hướng dẫn thi hành Bộ luật Lao động;</li>
+                                    <li>- Căn cứ Điều lệ tổ chức và hoạt động và các quy định của Công ty Cổ phần Xi măng Hà Tiên 1;</li>
+                                    <li>- Căn cứ nhu cầu sử dụng lao động của Công ty Cổ phần Xi măng Hà Tiên 1 và năng lực của người lao động;</li> <br>
+
+                                    <li>Hôm nay, ngày........ tháng ..... năm 2022, tại Công ty Cổ phần Xi măng Hà Tiên 1, chúng tôi gồm:</li>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div>
+                                                <li class="text-uppercase">Người sử dụng lao động:</li>
+                                                <li> Đại diện là: </li>
+                                                <li>Chức vụ: </li>
+                                                <li> Đại diện cho : </li>
+                                                <li>Địa chỉ trụ sở chính:</li>
+                                                <li>Điện thoại :</li> <br>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <div>
+                                                <li class="text-uppercase">Công ty Cổ phần Xi măng Hà Tiên 1</li>
+                                                <li class="text-uppercase">Lưu Đình Cường</li>
+                                                <li>Tổng Giám đốc</li>
+                                                <li>Công ty Cổ phần Xi măng Hà Tiên 1 (Gọi tắt là Công ty)</li>
+                                                <li>360 Bến Chương Dương, Phường Cầu Kho, Quận 1, TP. HCM</li>
+                                                <li>(028) 38 368 363</li> <br>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div>
+                                                <li class="text-uppercase">Người lao động: </li>
+                                                <li>Quốc tịch:</li>
+                                                <li> Ngày sinh :</li>
+                                                <li> Giới tính :</li>
+                                                <li> Địa chỉ thường trú:</li>
+                                                <li> CMND/CCCD số: </li><br>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <div>
+                                                <li class="text-uppercase">Ông/Bà : {{form_hd_nhanvien.Ho_ten}} </li>
+                                                <li> {{form_hd_nhanvien.Ho_ten.quoctich}}</li>
+                                                <li> {{form_hd_nhanvien.Ho_ten.ngay_sinh}}; Nơi sinh: {{form_hd_nhanvien.Ho_ten.ma_tinh_noi_sinh}}</li>
+                                                <li> {{form_hd_nhanvien.Ho_ten.Gioi_tinh}}</li>
+                                                <li> {{form_hd_nhanvien.Ho_ten.dc_thuong_tru}}, {{form_hd_nhanvien.Ho_ten.px_thuong_tru}}, {{form_hd_nhanvien.Ho_ten.qh_thuong_tru}}, {{form_hd_nhanvien.Ho_ten.ma_tinh_thuong_tru}}</li>
+                                                <li> {{form_hd_nhanvien.Ho_ten.so_CCCD}}; Cấp ngày: {{form_hd_nhanvien.Ho_ten.ngay_cap_CCCD}}; Nơi cấp: Cục cảnh sát BCA</li><br>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <li>Hai bên thỏa thuận ký kết hợp đồng lao động và cam kết thực hiện đúng những điều khoản sau đây:</li>
+                                    <li class="list-group-item list-group-item-success">Điều 1: Loại hợp đồng lao động:{{form_hd_nhanvien.Loai_hd}}</li>
+                                    <li> Bắt đầu từ ngày :</li>
+                                    <li> {{form_hd_nhanvien.Tu_ngay}}; Đến ngày: {{form_hd_nhanvien.Den_ngay}}</li>
+                                    <br>
+                                    <li class="list-group-item list-group-item-success"> Điều 2: Chức danh, địa điểm và công việc phải làm: </li>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div>
+                                                <li> 2.1. Chức danh công việc :</li>
+                                                <li> 2.2. Địa điểm làm việc : </li>
+                                                <li> 2.3. Công việc phải làm :</li>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div>
+                                                <li>{{form_hd_nhanvien.Ho_ten.vitri_CV}},</li>
+                                                <li> {{form_hd_nhanvien.Ho_ten.don_vi}}</li>
+                                                <li> {{form_hd_nhanvien.Ho_ten.vitri_CV}} </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <li>- Thực hiện theo Bản mô tả công việc của chức danh công việc.</li>
+                                    <li>- Thực hiện công việc khác theo Quyết định của Công ty phân công (nếu có).</li>
+                                    <li>Nội dung khoản 2.1; 2.2 và 2.3 – Điều 2 này được điều chỉnh tại khoản 7.4 – Điều 7 của hợp đồng này.</li>
+                                    <br>
+                                    <li class="list-group-item list-group-item-success"">Điều 3: Điều kiện và chế độ làm việc của người lao động</li>
+                                <li>3.1. Điều kiện làm việc:</li>
+                                <li>Người lao động được trang bị: dụng cụ, trang thiết bị, văn phòng phẩm để phục vụ cho công việc đang đảm nhận theo quy định của Công ty.</li>
+                                <li>3.2. Chế độ làm việc:</li>
+                                <li>3.2.1. Thời gian người lao động làm việc: Theo qui định tại Nội Qui lao động và Thỏa ước Lao động của Công ty.</li>
+                                <li>3.2.2. Số giờ làm việc trong ngày, trong tuần, trong ca và số ngày làm việc trong tuần đối với từng chức danh công việc được quy định tại Nội quy lao động của Công ty và phù hợp với pháp luật Lao động. Giờ làm việc tiêu chuẩn đối với: khối hành chính 8 giờ/ngày; hoặc khối ca/kíp: 8 giờ/ca; 40 giờ /tuần.</li>
+                                <li>3.2.3 Khi cần thiết do nhu cầu sản xuất kinh doanh người lao động thực hiện làm thêm giờ và được hưởng chế độ làm thêm giờ theo quy định của pháp luật.</li>
+                                <br>
+                                <li class=" list-group-item list-group-item-success">Điều 4: Quyền lợi và nghĩa vụ của người lao động</li>
+                                    <li>4.1. Quyền lợi của người lao động:</li>
+                                    <li>4.1.1. Thu nhập của người lao động:</li>
+                                    <li>a. Mức lương chính: Mức lương này là cơ sở để thực hiện đóng và hưởng các chế độ bảo hiểm bắt buộc và các chế độ theo quy định của pháp luật lao động.</li>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div>
+                                                <li class="list-group-item list-group-item-danger"> - Nhóm lương: </li>
+
+                                                <li class="list-group-item list-group-item-light"> - Hệ số lương: </li>
+                                                <li class="list-group-item list-group-item-light"> - Mức lương: </li>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div>
+
+                                                <li class="list-group-item list-group-item-danger">{{form_hd_nhanvien.bangluong}} </li>
+
+                                                <li class="list-group-item list-group-item-light"> {{form_hd_nhanvien.Heso}} </li>
+                                                <li class="list-group-item list-group-item-light">{{form_hd_nhanvien.Muc_luong}}đồng/tháng </li>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <li> b. Các loại phụ cấp: Theo Quy chế của Công ty .</li>
+                                    <li> c. Thu nhập và các khoản bổ sung khác: Người lao động làm việc tại Công ty hàng tháng được hưởng thu nhập theo quy định tại Quy chế phân phối thu nhập của Công ty.
+                                    <li> d. Thời gian và hình thức thanh toán: Được trả 01 lần trong tháng, không quá 10 ngày làm việc của tháng sau liền kề (qua thẻ ATM/Tiền mặt). Chi phí trả thu nhập cho người lao động qua thẻ ATM do Công ty chịu.</li>
+                                    <li> e. Mức lương là thông tin riêng của cá nhân và người lao động không được tiết lộ cho người thứ ba biết. </li>
+                                    <li> 4.1.2. Nâng bậc lương: </li>
+                                    <li> Người lao động được nâng ngạch lương, bậc lương, hệ số lương (theo thang, bảng lương của Công ty) khi đủ điều kiện theo Quy định nâng ngạch lương, bậc lương của Công ty và quy định của pháp luật. </li>
+                                    <li> 4.1.3. Phương tiện đi lại: </li>
+                                    <li> Người lao động tự túc phương tiện đi lại để làm việc. </li>
+                                    <li> 4.1.4. Chế độ nghỉ ngơi: </li>
+                                    <li> Người lao động được nghỉ hàng tuần; nghỉ lễ, tết; nghỉ phép và các chế độ nghỉ khác mà pháp luật quy định; việc thực hiện chế độ nghỉ ngơi này được thực hiện theo quy định của Công ty và tuân thủ đúng quy định của pháp luật. </li>
+                                    <li> 4.1.5. Các chế độ bảo hiểm bắt buộc và thuế thu nhập cá nhân: </li>
+                                    <li>Hàng tháng, Công ty thực hiện nộp bảo hiểm bắt buộc và thuế thu nhập cá nhân của người lao động phải nộp theo quy định của pháp luật cho từng người lao động. </li>
+                                    <li>4.1.6. Quyền đơn phương chấm dứt hợp đồng: </li>
+                                    <li> Người lao động có quyền đơn phương chấm dứt hợp đồng lao động theo quy định của pháp luật hiện hành. </li>
+                                    <li> 4.1.7. Chế độ bảo hộ lao động: </li>
+                                    <li>Người lao động được huấn luyện bảo hộ lao động, trang bị bảo hộ lao động, bồi dưỡng độc hại, khám sức khỏe định kỳ theo quy định của Công ty và quy định của pháp luật. </li>
+                                    <li> 4.1.8. Các quyền lợi khác: </li>
+                                    <li> Người lao động còn được hưởng các quyền như: Được cử đi đào tạo, bồi dưỡng nghiệp vụ, chế độ ăn ca, được mua bảo hiểm tai nạn cá nhân… và các quyền lợi khác theo quy định của Công ty và quy định của pháp luật.
+                                    <li> 4.2. Nghĩa vụ của người lao động: </li>
+                                    <li> 4.2.1. Học tập và thực hiện đúng, đủ các quy định nội bộ của Công ty gồm: thỏa ước lao động tập thể, nội quy lao động, các qui định về vệ sinh an toàn lao động và các quy chế, quy định nội bộ liên quan đến quan hệ lao động. </li>
+                                    <li> 4.2.2. Chấp hành lệnh điều hành sản xuất kinh doanh; kỷ luật lao động và hoàn thành những nội dung, công việc đã cam kết trong hợp đồng. </li>
+                                    <li> 4.2.3. Trách nhiệm vật chất: Bồi thường thiệt hại theo quy định nội bộ của Công ty và quy định của pháp luật. </li>
+                                    <li> 4.2.4. Mọi sáng kiến, phát minh có liên quan đến lĩnh vực hoạt động của Công ty (nếu có) trong quá trình làm việc của Công ty được xem là của Công ty. </li>
+                                    <li> 4.2.5. Không được phép tiết lộ hoặc để lộ (dưới mọi hình thức) bất cứ thông tin mật nào của Công ty mà người lao động biết được hoặc sở hữu được trong quá trình làm việc cho Công ty. </li>
+                                    <br>
+                                    <li class="list-group-item list-group-item-success"> Điều 5: Quyền và nghĩa vụ của người sử dụng lao động </li>
+                                    <li> 5.1. Quyền của người sử dụng lao động: </li>
+                                    <li> 5.1.1 Quyền yêu cầu: </li>
+                                    <li> a. Yêu cầu người lao động thực hiện đầy đủ các điều khoản quy định về nghĩa vụ của người lao động nêu tại hợp đồng này. </li>
+                                    <li> b. Yêu cầu người lao động thực hiện đúng và đủ các quy định của Công ty và của pháp luật trong suốt quá trình thực hiện hợp đồng. </li>
+                                    <li> c. Khi có căn cứ cho rằng người lao động vi phạm kỷ luật lao động, nội quy lao động, an toàn lao động, vệ sinh môi trường, các Quy chế, Quy định và Thỏa ước lao động tập thể của Công ty thì người sử dụng lao động thực hiện quyền đã được quy định trong quy định của Công ty để áp dụng. </li>
+                                    <li> 5.1.2. Quyền về quản lý, điều hành: </li>
+                                    <li> a. Quản lý, điều hành người lao động hoàn thành công việc theo hợp đồng: bố trí, phân công, kiểm tra, giám sát, điều chuyển, tạm ngừng việc. </li>
+                                    <li> b. Khen thưởng, kỷ luật, tạm hoãn hợp đồng lao động đối với người lao động, yêu cầu bồi thường trách nhiệm vật chất theo quy định tại các quy định của Công ty và của pháp luật. </li>
+                                    <li> c. Đơn phương chấm dứt hợp đồng theo quy định của pháp luật về lao động. </li>
+                                    <li> 5.2. Nghĩa vụ của người sử dụng lao động: </li>
+                                    <li> 5.2.1. Bảo đảm việc làm và thực hiện đầy đủ những cam kết trong hợp đồng lao động. </li>
+                                    <li> 5.2.2. Thanh toán đầy đủ, đúng thời hạn các chế độ và quyền lợi cho người lao động theo hợp đồng. </li>
+                                    <li> 5.2.3.Tạo điều kiện thuận lợi để người lao động hoàn thành tốt công việc được phân công. </li>
+                                    <br>
+                                    <li class="list-group-item list-group-item-success"> Điều 6. Các trường hợp chấm dứt hợp đồng </li>
+                                    <li> 6.1. Hai bên tự nguyện chấm dứt hợp đồng. </li>
+                                    <li> 6.2. Một trong các bên đơn phương chấm dứt hợp đồng. </li>
+                                    <li> 6.3. Chấm dứt trong các trường hợp quy định của pháp luật. </li>
+                                    <li> 6.4. Giải quyết trường hợp chấm dứt hợp đồng: </li>
+                                    <li> 6.4.1.Trong trường hợp người sử dụng lao động đơn phương chấm dứt hợp đồng, lý do chấm dứt hợp đồng phải đảm bảo đúng quy định của pháp luật. Trong trường hợp này người lao động được hưởng đầy đủ các chế độ theo quy định của Công ty và quy định của pháp luật về lao động. </li>
+                                    <li> 6.4.2.Trong trường hợp người lao động đơn phương chấm dứt hợp đồng, nếu người lao động chưa thực hiện đúng và đủ các điều khoản nêu tại hợp đồng này và các cam kết khác giữa người lao động và người sử dụng lao động thì người sử dụng lao động có quyền yêu cầu người lao động thực hiện hoàn tất nghĩa vụ trước khi thực hiện các thủ tục chấp dứt hợp đồng cho người lao động. </li>
+                                    <br>
+                                    <li class="list-group-item list-group-item-success"> Điều 7. Các thỏa thuận khác </li>
+                                    <li> 7.1. Trong quá trình thực hiện hợp đồng, nếu một trong các bên có hành vi vi phạm hợp đồng, quy định của Công ty hoặc quy định của pháp luật mà gây nên thiệt hại cho tập thể, Nhà nước hoặc thiệt hại cho phía bên kia thì phải chịu bồi thường trách nhiệm vật chất theo quy định của Công ty và của pháp luật. </li>
+                                    <li> 7.2. Trong quá trình thực hiện hợp đồng nếu có sự thay đổi về cơ chế, chính sách thì các bên thực hiện theo hướng dẫn của Công ty và quy định của pháp luật. </li>
+                                    <li> 7.3. Khi hai bên ký kết Phụ lục hợp đồng lao động thì nội dung của Phụ lục hợp đồng lao động cũng có giá trị như các nội dung của bản hợp đồng lao động này. Trường hợp nội dung của các phụ lục hợp đồng lao động khác nhau thì văn bản nào được ký thời điểm sau sẽ có giá trị pháp lý và đương nhiên thay thế cho điều khoản đã ký trong văn bản trước đó. </li>
+                                    <li> 7.4. Khi Tổng Giám đốc Công ty, ban hành Quyết định liên quan đến nội dung ghi tại khoản 2.1; 2.2 và 2.3 Điều 2 của hợp đồng này thì nội dung khoản khoản 2.1; 2.2 và 2.3 Điều 2 hợp đồng được điều chỉnh theo Quyết định đã ban hành. </li>
+                                    <br>
+
+                                    <li class="list-group-item list-group-item-success"> Điều 8. Giải quyết tranh chấp </li>
+                                    <li> Khi tranh chấp về lao động xảy ra, các bên thực hiện theo trình tự sau: </li>
+                                    <li>
+                                    <li> 8.1. Hai bên thông báo cho nhau về tranh chấp để cùng thảo luận, đàm phán, ưu tiên hòa giải để giải quyết tranh chấp. </li>
+                                    <li> 8.2. Nếu hai bên không thể thương lượng hòa giải được thì mọi tranh chấp lao động cá nhân, nếu phát sinh sẽ được giải quyết theo trình tự quy định trong Bộ luật Lao động. </li>
+                                    <br>
+                                    <li class="list-group-item list-group-item-success"> Điều 9: Điều khoản thi hành </li>
+                                    <li> 9.1. Những vấn đề về quan hệ lao động không được ghi trong hợp đồng lao động này thì áp dụng theo quy định của Thỏa ước lao động tập thể, Nội qui Lao động, Quy định nội bộ của Công ty và theo quy định của pháp luật. </li>
+                                    <li> 9.2. Hợp đồng lao động này được lập thành 02 (hai) bản, có chữ ký của người lao động và người sử dụng lao động. Các bản có giá trị pháp lý như nhau. Được giao cho người lao động và người sử dụng lao động, mỗi bên giữ 01 (một) bản và có hiệu lực từ ngày ký. </li>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div>
+                                                <li> NGƯỜI LAO ĐỘNG </li> <br><br><br><br><br>
+
+                                                {{form_hd_nhanvien.Ho_ten}}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div>
+
+                                                <li>NGƯỜI SỬ DỤNG LAO ĐỘNG </li><br><br><br><br><br>
+                                                <li>Lưu Đình Cường</li>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                </h3>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+
+
+<script>
+    (function () {
+        var
+         form = $('.form'),
+         cache_width = form.width(),
+         a4 = [595.28, 841.89]; // for a4 size paper width and height
+
+        $('#create_pdf').on('click', function () {
+            $('body').scrollTop(0);
+            createPDF();
+        });
+        //create pdf
+        function createPDF() {
+            getCanvas().then(function (canvas) {
+                var
+                 img = canvas.toDataURL("image/png"),
+                 doc = new jsPDF({
+                     unit: 'px',
+                     format: 'a4'
+                 });
+                doc.addImage(img, 'JPEG', 2, 2);
+                doc.save('DS don vi.pdf');
+                form.width(cache_width);
+            });
+        }
+
+        // create canvas object
+        function getCanvas() {
+            form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
+            return html2canvas(form, {
+                imageTimeout: 2000,
+                removeContainer: true
+            });
+        }
+
+    }());
+</script>
+<script>
+    /*
+ * jQuery helper plugin for examples and tests
+ */
+    (function ($) {
+        $.fn.html2canvas = function (options) {
+            var date = new Date(),
+            $message = null,
+            timeoutTimer = false,
+            timer = date.getTime();
+            html2canvas.logging = options && options.logging;
+            html2canvas.Preload(this[0], $.extend({
+                complete: function (images) {
+                    var queue = html2canvas.Parse(this[0], images, options),
+                    $canvas = $(html2canvas.Renderer(queue, options)),
+                    finishTime = new Date();
+
+                    $canvas.css({ position: 'absolute', left: 0, top: 0 }).appendTo(document.body);
+                    $canvas.siblings().toggle();
+
+                    $(window).click(function () {
+                        if (!$canvas.is(':visible')) {
+                            $canvas.toggle().siblings().toggle();
+                            throwMessage("Canvas Render visible");
+                        } else {
+                            $canvas.siblings().toggle();
+                            $canvas.toggle();
+                            throwMessage("Canvas Render hidden");
+                        }
+                    });
+                    throwMessage('Screenshot created in ' + ((finishTime.getTime() - timer) / 1000) + " seconds<br />", 4000);
+                }
+            }, options));
+
+            function throwMessage(msg, duration) {
+                window.clearTimeout(timeoutTimer);
+                timeoutTimer = window.setTimeout(function () {
+                    $message.fadeOut(function () {
+                        $message.remove();
+                    });
+                }, duration || 2000);
+                if ($message)
+                    $message.remove();
+                $message = $('<div ></div>').html(msg).css({
+                    margin: 0,
+                    padding: 10,
+                    background: "#000",
+                    opacity: 0.7,
+                    position: "fixed",
+                    top: 10,
+                    right: 10,
+                    fontFamily: 'Tahoma',
+                    color: '#fff',
+                    fontSize: 12,
+                    borderRadius: 12,
+                    width: 'auto',
+                    height: 'auto',
+                    textAlign: 'center',
+                    textDecoration: 'none'
+                }).hide().fadeIn().appendTo('body');
+            }
+        };
+    })(jQuery);
+
+</script>
+
+{% endblock content %}
+<!-- Specific Page JS goes HERE -->
+{% block javascripts %}{% endblock javascripts %}

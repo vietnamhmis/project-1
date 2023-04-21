@@ -1,0 +1,93 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Login/Regiser</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- CSS only -->
+
+    <style>
+    .image-thumbail{
+        height: 600px;
+
+        object-fit: cover;
+    }
+
+        .login--wrapper {
+            display: flex;
+            align-items: center;
+            height: 80vh;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+
+<body class="md-12">
+    <div class="container">
+               {% if request.user.is_authenticated %}
+                <p>Hello {{request.user}}</p>
+                {% endif %}
+<div class="row">
+    <div class="col-md-4">
+          <div class="card">
+          <div class="card-header">
+            <h2 style="color:red"> NĂNG LỰC NHÂN SỰ</h2>
+          </div>
+          <ul class="list-group list-group-flush">
+                  {% for tenlop in nhom_nangluc %}
+                       <li class="list-group-item">
+                             <a href="{% url 'list_nangluc_2' %}?loai_nang_luc={{tenlop.name}}">
+                             {{tenlop.name}}
+                             </a>
+                        </li>
+                 {% endfor %}
+              <li class="list-group-item">
+                            <a href="{% url 'list_nangluc_2' %}">Tất cả</a>
+                  </li>
+            <a href="{% url 'add_nangluc' %}" class="btn btn-success btn-block badge-pill">Thêm năng lực </a>
+          </ul>
+        </div>
+    </div>
+    <div class="col-md-8
+        <div class="row">
+             {% for photo in list_nangluc %}
+                 <div class="col-md-12">
+                     <div class="card">
+                         <div class="card-body">
+                            <a href="{% url 'nangluc_chitiet' photo.id %}" class="fa fa-eye-slash btn btn-success btn-block badge-pill"> {{ photo.name |upper}}
+                            <br> <small>Loại: {{ photo.loai_nang_luc }}</small></a
+                             <li><a> Mô tả: {{ photo.MoTa_nangluc }}</a</li>
+
+                         <div>
+                             </div>
+                         </div>
+
+                         <div class="row">
+
+                                       <div class="col-md-2">
+                                            <a href="{% url 'del_nangluc' photo.id %}" class="fa fa-trash"></a>
+                                       </div>
+                         </div>
+                     </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+
+    </div>
+</body>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+

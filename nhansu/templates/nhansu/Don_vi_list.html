@@ -1,0 +1,133 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Đơn vị {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+
+<!-- Page Content -->
+  <div class="content container-fluid">
+	  <!-- Page Header -->
+	  <div class="page-header">
+		  <div class="row align-items-center">
+			  <div class="col">
+				  <h3 class="page-title">Nhà máy, Trạm nghiền, Xí nghiệp, Trung tâm</h3>
+				  <ul class="breadcrumb">
+					  <!-- link bang dieu khiển -->
+					  <li class="breadcrumb-item"><a href="/dashboard">Bảng điểu khiển</a></li>
+					  <li class="breadcrumb-item active">Đơn vị</li>
+				  </ul>
+			  </div>
+			  <div class="col-auto float-right ml-auto">
+				  <a href="{% url 'add_donvi' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thêm Đơn vị</a>
+				  <div class="view-icons">
+					  <a href="" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+					  <a href="" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+	  <!-- /Page Header -->
+
+
+	  <!-- Search Filter----------------------------- -->
+	  <form method='POST' action=''>{% csrf_token %}
+		  <div class="form-row">
+			  <div class="form-group col-md-4">
+				  <input type="text" class="form-control" placeholder = "Tên Đơn vị" id={{form.Ten_DV}}
+			  </div>
+              <div class="form-group col-md-4">
+				  <input type="text" class="form-control" placeholder = "Địa chỉ" id={{form.diachi}}
+			  </div>
+
+
+			  <div class="form-check">
+
+				  <input class="form-check-input" type="checkbox" id="{{form.Xuất_Excel}}"
+				  <label class="form-check-label" class="fa fa-download">
+					  Xuất Excel
+				  </label>
+			  </div>
+			  <div class= "col-md-2 text-right">
+				  <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Tìm kiếm'/>
+			  </div>
+		  </div>
+	  </form>
+
+<form class="form" >
+	  <!-- /Search Filter ------------------------------------------------------>
+
+	  <div class="row">
+		  <div class="col-md-12">
+			  <div class="table-responsive">
+				  {% if queryset %}
+				  <table class="table table-striped custom-table datatable">
+					  <thead>
+					  <tr class="table-success">
+						  <th scope="col">ID</th>
+
+                          <th class="text-center" cscope="col">TÊN Đơn vị</th>
+                          <th class="text-center" scope="col">Địa chỉ</th>
+                          <th scope="col">Khối</th>
+                          <th scope="col">Nhiệm vụ</th>
+                          <th scope="col">Sửa/Xóa</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                       {% for donvi in queryset %}
+					   <tr >
+						   <th class="table-table-triped" scope="row">{{donvi.id}}</th>
+						   <td>
+							  <h5 class="table-avatar">
+								  <a href="{% url 'donvi_nhanvien' donvi.id %}" class="avatar"> <img src="/static/assets/img/profiles/avatar-02.jpg" alt=""></a>
+								  <a href="{% url 's_bophan' donvi.id %}">{{donvi.Ten_DV}}</span></a>
+							  </h5>
+							</td>
+						   <td><a href="" class="add-card" onclick="addCard({{donvi.id}})"></a></td>
+						   <td>{{donvi.diachi}}</td>
+						   <td>{{donvi.khoi_SXKD}}</td>
+						   <td class="table-Primary">{{donvi.nv_dv}}</td>
+						   <td >
+							   <a href="{% url 'update_donvi' donvi.id %}" class="btn btn-info"><i class="fa fa-pencil" style="font-size:18px;color:yellow"></i> Sửa </a>
+								<a href="{% url 'del_donvi' donvi.id %}" class="btn btn-success badge-pill"><i class="fa fa fa-trash" style="font-size:18px;color:yellow"></i> Xóa </a>
+							   <!---
+							   <form action="{% url 'del_donvi' donvi.id %}" method="post" class="d-inline">
+								   <input type="submit"  class="btn btn-success badge-pill" value="XÓA">
+								   {% csrf_token %}
+							   </form>  -->
+						   </td>
+					   </tr>
+					   {% endfor %}
+					  </tbody>
+					  <tfoot>
+					  <tr class="table-infor">
+						  <th class="text-center" cscope="col"></th>
+
+                          <th class="text-center" cscope="col">Đơn vị trực thuộc:{{bophan}}</th>
+                          <th scope="col">Vị trí công việc:{{vitri_chucvu}}</th>
+                          <th scope="col">Số lao động:{{nhanvien}}</th>
+
+                      </tr>
+                      </tfoot>
+
+
+				  </table>
+				  {% else %}
+				  <h4 class="text-center alert alert-warning">No record </h4>
+				  {% endif %}
+			  </div>
+		  </div>
+	  </div>
+  </div>
+<!-- /Page Content -->
+<script>
+$(document).ready(function() {
+	});
+	function addCard(id){
+	    alert(id);
+	}
+</script>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->

@@ -1,0 +1,162 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh mục văn bản {% endblock %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+  <style>
+    h1 {
+      color: red;
+      font: Arial Narrow text-align:;
+    }
+    .comment-form input, .comment-form textarea{
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    box-sizing: border-box;
+    border: 20;
+    outline: none;
+    background: #f0f0f0;
+}
+.comment-form button{
+    margin: 10px 0;
+}
+
+  </style>
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+
+        <button type="button" class="btn btn-info btn-lg"> HỆ THỐNG TÀI LIỆU</button>
+        <ul class="breadcrumb">
+          <!-- link bang dieu khiển -->
+        </ul>
+      </div>
+      <div class="col-auto float-right ml-auto">
+        <a href="{% url 'add_vanban' %}" class="btn add-btn">
+          <i class="fa fa-plus"></i> Thêm tài liệu </a>
+        <div class="view-icons">
+          <a href="{% url 'Vanban' %}" class="grid-view btn btn-link active">
+            <i class="fa fa-th"></i>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Page Header -->
+  <!-- Search Filter----------------------------- -->
+  <div class="page-header">
+    <div class="row">
+      <div class="col-sm-12">
+        <form method="GET" action=".">
+          <div class="form-row">
+            <div class="form-row">
+              <div class="form-group col-12">
+                <strong>
+                  <label for="">Lọc Tên, mã </label>
+                </strong>
+                <div class="input-group">
+                  <input class="form-control py-2 border-right-0 border" type="search" name="name_or_ma" placeholder="Tìm Tên, mã văn bản..." />
+                  <span class="input-group-append">
+                    <div class="input-group-text bg-transparent">
+                      <i class="fa fa-search"></i>
+                    </div>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-1 col-lg-1">
+              <label for="publishDateMin">Ngày tạo từ </label>
+              <input type="date" class="form-control" id="publishDateMin" name="date_min">
+            </div>
+            <div class="form-group col-md-1 col-lg-1">
+              <label for="publishDateMax">Đến ngày</label>
+              <input type="date" class="form-control" id="publishDateMax" name="date_max">
+            </div>
+            <div class="form-group col-md-2">
+              <label for="category">Tổ chức sử dụng</label>
+              <select id="category" class="form-control" name="category">
+                <option selected>Chọn ...</option> {% for cat in tochuc_Sudungs %} <option value="{{ cat }}">{{ cat }}</option> {% endfor %}
+              </select>
+            </div>
+              
+            <div class="form-group col-md-1">
+              <label for="loai_vanban_y">Loại </label>
+              <select id="loai_vanban_y" class="form-control" name="loai_vanban_y">
+                <option selected>Chọn ...</option> {% for cat in loai_nang_lucs %} <option value="{{ cat }}">{{ cat }}</option> {% endfor %}
+              </select>
+            </div>
+              
+            <div class="form-group col-md-2">
+              <div class="radio">
+                <input type="radio" id="su_dung" id="" name="group-radio" />
+                <label for="su_dung">Đang sử dụng</label>
+              </div>
+            </div>
+            <div>
+              {{form}}
+              <button type="submit" class="btn btn-info float: right" style="height:50px; with: 200px">Lọc dữ liệu</button>
+            </div>
+          </div>
+          <div class="form-row">
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- /Search Filter ------------------------------------------------------>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive"> {% if queryset %} <table class="table table-striped custom-table datatable">
+          <thead>
+            <tr class="table-success">
+              <th scope="col" width="5%">id</th>
+              <th scope="col" width="15%">Tên văn bản</th>
+
+              <th scope="col" width="15%">Loại/nhóm </th>
+              <th scope="col" width="15%">Tổ chức sử dụng</th>
+              <th scope="col" width="2%">Sử dụng F/T</th>
+
+              <th scope="col" width="5%">Tùy chỉnh</th>
+            </tr>
+          </thead>
+          <tbody> {% for sto in queryset %} <tr>
+              <td>{{forloop.counter}}</td>
+              <td>
+                <a href=""> {{sto.name|truncatewords:10}}
+              </td>
+
+
+              <td>
+                {{ sto.loai_vanban.name }}
+                <span class="badge badge-pill badge-{{ sto.get_label_display }}"> {{ sto.slug }}</span>
+              </td>
+
+
+              <td> {{ sto.tochuc_Sudung.name }}
+                <br>
+                <span></span>
+              </td>
+
+              <td aria-selected="false"> {{ sto.su_dung }}   </td>
+
+              <td>
+                <a href="{% url 'update_Vanban' sto.id %}" class="btn btn-info">
+                  <i class="fa fa-pencil" style="font-size:18px;color:yellow"></i>  </a>
+                <a href="{% url 'del_Vanban' sto.id %}" class="btn btn-success badge-pill">
+                  <i class="fa fa fa-trash" style="font-size:18px;color:yellow"></i>  </a>
+              </td>
+            </tr> {% endfor %}
+        </table> {% else %} <h4 class="text-center alert alert-warning">Không có dữ liệu</h4> {% endif %} </div>
+      <!-------------Finish class="table-responsive"------->
+    </div>
+  </div>
+</div>
+<!-- /Page Content -->
+
+{% endblock content %}
+{% block javascripts %}{% endblock javascripts %}

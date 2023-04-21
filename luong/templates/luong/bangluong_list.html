@@ -1,0 +1,275 @@
+{% extends "layouts/base_no.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+<div class="content container-fluid">
+    <!-- Page Header -->
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">BẢNG LƯƠNG</h3>
+                <ul class="breadcrumb">
+                    <!-- link bang dieu khiển -->
+                    <li class="breadcrumb-item"><a href="">BẢNG LƯƠNG</a></li>
+
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="{% url 'add_motacv' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thêm chi tiết định giá</a>
+                <div class="view-icons">
+                    <a href="" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <!-- Search Filter----------------------------- -->
+    <form method='POST' action=''>{% csrf_token %}
+        <div class="form-row">
+
+            <div class="form-group col-md-3">
+                <select class="form-control" placeholder="tên" {{form.Nhom_luong}} </select>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="{{form.Xuất_Excel}}" <label class="form-check-label">
+                Xuất Excel
+                </label>
+            </div>
+            <div class="col-md-2 text-right">
+                <input class="btn btn-success btn-block badge-pill" style="" type="submit" value='Tìm kiếm' >
+            </div>
+        </div>
+    </form>
+    <!-- /Search Filter ------------------------------------------------------>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive-sm">
+                {% if l1 %}
+           <table class="table table-striped custom-table datatable">
+                <!--         <table align="center"  cellspacing="300"  border="1" >---->
+                        <thead align="right">
+                        <td><strong>Nhóm</td>
+                            {% for sto in l1 %}
+                             <td>{{sto.Bac}}</td>
+                            {% endfor %}
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td><strong>Nhóm 1 </strong></td>
+                                {% for sto in l1 %}
+                                   <td align="right"> <strong>{{sto.Heso}} </strong><br>{{sto.Boiso}}<br><small>{{sto.Muc_luong}}</small></td>
+                                {% endfor %}
+                            </tr>
+
+                            <tr>
+                                <td><strong>Nhóm 2</strong></td>
+                                {% for sto in l2 %}
+                                   <td align="right"> <strong>{{sto.Heso}} </strong><br>{{sto.Boiso}}<br><small>{{sto.Muc_luong}}</small></td>
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                               <td><strong>Nhóm 3</strong></td>
+                                {% for sto in l3 %}
+                                    <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
+                            <tr>
+                                <td><strong>Nhóm 4</strong></td>
+                                {% for sto in l4 %}
+                                    <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
+                             <tr>
+                                 <td><strong>Nhóm 5</strong></td>
+                                {% for sto in l5 %}
+                                     <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
+                            <tr>
+                            <td><strong>Nhóm 6</strong></td>
+                                {% for sto in l6 %}
+                                    <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
+                            <tr>
+                              <td><strong>Nhóm 7</strong></td>
+                                {% for sto in l7 %}
+                                    <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                              <td><strong>Nhóm 8</strong></td>
+                                {% for sto in l8 %}
+                                    <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
+                            tr>
+                               <td><strong>Nhóm 9</strong></td>
+                                {% for sto in l9 %}
+                                    <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
+                            <tr>
+                                <td><strong>Nhóm 10 </strong></td>
+                                {% for sto in l10 %}
+                                    <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
+                            <tr>
+                                <td><strong>Nhóm 11 </strong></td>
+                                {% for sto in l11 %}
+                                    <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
+                            <tr>
+                                <td><strong>Nhóm 12</strong></td>
+                                {% for sto in l12 %}
+                                    <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                               <td><strong>Nhóm 31</strong></td>
+                                {% for sto in l13 %}
+                                    <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
+                            <tr>
+                                <td><strong>Nhóm 14</strong></td>
+                                {% for sto in l14 %}
+                                    <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
+                             <tr>
+                                 <td><strong>Nhóm 15</strong></td>
+                                {% for sto in l15 %}
+                                     <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
+                            <tr>
+                            <td><strong>Nhóm 16</strong></td>
+                                {% for sto in l16 %}
+                                    <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
+                            <tr>
+                              <td><strong>Nhóm 17</strong></td>
+                                {% for sto in l17 %}
+                                    <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                              <td><strong>Nhóm 18</strong></td>
+                                {% for sto in l18 %}
+                                    <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
+                            tr>
+                               <td><strong>Nhóm 19</strong></td>
+                                {% for sto in l19 %}
+                                    <td align="right">
+                                        <strong>{{sto.Heso}} </strong><br>
+                                        {{sto.Boiso}}<br>
+                                        <small>{{sto.Muc_luong}}</small>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
+
+                        </tbody>
+                </table>
+                {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+                {% endif %}
+            </div>
+        </div> <!-- /md-12-------->
+    </div><!-- /rows------->
+</div>
+<!-- /Page Content -->
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

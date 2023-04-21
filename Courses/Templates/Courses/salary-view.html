@@ -1,0 +1,131 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+				
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Bảng lương</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index">Bảng điều khiển</a></li>
+                    <li class="breadcrumb-item active">Phiếu lương</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <div class="btn-group btn-group-sm">
+                    <button class="btn btn-white">CSV</button>
+                    <button class="btn btn-white">PDF</button>
+                    <button class="btn btn-white"><i class="fa fa-print fa-lg"></i> In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="payslip-title">Bảng lương tháng 12 - 2021</h4>
+                    <div class="row">
+                        <div class="col-sm-6 m-b-20">
+                            <img src="/static/assets/img/logo2.png" class="inv-logo" alt="">
+                            <ul class="list-unstyled mb-0">
+                                <li>Nhân viên IT</li>
+                                <li>285, CMTT, HCMC</li>
+                                <li>285, CMTT, HCMC</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 m-b-20">
+                            <div class="invoice-details">
+                                <h3 class="text-uppercase">Phiếu lương #49029</h3>
+                                <ul class="list-unstyled">
+                                    <li>Tháng lương: <span>12/2021</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 m-b-20">
+                            <ul class="list-unstyled">
+                                <li><h5 class="mb-0"><strong>Trịnh Thanh Thế</strong></h5></li>
+                                <li><span>Phòng ban: IT</span></li>
+                                <li>Mã nhân viên: NV-0009</li>
+                                <li>Ngày bắt đầu: 01/10/2018</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div>
+                                <h4 class="m-b-10"><strong>Thu nhập</strong></h4>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Lương cơ bản</strong> <span class="float-right">$2000</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Trợ cấp nơi ở</strong> <span class="float-right">$55</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Di chuyển</strong> <span class="float-right">$55</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Trợ cấp khác</strong> <span class="float-right">$55</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Tổng thu nhập</strong> <span class="float-right"><strong>$55</strong></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div>
+                                <h4 class="m-b-10"><strong>Deductions</strong></h4>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Khấu trừ thuế tại nguồn</strong> <span class="float-right">$0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Quỹ tiết kiệm</strong> <span class="float-right">$0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Bảo hiểm nhà nước</strong> <span class="float-right">$0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Vay nợ</strong> <span class="float-right">$300</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Tổng khấu trừ</strong> <span class="float-right"><strong>$1000</strong></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <p><strong>Lương cứng: $2000</strong> (Bốn mươi triệu đồng chẵn.)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

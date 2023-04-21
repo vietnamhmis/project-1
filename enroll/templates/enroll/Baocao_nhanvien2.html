@@ -1,0 +1,190 @@
+{% extends "layouts/base_no.html" %}
+{% block title %} Danh sách nhân viên {% endblock %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Filter Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  </head>
+  <body>
+
+   <h3>BÁO CÁO NHÂN SỰ</h3>
+      <form method="GET" action=".">
+    <div class="form-row">
+        <div class="form-row">
+            <div class="form-group col-12">
+                <div class="input-group">
+                    <input class="form-control py-2 border-right-0 border" type="search" name="ho_lot_thuong_dung_contains" placeholder="Tìm Họ tên..." />
+                    <span class="input-group-append">
+                        <div class="input-group-text bg-transparent">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </span>
+                </div>
+            </div>        
+        </div>
+        <div class="form-row">
+            <div class="form-group col-12">
+                <div class="input-group">
+                    <input class="form-control py-2 border-right-0 border" type="search" name="id_nhanvien" placeholder="Tìm ID CBCNV..." />
+                    <span class="input-group-append">
+                        <div class="input-group-text bg-transparent">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </span>
+                </div>
+            </div>        
+        </div>
+        <div class="form-row">
+            <div class="form-group col-12">
+                <div class="input-group">
+                    <input class="form-control py-2 border-right-0 border" type="search" name="ho_lot_thuong_dung_or_chucvu" placeholder="Tìm Họ tên/Chức vụ..." />
+                    <span class="input-group-append">
+                        <div class="input-group-text bg-transparent">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </span>
+                </div>
+            </div>        
+        </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4 col-lg-4">
+                <label for="dantoc_tocngiao">Dân tộc/Tôn giáo </label>
+            <input class="form-control py-2 border-right-0 border" type="search" name="dantoc_tocngiao" placeholder="Tìm Dân tộc/Tôn giáo..." />
+        </div>
+          <div class="form-group col-md-2 col-lg-2">
+            <label for="publishDateMin">Ngày vào đơn vị từ</label>
+            <input type="date" class="form-control" id="publishDateMin" name="date_min">
+          </div>
+
+          <div class="form-group col-md-2 col-lg-2">
+            <label for="publishDateMax">Ngày vào đơn vị đến</label>
+            <input type="date" class="form-control" id="publishDateMax" name="date_max">
+          </div>
+
+          <div class="form-group col-md-4">
+            <label for="category">Đơn vị</label>
+            <select id="category" class="form-control" name="category">
+              <option selected>Chọn đơn vị...</option>
+              {% for cat in categories %}
+              <option value="{{ cat }}">{{ cat }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="not_da_nghiviec" name="not_da_nghiviec">
+            <label class="form-check-label" for="not_da_nghiviec">
+             Đang làm việc
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="da_nghiviec" name="da_nghiviec">
+            <label class="form-check-label" for="da_nghiviec">
+             Đã thôi việc
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Lọc dữ liệu</button>
+      </form>
+
+      <hr />
+   <div>
+    Tổng số: {{Tong_NV}} người
+    Giới tính nam: {{Nam}} người; Nữ: {{Nu}} người
+   </div>
+   <div>
+       Trình độ chuyên môn:
+           Tiến sĩ:{{TDTS}}
+           Thạc sĩ: {{TDTHS}}
+           Đại học: {{TDDH}}
+           TRung cấp: {{TDTC}}
+           Sơ cấp:{{TDSC}}
+           Trình độ Khác: {{TDkhac}}</div>
+   <div>
+           Trình độ lý luận chính trị:
+           Cao cấp:{{CTCC}}
+           Trung cấp:{{CTTC}}
+           Sơ cấp:{{CTSC}}
+               Khác {{CTkhac}}
+</div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                {% if queryset %}
+                <table class="table table-striped custom-table datatable">
+                    <thead>
+                        <tr class="table-success">
+                            <th scope="col">id</th>
+                            <th scope="col">Họ tên/Mã</th>
+                            <th scope="col">Vị trí</th>
+                            <th scope="col">Điện thoại</th>
+                            <th scope="col">In lý lịch</th>
+                            <th class="text-right no-sort">Tùy chỉnh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sto in queryset %}
+                        <tr>
+                            <td>{{sto.tuoi}}</td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="{% url 'nhanvien_profile_up' sto.id %}" class="avatar"> <img src="{{sto.avatar.url}}" alt=""></a>
+                                    <a href="{% url 'nhanvien_profile_view' sto.id %}"> {{sto.ho_lot_thuong_dung}}{{sto.ten_thuong_dung}}<span>{{sto.ma_nhan_vien}}</span></a>
+                                </h2>
+                            </td>
+                            <td>
+                                <a href="{% url 'view_motacv_chitiet7' sto.vitri_CV.id %}"> {{sto.vitri_CV}}
+
+                            </td>
+
+                            <td>{{sto.tel_dd}}</td>
+                            <td>
+                             <a class="dropdown-item" href="{% url 'nhanvien_profile_up' sto.id %}"><i class="fa fa-file-word-o m-r-5"></i>Quá trình C/tác/Lý lịch </a>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="{% url 'up_nhanvien' sto.id %}"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="{% url 'delete_nhanvien' sto.id %}"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                </table>
+                {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+                {% endif %}
+            </div>
+            <!-------------Finish class="table-responsive"------->
+
+        </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+
+
+{% endblock content %}
+
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,236 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+{% load static %}
+<style>
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+</style>
+<div class="content container-fluid">
+    <!-- Page Header -->
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h1 class="page-title-red" >HỢP ĐỒNG LAO ĐỘNG</h1>  <br>
+     <ul class="breadcrumb">
+
+                    <li class="breadcrumb-item"><a href="{% url 'hopdong_view' %}">TẤT CẢ</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'dieu_dong_view' %}">ĐIỀU ĐỘNG</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'dieu_dong_view' %}">BỔ NHIỆM</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'nangluong_view' %}">NÂNG LƯƠNG</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'dieu_dong_view' %}">KHEN THƯỞNG</a></li>
+
+     </ul>
+                <br>
+
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="{% url 'add_hopdong' %}" class="btn add-btn"><i class="fa fa-plus"></i> Thiết lập đợt ký Hợp đồng Lao động</a>
+                <div class="view-icons">
+                    <a href="" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                    <a href="" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Page Header --><!--Filter dữ liệu-->
+
+<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+								  <form method="GET" action=".">
+									<div class="form-row">
+										<div class="form-row">
+											<div class="form-group col-12">
+                                                <strong><label for="">Lọc Họ, tên, chức vụ, mã CBVNV</label></strong>
+												<div class="input-group">
+
+													<input class="form-control py-2 border-right-0 border" type="search" name="ho_lot_thuong_dung_or_chucvu" placeholder="Tìm Họ tên/Chức vụ/ID..." />
+													<span class="input-group-append">
+														<div class="input-group-text bg-transparent">
+															<i class="fa fa-search"></i>
+														</div>
+													</span>
+												</div>
+											</div>
+										</div>
+                                        <div class="form-group col-md-2 col-lg-2">
+											<label for="publishDateMin">Ngày ký hợp đồng từ ngày</label>
+											<input type="date" class="form-control" id="publishDateMin" name="date_min">
+										  </div>
+
+										  <div class="form-group col-md-2 col-lg-2">
+											<label for="publishDateMax">Đến ngày</label>
+											<input type="date" class="form-control" id="publishDateMax" name="date_max">
+										  </div>
+
+                                            <div class="form-group col-md-2">
+                                                <label for="category">Đơn vị</label>
+                                                <select id="category" class="form-control" name="category">
+                                                  <option selected>Chọn ...</option>
+                                                  {% for cat in categories %}
+                                                  <option value="{{ cat }}">{{ cat }}</option>
+                                                  {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group col-md-2">
+                                                <label for="loai_HD">Loại Hợp đồng</label>
+                                                <select id="loai_HD" class="form-control" name="loai_HD">
+                                                  <option selected>Chọn ...</option>
+                                                  {% for cat in hopdong_s %}
+                                                  <option value="{{ cat }}">{{ cat }}</option>
+                                                  {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div>
+                                                {{form}}
+                                                <button type="submit" class="btn btn-info float: right" style="height:50px; with: 200px">Lọc dữ liệu</button>
+                                            </div>
+
+										</div>
+
+										 <div class="form-row">
+
+								 </form>
+							</div>
+						</div>
+</div>
+
+
+					<!-- /Page Header -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive-sm">
+                {% if queryset_1 %}
+                <table class="table table-striped custom-table datatable">
+                    <thead>
+                        <tr class="table-success">
+
+                            <th scope="col" style="width: 4%">STT</th>
+                                <th scope="col" style="width: 16%">Họ tên/Quá trình Công tác <span></span></a>
+								</h2> </th>
+                            <th scope="col" style="width: 19%"> Chức danh  </th>
+                            <th scope="col" style="width: 12%">Loại hợp đồng  </th>
+                            <th scope="col" style="width: 8%">Từ ngày </th>
+                            <th scope="col" style="width: 8%">Đến ngày </th>
+
+                             <th scope="col" style="width: 12%">Bảng lương </th>
+                            <th scope="col" style="width: 4%">Hệ số</th>
+                            <th scope="col" style="width: 8%" >Mức lương</th>
+                             <th scope="col" style="width: 6%" >Quá trình Công tác</th>
+
+                           <th class="text-right no-sort" style="width: 3%">Tùy chỉnh</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        {% for sto in queryset_1 %}
+                        <tr>
+
+                            <td>
+                           {{forloop.counter}}
+
+
+                            </td>
+                            <td>
+                                <h2 class="table-avatar">
+								<a href="{% url 'nhanvien_profile_up' sto.Ho_ten.id %}" class="avatar"> <img src="{{sto.Ho_ten.avatar.url}}" alt=""></a>
+								<a href="{% url 'hopdongchitiet' sto.id %}"> {{sto.Ho_ten.ho_lot_thuong_dung}} {{sto.Ho_ten.ten_thuong_dung}}<span>{{sto.Ho_ten.bo_phan}}</span></a>
+
+								</h2>
+                            </td>
+                            <td>
+                                <a href=""> <span>{{sto.Ho_ten.vitri_CV|truncatewords:5}}</span>  </a>
+
+                            <td>
+                               {% if sto.Loai_hd == 'Không thời hạn' %}
+                                    {{ sto.Loai_hd }}
+                            {% else %}
+                                    {{ sto.Loai_hd }}<span class="badge badge-pill bg-warning ">{{sto.Day_past}}:{{sto.Day_still}}</span>
+                               {% endif %}
+                            </td>
+
+
+                            <td >{{sto.Tu_ngay|date:"d-m-Y"}}</td>
+                            <td  >{{sto.Den_ngay|date:"d-m-Y"}}
+
+                            </td>
+
+
+
+                            <td>{{sto.bangluong}}
+
+                            </td>
+
+                             <td>{{sto.Heso}}</td>
+
+                            <td >{{sto.Muc_luong}} </td>
+
+                               <td><a href="{% url 'nhanvien_hopdong' sto.Ho_ten.id %}" <i class="fa fa-id-card" aria-hidden="true"></i></a></td>
+
+
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="{% url 'update_hopdong' sto.id %}"><i class="fa fa-pencil m-r-5"></i> Sửa/In</a>
+                                         <a class="dropdown-item" href="{% url 'chamdut_hopdong' sto.id %}"><i class="fa fa-pencil m-r-5"></i> Chám dứtHĐ</a>
+                                        <a class="dropdown-item" href="{% url 'del_hopdong' sto.id %}"><i class="fa fa-trash-o m-r-5"></i> Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <h4 class="text-center alert alert-warning">No record </h4>
+                {% endif %}
+            </div>
+        </div> <!-- /md-12-------->
+    </div><!-- /rows------->
+</div>
+<!-- /Page Content -->
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,279 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load widget_tweaks %}
+
+<style>
+    form-row {
+      color: red;
+      font: Arial Narrow text-align: center;
+    }
+    p {
+      color: red;
+      font: Arial Narrow text-align:center;
+      width: 100%;
+      padding: 1px;
+      margin: 15px 0;
+      box-sizing: border-box;
+      border: 20;
+      outline: none;
+      background: #f1f0f7;
+    }
+
+    h6 {
+      color: white;
+      font: Arial Narrow text-align:center;
+      width: 100%;
+      padding: 1px;
+      margin: 15px 0;
+      box-sizing: border-box;
+      border: 20;
+      outline: none;
+      background: green;
+    }
+
+    .form-row, .form-row form-group{
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    box-sizing: border-box;
+    border: 20;
+    outline: none;
+    background: #BCD2D6;
+}
+.form-row btn btn-success{
+    margin: 10px 0;
+
+}
+
+
+  </style>
+
+
+<div >
+
+  </div>
+<div class="container ">
+     <p align="center" class="btn btn-success btn-block btn-lg">MÔ TẢ CÔNG VIỆC </p></strong>
+<!-- Page Content
+        <form action="" method="POST">-->
+        <form method="POST" id="Choise_DV_Form" load_bophans ="{% url 'load_bophans' %}" novalidate>{% csrf_token %}
+             <div class="form-row">
+                      <div class="form-group col-md-3 mb-0">
+                        {{ form.Ten_Nhom_CV|as_crispy_field }}
+                      </div>
+
+                      <div class="form-group col-md-3 mb-0">
+                        {{ form.don_vi|as_crispy_field }}
+                      </div>
+
+                      <div class="form-group col-md-3 mb-0">
+                        {{ form.bo_phan|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-3 mb-0">
+                        {{ form.to_nhom|as_crispy_field }}
+                      </div>
+
+             </div>
+
+             <div class="form-row">
+                       <div class="form-group col-md-3 mb-0">
+                        {{ form.Ten_vitri_full|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-3 mb-0">
+                        {{ form.chuc_danh|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-3 mb-0">
+                        {{ form.ma_tenvitri|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-3 mb-0">
+                        {{ form.Ten_theoluong|as_crispy_field }}
+                      </div>
+
+             </div>
+
+             <div class="form-row">
+                     <div class="form-group col-md-6 mb-0">
+                        {{ form.Captren|as_crispy_field }}
+                     </div>
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form.Donvi_Captren|as_crispy_field }}
+                     </div>
+                    <div class="form-group col-md-3 mb-0">
+                        {{ form.mota_Cong_viec|as_crispy_field }}
+                     </div>
+             </div>
+
+
+             <div class="form-row">
+                       <div class="form-group col-md-6 mb-0">
+                        {{ form.Qhe_captren|as_crispy_field }}
+                      </div>
+
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form.Qhe_capduoi|as_crispy_field }}
+                      </div>
+             </div>
+
+              <div class="form-row">
+                    <div class="form-group col-md-12 mb-0">
+                        {{ form.Mucdich_cv|as_crispy_field }}
+                      </div>
+              </div>
+
+              <div class="form-row">
+                       <div class="form-group col-md-6 mb-0">
+                        {{ form.Qhe_nn_xahoi|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form.Qhe_khachhang|as_crispy_field }}
+                      </div>
+             </div>
+             <div class="form-row">
+                       <div class="form-group col-md-12 mb-0">
+                        {{ form.Nh_vu_ket_qua|as_crispy_field }}
+                      </div>
+             </div>
+
+             <div class="form-row">
+                       <div class="form-group col-md-12 mb-0">
+                        {{ form.Trach_nhiem|as_crispy_field }}
+                      </div>
+             </div>
+
+             <div class="form-row">
+                       <div class="form-group col-md-12 mb-0">
+                        {{ form.Mucdo_anhhuong|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-12 mb-0">
+                        {{ form.Ptien_laodong|as_crispy_field }}
+                      </div>
+             </div>
+
+
+             <div class="form-row">
+                       <div class="form-group col-md-6 mb-0">
+                        {{ form.Yeu_to_1_trinh_do|as_crispy_field }}
+                        </div>
+                       <div class="form-group col-md-6 mb-0">
+                        {{ form.Yeu_to_2_Ky_nang|as_crispy_field }}
+                       </div>
+              </div>
+              <div class="form-row">
+                       <div class="form-group col-md-6 mb-0">
+                        {{ form.Yeu_to_3_Trach_nhiem|as_crispy_field }}
+                        </div>
+
+                       <div class="form-group col-md-6 mb-0">
+                        {{ form.Yeu_to_4_Anh_huong|as_crispy_field }}
+                        </div>
+              </div>
+             <div class="form-row">
+                       <div class="form-group col-md-6 mb-0">
+                        {{ form.Yeu_to_5_Sangtao|as_crispy_field }}
+                       </div>
+
+                       <div class="form-group col-md-6 mb-0">
+                        {{ form.Yeu_to_6_Giaotiep|as_crispy_field }}
+                       </div>
+              </div>
+             <div class="form-row">
+                       <div class="form-group col-md-6 mb-0">
+                        {{ form.Yeu_to_7_DK_lamviec|as_crispy_field }}
+                       </div>
+                       <div class="form-group col-md-6 mb-0">
+                        {{ form.ten_nghe_NNDH|as_crispy_field }}
+                       </div>
+             </div>
+             <div class="form-row">
+                       <div class="form-group col-md-6 mb-0">
+                        {{ form.Ycau_Ngoaingu_23|as_crispy_field }}
+                       </div>
+                       <div class="form-group col-md-6 mb-0">
+                        {{ form.Ycau_CNTT_24|as_crispy_field }}
+                       </div>
+             </div>
+               <div class="form-row">
+
+                       <div class="form-group col-md-12 mb-0">
+                        {{ form.Yeu_to_khac|as_crispy_field }}
+                       </div>
+             </div>
+
+
+             <div class="form-row">
+
+                <h6 class="account-title">Bạn kiểm tra và đồng ý ghi bản mô tả công việc vào vào hệ thống?</h6><br>
+            </div>
+
+            <div class="float-md-right" >
+                <input type="submit" class="btn btn-success " value="Cập nhật">
+                    <a href="{% url 'dinhgia_list_7yto' %}" class="btn btn-info "> TRỞ VỀ </a>
+                <br>       <br>
+                     {% if messages %}
+                     {% for up_dulieu in messages %}
+
+                    <h2 style="color: red">{{up_dulieu}}</h2>
+
+                     {% endfor %}
+                     {% endif %}
+            </div>
+
+        </form>
+</div>
+<!-- /Page Content -->
+                  <!-----------
+
+
+            {% for field in form.visible_fields %}
+                <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field | add_class:'form-control' }}
+
+                {% for error in field.errors %}
+                <span class="help-block">{{ error }}</span>
+                 {% endfor %}
+                 </div>
+            {% endfor %}
+
+_-->
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+    $("#id_don_vi").change(function () {
+      var url = $("#Choise_DV_Form").attr("load_bophans");
+      var don_viId = $(this).val();
+          $.ajax({
+            url: url,
+            data: {
+              'don_vi': don_viId
+            },
+            success: function (data) {
+              $("#id_bo_phan").html(data);
+            }
+          });
+      });
+
+     $("#id_bo_phan").change(function () {
+      var url = $("#Choise_DV_Form").attr("load_bophans");
+      var bo_phanId = $(this).val();
+          $.ajax({
+            url: url,
+            data: {
+              'bo_phan': bo_phanId
+            },
+            success: function (data) {
+              $("#id_to_nhom").html(data);
+            }
+          });
+      });
+
+  </script>
+{% endblock javascripts %}

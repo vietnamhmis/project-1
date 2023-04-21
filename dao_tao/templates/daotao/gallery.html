@@ -1,0 +1,95 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Login/Regiser</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <style>
+    .image-thumbail{
+        height: 600px;
+
+        object-fit: cover;
+    }
+
+        .login--wrapper {
+            display: flex;
+            align-items: center;
+            height: 80vh;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+
+<body class="md-12">
+    <div class="container">
+                        {% if request.user.is_authenticated %}
+                <p>Hello {{request.user}}</p>
+                {% endif %}
+<div class="row">
+
+    <div class="col-md-3">
+          <div class="card">
+          <div class="card-header">
+            <h5> NỘI DUNG LỚP ĐÀO TẠO </h5>
+          </div>
+          <ul class="list-group list-group-flush">
+
+                  {% for tenlop in tenlops %}
+                       <li class="list-group-item">
+                             <a href="{% url 'gallery' %}?tenlop={{tenlop.name}}">
+                                    {{tenlop.name}}
+                             </a>
+                        </li>
+                 {% endfor %}
+              <li class="list-group-item">
+                            <a href="{% url 'gallery' %}">Tất cả</a>
+                  </li>
+            <a href="{% url 'add_lop_daotao' %}" class="btn btn-success btn-block badge-pill">Thêm Khóa đào tạo </a>
+          </ul>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row">
+             {% for photo in photos %}
+                 <div class="col-md-12">
+                     <div class="card">
+                         <img class="image-thumbail" src="{% photo.image.url %}" alt="Card image cap">
+                         <div class="card-body">
+                            <small>{{ photo.tenlop }}</small>
+                             <li><a>{{ photo.educator }}</a</li>
+                         <div>
+
+                             </div>
+
+                         </div>
+                             <a href="{% url 'viewChuongtrinh_daotao' photo.id %}" class="btn btn-success btn-block badge-pill">View</a>
+                         <a href="{% url 'del_daotao' photo.id %}" class="fa fa-trash-o m-r-5 btn btn-warning btn-block badge-pill ">Xóa nội dung đào tạo</a>
+
+                     </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+
+    </div>
+</body>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+

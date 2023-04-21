@@ -1,0 +1,98 @@
+{% extends "layouts/base.html" %} {% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE --> {% block stylesheets %}{% endblock stylesheets %} {% block content %} <style>
+  .label {
+    color: white;
+    padding: 8px;
+    font-family: Arial;
+  }
+
+  .success {
+    background-color: #04AA6D;
+  }
+
+  /* Green */
+  .info {
+    background-color: #2196F3;
+  }
+
+  /* Blue */
+  .warning {
+    background-color: #ff9800;
+  }
+
+  /* Orange */
+  .danger {
+    background-color: #f44336;
+  }
+
+  /* Red */
+  .other {
+    background-color: #f44335;
+    color: yellow;
+  }
+
+  /* Gray */
+</style>
+<body class="m-12">
+  <div class="container ">
+    <div class="col-md-12">
+      <a href="{% url 'Nangluc_list_q' %}" class="btn btn-dark my-3"> Quay về trang chủ</a>
+      <div class="card">
+        <form method="POST" action="" enctype="multipart/form-data"> {% csrf_token %} <div class="form-row">
+            <div class="form-group col-md-8 mb-3">
+              <input required name="name" type="text" placeholder="Tên năng lực" class="form-control">
+            </div>
+            <div class="form-group col-md-4 mb-3">
+              <input required name="ngay_tao" type="date" placeholder="Nhập ngày " class="form-control">
+            </div>
+          </div>
+          <br>
+          <textarea id="w3review" name="MoTa_nangluc" rows="4" cols="135" placeholder=" Mô tả năng lực"></textarea>
+          <div class="form-row">
+            <div class="form-group col-md-4 mb-3">
+              <br>
+              <select name="loai_nang_luc" class="form-control">
+                <option value="none"> Chọn tên loại năng lực... </option> {% for loai_nang_luc in ten_nhom_nangluc %} <option value="{{loai_nang_luc.id}}">{{loai_nang_luc.name}}</option> {% endfor %}
+              </select>
+            </div>
+            <div class="form-group col-md-8 mb-3">
+              <input name="loai_nang_luc_new" type="text" placeholder="Tạo năng lực mới, khi chưa có NL trong hệ thốnng" class="form-control">
+            </div>
+          </div>
+          <br>
+          <br>
+          <span class="label success">Mức 1: Năng lực làm việc tốt</span>
+          <br>
+          <textarea id="NL_muc_1" name="NL_muc_1" rows="5" cols="135" placeholder=" Năng lực kém(Hiểu biết sơ bộ, làm được một phần việc, luôn có sự giám sát, hỗ trợ)"></textarea>
+          <br>
+          <br>
+          <span class="label info">Mức 2: Năng lực cơ bản</span>
+          <br>
+          <textarea id="NL_muc_2" name="NL_muc_2" rows="5" cols="135" placeholder=" Năng lực cơ bản(Hiểu biết cơ bản, làm thành thạo một phần việc, cần sự giám sát, hỗ trợ)"></textarea>
+          <br>
+          <br>
+          <span class="label warning">Mức 3: Năng lực làm việc </span>
+          <br>
+          <textarea id="NL_muc_3" name="NL_muc_3" rows="5" cols="135" placeholder=" Năng lực làm việc (Hiểu biết tốt, duy trì được công việc, thể hiện thường xuyên và đạt yêu cầu)"></textarea>
+          <br>
+          <br>
+          <span class="label other">Mức 4: Năng lực làm việc tốt</span>
+          <br>
+          <textarea id="NL_muc_4" name="NL_muc_4" rows="5" cols="135" placeholder=" Năng lực làm việc tốt (Hiểu biết sâu, thành thạo việc, thường xuyên hoàn thành tốt nhiệm vụ được giao)"></textarea>
+          <br>
+          <br>
+          <span class="label danger">Mức 5: Năng lực làm việc xuất sắc</span>
+          <br>
+          <textarea id="NL_muc_5" name="NL_muc_5" rows="5" cols="135" placeholder="Năng lực làm việc xuất sắc(Hiểu biết tinh thông, công việc vượt trội, thể hiện được sự sáng tạo, chủ động; hoặc dẫn dắt trong công việc)"></textarea>
+          <br>
+          <div class="form-group m-3">
+            <label> Upload ảnh/tài liệu</label>
+            <input required name="images" type="file" multiple class="form-control-file">
+          </div>
+          <button type="submit" class="btn btn-primary m-3">Lưu</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body> {% endblock content %}
+<!-- Specific Page JS goes HERE  --> {% block javascripts %}{% endblock javascripts %}

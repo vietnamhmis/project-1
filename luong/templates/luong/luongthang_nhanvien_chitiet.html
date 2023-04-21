@@ -1,0 +1,172 @@
+{% extends "layouts/base.html" %}
+{% block title %} Dashboard {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+<div class="content container-fluid">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Bảng lương</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index">Bảng điều khiển</a></li>
+                    <li class="breadcrumb-item active">Phiếu lương</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <div class="btn-group btn-group-sm">
+                    <button class="btn btn-white">CSV</button>
+                    <button class="btn btn-white">PDF</button>
+                    <button class="btn btn-white"><i class="fa fa-print fa-lg"></i> In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="payslip-title">PHIẾU LƯƠNG THÁNG {{form_nhanvien.Thang_tra_luong}}-{{form_nhanvien.Nam}} </h2>
+                    <div class="row">
+                        <div class="col-sm-6 m-b-20">
+
+                        <div class="rounded float-left">
+                            <div class="profile-img">
+                                <a href="" class="avatar"><img alt="" src="{{form_nhanvien.hoten_nhanvien.avatar.url}}" ></a>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 m-b-20">
+                            <ul class="list-unstyled">
+                                <h3 class="text-uppercase">{{form_nhanvien.hoten_nhanvien}} </h3>
+
+                                <li><span>{{form_nhanvien.hoten_nhanvien.vitri_CV}}</span></li>
+                                <li>{{form_nhanvien.hoten_nhanvien.don_vi}}, {{form_nhanvien.hoten_nhanvien.bo_phan}}</li>
+                                Mã NV: {{form_nhanvien.hoten_nhanvien.ma_nhan_vien}}, ĐT: {{form_nhanvien.hoten_nhanvien.tel_dd}}, Email: {{form_nhanvien.hoten_nhanvien.email}}
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div>
+                                <h4 class="m-b-10"><strong>Tiền lương:</strong></h4>
+                                <table class="table table-bordered">
+
+
+                                    <tbody>
+
+                                        <tr>
+                                             <td><strong>Mức lương Chính sách đóng BHXH, BHYT, BHTN</strong> <span class="float-right">{{form_nhanvien.Muc_luongBHXH}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Mức lương theo năng suất, hiệu quả</strong> <span class="float-right">{{form_nhanvien.Luong_thang}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Phụ cấp kiêm nhiện</strong> <span class="float-right">{{form_nhanvien.phucap_knhiem}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Phụ cấp khác (Tiền nhà, đi lại..)</strong> <span class="float-right">{{form_nhanvien.phucap_khac}}</span></td>
+                                        </tr>
+
+                                            <tr>
+                                            <td><strong>Bồi dưỡng hiện vật, NNĐH:</strong> <span class="float-right">{{form_nhanvien.Boiduong_dochai}}</span></td>
+                                        </tr>
+                                        <tr>
+                                             <td><strong>Tiền ăn giữa ca:</strong> <span class="float-right">{{form_nhanvien.Tien_an}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Lương thêm giờ ngày thường:</strong> <span class="float-right">{{form_nhanvien.luong_themgio}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Lương thêm giờ ngày T7, CN, lễ:</strong> <span class="float-right">{{form_nhanvien.Luong_lamthemT7}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Tổng thu nhập</strong> <span class="float-right">{{form_nhanvien.Thu_nhap}}</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div>
+                                <h4 class="m-b-10"><strong>Các khoản khấu trừ</strong></h4>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                              <td><strong>Tạm ứng kỳ 1:</strong> <span class="float-right">{{form_nhanvien.Tam_ung}}</span></td>
+                                        </tr>
+                                        <tr>
+                                             <td><strong>Thuế thu nhập thu tại nguồn:</strong> <span class="float-right">{{form_nhanvien.kn_thuetncn}}</span></td>
+                                        </tr>
+                                        <tr>
+                                              <td><strong>Bảo hiểm XH, BHYT, BHTN (11,5%):</strong> <span class="float-right">{{form_nhanvien.kn_BHXH_BYTT}}</span></td>
+                                        </tr>
+                                        <tr>
+                                              <td><strong>Công đoàn phí (1%):</strong> <span class="float-right">{{form_nhanvien.kn_KPCĐ}}</span></td>
+                                        </tr>
+                                        <tr>
+                                             <td><strong>Khấu trừ khác:</strong> <span class="float-right">{{form_nhanvien.kn_khac}}</span></td>
+                                        </tr>
+                                            <tr>
+                                             <td><strong>Thu nhập còn lại:</strong> <span class="float-right">{{form_nhanvien.Thu_nhapthuclinh}}</span></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                         <div class="col-sm-4">
+                            <div>
+
+                                <h4 class="m-b-10"><strong>Ngày công, giờ làm thêm: </strong></h4>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Ngày công trong tháng</strong> <span class="float-right">{{form_nhanvien.Ngaycong}}</span></td>
+                                        </tr>
+                                        <tr>
+                                             <td><strong>Hệ số năng lực công tác (P2)</strong> <span class="float-right">{{form_nhanvien.luong_p2}}</span></td>
+                                        </tr>
+
+                                        <tr>
+                                               <td><strong>Hệ số KPI hiệu quả (P3)</strong> <span class="float-right">{{form_nhanvien.luong_p3}}</span></td>
+                                        </tr>
+
+                                        <tr>
+                                              <td><strong>Số giờ làm thêm</strong> <span class="float-right">{{form_nhanvien.Gio_lam_them}}</span></td>
+                                        </tr>
+
+                                        <tr>
+                                              <td><strong>Số giờ làm thêm thứ 7, CN</strong> <span class="float-right">{{form_nhanvien.Gio_lam_themCT}}</span></td>
+                                        </tr>
+                                        <tr>
+                                              <td><strong>Số giờ làm thêm lễ  <span class="float-right">{{form_nhanvien.Gio_lam_them_le}}</span></strong></td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->
+
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

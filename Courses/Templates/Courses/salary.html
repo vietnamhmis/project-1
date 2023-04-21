@@ -1,0 +1,711 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+				
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Lương</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index">Bảng điều khiển</a></li>
+                    <li class="breadcrumb-item active">Lương</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_salary"><i class="fa fa-plus"></i> Thêm mới</a>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+    
+    <!-- Search Filter -->
+    <div class="row filter-row">
+       <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating">
+                <label class="focus-label">Tên nhân viên</label>
+            </div>
+       </div>
+       <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+            <div class="form-group form-focus select-focus">
+                <select class="select floating"> 
+                    <option value=""> -- Chọn -- </option>
+                    <option value="">Nhân viên</option>
+                    <option value="1">Quản lý</option>
+                </select>
+                <label class="focus-label">Vai trò</label>
+            </div>
+       </div>
+       <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
+            <div class="form-group form-focus select-focus">
+                <select class="select floating"> 
+                    <option> -- Chọn -- </option>
+                    <option> Chờ xử lý </option>
+                    <option> Đã chấp thuận </option>
+                    <option> Không chấp thuận </option>
+                </select>
+                <label class="focus-label">Trạng thái</label>
+            </div>
+       </div>
+       <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+            <div class="form-group form-focus">
+                <div class="cal-icon">
+                    <input class="form-control floating datetimepicker" type="text">
+                </div>
+                <label class="focus-label">Từ</label>
+            </div>
+        </div>
+       <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+            <div class="form-group form-focus">
+                <div class="cal-icon">
+                    <input class="form-control floating datetimepicker" type="text">
+                </div>
+                <label class="focus-label">Đến</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+            <a href="#" class="btn btn-success btn-block"> Tìm kiếm </a>  
+        </div>     
+    </div>
+    <!-- /Search Filter -->
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-striped custom-table datatable">
+                    <thead>
+                        <tr>
+                            <th>Tên nhân viên</th>
+                            <th>Mã nhân viên</th>
+                            <th>Email</th>
+                            <th>Ngày bắt đầu</th>
+                            <th>Vai trò</th>
+                            <th>Lương (VNĐ)</th>
+                            <th>Phiếu lương</th>
+                            <th class="text-right">Tùy chỉnh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img alt="" src="/static/assets/img/profiles/avatar-02.jpg"></a>
+                                    <a href="/dashboard/profile">Quỳnh <span>Nhân sự</span></a>
+                                </h2>
+                            </td>
+                            <td>NV-0001</td>
+                            <td>quynh@example.com</td>
+                            <td>09/11/2021</td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Nhân sự </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Giám đốc</a>
+                                        <a class="dropdown-item" href="#">Nhân sự</a>
+                                        <a class="dropdown-item" href="#">IT</a>
+                                        <a class="dropdown-item" href="#">Bảo vệ</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>20.000.000</td>
+                            <td><a class="btn btn-sm btn-primary" href="/dashboard/salary-view">Xuất tệp</a></td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_salary"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_salary"><i class="fa fa-trash-o m-r-5"></i>  Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-09.jpg" alt=""></a>
+                                    <a href="/dashboard/profile">Bình <span>Nhân sự</span></a>
+                                </h2>
+                            </td>
+                            <td>NV-0002</td>
+                            <td>binh@example.com</td>
+                            <td>09/11/2021</td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Nhân sự </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Giám đốc</a>
+                                        <a class="dropdown-item" href="#">Nhân sự</a>
+                                        <a class="dropdown-item" href="#">IT</a>
+                                        <a class="dropdown-item" href="#">Bảo vệ</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>20.000.000</td>
+                            <td><a class="btn btn-sm btn-primary" href="/dashboard/salary-view">Xuất tệp</a></td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_salary"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_salary"><i class="fa fa-trash-o m-r-5"></i>  Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-10.jpg" alt=""></a>
+                                    <a href="/dashboard/profile">Trinh <span>IT</span></a>
+                                </h2>
+                            </td>
+                            <td>NV-0003</td>
+                            <td>trinh@example.com</td>
+                            <td>09/11/2021</td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false">IT </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Giám đốc</a>
+                                        <a class="dropdown-item" href="#">Nhân sự</a>
+                                        <a class="dropdown-item" href="#">IT</a>
+                                        <a class="dropdown-item" href="#">Bảo vệ</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>20.000.000</td>
+                            <td><a class="btn btn-sm btn-primary" href="/dashboard/salary-view">Xuất tệp</a></td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_salary"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_salary"><i class="fa fa-trash-o m-r-5"></i>  Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-05.jpg" alt=""></a>
+                                    <a href="/dashboard/profile">Nguyên <span>Bảo vệ</span></a>
+                                </h2>
+                            </td>
+                            <td>NV-0004</td>
+                            <td>nguyen@example.com</td>
+                            <td>09/11/2021</td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Bảo vệ </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Giám đốc</a>
+                                        <a class="dropdown-item" href="#">Nhân sự</a>
+                                        <a class="dropdown-item" href="#">IT</a>
+                                        <a class="dropdown-item" href="#">Bảo vệ</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>5.000.000</td>
+                            <td><a class="btn btn-sm btn-primary" href="/dashboard/salary-view">Xuất tệp</a></td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_salary"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_salary"><i class="fa fa-trash-o m-r-5"></i>  Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-11.jpg" alt=""></a>
+                                    <a href="/dashboard/profile">Linh <span>Giám đốc</span></a>
+                                </h2>
+                            </td>
+                            <td>NV-0005</td>
+                            <td>linh@example.com</td>
+                            <td>09/11/2021</td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Giám đốc </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Giám đốc</a>
+                                        <a class="dropdown-item" href="#">Nhân sự</a>
+                                        <a class="dropdown-item" href="#">IT</a>
+                                        <a class="dropdown-item" href="#">Bảo vệ</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>50.000.000</td>
+                            <td><a class="btn btn-sm btn-primary" href="/dashboard/salary-view">Xuất tệp</a></td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_salary"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_salary"><i class="fa fa-trash-o m-r-5"></i>  Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-12.jpg" alt=""></a>
+                                    <a href="/dashboard/profile">Hoài <span>Nhân sự</span></a>
+                                </h2>
+                            </td>
+                            <td>NV-0006</td>
+                            <td>hoai@example.com</td>
+                            <td>09/11/2021</td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Nhân sự</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Giám đốc</a>
+                                        <a class="dropdown-item" href="#">Nhân sự</a>
+                                        <a class="dropdown-item" href="#">IT</a>
+                                        <a class="dropdown-item" href="#">Bảo vệ</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>20.000.000</td>
+                            <td><a class="btn btn-sm btn-primary" href="/dashboard/salary-view">Xuất tệp</a></td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_salary"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_salary"><i class="fa fa-trash-o m-r-5"></i>  Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-13.jpg" alt=""></a>
+                                    <a href="/dashboard/profile">Trang <span>Nhân sự</span></a>
+                                </h2>
+                            </td>
+                            <td>NV-0007</td>
+                            <td>trang@example.com</td>
+                            <td>09/11/2021</td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Nhân sự </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Giám đốc</a>
+                                        <a class="dropdown-item" href="#">Nhân sự</a>
+                                        <a class="dropdown-item" href="#">IT</a>
+                                        <a class="dropdown-item" href="#">Bảo vệ</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>20.000.000</td>
+                            <td><a class="btn btn-sm btn-primary" href="/dashboard/salary-view">Xuất tệp</a></td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_salary"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_salary"><i class="fa fa-trash-o m-r-5"></i>  Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-01.jpg" alt=""></a>
+                                    <a href="/dashboard/profile">Anh <span>Giám đốc</span></a>
+                                </h2>
+                            </td>
+                            <td>NV-0008</td>
+                            <td>anh@example.com</td>
+                            <td>09/11/2021</td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Giám đốc </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Giám đốc</a>
+                                        <a class="dropdown-item" href="#">Nhân sự</a>
+                                        <a class="dropdown-item" href="#">IT</a>
+                                        <a class="dropdown-item" href="#">Bảo vệ</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>20.000.000</td>
+                            <td><a class="btn btn-sm btn-primary" href="/dashboard/salary-view">Xuất tệp</a></td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_salary"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_salary"><i class="fa fa-trash-o m-r-5"></i>  Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-16.jpg" alt=""></a>
+                                    <a href="/dashboard/profile">Hưng <span>Giám đốc</span></a>
+                                </h2>
+                            </td>
+                            <td>NV-0009</td>
+                            <td>hung@example.com</td>
+                            <td>09/11/2021</td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Giám đốc </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Giám đốc</a>
+                                        <a class="dropdown-item" href="#">Nhân sự</a>
+                                        <a class="dropdown-item" href="#">IT</a>
+                                        <a class="dropdown-item" href="#">Bảo vệ</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>50.000.000</td>
+                            <td><a class="btn btn-sm btn-primary" href="/dashboard/salary-view">Xuất tệp</a></td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_salary"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_salary"><i class="fa fa-trash-o m-r-5"></i>  Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-04.jpg" alt=""></a>
+                                    <a href="/dashboard/profile">Lan <span>IT</span></a>
+                                </h2>
+                            </td>
+                            <td>NV-0010</td>
+                            <td>lan@example.com</td>
+                            <td>09/11/2021</td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false">IT </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Giám đốc</a>
+                                        <a class="dropdown-item" href="#">Nhân sự</a>
+                                        <a class="dropdown-item" href="#">IT</a>
+                                        <a class="dropdown-item" href="#">Bảo vệ</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>20.000.000</td>
+                            <td><a class="btn btn-sm btn-primary" href="/dashboard/salary-view">Xuất tệp</a></td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_salary"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_salary"><i class="fa fa-trash-o m-r-5"></i>  Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="/dashboard/profile" class="avatar"><img src="/static/assets/img/profiles/avatar-03.jpg" alt=""></a>
+                                    <a href="/dashboard/profile">Hằng <span>IT</span></a>
+                                </h2>
+                            </td>
+                            <td>NV-0011</td>
+                            <td>hang@example.com</td>
+                            <td>09/11/2021</td>
+                            <td>
+                                <div class="dropdown">
+                                    <a href="" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false">IT </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Giám đốc</a>
+                                        <a class="dropdown-item" href="#">Nhân sự</a>
+                                        <a class="dropdown-item" href="#">IT</a>
+                                        <a class="dropdown-item" href="#">Bảo vệ</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>20.000.000</td>
+                            <td><a class="btn btn-sm btn-primary" href="/dashboard/salary-view">Xuất tệp</a></td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_salary"><i class="fa fa-pencil m-r-5"></i> Sửa</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_salary"><i class="fa fa-trash-o m-r-5"></i>  Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->
+
+<!-- Add Salary Modal -->
+<div id="add_salary" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm lương nhân viên</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row"> 
+                        <div class="col-sm-6"> 
+                            <div class="form-group">
+                                <label>Chọn nhân viên</label>
+                                <select class="select"> 
+                                    <option>Anh</option>
+                                    <option>Bình</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6"> 
+                            <label>Lương cứng</label>
+                            <input class="form-control" type="text">
+                        </div>
+                    </div>
+                    <div class="row"> 
+                        <div class="col-sm-6"> 
+                            <h4 class="text-primary">Thu nhập</h4>
+                            <div class="form-group">
+                                <label>Cơ bản</label>
+                                <input class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>Trợ cấp vật tư(40%)</label>
+                                <input class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>Trợ cấp nơi ở(15%))</label>
+                                <input class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>Di chuyển</label>
+                                <input class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>Phụ cấp</label>
+                                <input class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>Trợ cấp y tế</label>
+                                <input class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>Khác</label>
+                                <input class="form-control" type="text">
+                            </div>
+                            <div class="add-more">
+                                <a href="#"><i class="fa fa-plus-circle"></i> Bổ sung thêm</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">  
+                            <h4 class="text-primary">Khấu trừ</h4>
+                            <div class="form-group">
+                                <label>Thuế khấu trừ tại nguồn</label>
+                                <input class="form-control" type="text">
+                            </div> 
+                            <div class="form-group">
+                                <label>Bảo hiểm nhà nước</label>
+                                <input class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>Quỹ bảo trợ</label>
+                                <input class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>Nghỉ phép</label>
+                                <input class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>Thuế thu nhập cá nhân</label>
+                                <input class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>Phúc lợi lao động</label>
+                                <input class="form-control" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>Khác</label>
+                                <input class="form-control" type="text">
+                            </div>
+                            <div class="add-more">
+                                <a href="#"><i class="fa fa-plus-circle"></i> Bổ sung thêm</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Add Salary Modal -->
+
+<!-- Edit Salary Modal -->
+<div id="edit_salary" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thay đổi lương</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row"> 
+                        <div class="col-sm-6"> 
+                            <div class="form-group">
+                                <label>Chọn nhân viên</label>
+                                <select class="select"> 
+                                    <option>Anh</option>
+                                    <option>Bình</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6"> 
+                            <label>Lương cứng</label>
+                            <input class="form-control" type="text" value="$4000">
+                        </div>
+                    </div>
+                    <div class="row"> 
+                        <div class="col-sm-6"> 
+                            <h4 class="text-primary">Thu nhập</h4>
+                            <div class="form-group">
+                                <label>Cơ bản</label>
+                                <input class="form-control" type="text" value="$6500">
+                            </div>
+                            <div class="form-group">
+                                <label>Trợ cấp vật tư(40%)</label>
+                                <input class="form-control" type="text" value="$2000">
+                            </div>
+                            <div class="form-group">
+                                <label>Trợ cấp nơi ở(15%))</label>
+                                <input class="form-control" type="text" value="$700">
+                            </div>
+                            <div class="form-group">
+                                <label>Di chuyển</label>
+                                <input class="form-control" type="text" value="$70">
+                            </div>
+                            <div class="form-group">
+                                <label>Phụ cấp</label>
+                                <input class="form-control" type="text" value="$30">
+                            </div>
+                            <div class="form-group">
+                                <label>Trợ cấp y tế</label>
+                                <input class="form-control" type="text" value="$20">
+                            </div>
+                            <div class="form-group">
+                                <label>Khác</label>
+                                <input class="form-control" type="text">
+                            </div>  
+                        </div>
+                        <div class="col-sm-6">  
+                            <h4 class="text-primary">Khấu trừ</h4>
+                            <div class="form-group">
+                                <label>Thuế khấu trừ tại nguồn</label>
+                                <input class="form-control" type="text" value="$300">
+                            </div> 
+                            <div class="form-group">
+                                <label>Bảo hiểm nhà nước</label>
+                                <input class="form-control" type="text" value="$20">
+                            </div>
+                            <div class="form-group">
+                                <label>Quỹ bảo trợ</label>
+                                <input class="form-control" type="text" value="$20">
+                            </div>
+                            <div class="form-group">
+                                <label>Nghỉ phép</label>
+                                <input class="form-control" type="text" value="$250">
+                            </div>
+                            <div class="form-group">
+                                <label>Thuế thu nhập cá nhân</label>
+                                <input class="form-control" type="text" value="$110">
+                            </div>
+                            <div class="form-group">
+                                <label>Phúc lợi lao động</label>
+                                <input class="form-control" type="text" value="$10">
+                            </div>
+                            <div class="form-group">
+                                <label>Quỹ công đoàn</label>
+                                <input class="form-control" type="text" value="$40">
+                            </div>
+                            <div class="form-group">
+                                <label>Khác</label>
+                                <input class="form-control" type="text" value="$15">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Edit Salary Modal -->
+
+<!-- Delete Salary Modal -->
+<div class="modal custom-modal fade" id="delete_salary" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-header">
+                    <h3>Xóa</h3>
+                    <p>Bạn có chắc chắn muốn xóa?</p>
+                </div>
+                <div class="modal-btn delete-action">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="javascript:void(0);" class="btn btn-primary continue-btn">Xác nhận</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Hủy bỏ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Delete Salary Modal -->
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

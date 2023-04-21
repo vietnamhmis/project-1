@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Dashboard - {% block title %}{% endblock %}
+    </title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+
+         <!-- Favicon icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/static/assets/img/favicon.png">
+        <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+        <!-- fontawesome CSS -->
+    <link rel="stylesheet" href="/static/assets/css/font-awesome.min.css">
+        <!-- Lineawesome CSS -->
+    <link rel="stylesheet" href="/static/assets/css/line-awesome.min.css">
+    	<!-- Main CSS -->
+    <link rel="stylesheet" href="/static/assets/css/mainstyle.css">
+
+    <!-- Specific CSS goes HERE -->
+    	<!-- Chart CSS -->
+	<link rel="stylesheet" href="/static/assets/plugins/morris/morris.css">
+
+    <link rel="stylesheet" href="/static/assets/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/static/assets/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/static/assets/css/fullcalendar.min.css">
+    <link rel="stylesheet" href="/static/assets/css/select2.min.css">
+    <!-- Tagsinput CSS -->
+	<link rel="stylesheet" href="/static/assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css"
+
+		 <!-- Main CSS
+        <link rel="stylesheet" href="assets/css/style2.css"> -->
+
+    {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+
+<body>
+            <!-- Main Wrapper -->
+    <div class="main-wrapper">
+    {% include 'includes/navigation.html' %}
+            <!-- SideBar -->
+    {% include 'includes/sidebar.html' %}
+         <!-- Page Content -->
+    <div class="page-wrapper">
+        
+     {% block content %}{% endblock content %}
+        
+    </div>
+            <!-- /Page Content -->
+    </div>
+			<!-- /Page Wrapper -->
+
+
+     {% include 'includes/scripts.html' %}
+    <!-- Specific Page JS goes HERE  -->
+        <script src="/static/assets/js/jquery-3.5.1.min.js"></script>
+
+		<!-- Bootstrap Core JS -->
+        <script src="/static/assets/js/popper.min.js"></script>
+        <script src="/static/assets/js/bootstrap.min.js"></script>
+
+		<!-- Slimscroll JS -->
+		<script src="/static/assets/js/jquery.slimscroll.min.js"></script>
+
+		<!-- Chart JS -->
+		<script src="/static/assets/plugins/morris/morris.min.js"></script>
+		<script src="/static/assets/plugins/raphael/raphael.min.js"></script>
+		<script src="/static/assets/js/chart.js"></script>
+        <script src="/static/assets/js/Chart.min.js"></script>
+		<script src="/static/assets/js/line-chart.js"></script>
+
+        <!-- Select2 JS -->
+		<script src="/static/assets/js/select2.min.js"></script>
+		
+		<!-- Datetimepicker JS -->
+		<script src="/static/assets/js/moment.min.js"></script>
+		<script src="/static/assets/js/bootstrap-datetimepicker.min.js"></script>   
+
+        <!-- Datatable JS -->
+		<script src="/static/assets/js/jquery.dataTables.min.js"></script>
+		<script src="/static/assets/js/dataTables.bootstrap4.min.js"></script>
+
+		<!-- Custom JS -->
+		<script src="/static/assets/js/app.js"></script>
+
+        <!-- Dropfiles JS -->
+		<script src="/static/assets/js/dropfiles.js"></script>
+
+        <!-- Task JS -->
+		<script src="/static/assets/js/task.js"></script>
+
+        <!-- Tagsinput JS -->
+		<script src="/static/assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+				
+		<script src="/static/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+
+        <!-- Summernote JS -->
+		<script src="/static/assets/plugins/summernote/dist/summernote-bs4.min.js"></script>
+
+        	<!-- Calendar JS -->
+		<script src="/static/assets/js/jquery-ui.min.js"></script>
+        <script src="/static/assets/js/fullcalendar.min.js"></script>
+        <script src="/static/assets/js/jquery.fullcalendar.js"></script>
+
+        <!-- Mask JS -->
+		<script src="/static/assets/js/jquery.maskedinput.min.js"></script>
+        <script src="/static/assets/js/mask.js"></script>
+
+        <!-- Form Validation JS -->
+        <script src="/static/assets/js/form-validation.js"></script>
+
+        <!-- Multiselect JS -->
+		<script src="assets/js/multiselect.min.js"></script>
+    {% block javascripts %} 
+     
+    {% endblock javascripts %}
+
+</body>
+</html>
+

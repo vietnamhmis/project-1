@@ -1,0 +1,96 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyInterpreterInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E302" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N801" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyShadowingBuiltinsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredNames">
+        <list>
+          <option value="id" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="Authen.profiles.urls.profiles_views" />
+          <option value="Authen.profiles.urls.siteloginview" />
+          <option value="crudproject1.crudproject1.urls.mysite" />
+          <option value="Authen.bsc_kpi.urls.bsc_kpi" />
+          <option value="Authen.bsc_kpi.urls.views" />
+          <option value="crudproject1.enroll.urls.enroll" />
+          <option value="crudproject1.enroll.views.stud" />
+          <option value="crudproject1.enroll.models.*" />
+          <option value="crudproject1.enroll.admin.Admin" />
+          <option value="crudproject1.nhanvien.admin.nhanvien" />
+          <option value="crudproject1.mota_cv.models.To_nhom" />
+          <option value="crudproject1.mota_cv.models.*" />
+          <option value="crudproject1.nhansu.Don_vi" />
+          <option value="crudproject1.nhansu.Bo_phan" />
+          <option value="crudproject1.nhansu.To_nhom" />
+          <option value="crudproject1.nhansu.models.Phai" />
+          <option value="crudproject1.crudproject1.urls.login" />
+          <option value="crudproject1.nhansu.views.Ly_lich_NV" />
+          <option value="crudproject1.enroll.filters.forms" />
+          <option value="crudproject1.nhansu.views.request" />
+          <option value="crudproject1.nhansu.urls.views" />
+          <option value="crudproject1.nhansu.urls.update_donvi" />
+          <option value="crudproject1.nhansu.urls.delete_dmdv" />
+          <option value="crudproject1.login.views.register.as_view" />
+          <option value="crudproject1.login.views.logout_User.as_view" />
+          <option value="crudproject1.login.views.logout_User" />
+          <option value="crudproject1.login.views.redirect" />
+          <option value="crudproject1.enroll.views.View" />
+          <option value="crudproject1.nhansu.urls.nhansu" />
+          <option value="crudproject1.dinhbien.admin.ImportExportModelAdmin" />
+          <option value="crudproject1.mota_cv.forms.forms" />
+          <option value="crudproject1.nhansu.models.Bo_phan.objects" />
+          <option value="crudproject1.mota_cv.urls.views" />
+          <option value="persons.models.Country" />
+          <option value="persons.models.City" />
+          <option value="persons.models.Phuongxa" />
+          <option value="crudproject1.mota_dg.views.redirect" />
+          <option value="accounts.admin.create_superuser" />
+          <option value="crudproject1.dinhbien.views.chuc_vu_id" />
+          <option value="crudproject1.phucap.admin.phucap" />
+          <option value="crudproject1.luong.models.ht_luong" />
+          <option value="crudproject1.luong.models.ht_traluong" />
+          <option value="models.Campus" />
+          <option value="crudproject1.thunghiem.views.models" />
+          <option value="crudproject1.thunghiem.views.simplejson" />
+          <option value="crudproject1.thunghiem.admin.City" />
+          <option value="crudproject1.mota_cv.views.don_vi_id" />
+          <option value="crudproject1.mota_cv.forms.country_id" />
+          <option value="crudproject1.enroll.urls.views" />
+          <option value="crudproject1.mota_cv.views.bo_phan_id" />
+          <option value="crudproject1.mota_cv.forms.to_nhom_id" />
+          <option value="crudproject1.mota_cv.admin.Cong_viec" />
+          <option value="crudproject1.luong.views.pnv" />
+          <option value="crudproject1.luong.models.hd_laodong.objects" />
+          <option value="crudproject1.luong.urls.views" />
+          <option value="crudproject1.luong.models.Chamcongchitiet" />
+          <option value="crudproject1.kpi.filters.Dmkpi_dv_Filter" />
+          <option value="django.conf.urls.url" />
+          <option value="hrm.hrm.urls.settings" />
+          <option value="hrm.hrm.urls.static" />
+          <option value="hrm.luong.models.settings" />
+          <option value="hrm.enroll.models.settings" />
+          <option value="hrm.nhansu.views.nangluc_chitiet.as_view" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

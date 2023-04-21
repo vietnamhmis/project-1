@@ -1,0 +1,91 @@
+{% extends "layouts/base.html" %}
+{% block title %} Danh sách Bộ phận {% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<!-- Page Content -->
+<div class="content container-fluid">
+    <!-- Page Header -->
+<body class="container">
+
+
+
+
+
+
+<div class="row">
+        <div class="col-md-12">
+           <div class="table-responsive-sm">
+               {% if students %}
+                 <!--  <table id="table" class="" height= "100 px";>-->
+                       <table class="table table-striped custom-table datatable">
+                    <thead>
+                       <tr class="table-success">
+                            <th scope="col" style="width: 5%">id</th>
+                            <th scope="col" style="width: 25%">Tên nhân viên viên</th>
+                            <th scope="col" style="width: 15%">Vị trí</th>
+                            <th scope="col" style="width: 15%">Bộ phận </th>
+                            <th scope="col" style="width: 10%">Lương BHXH cũ </th>
+                            <th scope="col" style="width: 10%">Lương  cũ </th>
+                            <th scope="col" style="width: 5%">Lương BHXH</th>
+                            <th scope="col" style="width: 5%">Lương  </th>
+                            <th scope="col" style="width: 5%">Chệnh lệch lương </th>
+                            <th scope="col" style="width: 5%">BHXH </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                        <tr>
+                            <td>{{ student.id }}</td>
+                            <td>{{student.Nhanvien.ho_lot_thuong_dung}} </td>
+                            <td >{{ student.Nhanvien.vitri_CV.Ten_Nhom_CV }}</td>
+                            <td >{{ student.Nhanvien.bo_phan.ten_bp }}</td>
+                            <td>{{ student. }}</td>
+                            <td>{{ student. }}</td>
+                            <td>{{ student. }}</td>
+                            <td>{{ student. }}</td>
+                            <td>{{ student. }}</td>
+                            <td>{{ student. }}</td>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                           <tr class="table-warning" >
+                               <td colspan="1" ></td>
+                               <td class="text-left" >Tổng ;
+                               </td>
+
+                               <td class="text-left" >{{total_Luong_BHXH_cu}}</td>
+                                <td class="text-left" >{{total_Luong_BHXH_moi}}</td>
+                               <td colspan="text-left">{{total_Luong_cu}}</td>
+
+
+                               <td class="text-left" >{{total_Luong_moi}}</td>
+
+                               <td colspan="text-left">{{total_CL_Luong_BHXH_PA_1}}</td>
+
+                               <td class="text-left" >{{total_CL_Luong_moi_PA_1}}</td>
+                            </tr>
+                      </tfoot>
+                </table>
+               {% else %}
+                  <h4 class="text-center alert alert-warning">Chưa có dữ liệu </h4>
+               {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</div>
+</html>
+
+{% endblock content %}

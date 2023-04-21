@@ -1,0 +1,509 @@
+
+<!------------------------Biểu đồ ---------------------------------------------------------------------------------------------------------------->
+<div class="row">
+<div class="col-md-12">
+<div class="row">
+            <!------------------------Biểu đồ char1 -------><div class="col-md-6 text-center">
+<div class="card">
+										<div class="card-body">
+											<h3 class="card-title red">BIỂU ĐỒ NĂNG LỰC: </h3>
+                                           <h6 class="card-title">Tiêu chuẩn/Tự đánh giá/Đơn vịđánh giá </h6>
+                                            <div class="col-md-12">
+                                                <div class="col-md-10">
+                                                   <canvas id="myChart1" width="200" height="300"></canvas>
+                                                       <script>
+                                                                var ctx = document.getElementById('myChart1').getContext('2d');
+                                                                ctx.canvas.width = 80;
+																ctx.canvas.height = 80;
+
+                                                                var myChart1 = new Chart(ctx, {
+                                                                    type: 'radar',
+                                                                    data: {
+                                                              labels: [{% for product in productss %}  '{{ product.TenNangluc_congviec|truncatewords:3 }}',  {% endfor %}],
+                                                                        datasets: [{
+                                                                    label: ' Mức chuẩn',
+                                                                    data: [{% for product in productss %}  '{{ product.TenNangluc_congviec.Muc_thanhthao_nluc }}',  {% endfor %}],
+
+                                                                    fill: true,
+                                                                    backgroundColor: 'rgba(255, 99, 132, 0.1)',
+
+                                                                    borderColor: 'rgb(255, 99, 100)',
+                                                                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                                                                    pointBackgroundColor: 'rgba(251, 99, 32, 0.6)',
+                                                                    pointBackgroundColor: 'rgba(250, 99, 32, 0.7)',
+                                                                    pointBackgroundColor: 'rgba(258, 99, 32, 0.8)',
+
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                                                                  }, {
+                                                                    label: 'Kết quả chung',
+                                                                    data: [{% for product in productss %}  '{{ product.Ketqua_danhgia }}',  {% endfor %}],
+                                                                    fill: true,
+                                                                    backgroundColor: [
+                                                                      'rgba(255, 0, 255, 0.2)',
+                                                                      'rgba(155, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.2)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+
+                                                                    ],
+
+                                                                    borderColor: 'rgb(54, 162, 235)',
+                                                                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                                                                    pointBackgroundColor: 'rgba(251, 99, 132, 0.1)',
+                                                                    pointBackgroundColor: 'rgba(250, 99, 132, 0.7)',
+                                                                    pointBackgroundColor: 'rgba(258, 99, 132, 0.8)',
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                                                                  },{
+                                                                    label: 'Tự Đ.giá',
+                                                                    data: [{% for product in productss %}  '{{ product.tu_danhgia_dapung }}',  {% endfor %}],
+                                                                    fill: true,
+                                                                    backgroundColor: [
+                                                                      'rgba(255, 0, 255, 0.2)',
+                                                                      'rgba(155, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.2)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+
+                                                                    ],
+
+                                                                    borderColor: 'rgb(54, 162, 235)',
+                                                                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                                                                    pointBackgroundColor: 'rgba(251, 99, 132, 0.1)',
+                                                                    pointBackgroundColor: 'rgba(250, 99, 132, 0.7)',
+                                                                    pointBackgroundColor: 'rgba(258, 99, 132, 0.8)',
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                                                                  }, {
+                                                                    label: 'Quản lý Đ.giá',
+                                                                    data: [{% for product in productss %}  '{{ product.Quanly_danhgia }}',  {% endfor %}],
+                                                                    fill: true,
+                                                                    backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                                                                    borderColor: 'rgb( 0, 245, 255)',
+                                                                    pointBackgroundColor: [
+
+                                                                      'rgb( 0, 245, 255)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.2)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+
+                                                                    ],
+
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                                                                  }]
+
+                                                                    },
+                                                                    options: {
+                                                                        scales: {
+                                                                            y: {
+                                                                                beginAtZero: true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                });
+                                                                </script>
+
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+</div>
+                               <!------------------------Biểu đồ char2------->
+    <div class="col-md-6 text-center">
+                                <div class="card">
+										<div class="card-body">
+											<h3 class="card-title">BIỂU ĐỒ NĂNG LỰC </h3>
+                                            <h6 class="card-title">Tiêu chuẩn/Tự đánh giá/Đơn vịđánh giá </h6>
+                                            <div class="col-md-12">
+                                                <div class="col-md-10">
+                                                   <canvas id="myChart2" width="200" height="300"></canvas>
+                                                               <script>
+                                                                var ctx = document.getElementById('myChart2').getContext('2d');
+                                                                ctx.canvas.width = 100;
+																ctx.canvas.height = 100;
+                                                                var myChart2 = new Chart(ctx, {
+                                                                    type: 'bar',
+                                                                    data: {
+                                                              labels: [{% for product in productss %}  '{{ product.TenNangluc_congviec|truncatewords:3 }}',  {% endfor %}],
+                                                                        datasets: [{
+                                                                    label: 'Mức NL tiêu chuẩn',
+                                                                    data: [{% for product in productss %}  '{{ product.TenNangluc_congviec.Muc_thanhthao_nluc }}',  {% endfor %}],
+
+                                                                    fill: true,
+                                                                   backgroundColor: [
+                                                                      'rgba(155, 99, 132, 0.8)',
+                                                                      'rgba(155, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.2)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.2)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+
+                                                                    ],
+
+                                                                    borderColor: [
+
+                                                                      'rgb(0, 255, 127)',
+                                                                      'rgb(75, 192, 192)',
+                                                                      'rgb(54, 162, 235)',
+                                                                      'rgb(153, 102, 255)',
+                                                                      'rgb(201, 203, 207)'
+                                                                    ],
+                                                                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                                                                    pointBackgroundColor: 'rgba(251, 99, 32, 0.6)',
+                                                                    pointBackgroundColor: 'rgba(250, 99, 32, 0.7)',
+                                                                    pointBackgroundColor: 'rgba(258, 99, 32, 0.8)',
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                                                                  }, {
+                                                                    label: 'Tự Đ.giá',
+                                                                    data: [{% for product in productss %}  '{{ product.tu_danhgia_dapung }}',  {% endfor %}],
+                                                                    fill: true,
+                                                                    backgroundColor: [
+                                                                      'rgba(155, 99, 132, 0.2)',
+                                                                      'rgba(155, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.2)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+
+                                                                    ],
+
+                                                                    borderColor: 'rgb(0, 162, 235)',
+                                                                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                                                                    pointBackgroundColor: 'rgba(251, 99, 132, 0.1)',
+                                                                    pointBackgroundColor: 'rgba(250, 99, 132, 0.7)',
+                                                                    pointBackgroundColor: 'rgba(258, 99, 132, 0.8)',
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                                                                  }, {
+                                                                    label: 'Kết quả Đ.giá',
+                                                                    data: [{% for product in productss %}  '{{ product.Ketqua_danhgia }}',  {% endfor %}],
+                                                                    fill: true,
+                                                                    backgroundColor: [
+                                                                      'rgba(155, 99, 132, 0.2)',
+                                                                      'rgba(155, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.2)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+
+                                                                    ],
+
+                                                                    borderColor: 'rgb(0, 162, 235)',
+                                                                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                                                                    pointBackgroundColor: 'rgba(251, 99, 132, 0.1)',
+                                                                    pointBackgroundColor: 'rgba(250, 99, 132, 0.7)',
+                                                                    pointBackgroundColor: 'rgba(258, 99, 132, 0.8)',
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                                                                  }, {
+                                                                    label: 'Quản lý Đ.giá',
+                                                                    data: [{% for product in productss %}  '{{ product.Quanly_danhgia }}',  {% endfor %}],
+                                                                    fill: true,
+                                                                    backgroundColor: [
+
+
+                                                                      'rgb(255, 106, 106, 04)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.2)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                       'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.2)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(201, 203, 207, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.2)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+                                                                      'rgba(255, 99, 132, 0.6)',
+                                                                      'rgba(255, 159, 64, 0.6)',
+                                                                      'rgba(255, 205, 86, 0.6)',
+                                                                      'rgba(75, 192, 192, 0.6)',
+                                                                      'rgba(54, 162, 235, 0.6)',
+                                                                      'rgba(153, 102, 255, 0.6)',
+
+                                                                    ],
+
+                                                                    borderColor: 'rgb(0, 245, 255)',
+                                                                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                                                                    pointBackgroundColor: 'rgba(251, 99, 132, 0.1)',
+                                                                    pointBackgroundColor: 'rgba(250, 99, 132, 0.7)',
+                                                                    pointBackgroundColor: 'rgba(258, 99, 132, 0.8)',
+
+                                                                    pointBorderColor: '#fff',
+                                                                    pointHoverBackgroundColor: '#fff',
+                                                                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                                                                  }]
+
+                                                                    },
+                                                                    options: {
+                                                                        scales: {
+                                                                            y: {
+                                                                                beginAtZero: true
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                });
+                                                                </script>
+
+                                                        </div>
+                                                   </div>
+                                        </div>
+                                        </div>
+                                </div>
+</div>
+</div>
+</div>

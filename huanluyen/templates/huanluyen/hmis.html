@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta name="viewport" content="with =device-width, initial-scale=1.0">
+    <title>HMis Web</title>
+    <link rel="stylesheet" href= {% static "/huanluyen/hmis.css" %}>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@600;700&display=swap" rel="stylesheet">
+    <!----
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    ---->
+   <link rel="stylesheet" href="/static/assets/css/font-awesome.min.css">
+</head>
+<body>
+<section class="header">
+    <nav>
+        <a href="layouts/hmis.html"> <img class="image-thumbail" alt="" src="/static/assets/img/anh_his/hrm3.png"></a>
+        <div class="nav-links" id="navLinks">
+            <i class="fa fa-times"  onclick="hideMenu()"></i>
+            <ul>
+                <li> <a href="{% url 'huanluyen:web_index' %}">HOME</a> </li>
+                <li> <a href="{% url 'huanluyen:web_about' %} ">ABOUT</a> </li>
+                <li> <a href="{% url 'huanluyen:web_course' %} ">COURSE</a> </li>
+                <li> <a href="{% url 'huanluyen:web_blog' %} ">BLOG</a> </li>
+                <li> <a href="">CONTACT</a> </li>
+            </ul>
+        </div>
+       <!---  <i class="fa fa-bars"</i> --->
+       <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <div class="text-box">
+        <h1> Việt Nam's Bisggest Human Resources Management</h1>
+        <p> HMIS là một tổ chức khoa học và công nghệ cam kết sẽ nỗ lực hết mình <br>
+            nhằm mang lại các giá trị tài nguyên con người, đáp ứng tối đa nhu cầu của Quý Doanh nghiệp,<br>
+            góp phần nâng cao trách nhiệm xã hội đối với cộng đồng.
+        </p>
+        <a class="hero-btn" href="">Visit Us To know More</a>
+    </div>
+
+
+</section>
+<!-------Couser--->
+<section class="course">
+    <h1>  CÁC CHƯƠNG TRÌNH TƯ VẤN VÀ ĐÀO TẠO </h1>
+    <p>MỘT SỐ CHƯƠNG TRÌNH TƯ VẤN VÀ ĐÀO TẠO
+CỦA VIỆN KHOA HỌC QUẢN LÝ NGUỒN NHÂN LỰC (HMIS)
+</p>
+    <div class="row">
+        {% for sto in ct_tu_van2 %}
+             <div class="course-col">
+
+                    <h3> {{sto.name|upper}}</h3>
+                    <p>{{sto.content}}  </p>
+
+
+            </div>
+        {% endfor %}
+    </div>
+           <!---
+        <div class="course-col">
+            <h3>  Xây dựng bộ Tự điển đánh giá năng lực nhân sự</h3>
+            <p>
+                Thu thập, phân tích dữ liệu liên quan: chức năng, nhiệm vụ, mô tả công việc
+                Biên soạn tài liệu, đào tạo kiến thức và thực hành đánh giá năng lực nhân viên
+                Xác định mô hình năng lực Doanh nghiệp
+                Xác định và phân loại năng lực
+                Xác định danh mục năng lực Doanh nghiệp
+                Phân tích năng lực chức danh
+                Phân cấp năng lực chức danh
+                Hoàn chỉnh Bộ từ điển năng lực
+                Xây dựng Quy trình đánh giá năng lực nhân sự và phát triển nguồn nhân lực
+            </p>
+        </div>
+        ---Chưuơng trình--->
+         <!-------Ednd: Chưuơng trình-
+        <div class="course-col">
+            <h3> XÂY DỰNG HỆ THỐNG BẢNG MÔ TẢ CÔNG VIỆC</h3>
+            <p>
+               Thiết kế mẫu bảng mô tả công việc
+                Tổ chức tập huấn triển khai
+                Phát phiếu và thu thập dữ liệu theo mẫu
+            </p>
+        </div>-->
+
+</section>
+<!-------campus--->
+<section class="campus">
+    <h1>CÁC ĐƠN VỊ ĐÃ ĐƯỢC HMIS TƯ VẤN, ĐÀO TẠO</h1>
+     <p>Kỹ năng sống cho giáo viên, sinh viên và học sinh
+        Kỹ năng tổ chức sự kiện
+        Kỹ năng quản lý thời gian
+        Kỹ năng nói trước công chúng
+        Kỹ năng làm việc với người khó tính
+     </p>
+
+    <div class="row">
+        {% for sto in querysets %}
+            <div class="campus-col">
+            <img src="{{sto.image_kh.url}}">
+                <div class="layer">
+                 <h3>{{sto.name_kh}}</h3>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if is_paginated %}
+      <nav class="d-flex justify-content-center wow fadeIn">
+        <ul class="pagination pg-blue">
+
+          {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+    {% endif %}
+
+          <li class="page-item active">
+            <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+
+   <!--------------
+
+    <div class="row">
+        <div class="campus-col">
+            <img src="/static/assets/img/anh_his/satra.png">
+            <div class="layer">
+                <h1>Satra</h1>
+           </div>
+        </div>
+        <div class="campus-col">
+            <img src="/static/assets/img/anh_his/ximangHaTien.jpg">
+            <div class="layer">
+                <h3>Vicem Hà Tiên</h3>
+           </div>
+        </div>
+
+       <div class="campus-col">
+            <img src="/static/assets/img/anh_his/belogitic.jpg">
+            <div class="layer">
+                <h3>Bee Logictic Group</h3>
+           </div>
+        </div>
+    </div>
+     <!--------------------------->
+        <div class="row">
+        <div class="campus-col">
+            <img src="/static/assets/img/anh_his/london.png">
+            <div class="layer">
+                <h3>QUÂN ĐẠT GRUOP</h3>
+           </div>
+        </div>
+        <div class="campus-col">
+            <img src="/static/assets/img/anh_his/washington.png">
+            <div class="layer">
+                <h3>TWG GROUP</h3>
+           </div>
+        </div>
+
+       <div class="campus-col">
+            <img src="/static/assets/img/anh_his/newyork.png">
+            <div class="layer">
+                <h3>ĐH TRÀ VINH</h3>
+           </div>
+        </div>
+    </div>
+    <!--------------------------->
+</section>
+
+<!---------------------------------Tư liẹu-1---->
+<section class="faclities">
+    <h1>CÁC ĐỀ TÀI, NGHIÊN CỨU CHUYỂN GIAO</h1>
+    <P> Giám đốc điều hành (CEO)
+Giám đốc nhân sự (CPO)Giám đốc tài chính (CFO)Giám đốc kinh doanh (CCO)Nâng cao năng lực lãnh đạo
+</P>
+    <div class="row">
+        <div class="facilities-col">
+            <img src="/static/assets/img/anh_his/dt.JPG">
+            <h3>TÁI CẤU TRÚC DOANH NGHIỆP</h3>
+            <p>Hoạch định chiến lược;Nghệ thuật lãnh đạo và thuật sử dụng quyền lực
+                    Quản trị thương hiệu và Tiếp thị dành cho lãnh đạo;Nhân sự dành cho lãnh đạo
+                Kỹ năng giao tiếp bán hàng và chăm sóc khách hàng; Quản trị chiến lược
+            </p>
+        </div>
+        <div class="facilities-col">
+            <img src="/static/assets/img/anh_his/BSC.jpg">
+            <h3>HỆ THỐNG KPI/BSC</h3>
+            <p>KQuản lý nhân viên hiệu quả; Nghệ thuật giữ chân nhân tài;Nghiên cứu và phân tích thị trường
+            </p>
+            </div>
+        <div class="facilities-col">
+            <img src="/static/assets/img/anh_his/Elearning.jpg">
+            <h3>ĐỊNH MỨC LAO ĐỘNG, ĐỊNH BIÊN LAO ĐỘNG</h3>
+            <p>Kỹ năng quản lý và giám sát đội ngũ bán hàng
+                Kỹ năng giao tiếp bán hàng và chăm sóc khách hàng; Quản trị chiến lược
+            </p>
+        </div>
+
+    </div>
+
+    </section>
+
+<!---------------------------------Tư liẹu-2---->
+
+<section class="faclities">
+    <h1>CÁC CHƯƠNG TRÌNH ĐÀO TẠO</h1>
+    <P> Giám đốc điều hành (CEO)
+Giám đốc nhân sự (CPO)Giám đốc tài chính (CFO)Giám đốc kinh doanh (CCO)Nâng cao năng lực lãnh đạo
+</P>
+    <div class="row">
+        <div class="facilities-col">
+            <img src="/static/assets/img/anh_his/basketball.png">
+            <h3>DÀNH CHO QUẢN LÝ CẤP CAO</h3>
+            <p>Hoạch định chiến lược;Nghệ thuật lãnh đạo và thuật sử dụng quyền lực
+                    Quản trị thương hiệu và Tiếp thị dành cho lãnh đạo;Nhân sự dành cho lãnh đạo
+                Kỹ năng giao tiếp bán hàng và chăm sóc khách hàng; Quản trị chiến lược
+            </p>
+        </div>
+        <div class="facilities-col">
+            <img src="/static/assets/img/anh_his/cafeteria.png">
+            <h3>DÀNH CHO QUẢN LÝ CẤP TRUNG</h3>
+            <p>KQuản lý nhân viên hiệu quả; Nghệ thuật giữ chân nhân tài;Nghiên cứu và phân tích thị trường
+            </p>
+            </div>
+        <div class="facilities-col">
+            <img src="/static/assets/img/anh_his/library.png">
+            <h3>DÀNH CHO LĨNH VỰC MARKETING & SALES</h3>
+            <p>Kỹ năng quản lý và giám sát đội ngũ bán hàng
+                Kỹ năng giao tiếp bán hàng và chăm sóc khách hàng; Quản trị chiến lược
+            </p>
+        </div>
+
+    </div>
+
+    </section>
+
+<!---------------------------------Tư liẹu----->
+<section class="testimonials">
+    <h1>CÁC TẬP ĐOÀN/CÔNG TY/DOANH NGHIỆP NÓI VỀ CHÚNG TÔI</h1>
+     <div class="row">
+        <div class="testimonials-col">
+            <img src="/static/assets/img/anh_his/ThanhBeee.jfif">
+            <div>
+                <p>Hoạch định chiến lược;Nghệ thuật lãnh đạo và thuật sử dụng quyền lực
+                        Quản trị thương hiệu và Tiếp thị dành cho lãnh đạo;Nhân sự dành cho lãnh đạo
+                    Kỹ năng giao tiếp bán hàng và chăm sóc khách hàng; Quản trị chiến lược
+                </p>
+                <h3>Mr.Đinh Hữu Thạnh, Chủ tịch Bee Logistics</h3>
+
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                 <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o" ></i>
+            </div>
+        </div>
+         <div class="testimonials-col">
+            <img src="/static/assets/img/anh_his/cuongximang.jfif">
+             <div>
+                 <p>Hoạch định chiến lược;Nghệ thuật lãnh đạo và thuật sử dụng quyền lực
+                        Quản trị thương hiệu và Tiếp thị dành cho lãnh đạo;Nhân sự dành cho lãnh đạo
+                    Kỹ năng giao tiếp bán hàng và chăm sóc khách hàng; Quản trị chiến lược
+                </p>
+                   <h3>Mr.Lưu Đình Cường, Tổng Giám đốc Công ty VICEM Hà Tiên</h3>
+                 <i class="fa fa-star"></i>
+                 <i class="fa fa-star"></i>
+                 <i class="fa fa-star"></i>
+                 <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+
+             </div>
+        </div>
+
+            <div class="testimonials-col">
+            <img src="/static/assets/img/anh_his/Thanh_satra.jpg">
+             <div>
+                 <p>Hoạch định chiến lược;Nghệ thuật lãnh đạo và thuật sử dụng quyền lực
+                        Quản trị thương hiệu và Tiếp thị dành cho lãnh đạo;Nhân sự dành cho lãnh đạo
+                    Kỹ năng giao tiếp bán hàng và chăm sóc khách hàng; Quản trị chiến lược
+                </p>
+                   <h3>Mr.Lâm Quốc Thanh Tổng Giám đốc Tổng Công ty Thương mại Sài Gòn - TNHH Một Thành Viên</h3>
+                 <i class="fa fa-star"></i>
+                 <i class="fa fa-star"></i>
+                 <i class="fa fa-star"></i>
+                 <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+
+             </div>
+        </div>
+        </div>
+</section>
+
+
+<!---------------------------------Call to Action----->
+<section class ="c_ta">
+    <h1>VUI LÒNG LIÊN HỆ VỚI CHÚNG TÔI  </h1>
+    <a href="" class="hero-btn">CONTACT US</a>
+</section>
+
+
+
+<!------------------Footer------------>
+<section class="footer">
+    <h4>Abou Us</h4>
+    <p>  HMIS sẵn sàng trao đổi, phân tích nhu cầu <br>
+        và thiết kế các chương trình tư vấn và đào tạo chuyên biệt phù hợp
+        theo đơn đặt hàng của Quý Doanh nghiệp</p>
+    <div class="icons">
+        <i class="fa fa-facebook"></i>
+        <i class="fa fa-twitter"></i>
+        <i class="fa fa-instagram"></i>
+        <i class="fa fa-linkedin"></i>
+    </div>
+<p>Made with   <i class="fa fa-heart-o"></i> Viện Khoa học Quản lý Nguồn nhân lực (HMIS) </p>
+</section>
+
+
+<script>
+    var navLinks = document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right = "0";
+    }
+    function hideMenu(){
+        navLinks.style.right = "-200px";
+    }
+</script>
+
+</body>
+</html>
