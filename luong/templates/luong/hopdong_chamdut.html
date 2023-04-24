@@ -1,57 +1,114 @@
 {% extends "layouts/base.html" %}
-{% block title %} Danh sách Bộ phận {% endblock %}
+{% block title %} Cham dứt hợp đồng {% endblock %}
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
 
+<style>
+    form-row {
+      color: red;
+      font: Arial Narrow text-align: center;
+    }
+    p {
+      color: red;
+      font: Arial Narrow text-align:center;
+      width: 100%;
+      padding: 1px;
+      margin: 15px 0;
+      box-sizing: border-box;
+      border: 20;
+      outline: none;
+      background: #f1f0f7;
+    }
+
+    h6 {
+      color: white;
+      font: Arial Narrow text-align:center;
+      width: 100%;
+      padding: 1px;
+      margin: 15px 0;
+      box-sizing: border-box;
+      border: 20;
+      outline: none;
+      background: green;
+    }
+
+    .form-row, .form-row form-group{
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    box-sizing: border-box;
+    border: 20;
+    outline: none;
+    background: #BCD2D6;
+}
+.form-row btn btn-success{
+    margin: 10px 0;
+
+}
+
+
+  </style>
+
 <!-- Page Content -->
 <div class="container p-3 mb-2 bg-transparent text-blue border border-danger">
-    <h2 class="alert alert-danger red"> XEM, IN KẾT THÚC HỢP ĐỒNG LAO ĐỘNG</h2>
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+             <div class="col-md-12">
 
-              <div class="col-md-12">
-                <div class="card">
-                        {{form|crispy}}
-<!----------------
-                          <div class="row">
-                              <div class="card-body">
-                                <div class="col-sm-6">
-                                    <select class="form-select form-select-lg mb-3" size="1" aria-label={{form.Ho_ten}}
-                                          <option selected> Chọn tên</option>
-
-                                    </select>
-                                          <select class="orm-select form-select-sm" size="3" aria-label={{form.Loai_hd}}
-                                          <option selected> Loại hợp đồng</option>
-
-                                    </select>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <input class="form-control" type="text" placeholder="Default input" aria-label={{form.Bac}}
-                                    <input class="form-control" type="text" placeholder="Default input" aria-label={{form.Heso}}
+    <h3 align ="center"  class="alert alert-danger red alert-lg mb-60"> ĐIỀU CHỈNH, IN CHẤM DỨT ĐỒNG LAO ĐỘNG</h3>
 
 
-                                    <div class="custom-control custom-checkbox">
-                                      <input type="checkbox" class="custom-control-input" name="id_Xuất_Word" id="id_Xuất_Word">
-                                      <label class="custom-control-label" for="id_Xuất_Word">xuất file word</label>
-                                    </div>
+
+   <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                   <div class="form-row">
+                      <div class="form-group col-md-3 mb-0">
+                        {{ form.So_hopdong|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-4 mb-0">
+                        {{ form.Ho_ten|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-4 mb-0">
+                        {{ form.Loai_hd|as_crispy_field }}
+                      </div>
+                    </div>
+                  <div class="form-row">
+                      <div class="form-group col-md-3 mb-0">
+                        {{ form.Ngay_chamdut|as_crispy_field }}
+                      </div>
+
+                    </div>
 
 
 
 
-                               </div>
-                          </div>
-                    <div/>
-                    ------>
-                <div/>
-              <div/>
-        <input type="submit" class="btn btn-success" value="Cập nhật/In">
-        <a href="{% url 'hopdong_view' %}" class="btn btn-info"> TRỞ VỀ </a>
-    </form>
+
+
+
+                    <div class="form-row float: right">
+
+                        <h5 class="account-title">Bạn kiểm tra và đồng ý ?</h5><br>
+                     </div>
+
+                <div class="float-md-right" >
+                    <input type="submit" class="btn btn-success " value="Cập nhật">
+                        <a href="{% url 'hopdong_view' %}" class="btn btn-info "> TRỞ VỀ </a>
+                    <br>       <br>
+                         {% if messages %}
+                         {% for up_dulieu in messages %}
+
+                        <h2 style="color: red">{{up_dulieu}}</h2>
+
+                         {% endfor %}
+                         {% endif %}
+                </div>
+
+  </form>
+
+
+
+</div>
 </div>
 <!-- /Page Content -->
 

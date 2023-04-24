@@ -26,7 +26,7 @@ import random
 from datetime import datetime
 
 now = datetime.now() # current date and time
-#importpip install matplotlib
+import matplotlib.pyplot as plt
 #---------------
 
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse

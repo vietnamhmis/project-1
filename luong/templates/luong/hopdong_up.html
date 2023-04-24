@@ -6,10 +6,58 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
+<style>
+    form-row {
+      color: red;
+      font: Arial Narrow text-align: center;
+    }
+    p {
+      color: red;
+      font: Arial Narrow text-align:center;
+      width: 100%;
+      padding: 1px;
+      margin: 15px 0;
+      box-sizing: border-box;
+      border: 20;
+      outline: none;
+      background: #f1f0f7;
+    }
+
+    h6 {
+      color: white;
+      font: Arial Narrow text-align:center;
+      width: 100%;
+      padding: 1px;
+      margin: 15px 0;
+      box-sizing: border-box;
+      border: 20;
+      outline: none;
+      background: green;
+    }
+
+    .form-row, .form-row form-group{
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    box-sizing: border-box;
+    border: 20;
+    outline: none;
+    background: #BCD2D6;
+}
+.form-row btn btn-success{
+    margin: 10px 0;
+
+}
+
+
+  </style>
+
 <!-- Page Content -->
 <div class="container p-3 mb-2 bg-transparent text-blue border border-danger">
              <div class="col-md-12">
-    <h4 class="alert alert-danger red"> ĐIỀU CHỈNH, IN HỢP ĐỒNG LAO ĐỘNG</h4>
+
+    <h3 align ="center"  class="alert alert-danger red alert-lg mb-60"> ĐIỀU CHỈNH, IN HỢP ĐỒNG LAO ĐỘNG</h3>
+
 
 
    <form action="" method="post" enctype="multipart/form-data">
@@ -34,39 +82,42 @@
                         {{ form.Den_ngay|as_crispy_field }}
                       </div>
                     </div>
+
                     <div class="form-row">
-                      <div class="form-group col-md-4 mb-0">
+                      <div class="form-group col-md-3 mb-0">
                         {{ form.Ht_traluong|as_crispy_field }}
                       </div>
-                      <div class="form-group col-md-4 mb-0">
+                      <div class="form-group col-md-2 mb-0">
                         {{ form.bangluong|as_crispy_field }}
                       </div>
-                      <div class="form-group col-md-4 mb-0">
+                      <div class="form-group col-md-2 mb-0">
                         {{ form.Heso|as_crispy_field }}
                       </div>
-                                  <div class="form-group col-md-4 mb-0">
+                      <div class="form-group col-md-2 mb-0">
                         {{ form.Bac|as_crispy_field }}
                       </div>
-                                  <div class="form-group col-md-4 mb-0">
+                     <div class="form-group col-md-2 mb-0">
                         {{ form.Muc_luong|as_crispy_field }}
                       </div>
                     </div>
+
                     <div class="form-row float: right">
                         <div class="form-group col-md-2 mb-0">{{form.Xuất_Word|as_crispy_field}} </div>
+                        <h5 class="account-title">Bạn kiểm tra và đồng ý ghi hợp đồng vào hệ thống?</h5><br>
+                     </div>
 
-                        <div class="form-group col-md-2 mb-0"> <input type="submit" class="btn btn-success" value="Cập nhật/In"></div>
+                <div class="float-md-right" >
+                    <input type="submit" class="btn btn-success " value="Cập nhật">
+                        <a href="{% url 'hopdong_view' %}" class="btn btn-info "> TRỞ VỀ </a>
+                    <br>       <br>
+                         {% if messages %}
+                         {% for up_dulieu in messages %}
 
+                        <h2 style="color: red">{{up_dulieu}}</h2>
 
-                     <a href="{% url 'hopdong_view'%}" class="btn btn-info col-md-2"> TRỞ VỀ </a>
-                    </div>
-
-                     {% if messages %}
-                     {% for up_dulieu in messages %}
-
-                    <h2 style="color: red">{{up_dulieu}}</h2>
-
-                     {% endfor %}
-                     {% endif %}
+                         {% endfor %}
+                         {% endif %}
+                </div>
 
   </form>
 

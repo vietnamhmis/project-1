@@ -36,7 +36,7 @@ from docx.text import paragraph
 
 #python -m pip install docxtpl
 from docxtpl import DocxTemplate, InlineImage
-#from docx2pdf import convert
+
 import datetime as dt
 import pythoncom
 #-------------
@@ -46,7 +46,7 @@ from docx.text import paragraph
 
 #python -m pip install docxtpl
 from docxtpl import DocxTemplate, InlineImage #r
-#from docx2pdf import convert
+
 from random import randint
 import datetime as dt
 import pythoncom

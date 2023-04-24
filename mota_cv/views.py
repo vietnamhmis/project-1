@@ -10,7 +10,6 @@ from datetime import datetime
 from .models import *
 from django.views.decorators.csrf import csrf_exempt
 now = datetime.now() # current date and time
-
 import os
 import json
 from django.http import HttpResponse, JsonResponse

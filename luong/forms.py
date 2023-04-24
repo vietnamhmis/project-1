@@ -94,10 +94,13 @@ class hd_laodong_list_f(forms.ModelForm):
         ]
         widgets = {
             'Heso': forms.Select(attrs={'class':'form-select'}),
-
+            'Loai_hd':forms.Select(attrs={'class':'form-select'}),
+            'Ht_traluong': forms.Select(attrs={'class':'form-select'}),
+            'bangluong':forms.Select(attrs={'class':'form-select'}),
+            'Bac': forms.Select(attrs={'class':'form-select'}),
+            'Ho_ten':forms.Select(attrs={'class':'form-select'}),
             'Tu_ngay': forms.DateInput(format=('%d-%m-%Y'),
                                          attrs={'class': 'form-control','placeholder': 'Nhập ngày hết hạn hợp đồng','type': 'date'}),
-
             'Den_ngay': forms.DateInput(format=('%d-%m-%Y'),
                                          attrs={'placeholder': 'Nhập ngày hết hạn hợp đồng','type': 'date'}),
         }
@@ -130,17 +133,25 @@ class ketthuc_laodong_f(forms.ModelForm):
     class Meta:
         model = hd_laodong
         fields = [
-           'So_hopdong', 'Ho_ten',  'Loai_hd', 'Heso', 'Bac','Muc_luong',
+           'So_hopdong', 'Ho_ten',  'Loai_hd', 'Heso', 'Bac','Muc_luong', 'Ngay_chamdut',
         ]
         widgets = {
-            'Tu_ngay': forms.DateInput(format=('%d-%m-%Y'),
-                                       attrs={'class':'myDateClass',
-                                              'placeholder':'Select a date'}),
+
+            'Heso': forms.Select(attrs={'class':'form-select'}),
+            'Loai_hd':forms.Select(attrs={'class':'form-select'}),
+            'Ht_traluong': forms.Select(attrs={'class':'form-select'}),
+            'bangluong':forms.Select(attrs={'class':'form-select'}),
+            'Bac': forms.Select(attrs={'class':'form-select'}),
+            'Ho_ten':forms.Select(attrs={'class':'form-select'}),
+            'Ngay_chamdut': forms.DateInput(format=('%d-%m-%Y'),
+                                         attrs={'class': 'form-control','placeholder': 'Nhập ngày chấm dứt hợp đồng','type': 'date'}),
+
         }
+
         help_texts = {
             'chuc_vu': _('Chức vụ hoặc vị trí công việc'),
             'Loai_hd': ('Chọn hợp đồng lao động: Có thời hạn, không xác định thời theo Điều 20 BLLĐ'),
-            'Tu_ngay': ('Hợp đồng có hiệu lực từ ngày:'),
+            'Ngay_chamdut': ('Hợp đồng chấm dứt hợp đồng:'),
 
         }
         labels = {
@@ -148,6 +159,15 @@ class ketthuc_laodong_f(forms.ModelForm):
             'Ho_ten': ('Họ và tên:'),
             'Loai_hd': ('Loại hợp đồng lao động:'),
             'Tu_ngay': ('Hợp đồng có hiệu lực từ ngày:'),
+            'Den_ngay': ('Đến ngày:'),
+            'Ht_traluong': ('Hình thức trả lương:'),
+            'bangluong': ('Bảng lương'),
+            'Nhom_luong': ('Nhóm lương:'),
+            'Heso': ('Hệ số lương:'),
+            'bac': ('Bậc lương:'),
+            'Muc_luong': ('Mức lương hàng tháng:'),
+            'Phucap_kn': ('Phụ cấp kiêm nhiệm:'),
+            'Phucap_khac': ('Phụ cấp khác:'),
                   }
 
 class luongthang_Form(forms.Form):

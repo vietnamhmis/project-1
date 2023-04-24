@@ -151,10 +151,6 @@ class bangluong_BHXH(models.Model):
     def __str__(self):
        return str(self.Nhom_luong)
 
-
-
-
-
 class Phuongan_luong(models.Model):
     Nhom_luong      =models.ForeignKey(bangluong_chinh, null=True, blank=True, on_delete=models.SET_NULL)
     Nhanvien        =models.ForeignKey(Nhan_vien, null=True, blank=True, on_delete=models.SET_NULL)
@@ -265,6 +261,7 @@ class hd_laodong(models.Model):
     Tu_ngay         = models.DateField(null=True, blank=True)
     Den_ngay        = models.DateField(null=True, blank=True)
     start_date      = models.DateTimeField(auto_now_add=True)
+    Ngay_chamdut     = models.DateField(null=True, blank=True)
 
     Ht_traluong     = models.CharField(max_length=20,  blank=True, null=True, choices = ht_traluong, default='Khoán')
     bangluong       = models.ForeignKey(bangluong,  blank=True, null=True, on_delete= models.SET_NULL)
@@ -283,7 +280,6 @@ class hd_laodong(models.Model):
     Ngay_nangluong_sau  = models.DateField(auto_now_add=True, blank=True, null=True)
     Thu_nhap        = models.IntegerField(blank=True, null=True)
     Hieuluc         = models.BooleanField(blank=True, null=True, default=True)
-
   #  def save(self):
        # self.Heso = self.bangluong.Heso
        # self.Bac = self.bangluong.Bac
